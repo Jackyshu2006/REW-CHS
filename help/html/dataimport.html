@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Importing Measurement Data</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Importing Measurement Data</A></H2>
+
+        <P>REW can import frequency response and impedance measurement data from 
+        other applications, including the ETF5 measurement system 
+        (<A HREF="http://www.acoustisoft.com">http://www.acoustisoft.com</A>).
+        Most ETF5 export formats are supported, along with generic comma, space or
+        TAB-delimited text files. Note that when making measurements with ETF5
+        it is best to use the calibrated SPL option to allow level
+        comparisons between channels.
+
+        <H3><A name="etfimpulse">ETF *.pcm Format Impulse Responses</A></H3>
+        
+        <P>Full range ETF measurements allow the impulse response to be exported
+        in a .pcm raw data format, using the <I>File &rarr; Write Impulse As *.pcm</I> 
+        option. Use REW's <EM>File &rarr; Import Impulse Response</EM> 
+        command to load these files. Importing the impulse response allows REW's 
+        Spectral Decay and Waterfall plots to be generated from the data 
+        (this is not possible when importing frequency response text files). REW loads 
+        the first 128k samples from the file (approx 2.73s at 48k sampling).
+
+        <H3><A name="wavimpulse">WAV, AIFF, Flac or MP3 Format Impulse Responses</A></H3>
+        
+        <P>The <EM>File &rarr; Import Impulse Response</EM> command can also
+        be used to load impulse responses that have been saved as .wav, .aiff, .mp3 or .flac format. 
+        REW can load up to approx 60 seconds of data from the file.
+
+        <H3><A name="textimport">Frequency Response and Impedance Text Files</A></H3>
+
+        <P>The <EM>File &rarr; Import Frequency Response</EM> and
+        <EM>File &rarr; Import Impedance Measurement</EM> commands accept
+        text files with extension .txt, .frd, .dat or .zma. If the extension is 
+        .zma the data is always treated as impedance, otherwise it is treated as SPL
+        if loaded via <EM>Import Frequency Response</EM> or impedance if loaded via
+        <EM>Import Impedance Measurement</EM>. The following formats are accepted:
+        <UL>
+            <LI>Generic comma, TAB, space or semicolon delimited files
+            <UL>
+                <LI>Data must be presented as freq, magnitude (SPL or impedance) 
+                and (optionally) phase in degrees, one set of values per line
+                <LI>Samples can be at arbitrary frequency spacing, but each
+                line must have a higher frequency than the one before and there
+                must be at least 5 data entries
+                <LI>Only lines which begin with a number are imported, others
+                are ignored
+                <LI>In comma-delimited files there must be at least one space after the comma
+                <LI>Spaces before values are ignored
+                <LI>To add a comment on a data line put a tab, comma or space after
+                the last value
+            </UL>
+            <LI>ETF5 Export Data option for the Low Frequency Room Response window
+            <LI>ETF5 Export Bode Response option
+            <LI>ETF5 Export Data option for the Logarithmic Frequency Response
+            window<BR>
+            <UL>
+                <LI>Cubic spline interpolation is used between sample points
+            </UL>
+        </UL>
+        <H4><A name="commaformat">Comma-delimited File Format</A></H4>
+        <P>Here is an example of a valid format for comma-delimited SPL data without
+        phase:
+        <PRE>
+            SPL measurements acquired by REW V3.08
+            Source: D:\REW\test files\testfile.txt
+            Format: Comma delimited data
+            Dated: 05-Mar-2005 17:53:56
+            Channel: Left, Bass limited 80Hz
+
+            20.0, 65.01
+            21.0, 65.77
+            22.0, 67.50
+            23.0, 67.93
+            24.0, 68.22
+            25.0, 67.88
+            26.0, 67.92
+            27.0, 68.31, this line has a comment
+            28.0, 69.14
+            29.0, 69.16
+            30.0, 69.29
+        </PRE>
+        <P>If comma is used as the decimal delimiter in your locale it is best
+        for clarity to use TAB, space or semicolon as the separator.
+        
+        <H4><A name="spaceformat">Space-delimited File Format</A></H4>
+        <P>Here is some impedance data in space-delimited format, with phase
+        <PRE>
+            * Measurement data saved by REW V5.00
+            * Source: Line (ESI MAYA44 Audio), no input selected, Right channel, volume: no control
+            * Format:   1M Log Swept Sine, 1 sweep at -30,0 dBFS
+            * Dated: 31-Dec-2010 11:26:49
+            * Sense Resistor: 100.0
+            * Lead resistance: 0.000
+            * Calibration factor: 1.0028
+            * Note: horizontal
+            * Measurement: SPH170 horz
+            * Frequency Step: 0.36621094 Hz
+            * Start Frequency: 1.8310547 Hz
+            *
+            * Freq(Hz) Z(Ohms) Phase(degrees)
+            1.831 6.423 5.392
+            2.197 6.444 6.426
+            2.563 6.481 7.302
+            2.930 6.522 8.049
+            3.296 6.558 8.714
+            3.662 6.586 9.368
+            4.028 6.609 10.076
+            4.395 6.632 10.864
+            4.761 6.664 11.706
+            5.127 6.705 12.549
+            5.493 6.753 13.346
+            5.859 6.803 14.082
+            6.226 6.851 14.777
+            6.592 6.896 15.467
+            6.958 6.939 16.180
+            7.324 6.985 16.919
+            7.690 7.034 17.669
+            8.057 7.089 18.409
+            8.423 7.147 19.126
+            8.789 7.207 19.822
+            9.155 7.269 20.505
+            9.521 7.332 21.181
+            9.888 7.398 21.851
+        </PRE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>信号发生器</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">信号发生器</A></H2>
+
+        <BR><IMG SRC="../../images/siggen.jpg" ALT="信号发生器" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P>信号发生器把信号分成四组：单音、多音、噪声和扫频。各组提供以下信号类型：
+        <UL>
+            <LI><A href="#sinewave">正弦波</A>
+            <UL>
+                <LI>可选加入谐波失真
+            </UL>
+            <LI><A href="#squarewave">方波</A>
+            <UL>
+                <LI>占空比可调
+                <LI>可选带限
+            </UL>
+            <LI><A href="#sawtooth">锯齿波</A>
+            <UL>
+                <LI>可选带限
+            </UL>
+            <LI><A href="#toneburst">猝发音</A>
+            <UL>
+                <LI>加窗猝发音，0.5～100 个周期
+                <LI>可循环重复猝发
+            </UL>
+            <LI><A href="#cea2010">CEA-2010 猝发音</A>
+            <UL>
+                <LI>6.5 个周期、加汉宁窗的猝发音
+                <LI>可循环重复猝发
+            </UL>
+            <LI><A href="#jtest">J-test</A>
+            <UL>
+                <LI>时基抖动测试信号，主成分位于采样率的四分之一处
+            </UL>
+            <LI><A href="#dualtone">双音</A>
+            <UL>
+                <LI>SMPTE、DIN、CCIF 和自定义
+            </UL>
+            <LI><A href="#tripletone">三音</A>
+            <UL>
+                <LI>Borberly、Cordell、Klingelnberg 和自定义
+            </UL>
+            <LI><A href="#multitone">多音</A>
+            <UL>
+                <LI>线性、倍频程、十倍频程和“无间谐波失真”间隔
+            </UL>
+            <LI><A href="#pinknoise">随机粉红噪声与随机白噪声</A>
+            <UL>
+                <LI>全频段（频谱延伸到 10 Hz 以下）
+                <LI>自定义滤波<br><br>
+                    以下几项仅限粉红噪声：<br><br>
+                <LI>扬声器校准用
+                <LI>低音炮校准用
+                <LI>CTA-2034 滤波
+            </UL>
+            <LI><A href="#periodicnoise">周期性粉红噪声与周期性白噪声</A>
+            <UL>
+                <LI>序列长度与 RTA 的 FFT 长度匹配
+                <LI>全频段（频谱延伸到 10 Hz 以下）
+                <LI>自定义滤波<br><br>
+                    以下几项仅限粉红噪声：<br><br>
+                <LI>扬声器校准用
+                <LI>低音炮校准用
+                <LI>CTA-2034 滤波
+            </UL>
+            <LI><A href="#sinesweep">正弦扫频</A>
+            <UL>
+                <LI>线性
+                <LI>对数（同步扫频，各次谐波与基波同相）
+                <LI>可循环重复扫频
+            </UL>
+            <LI><A href="#meassweep">测量扫频</A>
+            <UL>
+                <LI>REW 的对数测量扫频
+            </UL>
+        </UL>
+
+        <H3><A name="rmslevel">RMS 信号电平</A></H3>
+
+        <P>所有信号类型都可以设置 RMS 信号电平。电平以数字满量程（digital full scale）为参考，分辨率为 0.01 dB。显示单位可选 dBFS、dBu、dBV 和 Volts。
+
+        <P>RMS 电平数值框旁的箭头按钮每按一次改变 0.1 dB；也可以在数值框里直接输入所需的数值。用鼠标滚轮调节时，每格改变 1 dB；滚动时按住 Alt 键，每格改变 0.1 dB；按住 Ctrl+Alt，每格改变 0.01 dB。
+
+        <P>输入的数值会按当前单位自动换算。例如在 dBu 模式下往数值框里输入 775mV，会换算成 0 dBu（即 -2.2 dBV）。在 dBFS 以外的模式下，数值框左上角会显示对应的 dBFS 值。<BR><BR>
+        <IMG SRC="../../images/rmslevel.jpg" ALT="RMS 电平控件" ALIGN="left"><BR CLEAR="all">
+
+        <P>峰值刚好达到数字满量程的正弦波，RMS 电平可以记作 0 dBFS（AES 定义），也可以记作 -3.01 dBFS（数学上更准确）。用哪一种，由<A href="view.html#fullscalesine">设置 → 视图里的“满量程正弦波 RMS 为 0 dBFS”选项</A>决定。</P>
+
+        <P>输出电压电平用<EM>校准电平</EM>按钮校准。校准时先播放一个正弦波信号，用万用表（multimeter）或示波器（oscilloscope）测出它产生的 RMS 电压，再把读数填进校准对话框。万用表测量市电频率（mains frequency）附近的信号时通常最准。
+
+        <P>填入电压读数后，对话框会显示对应的满量程电压（RMS 值和峰值）。如果已经知道所用设备满量程时输出多少电压（要把音量设置考虑在内），也可以把这个值直接填进<EM>满量程正弦 Vrms</EM> 标签下方的文本框。<BR><BR>
+        <IMG SRC="../../images/calibrateoutputlevel.jpg" ALT="校准输出电平" ALIGN="left" width="383" height="265"><BR CLEAR="all"><BR>
+        <IMG SRC="../../images/calibrateoutputcompleted.jpg" ALT="输出校准确认" ALIGN="left" width="275" height="233"><BR CLEAR="all">
+
+        <P>如果已经知道所用设备满量程时输出多少电压（要把音量设置考虑在内），可以把这个值直接填进<EM>满量程正弦 Vrms</EM> 标签下方的文本框。点击文本框左上角的小三角，会弹出一列可以填入的预设值；预设的名称和数值都可以按需要修改。
+        <P><IMG SRC="../../images/siggenpresets.jpg" ALT="输出满量程电压预设" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="waveform">波形预览</A></H3>
+
+        <P>RMS 电平数值框下方显示信号波形的预览。预览会按输出的幅度范围自动缩放。如果输出接近数字满量程，显示区的顶部和底部会各出现一条红线，标出满量程的界限。<BR><BR>
+        <IMG SRC="../../images/waveformpreview.jpg" ALT="波形预览" ALIGN="left"><BR CLEAR="all">
+
+        <P>如果信号会超过数字满量程，波形显示区会变成红色，并显示警告。<BR><BR>
+        <IMG SRC="../../images/waveformclipping.jpg" ALT="波形削波警告" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="output">输出</A></H3>
+
+        <P>音频输出设备的设置方法见<A HREF="gettingstarted.html#audioconfig">快速入门</A>。所选设备上具体用哪个输出，在信号发生器的<EM>播放</EM>面板里选。使用 Java 驱动时，如果输出是立体声，信号可以只从其中一个声道输出，也可以两个声道同时输出。
+
+        <P>使用 Java 驱动且两个声道都有输出，或者使用 ASIO 驱动并选了第二路输出时，可以用<EM>反相第二输出</EM>复选框设定第二路的信号：勾选时，第二路输出第一路的反相信号；不勾选时，两路信号相同。
+
+        <P>信号还可以同时送到时间基准输出（对应“发送信号至时间基准输出”复选框）。不过在设置 → 声卡或测量对话框里运行“检查电平”时，这项设置不起作用。<BR><BR>
+        <IMG SRC="../../images/playpanel.jpg" ALT="播放面板" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="protections">保护</A></H3>
+
+        <P>信号发生器有两种保护机制，用来防止输出电平过高。勾选 <EM>SPL 限制</EM>后，输入声压级一旦超过数值框里设定的值，发生器就会停止。勾选<EM>输入严重削波时停止</EM>后，只要某个输入信号块里有超过 30% 的采样点高于削波阈值，发生器就会停止。
+
+        <P><B>注意：</B>这两种机制都要在 REW 的输入处于运行状态时才起作用，也就是声压计、电平表或 RTA 至少有一个在工作。
+
+        <H3><A name="savingsignals">保存信号为 WAV 文件</A></H3>
+
+        <P>信号可以保存为单声道或立体声 WAV 文件，所选信号可以放在其中一个声道，也可以两个声道都放。可设的选项随信号类型而定，例如正弦波可以设文件时长，猝发音可以设重复次数。文件里的信号电平与信号发生器的 RMS 电平设置一致，采样率和采样精度取面板里选定的值。
+
+        <P>保存测量扫频时，可以选择加入时间基准，建议加入。测量扫频文件在测试信号开始前可能带有 2～3 秒的抖动（dither），让播放设备有时间锁定到信号源。
+
+        <P>注意：REW 的测量扫频在不同版本之间可能有变化。因此，之后打算用哪个 REW 版本分析采集到的响应，就一定要用这个版本来保存扫频文件。<BR><BR>
+        <IMG SRC="../../images/savewavpanel.jpg" ALT="保存到文件面板" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="sinewave">正弦波</A></H3>
+        <BR><IMG SRC="../../images/sinegen.jpg" ALT="正弦波发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>正弦波的频率范围是 1.0 Hz 到声卡<A HREF="soundcard.html#samplerate">采样率</A>的一半，例如声卡工作在 48 kHz 时，上限是 24 kHz。
+
+        <P>频率可以直接在“频率”框里输入，也可以用箭头按钮增减：200 Hz 以下每步 0.5 Hz，200 Hz 以上每步 1 Hz。如果勾选了“锁定 RTA FFT 频率”，实际生成的频率通常与设定频率略有差别；发生器运行时，频率显示区右上角会显示这个实际频率。
+
+        <P><EM>上一个 1/3 倍频程</EM>和<EM>下一个 1/3 倍频程</EM>按钮把发生器频率移到相邻的 1/3 倍频程中心频率（centre frequency）。<EM>上一个音名</EM>和<EM>下一个音名</EM>按钮以 A4 = 440 Hz 为基准，把频率移到音阶上相邻的音名。
+
+        <H4><A name="locktofft">锁定 RTA FFT 频率</A></H4>
+
+        <P>勾选<EM>锁定 RTA FFT 频率</EM>后，发生器频率会调整到最近的 FFT 频率区间（bin）的中心，频率区间按当前的 RTA FFT 长度划分。这样，信号在一个 FFT 长度内恰好完成整数个周期，RTA 就可以用矩形窗（rectangular window），使 RTA 图的频谱分辨率达到最高。复选框后面的括号里显示 FFT 长度。发生器运行时，实际生成的精确频率显示在频率显示区的右上角。<BR><BR>
+        <IMG SRC="../../images/exactfreq.jpg" ALT="实际频率显示在设定频率上方" ALIGN="left"><BR CLEAR="all">
+
+        <H4><A name="freqtrackscursor">频率跟随光标</A></H4>
+
+        <P>勾选<EM>频率跟随光标</EM>后，也可以用图表光标控制频率。此时发生器频率与图表光标的位置联动，移动光标时频率随之变化。频率变化是平滑的，不会出现相位跳变（phase discontinuity）。<BR>
+
+        <H4><A name="adddistortion">加入谐波失真</A></H4>
+
+        <P>勾选“加入谐波失真”后，会弹出一个对话框，用来设置 2～9 次谐波（harmonic）的电平和相位。每次谐波都可以用各自的复选框启用或关闭。电平以相对基波（fundamental）的 dB 值调节，旁边的标签同时显示换算成百分比的值。
+
+        <P>控件上方显示一个最大信号电平：在当前失真设置下，信号电平不超过这个值，输出就不会削波。注意：只有落在当前采样率所支持范围内的谐波才会生成。信号预览会反映所选失真的效果。<BR><BR>
+        <IMG SRC="../../images/harmonicdistortioncontrols.jpg" ALT="谐波失真控件" ALIGN="left"><BR CLEAR="all">
+
+        <P>谐波对话框还可以生成预失真（pre-distorted）信号，在某个特定频率和电平下抵消测量系统自身的失真。做法是：让发生器以所需的频率和电平运行，用 RTA 测量这套测量系统自身。建议开启相干平均（coherent averaging），减小噪声对测得的谐波的影响。等 RTA 上的谐波电平和相位稳定后，点 <EM>Set from RTA</EM>（从 RTA 设置）按钮。
+
+        <P>注意：做这次 RTA 测量之前，发生器的各次失真谐波都应关闭，可以用 <EM>Clear all</EM>（全部清除）按钮确保这一点。
+
+        <P>这样做可以把总谐波失真（THD）改善约 20 dB。但这组设置只在测量时的那个频率和信号电平下有效；测量系统的失真一旦变化（例如温度变化时），设置就不再有效。
+
+        <P>谐波对话框还能合成由基波加若干谐波构成的信号。例如近似方波（由奇次谐波合成），或者下图这种极性测试信号（polarity test signal）：它只用基波加一个 0 dB、相位 -90 度的 2 次谐波生成。</P><BR><BR>
+        <IMG SRC="../../images/polaritysignal.jpg" ALT="极性检查波形" ALIGN="left"><BR CLEAR="all">
+
+        <H4><A name="adddither">添加抖动</A></H4>
+
+        <P>勾选<EM>添加抖动</EM>后，发生器会在输出中加入峰峰值 2 LSB 的三角形抖动（triangular dither），用来消除量化噪声（quantisation noise）尖峰。抖动按多少位的精度加入，在复选框右侧的位数下拉框里选择。<B>注意：在 Windows 上使用 Java 驱动时，音频数据的精度限于 16 位。</B>
+
+        <P>对 AV 功放、AV 处理器或均衡器这类电子设备做非常精确的失真测量时，加抖动很有好处。做声学测量时通常不需要，因为抖动消除的量化伪像（artefact）远低于声学本底噪声。
+
+        <P>下面两张图展示了抖动选项的效果：声卡做回环测试，播放 -6 dBFS 的 1 kHz 单音。第一张图未加抖动，第二张图加了抖动。加抖动后，原来在 -120 dBFS 以下清晰可见的噪声大部分被清除，高频段尤其明显，真实的谐波失真电平因此更容易看清。<BR><BR>
+        <IMG SRC="../../images/sinewithoutdither.jpg" ALT="1kHz -6 dBFS 正弦波，未加抖动" ALIGN="left"><BR CLEAR="all">
+        <BR><IMG SRC="../../images/sinewithdither.jpg" ALT="1kHz -6 dBFS 正弦波，加抖动" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="squarewave">方波</A></H3>
+        <BR><IMG SRC="../../images/squaregen.jpg" ALT="方波发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>方波发生器的占空比（duty cycle）可在 1%～99% 之间设置，步进 1%。方波每半个周期内的采样值有两种生成方式：等值（即经典意义上的方波），或带限（band-limited）到采样率的一半。
+
+        <P>等值数据转换成模拟信号时，产生的过冲（overshoot）比带限数据更大；而且频率接近采样率一半时，谐波电平会高于方波理论上应有的水平。
+
+        <P>等值方式还有一个限制：生成的频率必须调整到每个周期恰好包含偶数个采样点，这样占空比 50% 的方波频谱里才只有奇次谐波。发生器运行时，实际生成的频率显示在频率显示区的右上角。频率较高时，它可能与设定频率相差很多。
+
+        <P>勾选<EM>带限方波采样</EM>后，REW 把信号的各次谐波逐一叠加，一直加到采样率的一半，用这种方式生成数据。这样原始数据里不会有带外成分，整个带宽内的谐波电平也都正确。不过 REW 对非带限数据本来就施加了“偶数个采样点”的限制，所以占空比 50% 时，两种方式听起来差别不大。
+
+        <P>注意：带限信号开始削波的电平，最多可能比等值方式低 1.5 dB。对采样数据做带限，必然会带来过冲；带限时这些过冲直接体现在采样值上，而等值方式的过冲出现在采样点之间。不过，带限数据转换成模拟信号后，过冲反而更小。
+
+        <P>带限数据的频率限制宽松得多。但为了高效生成信号，REW 会选取合适的精确频率，使数据值在不超过 8192 个采样点的长度内循环重复。实际频率通常与设定频率相差不到 0.1%，但最低频率在 44.1 kHz 采样率下是 5.4 Hz，采样率更高时按比例提高。
+
+        <P>使用带限选项时应加抖动，避免量化带来伪像。等值方式不适用抖动，因为数据里只有两个采样值。<BR>
+
+        <H3><A name="sawtooth">锯齿波</A></H3>
+        <BR><IMG SRC="../../images/sawtoothgen.jpg" ALT="锯齿波发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>锯齿波发生器可以生成理想化的或带限的锯齿波。理想化锯齿波有一个限制：生成的频率必须调整到每个周期恰好包含整数个采样点，频谱才有正确的谐波分布。不过频率接近采样率一半时，理想化锯齿波的谐波电平会高于锯齿波理论上应有的水平。
+
+        <P>发生器运行时，实际生成的频率显示在频率显示区的右上角。频率较高时，它可能与设定频率相差很多。应加抖动，避免量化带来伪像。
+
+        <P>勾选<EM>带限锯齿波采样</EM>后，REW 把信号的各次谐波逐一叠加，一直加到采样率的一半，用这种方式生成数据。这样原始数据里不会有带外成分，整个带宽内的谐波电平也都正确。
+
+        <P>带限数据的频率限制宽松得多。但为了高效生成信号，REW 会选取合适的精确频率，使数据值在不超过 8192 个采样点的长度内循环重复。实际频率通常与设定频率相差不到 0.1%，但最低频率在 44.1 kHz 采样率下是 5.4 Hz，采样率更高时按比例提高。<BR>
+
+        <H3><A name="toneburst">猝发音</A></H3>
+        <BR><IMG SRC="../../images/toneburst.jpg" ALT="猝发音发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>猝发音发生器在所选频率上生成加窗的猝发音（tone burst），周期数可选。<BR><BR></P>
+
+        <P>勾选<EM>重复猝发</EM>后，猝发音会按所选的猝发周期重复。猝发周期可以用周期数、毫秒数或采样点数来指定。按周期数指定时，两次猝发之间可以继续播放这个单音，电平由“关闭电平”设定。如果 RTA 用矩形窗，把采样点数设成与 RTA 的 FFT 长度相等，信号频谱就能稳定显示。
+
+        <P><EM>上一个 1/3 倍频程</EM>和<EM>下一个 1/3 倍频程</EM>按钮把发生器频率移到相邻的 1/3 倍频程中心频率。</P>
+
+        <H3><A name="cea2010">CEA-2010 猝发音</A></H3>
+        <BR><IMG SRC="../../images/ceagen.jpg" ALT="CEA-2010 猝发音发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>CEA-2010 猝发音发生器在所选频率上生成 6.5 个周期、加汉宁窗（Hann window）的猝发音。这个信号用来测试低音炮的最大输出功率：信号播放时，把 RTA 设为 Spectrum（频谱）模式，观察信号产生的各失真成分的电平。测试频率通常取 63、50、40、31.5、25 和 20 Hz。
+
+        <P>按 CTA-2034-A 测试音箱的最大声压级时也用这个信号，测试频率取 20 Hz～5 kHz 范围内的各个 1/3 倍频程中心频率。失真成分的限值可以采用 CEA 2010-2006 或 ANSI/CTA-2010-B R-2020 标准，在 RTA 的外观设置里选择。<BR><BR></P>
+
+        <P>勾选<EM>重复猝发</EM>后，猝发音会以不短于 1 秒的间隔重复（实际间隔会选成与 RTA 的数据块长度和 FFT 长度对齐）。<EM>上一个 1/3 倍频程</EM>和<EM>下一个 1/3 倍频程</EM>按钮把发生器频率移到相邻的 1/3 倍频程中心频率。
+
+        <P>各次谐波都不超过限值时，基波所能达到的最高电平，就是该测试频率下的最大输出电平。限值的参考电平，是测试频率所在 1/3 倍频程范围内的最高电平。
+
+        <P>播放 CEA-2010 猝发音时，只要 RTA 处于频谱模式，RTA 图上就会叠加显示限值和测试频率处的峰值电平。超过限值时，峰值电平显示为红色。<BR><BR>
+        <IMG SRC="../../images/rtaceaoverlay.jpg" ALT="CEA-2010 猝发音的 RTA 叠加显示" ALIGN="left"><BR CLEAR="all">
+
+        <P>把 CEA-2010 猝发音的 RTA 数据保存为测量后，SPL & 相位图上会叠加显示峰值电平和限值，CEA-2010 的测试频率和峰值电平数值也会记入测量备注。
+
+        <P>采样率为 44.1 kHz 或 48 kHz 时，推荐的 RTA 设置如下：<BR><BR>
+        <IMG SRC="../../images/ceaburstrtasettings.jpg" ALT="CEA-2010 猝发音的 RTA 设置" ALIGN="left" width="363" height="167"><BR CLEAR="all">
+
+        <P>采样率为 88.2 kHz 或 96 kHz 时，FFT 长度用 128k（131,072）或更长。测量步骤的细节请参阅 CEA 2010-2006、ANSI/CTA-2010-B R-2020 或 ANSI/CTA-2034-A 标准，也可以在网上搜索相关指南。</P>
+
+        <H3><A name="jtest">J-test</A></H3>
+        <BR><IMG SRC="../../images/jtest.jpg" ALT="J-test 发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>时基抖动测试信号（jitter test signal）的主体是一个频率为采样率四分之一、幅度为满量程一半的方波。这个方波再由另一个方波做幅度调制。调制方波的频率是采样率的 1/192，取值在 0 和 -1 LSB 之间交替；LSB 按所选的 16 位或 24 位计算。
+
+        <P><B>这个信号绝不能用音箱播放：它电平很高、频率也很高，可能烧毁高音单元。</B>
+
+        <P>在 Windows 上分析这个信号，要用 Java 驱动的 WASAPI 独占模式设备项，或者用 ASIO 驱动。
+
+        <H3><A name="dualtone">双音</A></H3>
+        <BR><IMG SRC="../../images/dualtonegen.jpg" ALT="双音发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>双音发生器用于互调失真（intermodulation distortion，IMD）测量。它预置了 AES17-2015、SMPTE、DIN、CCIF 和 TDFD 几种信号，也可以生成电平比为 1:1 或 4:1 的自定义信号。注意：自定义信号要得到有效的 IMD 结果，f2 必须高于 f1。
+
+        <P>合成信号的 RMS 电平就是信号发生器设定的 RMS 电平。但双音信号的峰值因数（crest factor）比单音高，所以开始削波的电平比正弦波低：1:1 信号（峰值因数 6 dB）的削波电平比正弦波低 3 dB，4:1 信号（峰值因数 4.7 dB）低 1.7 dB。
+
+        <P>使用双音信号时，RTA 可以显示互调失真的数值，以及各互调成分的电平。
+
+        <H3><A name="tripletone">三音</A></H3>
+        <BR><IMG SRC="../../images/tripletonegen.jpg" ALT="三音发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>三音发生器为互调失真测量另外提供了一种激励信号。它预置了 Borberly、Cordell 和 Klingelnberg 三种版本，也可以生成自定义信号。各单音电平相同。
+
+        <P>合成信号的 RMS 电平就是信号发生器设定的 RMS 电平。但三音信号的峰值因数比单音高，削波电平比正弦波低 4.8 dB（峰值因数 7.8 dB）。
+
+        <P>关于这几种信号的讨论，见 Klingelnberg, Arndt: Non-linear distortion revisited, 29th Tonmeistertagung, VDT International Convention, November 2016。各信号的精确频率如下：<BR><BR>
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>信号<TH>f1<TH>f2<TH>f3
+                <TR ALIGN="center"><TD>Borberly<TD>9000<TD>19030<TD>20000 Hz
+                <TR ALIGN="center"><TD>Cordell<TD>9000<TD>10050<TD>20000 Hz
+                <TR ALIGN="center"><TD>Klingelnberg<TD>10504<TD>19027<TD>19997 Hz
+            </TABLE>
+
+        <P>使用三音信号时，RTA 可以显示总失真加噪声（Total Distortion + Noise，TD+N）的百分比。
+<!--        <H3><A name="quadtone">Quad Tone</A></H3>
+
+        <BR><IMG SRC="../../images/quadtonegen.jpg" ALT="Quad tone Generator" ALIGN="left"><BR CLEAR="all">
+
+        <P>The quad tone generator provides an additional stimulus for intermodulation distortion 
+        measurements. It has presets for a signal according to Klingelnberg and allows custom signals 
+        to be generated. All tones have the same level. The rms level of the combined signal is the 
+        signal generator rms level, but quad tone signals have a higher crest factor than a single 
+        tone so the signal will clip at a level 6 dB lower than a sine wave (crest factor 9 dB).
+        For a discussion of these signals see Klingelnberg, Arndt: Non-linear distortion revisited, 
+        29th Tonmeistertagung, VDT International Convention, November 2016.
+
+        <P>When the quad tone signal is being used the RTA can show figures for the Total Distortion
+        + Noise (TD+N) percentage. -->
+
+        <H3><A name="multitone">多音</A></H3>
+        <BR><IMG SRC="../../images/multitonegen.jpg" ALT="多音发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>多音发生器在设定的频率范围内生成多个单音。单音间隔有三种排法。第一种是线性间隔。第二种是对数间隔，间隔取所选的分数倍频程（fractional octave）或分数十倍频程。第三种按一种特殊序列排布，让每个单音都不落在其他单音的低阶谐波或互调产物（intermodulation products）上，称为“无间谐波失真”（No Interharmonic Distortion，NID）。按分数倍频程排布时，频率取自优选频率表（preferred frequencies）。
+
+        <P>无论哪种排法，单音都落在 FFT 频率区间的中心上，这个 FFT 的长度就是所选的序列长度。这样，只要 FFT 用矩形窗，且长度不短于序列长度，就能观察系统在这些单音激励下的表现。
+
+        <P>勾选“最小化多音信号峰值因数”后，REW 会调整多音序列中各单音的相位，使信号的峰值因数尽量小。线性间隔的单音这样处理后，峰值因数通常低于 5 dB。对数间隔和 NID 单音的峰值因数可能达到 12 dB 或更高，最小化对它们几乎不起作用。
+
+        <P>面板上会显示信号的峰值因数和峰度（kurtosis）&#954;。注意：这是信号生成时的峰值因数，数模转换过程中峰值因数还可能变大。
+
+        <P>不削波时可用的最大 RMS 电平（dBFS）等于 3 减去峰值因数（dB），例如峰值因数 9 dB 时为 -6 dBFS（前提是勾选了设置 → 视图里的<EM>满量程正弦波 RMS 为 0 dBFS</EM>；没勾选时再低 3 dB）。不过，为了避免接收端设备削波，可能还要设得更低。
+
+        <P>多音序列的频谱可以设为白频谱（各单音幅度相等）或粉红频谱（幅度按 10 dB/十倍频程下降）。做了峰值因数最小化时，粉红频谱序列的峰值因数通常更低，推荐用于测试音箱。测试电子设备一般用白频谱；但白频谱的高频能量比粉红噪声多得多，不建议用于音箱，高电平时可能损坏高音单元。
+
+        <P>使用多音信号时，RTA 可以显示总失真加噪声（TD+N）的百分比；如果 FFT 长度达到信号长度的两倍或以上，还能显示信噪比（signal to noise ratio，SNR）。
+
+        <H3><A name="pinknoise">随机粉红噪声与随机白噪声</A></H3>
+        <BR><IMG SRC="../../images/pinkgen.jpg" ALT="粉红噪声发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>粉红噪声（pink noise）发生器把白噪声（white noise）送进一个 -10 dB/十倍频程的滤波器得到粉红噪声。这个滤波器由一组一阶滤波器加权求和构成，是 Paul Kellet 在 1999 年前后设计的。据设计者说明，在 44.1 kHz 采样率下，9.2 Hz 以上的误差在 0.05 dB 以内。
+
+        <P>“全频段”选项直接输出滤波后的噪声，带宽最宽，低频成分也最多。“扬声器校准用”选项在 500 Hz 和 2 kHz 处各加一个 2 阶滤波器（40 dB/十倍频程，即 12 dB/倍频程），得到能量集中在 1 kHz 附近的信号。“低音炮校准用”在 30 Hz 和 80 Hz 处加滤波器。这两种都大体符合 THX 对测试信号的建议。
+
+        <P>“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》（Standard Method of Measurement for In-Home Loudspeakers）对频谱整形。“语音范围”噪声按 IEC 60268-16:2030 的语音整形噪声（speech-shaped noise）整形，用于语音传输指数（STI）测试。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
+
+        <P>“自定义”可以任意设定低频截止和/或高频截止频率，但带宽至少为 1/3 倍频程。滤波器是巴特沃斯（Butterworth）高通和低通，阶数可在 2 阶（12 dB/倍频程）到 8 阶（48 dB/倍频程）之间选择。
+
+        <P>REW 会针对各选项和滤波设置自动调整信号电平，使信号的 RMS 值与 RMS 电平里的设定一致。注意：粉红噪声有随机起伏，RMS 电平高于约 -12 dBFS 时，部分峰值会削波（如果在设置 → 视图里把满量程正弦波的电平设为 0 dBFS，这个界限约为 -9 dBFS）。
+
+        <P>勾选<EM>非相关随机噪声</EM>后，如果有多路输出，各路输出的信号互不相关（uncorrelated）。
+
+        <P>勾选<EM>高斯分布</EM>后，随机噪声服从高斯分布（Gaussian distribution），而不是均匀分布（uniform distribution）。对白噪声来说，这意味着峰值因数比均匀分布时高约 3 dB；对粉红噪声，差别要小得多。高斯分布的粉红噪声和白噪声，峰度都约为 3.0；均匀分布的粉红噪声约为 2.85，均匀分布的白噪声约为 2.55。
+
+        <P>白噪声的高频能量比粉红噪声多得多，不建议用于音箱，高电平时可能损坏高音单元。
+
+        <H3><A name="periodicnoise">周期性粉红噪声与周期性白噪声</A></H3>
+        <BR><IMG SRC="../../images/pinkpngen.jpg" ALT="周期性粉红噪声发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>周期性噪声（periodic noise，PN）序列非常适合配合频谱分析仪（spectrum analyser）和实时分析仪（real time analyser，RTA）使用。序列长度与分析仪的 FFT 长度一致，并且包含分析仪能分辨的每一个频率。
+
+        <P>它最大的好处是：不需要任何平均或加窗，就能得到想要的频谱形状（前提是输入和输出在同一台设备上，因而共用同一个时钟）。所以，与用随机粉红噪声或随机白噪声测试相比，分析仪显示对系统变化的反应要快得多，PN 非常适合实时调整 EQ 滤波器。
+
+        <P>REW 生成的 PN 序列可以选择做峰值因数最小化：全频段序列的峰值因数（峰值电平与 RMS 电平之比）不超过 6 dB，频带较窄的序列应低于 6.5 dB。不做最小化时，峰值因数约为 12 dB。面板上会显示信号的峰值因数和峰度 &#954;。CTA-2034 滤波噪声按规范要求峰值因数为 12 dB，因此这个信号不提供峰值因数最小化选项。
+
+        <P>用 RTA 测量时选周期性粉红噪声，用频谱分析仪时选周期性白噪声。<BR>
+
+        <P>“序列长度”必须设成与分析仪所用的 FFT 长度相同。序列长度比 FFT 短时，周期性噪声里会缺少分析仪要找的部分频率，分析仪显示上就会出现凹陷。序列长度比 FFT 长时，多出来的频率会让显示杂乱，需要更多次平均。使用 <A HREF="spectrum.html#top">REW 的 RTA</A> 时，序列长度会自动设成与 FFT 长度相同。
+
+        <P>下面是一组 RTA 设置示例，FFT 长度为 64k，适用于输入和输出在同一台设备上、因而共用同一个时钟的情况：
+        <P><IMG SRC="../../images/rtapnsettings.jpg" ALT="输入输出在同一设备时的周期性噪声 RTA 设置" ALIGN="left"><BR CLEAR="all">
+
+        <P>勾选<EM>非相关周期性噪声</EM>后，如果有多路输出，各路输出的信号互不相关。
+
+        <P>下面是一组 RTA 设置示例，FFT 长度为 64k，适用于输入和输出在不同设备上的情况。这时需要加窗，并设定特定的平均次数和重叠率，以抵消两台设备时钟频率差异的影响：
+        <P><IMG SRC="../../images/rtapnsettingsdifferentdevices.jpg" ALT="输入输出在不同设备时的周期性噪声 RTA 设置" ALIGN="left"><BR CLEAR="all">
+
+        <P>下面几张图对比序列长度设置正确与错误时的效果。图中是一次回环测量，RTA 设为 1/48 倍频程，FFT 长度为 65536（64k）。<BR><BR>
+        长度 32768，短于 FFT<BR>
+        <IMG SRC="../../images/pn32krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+        <BR>长度 131072，长于 FFT（未平均）<BR>
+        <IMG SRC="../../images/pn128krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+        <BR>长度 65536，与 FFT 一致<BR>
+        <IMG SRC="../../images/pn64krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+
+        <P>“全频段”选项生成的噪声从所选 FFT 长度对应的最低频率一直延伸到采样率的一半，带宽最宽，低频成分也最多。粉红噪声选“全频段”时，10 Hz 以下的频谱是平直的（与随机粉红噪声相同），以免最低频段能量过大。
+
+        <P>“扬声器校准用”选项生成 500 Hz～2 kHz 的噪声，能量集中在 1 kHz 附近。“低音炮校准用”生成 30～80 Hz 的噪声。“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》对频谱整形，峰值因数为 12 dB。“语音范围”噪声按 IEC 60268-16:2030 的语音整形噪声整形，用于 STI 测试，频谱在 125 Hz 频带下沿以下、8 kHz 频带上沿以上的部分被截掉。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
+
+        <P>“自定义”可以任意设定低频截止和/或高频截止频率，但带宽至少为 10%。“低音炮校准用”和“扬声器校准用”两种信号用砖墙滤波器（brick wall filter）滤波。其他滤波信号可选巴特沃斯高通和低通滤波器，阶数从 2 阶（12 dB/倍频程）到 8 阶（48 dB/倍频程），也可选砖墙滤波器。
+
+        <P>REW 会针对各选项和滤波设置自动调整信号电平，使 RMS 值与 RMS 电平里的设定一致。RMS 电平达到 -6 dBFS 或更高时，峰值会削波。
+
+        <P>周期性粉红噪声序列可以保存为 WAV 文件，再做成测试文件或光盘，在待测系统上播放。所选采样率要与光盘格式相符，例如制作 CD 用 44.1 kHz，制作 DVD 用 48 kHz。测量该系统时，采样率和 FFT 长度都必须与制作测试文件或光盘时所用的一致。<BR>
+
+        <P>白噪声的高频能量比粉红噪声多得多，不建议用于音箱，高电平时可能损坏高音单元。
+
+        <H3><A name="sinesweep">线性扫频、对数扫频</A></H3>
+        <BR><IMG SRC="../../images/sweepgen.jpg" ALT="正弦扫频发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>信号发生器可以生成扫频信号，起始频率、结束频率、持续时间都可以设置，频率按线性或对数变化。扫频持续时间最长 60 秒。勾选“循环扫频”后，扫频会连续重复。扫频的淡入和淡出采用升余弦（raised cosine）形状，时长可调（设为零即不淡入淡出）。扫频播放时，面板上会显示当前的扫频频率。<BR>
+
+        <H3><A name="meassweep">测量扫频</A></H3>
+        <BR><IMG SRC="../../images/meassweepgen.jpg" ALT="测量扫频发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>测量扫频信号是 REW 测量系统响应时使用的信号。它是一段对数扫频，从起始频率的一半扫到结束频率的两倍（但总体不超过音频接口采样率的一半），以保证所选范围内测量准确。如果起始频率低于 20 Hz，信号先从直流（DC）线性扫到 10 Hz，再从 10 Hz 对数扫到结束频率。扫频持续时间用“长度”控件设置。
+
+        <P>做扫频测量时会自动选用这个信号。测量扫频可以保存为 WAV 文件，用于<A HREF="offlinemeasurements.html#top">离线测量</A>。注意：测量扫频在不同 REW 版本之间可能有变化。因此，之后打算用哪个 REW 版本分析采集到的响应，就一定要用这个版本生成的扫频。<BR>
+
+        <P>勾选<EM>扫频前播放抖动</EM>后，发生器会在扫频开始前播放一小段加了抖动的静音。这个选项用来确保扫频信号开始前，回放链路已经处于工作状态。
+
+        <P>勾选<EM>静音区填充抖动</EM>后，发生器会用 16 位抖动替换扫频里的静音部分。有些数模转换器（DAC）在某个输入通道没有信号时，会很快把输出静音；这个选项用来尽量避免这种情况。
+
+        <P>代价是脉冲响应（impulse response）的噪声电平会略有升高。不过升高的部分远低于声学测量的本底噪声，只有测量电子设备时才可能有影响。即便如此，也只应在确实需要应对设备的这种行为时才勾选。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

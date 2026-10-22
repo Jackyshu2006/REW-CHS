@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Cal Files Preferences</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+
+        <H2><A name="top">Cal files Preferences</A></H2>
+
+        <P> The Cal files Preferences list all the outputs and inputs that have 
+        previously been selected in REW with any calibration files that have been 
+        specified for them. Choosing an output device and output or input device 
+        and input will cause REW to automatically load the associated calibration 
+        data. Entries can be deleted if they are no longer needed. Individual 
+        calibration files can be added using the browse buttons or removed 
+        using the delete buttons. The calibration data will be applied 
+        to all new measurements taken after it has been loaded and will be shown on 
+        the SPL &amp; Phase graph for the measurements. The currently active entries are 
+        highlighted. The calibration files that will be used for a new measurement 
+        can be seen by using the <EM>Cal files</EM> button on the Measure dialog.
+
+        <P><IMG SRC="../../images/calfilessettings.jpg" ALT="Cal Files Preferences" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <P>Soundcard calibration files are specific to the sample rate being used.
+        If the sample rate changes a file for that sample rate will be loaded, if 
+        available.
+        
+        <P>Mic calibration entries have additional settings that are accessed by pressing 
+        the settings button for the entry, which has a gear icon. 
+        <P><IMG SRC="../../images/miccalsettings.jpg" ALT="Mic cal settings" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <P>Select <FONT CLASS="heading">Input device is a C Weighted SPL Meter</FONT> if 
+        you are using a C weighted SPL meter as the input to REW, measurements will then 
+        be corrected to remove the low and high frequency roll-offs of the C weighting 
+        characteristic. If a cal file is also loaded the correction will only be 
+        applied outside the frequency range covered by the cal file.
+        
+        <P>Mic cal files can apply to all inputs on a device or, if 
+        <FONT CLASS="heading">Separate cal for each input</FONT> is selected
+        individual cal files can be specified for the separate inputs of the device.
+        For example, the left and right inputs of a miniDSP EARS headphone measurement
+        system have separate cal files. Note that most USB microphones are mono devices
+        and provide the same data on both left and right channels, a single cal file
+        for the device is appropriate for those.
+        
+        <P>The <EM>dBFS @ 94 dB SPL</EM> and <EM>Full scale SPL</EM> fields can be used 
+        to calibrate the SPL reading for the input. If the mic is put in a 94 dB calibrator 
+        the dBFS input reading (from the <A href="levelmeters.html">Level meters</A> or 
+        <A href="splmeter.html">SPL meter</a>) may be entered. Alternatively,
+        if the SPL corresponding to a full scale input is known, that may be entered. 
+        These fields are disabled if the calibration file contains a sensitivity value,
+        the values displayed are then determined by that sensitivity entry.</P>
+        
+        <P>The <EM>FS sine Vrms</EM> value is used to calibrate the input reading 
+        for electronic measurements. It should be set to the rms voltage of a sine wave 
+        whose peaks reach full scale.</P>
+
+        <P>To apply or remove a calibration file for an existing measurement, 
+        use the <EM>Change cal</EM> button in the measurement panel right click menu.
+        
+        <P>To calibrate the REW SPL meter reading against an external meter use the
+        <em>Calibrate</em> button in the SPL Meter controls.
+        
+        <H4>Calibration File Format</H4>
+
+        <P>The calibration file is a plain text file which by default has the extension 
+        .cal, though other extensions are also accepted. It should contain the actual 
+        gain (and optionally phase) response of the meter or microphone at the frequencies 
+        given, these will then be subtracted from subsequent measurements. The values in the 
+        calibration file can be separated by spaces, tabs or commas. Typically the values
+        are relative to the level at some reference frequency, e.g. 1kHz, so the gain
+        value there is 0.0.
+        
+        <UL>
+            <LI>Each line of calibration data must have a frequency value and a 
+            gain value, a phase value is optional
+            
+            <LI>Frequency is in Hz, gain in dB, phase in degrees
+            
+            <LI>The cal points can be at arbitrary frequency spacing, but each
+            line must have a higher frequency than the one before and there
+            must be at least 2 freq, gain data pairs
+            
+            <LI>Only lines which begin with a number are loaded, others
+            are ignored
+            
+            <LI>In comma-delimited files there must be at least one space after the comma
+            
+            <LI>Spaces before values are ignored
+            
+        </UL>
+        Here is an example section of a valid file format:<BR><BR>
+        <PRE>
+SPL Meter Calibration data
+
+20 -15.38
+50 -3.69
+100 -1.34
+200 -0.62
+500 -0.26
+1000 0.0
+2000 1.80
+5000 3.95
+10000 -0.71
+20000 -6.28
+        </PRE>
+        
+        <H4><A name="sensitivity">Mic sensitivity calibration data</A></H4>
+
+        <P>USB microphone cal files will typically have a line at the start of the file that
+        defines their sensitivity, of the form:<BR><BR>
+        <TT>"Sens Factor =1.2345dB, SERNO: XXXXXXX"</TT><BR>
+        <P>The sens factor figure is usually the input dBFS reading the mic will produce when driven
+        by a 94 dB calibrator with the input volume set to maximum. REW can make use of this value if
+        it also knows the relationship between the input volume setting and the gain in dB applied to 
+        the mic data, as of September 2022 that is known for the UMIK-1, UMIK-2, UMIK-X, EARS, CARIO-A2B, 
+        UMM-6, Omnimic and Beta Three mics. Sens Factor entries for other devices are not used.
+
+        <P>Analog microphone cal files can also include sensitivity information. Add a line at the 
+        start of the file of the form:<BR><BR>
+        <TT>Sensitivity -12.34 dBFS</TT><BR><BR>
+        where "-12.34" is replaced by the REW dBFS input level when the microphone 
+        is driven by 94 dB SPL. When that cal file is used REW will use the sensitivity
+        data to calculate the SPL calibration offset. Note, however, that this 
+        calibration will <B>only be valid when using the same mic interface gain and input
+        volume that were used when it was measured</B>. 
+        
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

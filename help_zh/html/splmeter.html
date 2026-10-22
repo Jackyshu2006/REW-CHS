@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>声压计</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">声压计</A></H2>
+
+        <P>声压计是一台积分式、可记录的声级计（sound level meter）。它按输入通道的 RMS 电平，显示声压级（sound pressure level，SPL）、等效声级（equivalent sound level，Leq）或声暴露级（sound exposure level，SEL）。
+
+        <P>它提供 A、C、Z 三种计权，快、慢两档指数时间加权，还有一个用来压住风噪的高通滤波器，并记录最小值、最大值和不计权的峰值电平。
+
+        <P>峰值读数取自每一块音频数据里绝对值最大的那个采样点。
+
+        <P>声压计会把声卡校准文件和麦克风校准文件一并计入，据此修正读数。配合已校准的麦克风和声级校准器使用时，可以达到 IEC 0 级（class 0）的精度。
+
+        <P>校准文件带来的提升量有上限，可以在<A HREF="analysis.html#limitcalboost">设置 → 分析</A>里限制，目的是不让本底噪声（noise floor）被过度抬高。
+
+        <P>声压计测得的数据可以持续记录、绘成曲线，也可以保存为文本文件。<br><br>
+        <IMG SRC="../../images/splmeter.jpg" ALT="声压计" ALIGN="left"><BR CLEAR="all">
+
+        <P>显示区上方那排按钮决定声压计显示哪一项：声压级、时间平均的等效声级（L<sub>eq</sub>）还是声暴露级（L<sub>E</sub>）。
+
+        <P>等效声级模式下，数值有两种算法。一种是从上次启动或重置声压计算起的累计值，另一种是按显示区下方设定的时间跨度滚动计算。
+
+        <P>声压级读数带时间加权，时间常数（time constant）有“快”（125 ms）和“慢”（1 s）两档，用快 / 慢按钮切换。日常使用选“慢”最合适。
+
+        <P>按下<em>高通</em>按钮后会接入一个高通滤波器，滤掉约 8 Hz 以下的成分。
+
+        <h3><a name="limits">声压计限制</a></h3>
+
+        <P>声压级、等效声级和声暴露级三项可以各自设限制。
+
+        <P>使用专业版升级的多通道测量功能时，每一台声压计都可以设不同的限制。
+
+        <P>启用限制后，只要当前电平比限制值低，而且低出的量超过琥珀色阈值，声压计背景就显示绿色。<br><br>
+        <IMG SRC="../../images/splmeterlimits.jpg" ALT="未超限时的绿色背景" ALIGN="left"><BR CLEAR="all">
+
+        <P>电平进入限制值以下的琥珀色阈值范围后，背景转为琥珀色。<br><br>
+        <IMG SRC="../../images/approachingspllimit.jpg" ALT="接近声压级限制" ALIGN="left"><BR CLEAR="all">
+
+        <P>超过限制值后，背景转为红色。<br><br>
+        <IMG SRC="../../images/spllimitexceeded.jpg" ALT="声压级超限" ALIGN="left"><BR CLEAR="all">
+
+        <h3><a name="weighting">计权方式</a></h3>
+
+        <P>声压级测量会用计权曲线（weighting curve）对接收到的信号做频率整形，突出某类需求所关心的频段。下图是 A 计权和 C 计权曲线。<BR>
+        <IMG SRC="../../images/weightings.jpg" ALT="A 计权与 C 计权滤波器" BORDER=0><BR>
+
+        <P>C 计权的响应最宽（“平坦”“零”或 Z 计权除外），-3 dB 点分别在 31.5 Hz 和 8 kHz。
+
+        <P>A 计权的低频滚降要陡得多。它模拟的是人耳对小声音（约 40 dB SPL）的灵敏度。
+
+        <P>A 计权的高频滚降形状与 C 计权相同，但两条曲线在高频段并不重合。原因是两者都被调整成在 1 kHz 处增益为零，这一调整把 A 计权曲线整体抬高，于是相对 C 计权就错开了。
+
+        <P>用 Z 计权时，声压级数值会把直流分量和奈奎斯特频率（Nyquist frequency，即采样率的一半）处的成分也算进去。
+
+        <h3><a name="spldisplay">显示区</a></h3>
+
+        <P>显示区里有当前选中的测量项、电平数值，以及一个过载指示（“OVER”）。声卡输入超出量程时，这个指示会亮起。
+
+        <P>在显示区内点击，或按<em>全部重置</em>按钮，都可以清除 OVER 指示。
+
+        <P>选中声压级时，显示区写出 dB、括号里的计权方式（A、C 或 Z），以及 F（快）或 S（慢）。测量等效声级时，按所选计权显示 LAeq、LCeq 或 LZeq。测量声暴露级时显示 SEL。
+
+        <P>等效声级或声暴露级各自累计了多长时间，显示在声压计底部的“已用时长”里。
+
+        <P>等效声级有一个很实用的场合：用 AV 处理器或 AV 功放内置的校准信号测低音炮电平。这种信号电平起伏很大，直接读瞬时值很难读准。
+
+        <P>等效声级显示的是从上次按下<em>全部重置</em>起的平均结果。所以放出测试信号后按一下<em>全部重置</em>，等读数稳定，就能得到准确的电平。<br><br>
+        <IMG SRC="../../images/spldisplay.jpg" ALT="声压计显示区" BORDER=0><BR>
+
+        <P>声压计窗口可以按需要调整大小，主显示区的数字会自动缩放，适应可用空间。声压计也可以全屏显示。<br><br>
+        <IMG SRC="../../images/splmeterlarge.jpg" ALT="放大后的声压计" BORDER=0><BR>
+
+        <P>声压级、等效声级和声暴露级可以同时显示，每一项的计权方式都能单独选。<br><br>
+        <IMG SRC="../../images/splmetermulti.jpg" ALT="同时显示声压级、Leq 和 SEL 的声压计" BORDER=0><BR>
+
+        <P>主控制行下方有一个电平表，用 dBFS 显示当前的声卡输入电平。红色条是峰值，数字读数和彩色条是 RMS 电平。<br><br>
+        <IMG SRC="../../images/spllevelmeter.jpg" ALT="声卡输入电平表" BORDER=0><BR>
+
+        <P>声卡电平表下方是<em>最小/最大</em>和<em>全部重置</em>两个按钮。前者让显示区一并显示最小值、最大值和峰值；后者重置已用时长、最小值、最大值、峰值、等效声级、声暴露级和过载指示。
+
+        <P><em>校准</em>按钮启动声压计的校准流程；开启和关闭声压计，用的是声压计面板上带录制标志的那个按钮。
+
+        <P>选中<em>最小/最大</em>后，这几个数值会显示在主读数旁边。<br><br>
+        <IMG SRC="../../images/splminmax.jpg" ALT="最小/最大显示" BORDER=0><BR>
+
+        <H3><A name="meterinput">输入通道选择</A></H3>
+
+        <P>要测哪一路声卡输入通道，在<A HREF="soundcard.html#inputchannel">设置 → 声卡</A>里选。音频输入的设置方法见<A HREF="gettingstarted.html#audioconfig">快速入门</A>。
+
+        <H3><A name="splcal">校准 SPL 读数</A></H3>
+
+        <P>做完 <A HREF="inputcal.html#top">SPL&nbsp;校准</A>之前，声压计不会显示有效读数。
+
+        <P>按<EM>校准</EM>按钮，可以用外部声压计或声级校准器给读数定标。声压计尚未校准时，按钮上的文字和显示区的数字都是红色的。
+
+        <P>如果在 REW 的设置 → 声卡里换了输入，或者改动了输入电平，都需要重新校准声压计读数。
+
+        <H3><A name="spllog">声压级数据记录</A></H3>
+
+        <P><EM>记录器</EM>按钮打开声压记录器窗口。图表右上角的记录按钮用来开始或停止记录声压级数值。
+
+        <P>记录进行期间，声压计的开关、校准、计权、时间常数和高通这几个按钮都会被禁用。
+
+        <P>记录器记下的内容包括：声压级（按当前选定的计权和时间常数）、最小值和最大值、不计权且未经校准的峰值、等效声级、声暴露级。
+
+        <P>图表上方的<EM>保存</EM>按钮可以把记录的数据存成文本文件，字段之间用 REW <A HREF="file.html#top">文件</A>菜单里设定的文本分隔符隔开。已有的日志文件可以用<EM>打开</EM>按钮载入。
+
+        <H3>声压记录器控制面板</H3>
+
+        <P>声压记录器图表的控制面板上有这些控件：
+        <P><IMG SRC="../../images/splloggercontrols.jpg" ALT="声压记录器控制面板" width="190" height="89"><BR CLEAR="all">
+
+        <P>勾选<EM>显示实际时间</EM>后，时间轴显示每条数据对应的当天时刻；不勾选则显示从开始记录起算的相对时间。
+
+        <P>勾选<EM>按日期保存日志</EM>后，只要记录器在运行，数据就会自动存进 REW 的日志目录（目录位置可以在<B>关于 REW</B> 对话框里看到）。
+
+        <P>文件名的格式是 SPL-YYYY-MMM-dd.txt，例如 SPL-2016-Apr-24.txt。当天的文件如果已经存在，文件名后面会加序号，例如 SPL-2016-Apr-24-1.txt、SPL-2016-Apr-24-2.txt。记录跨过午夜时，会按新日期另建一个文件。
+
+        <P>长时间记录会让文件变得很大，增长速度约每分钟 18 kB。开了按日期存文件之后，记得定期检查 REW 日志目录，删掉不再需要的文件。
+
+        <P><EM>曲线选项</EM>按钮会打开一个对话框，用来改曲线的颜色和线型。改过之后，这张图上显示的所有测量都会按新设置画。
+
+        <P>曲线也可以隐藏。隐藏后它会同时从图表和图例中消失。
+
+        <P>记录数据的格式见下面的例子。这个例子里文本分隔符是逗号，声压计设的是 Z 计权。<BR><BR>
+
+        <PRE>
+    SPL log data saved by REW V5.19
+    Note: includes Leq over last minute and last 10 minutes
+    Soundcard cal: 
+    Mic cal: 
+    SPL cal offset: 104.85347938537598 dB
+    High Pass Filter: Off
+    Date: 16-Jul-2018 17:43:10
+    Start: 1531762990157
+    Log length: 7061 entries over 1311.6s
+    Log interval: 0.18575963718820862 seconds
+
+    Time[s], LZS, LZSMin, LZSMax, LZpeak, LZeq, LZE, LZeq1m, LZeq10m
+    0.186, 84.7, 84.7, 84.7, 95.1, 84.6, 77.3, 84.6, 84.6, 17:43:10.186
+    0.372, 84.7, 84.6, 84.7, 96.1, 84.7, 80.4, 84.7, 84.7, 17:43:10.372
+    0.557, 84.6, 84.6, 84.7, 96.1, 84.5, 82.0, 84.5, 84.5, 17:43:10.557
+    0.743, 84.7, 84.5, 84.7, 96.1, 84.6, 83.3, 84.6, 84.6, 17:43:10.743
+    0.929, 84.7, 84.5, 84.7, 96.1, 84.6, 84.3, 84.6, 84.6, 17:43:10.929
+        </PRE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

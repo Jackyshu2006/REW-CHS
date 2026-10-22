@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Distortion Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Distortion Graph</A></H2>
+        
+        <P><IMG SRC="../../images/distortionplot.jpg" ALT="Distortion Graph"><BR CLEAR="all">
+        <P>The Distortion graph shows the measurement's fundamental (the linear part of its response),
+        and either its harmonic distortion components up to the ninth harmonic along with Total Harmonic 
+        Distortion (THD) or other distortion metrics such as TD+N, depending on the type of measurement
+        whose data it is showing. It may also show the level of the noise floor, if that was captured 
+        during the measurement.
+        
+        <P>The harmonic plots can only be generated for frequencies within the bandwidth of the
+        measurement. For example, if a measurement is made to 20 kHz, the second harmonic plot
+        can only be generated to 10 kHz, as the 2nd harmonic of 10k Hz is 20 kHz. Similarly the third 
+        harmonic plot can only be generated to 6.67 kHz (20/3). The upper limit for distortion plots
+        is 95% of the Nyquist frequency (which is half the sample rate). For example, at 44.1 kHz 
+        sampling the upper limit is 0.95*44.1/2 = 20.95 kHz.
+        
+        <P>Total Harmonic Distortion is generated from the available harmonics. There is a control 
+        to select the highest harmonic to use in the THD calculation, the trace name in the graph 
+        legend shows which harmonics are included. At higher frequencies the THD plot will incorporate 
+        fewer harmonics, according to which are available.
+        
+        <P>If the <A HREF="analysis.html#frcalculation">Analysis Preference</A> <FONT CLASS="heading">Apply cal files to distortion</FONT>
+        is selected the results will include corrections for the cal file responses (as is the case for the
+        RTA distortion figures). Applying the cal files provides more accurate results in regions where 
+        the fundamental or harmonics are affected by interface roll-offs but boosts the noise floor in 
+        those regions. This should be borne in mind when viewing the results. If large cal file corrections 
+        are required make sure the <A HREF="analysis.html#frcalculation">Analysis Preference</A>
+        <FONT CLASS="heading">Limit cal data boost to 20 dB</FONT> is not selected. Note that any subsequent
+        changes to the cal files will <B>NOT</B> update the distortion results, they are generated from the cal
+        files that were in use at the time the measurement was made.
+        
+        <P>The distortion data can be exported to a text file using 
+        <A HREF="file.html#filewritedistortion">File &rarr; Export &rarr; Distortion data as text</A>.
+
+        <H3><a name="sweep">Sweep distortion</a></H3>
+
+        <P>Impulse responses measured using logarithmic sweeps separate harmonic distortion from the linear 
+        part of the system response. The distortion components appear at negative times, behind the main 
+        impulse. Analysing the frequency content of those components allows plots of distortion harmonics 
+        to be generated. The longer the sweep, the better the distortion components are separated from 
+        each other and the better resolved they are. The fundamental and harmonic plots derived from sweep 
+        measurements use frequency-dependent windows to minimise noise, that produces a smoothing effect 
+        roughly equivalent to 1/48 octave. 
+        
+        <P>Sweeps of 256k or shorter should start at 0 Hz to prevent an artificial rise in distortion 
+        at the lowest frequencies due to the reduced low frequency bandwidth of the resulting impulse 
+        response. When measuring a system with high distortion levels use a long sweep (e.g. 1M or longer), 
+        with shorter sweeps the harmonics may affect each other giving misleading results. A spot check 
+        can be made at frequencies of interest using the RTA and the signal generator. If discrepancies 
+        are observed even with a long sweep consider making a stepped sine measurement instead. For the 
+        lowest noise floor with sweep measurements use multiple sweeps, but note that requires the input 
+        and output to be on the same device.
+        
+        <P>The lower frequency limit for distortion plots is 10 Hz or the measurement start frequency,
+        whichever is higher. 10 Hz is the lower limit of the logarithmic part of the measurement sweep. 
+        Start frequencies lower than that use an initial linear swept portion (to avoid spending an 
+        excessive proportion of the sweep duration time at very low frequencies) which means that region 
+        cannot be used to generate distortion data. Note that sweeps with start frequencies of 20 Hz or 
+        higher may show rising distortion at low frequencies as a result of the time domain ringing 
+        inherent in band limited impulse responses overlapping the distortion harmonics. To avoid that 
+        use start frequencies below 20 Hz where possible and longer sweeps.
+        
+        <P>When measurements with distortion data are averaged their distortion data is also averaged, 
+        providing the measurements were made over the same frequency range and at the same resolution.
+        
+        <H3><a name="sweep">Stepped sine distortion</a></H3>
+        
+        <P>Although much, much slower than a log sweep the stepped sine measurement may measure very low 
+        distortion levels more accurately than a sweep. Stepped sine distortion measurements show distortion 
+        components up to the ninth harmonic, THD and the noise floor, in the same way as the sweep-derived 
+        results, but also include THD+N (total harmonic distortion plus noise and non-harmonic distortion) 
+        and N (noise and non-harmonic distortion) alone. Note that the noise floor plot shows the spectral 
+        content of the noise measured with no signal playing. The 'Noise' in the N and THD+N shows the <B>summed</B> 
+        level of all non-harmonic distortions and noise across the frequency span for each test frequency. 
+        It consequently sits much higher than the noise floor plot. For stepped level measurements the X axis
+        can be dB SPL, dBFS, dBu, dBV, dBW, V or W showing either the generator or input level. For stepped 
+        IMD vs level the "input" is the level of the reference tone for the IMD signal (e.g. the level of f2 
+        for SMPTE IMD), not the total input rms level.
+
+        <H3><a name="distortioncontrols">Distortion controls</a></H3>
+        
+        <P>The control panel for the graph has these controls:
+        <P><IMG SRC="../../images/distortioncontrols.jpg" ALT="Distortion controls"><BR CLEAR="all">
+
+        <P>By default the plot shows the absolute levels of the fundamental and the 
+        harmonics. The Y axis can be set to show dB SPL, dBFS, dBu, dBV, dBW, volts, watts, 
+        dBr or percent. Values for dBW and watts are derived from the measured voltages 
+        using the reference impedance value in the RTA Appearance settings. 
+        If the Y axis is set to percent or dBr the harmonics are divided by the fundamental 
+        to show their relative level and the fundamental appears as a flat line at 0 dBr or 
+        100%. The legend value for the fundamental will continue to show its absolute level, 
+        the readings for the harmonics and THD will depend on the <EM>Distortion Figures</EM> 
+        setting. Normalising the plot will cause the distortion traces to rise at high 
+        frequencies if the response of the system being measured rolls off (as is usually the case).
+        This is exaggerated if <EM>Use harmonic frequency as ref</EM> is selected (see next section). 
+        The boosting due to low fundamental level can be controlled by selecting
+        <EM>Limit norm. to 30 dB below peak</EM>, this sets a lower limit on the fundamental
+        that is 30 dB below the peak level of the fundamental - for example, if the peak
+        of the fundamental were 95 dB the minimum level used for normalising would be 65 dB.
+        
+        <P>The harmonic and THD plots in normalised mode use the level at the fundamental for 
+        each frequency as their reference by default - for example, the distortion 
+        figures for each harmonic at 1 kHz will depend on the level of the fundamental at 1 kHz.
+        If <EM>Use harmonic frequency as ref</EM> is selected the reference will be the frequency 
+        of the harmonic - for example, at 1 kHz the 2nd harmonic figure will depend on the 
+        level of the fundamental at 2 kHz, the 3rd harmonic will depend on the level of the 
+        fundamental at 3 kHz and so on. This follows a recommendation made by Steve F. Temme 
+        in "How to graph distortion measurements" presented at the 94th AES convention 
+        in March 1993. 
+        If the response of the system being measured is flat this makes no difference to the results, 
+        but when the response is not flat (as for most acoustic measurements) it can remove 
+        the influence of the loudspeaker's fundamental response from the distortion figures. 
+        As an example, suppose the loudspeaker response was flat apart from a 6 dB peak at 2 kHz. 
+        2 kHz is the 2nd harmonic of 1 kHz, so the 2nd harmonic level shown at 1 kHz will be 
+        increased by 6 dB due to the boost in the fundamental when using the excitation 
+        frequency as the reference. Similarly the 3rd harmonic level at 667 Hz (2/3 kHz)
+        will be boosted by 6 dB. If the harmonic frequency were used as the reference the distortion
+        figures would not show this boost. Using the harmonic frequency as the reference also 
+        provides a more meaningful view of distortion at frequencies below the LF roll-off
+        of the system as otherwise the distortion levels are boosted as the level of the 
+        fundamental drops. Note that this option will not affect the traces when the plot 
+        is not normalised, but will still affect the values in the legend if the distortion
+        figures are set to read in percent or in dB relative to the fundamental.
+        
+        <P>The <EM>Mask harmonics below noise floor</EM> control greys out harmonics that lie 
+        below the noise floor (at the frequency of the harmonic). The THD trace is also greyed
+        out if all the harmonics that contribute to it are below the noise floor.
+
+        <P><EM>Plot harmonics at the harmonic frequency</EM> changes the way the harmonic orders 
+        for sweep measurement distortion are plotted - rather than plotting the distortion at the 
+        frequency of the fundamental it is plotted at the frequency of the harmonic, so (for example)
+        the 2nd order harmonic distortion level for 1 kHz would be plotted at 2 kHz, where the distortion
+        occurs. This makes it easier to correlate harmonic levels with the level of the fundamental at 
+        the harmonic frequency and also helps distinguish the effects of external noise, since noise
+        affects all harmonics at the frequency at which it occurs. The THD trace is not affected by this
+        control, it will continue to show the THD value corresponding to the harmonic levels at their
+        fundamental frequency. However, when plotting harmonics at the harmonic frequency the level of 
+        the fundamental at the harmonic frequency (which in this graph mode is the cursor frequency) is 
+        used as the reference, so <EM>Use harmonic frequency as ref</EM> will be selected
+        and the control for it disabled. If that was not previously selected the THD trace will update.
+
+        <P>The <EM>Distortion figures</EM> control selects the units that are used for the
+        harmonic distortion levels displayed on the graph legend. The choices are <EM>As Y axis</EM>,
+        which shows the level using the selected Y axis unit; <EM>dB relative</EM>, which 
+        shows how many dB the harmonic is below the fundamental; and <EM>Percent</EM>, which 
+        shows the harmonic level as a percentage of the fundamental. The frequency at which the 
+        fundamental level is taken depends on the setting of <EM>Use harmonic frequency as ref</EM> 
+        (see above).
+        
+        <P>The <EM>Highest harmonic to show</EM> control allows the higher harmonics to be hidden 
+        if they are not of interest. For example, if <EM>Highest Harmonic to show</EM> were set to
+        3 only the second and third harmonic traces would appear on the graph and in the graph 
+        legend. The measured harmonics used to calculate THD are controlled by <EM>Highest harmonic in THD</EM>.
+
+        <P>The <EM>Highest harmonic in THD</EM> control allows the higher harmonics to be 
+        excluded when calculating THD. This may be desired if they are in the noise floor 
+        and so adding noise to the THD calculation.
+        
+        <P>If <EM>Show points for stepped level data</EM> is selected each sample point
+        is marked on the graph.
+        
+        <P>The <EM>Play FSAF residual</EM>, <EM>Gain</EM>, <EM>Load FSAF residual</EM>, <EM>Save FSAF residual</EM>
+        and <EM>Set FSAF folder</EM> controls are for <A href="fsafmeasurement.html">FSAF measurements</A>.
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+        <H3><a name="distortionexamplessc">Distortion Examples - soundcard measurements</a></H3>
+        
+        <P>Here is a distortion plot generated from a loopback measurement of a low cost soundcard,
+        produced with a 256k sweep at -2 dBFS. 
+        <P><IMG SRC="../../images/distloopbacksmall.jpg" ALT="Loopback distortion 256k sweep -2 dBFS"><BR CLEAR="all">
+        
+        <P>The 2nd harmonic (in red) dominates up to 800 Hz, then the 3rd harmonic (in orange) 
+        becomes the largest, increasing steadily until the frequency passes the point at which 
+        3rd harmonic data is available.
+        
+        <P>This is the impulse response for that measurement, the distortion peaks are to the
+        left of the main peak. The first peak to the left is the 2nd harmonic, the next is the 
+        third harmonic and so on.
+        <P><IMG SRC="../../images/irloopbacksmall.jpg" ALT="Loopback impulse response showing distortion peaks"><BR CLEAR="all">
+
+        <P>The plots below show the same soundcard loopback measurement at -2 dBFS but measured with 
+        a 4M sweep (taking 95 seconds) and stepped sine (64k FFT, 24 ppo, approx 17 minutes). The 4M 
+        sweep shows much cleaner harmonics than the 256k sweep above, though the stepped sine result 
+        has a noise floor about 6 dB lower than the sweeps. Multiple sweeps would reduce the noise 
+        floor (provided input and output are on the same device), but increase the measurement time 
+        correspondingly. An interesting characteristic of this soundcard
+        is the change in its odd harmonics depending on how long it has been passing a signal.
+        In the 256k sweep above the 3rd harmonic exceeds the 2nd harmonic above 800 Hz. With the 4M sweep
+        the 3rd harmonic does not rise above the second until 1.4 kHz, the overall sweep time for this
+        44.1 kHz 4M measurement was 95 seconds compared to 5.9 seconds for the 256k sweep. The stepped 
+        sine measurement shows a much bigger difference, with the crossover not happening until 2.2 kHz!
+        Similar behaviour can be seen with the sweep measurements by performing a series of sweeps without 
+        any rest time between them. The time history of the signals passed through a device may have a 
+        significant effect on its distortion. The stepped measurement took more than 17 minutes (24 ppo, 
+        64k FFT, 2 averages, 50% overlap). That's largely a consequence of the time needed for the (large) 
+        audio buffers to flush through when the frequency changes and for sufficient samples to be acquired 
+        for the FFTs and the relatively high frequency resolution of 24 points per octave meaning 240 measurements 
+        over the 20 Hz to 20 kHz span measured.
+        <P><IMG SRC="../../images/sweptdistortion.jpg" ALT="Loopback distortion 4M sweep -2 dBFS"><BR CLEAR="all">
+        <P><IMG SRC="../../images/steppeddistortion.jpg" ALT="Stepped sine distortion 24 ppo, 64k, 2 averages"><BR CLEAR="all">
+
+        <P>The next plot is from a room measurement. The 2nd (red), 3rd (orange) and 4th (yellow) 
+        harmonic traces are shown, along with the THD (black). Higher harmonics were within the 
+        noise floor. The measurement shows a sharp rise in 3rd harmonic distortion at 94 Hz, and 
+        a dramatic rise in all distortion components from about 2 kHz upwards. Further measurements
+        at differing signal levels established that this distortion was being introduce by the SPL 
+        meter used for the measurement.
+        <P><IMG SRC="../../images/roomdistsmall.jpg" ALT="Room Measurement Distortion"><BR CLEAR="all">
+
+        <P>This is the impulse response for the in-room measurement, the distortion peaks are 
+        clearly visible to the left of the main peak.
+        <P><IMG SRC="../../images/irwithdistsmall.jpg" ALT="Room Measurement Impulse Response"><BR CLEAR="all">
+
+        <P>Further insight into the distortion behaviour can be obtained by looking at waterfall
+        or spectrogram views of the spectrum data captured at each test frequency. Note that these
+        can only be generated for stepped sine measurements that had the option to 
+        <EM>Capture spectrum data at each frequency</EM> selected. Here is a spectrogram of the stepped
+        sine measurement above.
+        <BR><BR>
+        <IMG SRC="../../images/stepspectrogram.jpg" ALT="Stepped sine spectrogram"><BR CLEAR="all">
+        <P>Here is its waterfall plot.
+        <BR><BR>
+        <IMG SRC="../../images/stepwaterfall.jpg" ALT="Stepped sine waterfall"><BR CLEAR="all">
+        
+        <P>Here is a stepped sine measurement of another soundcard, superficially looking to have similar 
+        performance to the one above. 
+        <BR><BR>
+        <IMG SRC="../../images/steppeddistortion2.jpg" ALT="Stepped sine distortion measurement"><BR CLEAR="all">
+
+        <P>However, its spectrogram makes clear that it has far worse behaviour with significant intermodulation 
+        products with the 1 kHz harmonics of the USB frame rate.
+        <BR><BR>
+        <IMG SRC="../../images/stepspectrogram2.jpg" ALT="Stepped sine spectrogram"><BR CLEAR="all">
+        
+        <P>Its waterfall plot is similarly revealing.
+        <BR><BR>
+        <IMG SRC="../../images/stepwaterfall2.jpg" ALT="Stepped sine waterfall"><BR CLEAR="all">
+
+        <H3><a name="distortionexamples">Distortion Examples - speaker measurements</a></H3>
+
+        <P>Speaker measurements, particularly those made in-room rather than with the benefit of
+        an anechoic chamber, present additional challenges for interpretation. Distortion results 
+        for electronic components are typically shown as percentages, values relative to the 
+        fundamental. Plotting these percentages for speaker measurements can make the results 
+        challenging to interpret due to the often highly irregular frequency response of the speaker.
+        Using the harmonic frequency as reference (see <A href="#distortioncontrols">distortion controls</A> 
+        above) helps somewhat, but is by no means a complete solution. My personal preference is to
+        view the distortion results without normalisation, which helps make the effect of the response 
+        irregularities apparent and also emphasises the acoustic level of the distortion components, 
+        which can be helpful in deciding where they are likely to be audible and where not. When 
+        viewing the distortion graph as SPL levels the trace legend can still be configured to read 
+        out distortion percentages using the <EM>Distortion figures</EM> control.
+        
+        <P>Here is a measurement of a small desktop speaker (Adam Artist 3). The mic (UMIK-1) was 
+        just 15 cm from the speaker, hence the relatively high SPL measured - the levels correspond 
+        to about 85 dB at the listening position, about 70 cm from the speakers.<BR><BR>
+        <IMG SRC="../../images/speakerstepped.jpg" ALT="Stepped sine speaker distortion measurement"><BR CLEAR="all">
+        <BR><BR>
+        <IMG SRC="../../images/speakerswept.jpg" ALT="Log sweep speaker distortion measurement"><BR CLEAR="all">
+
+        <P>The hump of odd harmonics centred around 80 Hz or so looks to be mild clipping. Above 3 kHz,
+        where the speaker's ribbon tweeter comes into play, distortion levels drop below the noise floor 
+        for the sweep though the stepped sine tracks them comfortably. As this is a near field measurement 
+        room effects are reduced, but the frequency response variation can still make a normalised view 
+        more difficult to fathom. Below is the response normalised, without using harmonic frequency as 
+        ref. The noise floor (dark brown) is included to help illustrate the effect normalisation has on 
+        boosting the noise floor where the response dips.<BR><BR>
+        <IMG SRC="../../images/speakernorm.jpg" ALT="Normalised speaker distortion measurement"><BR CLEAR="all">
+
+        <P> It is apparent that the peak in second harmonic distortion around 3 kHz is simply the noise floor 
+        being boosted and so can be ignored - though that would not be so easily identified without the 
+        noise floor trace to guide us. However, distortion at low frequencies is now shown much higher 
+        than it should be due to the low frequency roll off of the speaker's response meaning it is being 
+        normalised against a much lower level. That 10% 2nd harmonic might give cause for concern until it 
+        is recognised as an artefact of the normalisation.
+            
+        <P>The normalisation artefacts at low frequencies can be ameliorated by using the level of the 
+        fundamental at the harmonic frequency as the normalisation reference. That gives us the plot below,
+        the low frequency behaviour is now more accurately portrayed. However, new peaks have appeared in 
+        the 2nd and 3rd harmonics above 1kHz, consequences of the dip in the response centred around 3 kHz.
+        That dip is probably due to the crossover between mid/bass and tweeter integrating poorly at such a
+        near field measurement position. It is unlikely that the distortion peaks are real. The view without
+        normalisation is least susceptible to misinterpretation.<BR><BR>
+        <IMG SRC="../../images/speakernormharmref.jpg" ALT="Normalised to harmonic frequency speaker distortion measurement"><BR CLEAR="all">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

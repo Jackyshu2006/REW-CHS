@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>EQ Filters</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">EQ Filters Panel</A></H2>
+        
+        <P>The EQ Filters panel is displayed by clicking its button at the top of 
+            the EQ window.<BR><BR>
+        <IMG SRC="../../images/eqfiltersbtn.jpg" ALT="EQ Filters Button" width="79" height="22">
+        <BR CLEAR="all"><BR>
+        
+        <P>The panel shows the filters settings for the current measurement. Controls 
+        at the side of the panel allow the filters to be loaded, saved, copied to the 
+        clipboard or reset and settings for the panel to be adjusted. The name of the
+        measurement and the equaliser are shown, the equaliser can be changed in the 
+        <A HREF="equaliser.html#top">Equaliser</A> selector at the right of the EQ window.
+        The headroom the filter set requires is shown, this will only be greater than zero 
+        if the filter set has overall gain. The number of biquads (second order filter 
+        elements) in use is also shown. The controls for the filters can be shown or hidden
+        using the <EM>Show all</EM> and <EM>Hide all</EM> buttons. Controls for each individual
+        filter can be shown by clicking on it, and hidden again by double clicking. The filters 
+        can be sorted according to the sort direction and key specified. If the mouse is over 
+        a set of filter controls the response of the filter will be shown highlighted on the Filter 
+        adjust graph.<BR><BR>
+        <IMG SRC="../../images/eqfilterspanel.jpg" ALT="EQ Filters Panel, controls showing">
+        <BR CLEAR="all"><BR>
+        <IMG SRC="../../images/eqfilterspanelhidden.jpg" ALT="EQ Filters Panel, controls hidden">
+        <BR CLEAR="all"><BR>
+        
+        <P>Values in spinners and drop down boxes can be changed by using the mouse wheel,
+        whether the controls are visible or hidden, whenever the mouse is over the control.
+        To disable that behaviour deselect <EM>Mousewheel adjusts controls on hover</EM> in
+        the View preferences. For fine adjustment hold the Alt key while scrolling the mouse 
+        wheel.
+
+        <H3><A name="settings">Filters panel settings</A></H3>
+        <BR>
+        
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD width='110'><IMG SRC="../../images/eqfilterspanelsettings.jpg" ALT="EQ Filters Panel settings" ALIGN="left">
+            <TD VALIGN="top">The settings for the filters panel are shown by clicking on the cog icon. The button 
+            to enable/disable each filter includes an image of the filter response. 
+            The range of that response can be adjusted in the filter panel settings, or removed
+            by unchecking <EM>Show filter response</EM>. The centre frequency of the filter is in 
+            the middle of the response, the frequency span is controlled by the <EM>Response aspect</EM> 
+            setting. Using an aspect ratio rather than a fixed frequency span ensures the response shape 
+            remains consistent if the dB span of the image is changed or as the button gets narrower when 
+            the controls are hidden. The <EM>Side by side spinner buttons</EM> selection controls whether 
+            the value controls have side-by-side plus and minus buttons (easier to adjust) or 
+            one above the other arrow buttons (more compact).
+            </TABLE>
+        
+        <H3><A name="controls">Filter controls</A></H3>
+        <BR>
+        
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD width='110'><IMG SRC="../../images/filtercontrols.jpg" ALT="Filter Controls" ALIGN="left">
+            <TD VALIGN="top">Each filter has:
+           <UL>
+               <LI>A button to enable/disable it with an identifying number and 
+               a preview of the response drawn in the colour used when showing 
+               individual filter responses on the Filter adjust graph.
+               <LI>A drop-down box for the filter type, whose options depend on the 
+               equaliser. Some only offer peaking filters, variously labelled as
+               PK, PEQ or Peaking according to the particular model. A 'Modal' filter 
+               type may also be offered, which is a peaking filter whose bandwidth or 
+               Q is adjusted by REW to match a Target T60 decay time. It is used to 
+               accurately counter a modal resonance whose decay time is known. The 
+               Generic equaliser setting has a wide range of filter types, the Extended
+               equaliser includes higher order filters. 
+               <LI>Centre frequency/corner frequency, gain and either Q, bandwidth 
+               or other controls as appropriate for the filter type and selected 
+               <A HREF="equaliser.html#top">equaliser</A>.
+               <LI>A check box to select whether REW is allowed to use this filter
+               for automatic EQ target matching. If the box is not selected the filter
+               will not be altered when matching to a target, allowing manual adjustments
+               to be preserved.
+           </UL>
+        </TABLE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

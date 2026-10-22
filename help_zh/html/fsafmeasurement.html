@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>FSAF 测量</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">FSAF 测量</A></H2>
+
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p>REW 可以用快速子带自适应滤波（Fast Subband Adaptive Filtering，FSAF）方法测量音箱。这一方法由 Michael Tsiroulnikov（又名 Michael Zrull）开发，详见 Michael Zrull (2020) 的 Fast Subband Adaptive Filtering (FSAF)
+        <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.mathworks.com/matlabcentral/fileexchange/83363-fast-subband-adaptive-filtering-fsaf">
+            <param name="content" value="https://www.mathworks.com/matlabcentral/fileexchange/83363-fast-subband-adaptive-filtering-fsaf">
+            </object>
+        ，以及 Michael Tsiroulnikov (2022) 的 Loudspeakers for AEC: Measurement and Linearization
+        <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.mathworks.com/matlabcentral/fileexchange/117715-loudspeakers-for-aec-measurement-and-linearization">
+            <param name="content" value="https://www.mathworks.com/matlabcentral/fileexchange/117715-loudspeakers-for-aec-measurement-and-linearization">
+            </object>。<BR><BR>该 MATLAB 代码的版权信息为 Copyright (C) 2001-2022 MICHAEL ZRULL (TSIROULNIKOV)，保留所有权利；禁止直接或间接的商业衍生或商业使用。代码以 GNU 通用公共许可证 3.0 及以上版本（GNU General Public License v.3+）发布 <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.gnu.org/licenses">
+            <param name="content" value="https://www.gnu.org/licenses/">
+            </object>。
+
+            <P>Java 移植版的源代码放在 <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Github">
+            <param name="content" value="https://github.com/johnmgithub/FSAF">
+            </object> 上。
+        </div>
+
+        <div class="onlineonly">
+            <!-- External links for the online help -->
+            <P>REW 可以用快速子带自适应滤波（Fast Subband Adaptive Filtering，FSAF）方法测量音箱。这一方法由 Michael Tsiroulnikov（又名 Michael Zrull）开发，详见 Michael Zrull (2020) 的 Fast Subband Adaptive Filtering (FSAF)
+            <A href="https://www.mathworks.com/matlabcentral/fileexchange/83363-fast-subband-adaptive-filtering-fsaf" target="_blank">www.mathworks.com/matlabcentral/fileexchange/83363-fast-subband-adaptive-filtering-fsaf</A>
+            ，以及 Michael Tsiroulnikov (2022) 的 Loudspeakers for AEC: Measurement and Linearization
+            <A href="https://www.mathworks.com/matlabcentral/fileexchange/117715-loudspeakers-for-aec-measurement-and-linearization" target="_blank">www.mathworks.com/matlabcentral/fileexchange/117715-loudspeakers-for-aec-measurement-and-linearization</A>。<BR><BR>该 MATLAB 代码的版权信息为 Copyright (C) 2001-2024 MICHAEL ZRULL (TSIROULNIKOV)，保留所有权利；禁止直接或间接的商业衍生或商业使用。代码以 GNU 通用公共许可证 3.0 及以上版本（GNU General Public License v.3+）发布
+            <A href="https://www.gnu.org/licenses/">www.gnu.org/licenses</A>。
+
+            <P>Java 移植版的源代码放在 <A href="https://github.com/johnmgithub/FSAF">Github</A> 上。
+        </div>
+
+        <P>REW 实现的 FSAF 可以用噪声作测量信号，包括白噪声（white noise）、粉红噪声（pink noise）和布朗噪声（brown noise），也可以用用户自备文件中的一段。这样一来，即使播放的是音乐，也能得到失真结果，即总失真加噪声（total distortion plus noise，TD+N）。
+
+        <P>输入信号在做 FSAF 处理之前，会先经过一个 10 Hz 的一阶高通滤波器（first order high pass filter），以免处理过程产生伪像（artefact）。
+
+        <P>请注意：用文件作测量信号时，文件本身的任何缺陷（例如削波）都会让测得的 TD+N 升高。文件里被削波的数据，通常会在失真残差信号（residual）里表现为一个个脉冲声。
+
+        <H3><a name="calibrate">所需设备</a></H3>
+
+        <P>FSAF 处理对回放与录音之间的时钟频率（clock rate）差异非常敏感。输出和输入用同一台音频接口时效果最好，因为这样只有一个时钟源。
+
+        <P>如果输入设备和输出设备不是同一台，REW 可以在测量信号前后加上时间标记，用来做时钟频率校正。但即使做了校正，结果仍然在很大程度上受时钟源稳定性的影响。
+
+        <P><B>依赖 USB 时钟的 USB 麦克风不适合做 FSAF 测量</B>，因为 USB 时钟不稳定。例如 UMIK-1、UMM-6 和 Omnimic 都不适合。内置独立时钟源的 USB 麦克风可以用，例如 UMIK-2。
+
+        <P>所用麦克风的自噪声（self-noise）和失真，也会反映在结果里。采用低成本 6 mm 驻极体全指向咪头（capsule）的麦克风，通常噪声高、最大声压级低，而且声压级一高，失真就上升得很快。
+
+        <P>高品质的测量麦克风效果更好，但价格贵。成本较低的替代品是 Line Audio Design Omni1，它用的是 10 mm 咪头，不过在全球的销售渠道有限。
+
+        <P>另一个选择是 &frac12; 英寸心形指向电容麦克风（cardioid condenser microphone），例如 AKG P170。但这类麦克风需要用替代法（substitution method）自己生成频率响应校准文件：以一支已校准的测量麦克风作参考，对两支麦克风分别做扫频测量，比较它们的响应。
+
+        <P>心形指向麦克风还有近讲效应（proximity effect），也就是它的低频响应会随它与声源的距离而变化，这一点也必须考虑进去。办法是：做替代法校准测量时，音箱和麦克风的摆放位置，要与之后正式测量音箱时完全一致。
+
+        <P>要让麦克风校准文件作用于 FSAF 失真结果，请确认已在 REW 的<A href="analysis.html">设置 → 分析</A>里勾选<EM>校准文件应用于失真分析</EM>。
+
+        <H3><a name="measure">做一次 FSAF 测量</a></H3>
+
+        <UL>
+            <LI>点击“测量”按钮
+            <IMG SRC="../../images/measurebuttonbare.jpg" ALT="测量按钮" BORDER=0>
+            （或按 Ctrl+M）打开测量对话框，选择
+            <FONT CLASS="heading">FSAF</FONT> 测量方法。<BR><BR>
+            <IMG SRC="../../images/measurepanelfsaf.jpg" ALT="FSAF 测量对话框" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI><A name="level"><FONT CLASS="heading">电平</FONT></A>控制测量信号播放时的 RMS 电平。几种噪声信号的峰值因数（crest factor，即峰值电平与 RMS 电平之比）通常是 14 dB，所以用噪声时，电平应设在 -14 dB 或更低。播放文件时，合适的电平取决于文件内容。
+
+            <LI>FSAF 的<FONT CLASS="heading">信号</FONT>可以是白噪声、粉红噪声、布朗噪声或文件。信号选择器旁边是信号的持续时间，可设 5 到 60 秒。<BR><BR>用文件时，还会多出一个“起始位置”控件，用来选择从文件的哪个时间点开始；另有一个“浏览”按钮，用来选择文件。<BR><BR>文件应覆盖较宽的频率范围，实际输出哪一段频率，可以用滤波器设置来控制。所选的文件片段，一开头就应该有足够的信号电平。<BR><BR>文件数据会自动重采样到测量采样率，但文件较长时，这一步可能要花些时间。为了省掉这段等待，最好先用采样率转换工具，生成一个与测量采样率相同的文件。<BR><BR>可选的文件格式有 WAV、AIFF、FLAC 和 MP3。<BR><BR>
+            <IMG SRC="../../images/fsaffile.jpg" ALT="FSAF 文件测量" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>可以给信号加<A name="filters"><FONT CLASS="heading">滤波器</FONT></A>，用来限制信号的频率范围，或者模拟分频滤波器（crossover filter）的效果。<BR><BR>
+            <IMG SRC="../../images/fsaffilters.jpg" ALT="FSAF 滤波器设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>测试信号的<A name="level">频谱</A>显示在滤波器设置下方，其中已包含所选滤波器的影响。频谱右边显示测试信号的峰值因数和峰度（kurtosis）。<BR><BR>
+            <IMG SRC="../../images/fsafspectrum.jpg" ALT="FSAF 测试信号频谱" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI><A name="irlength"><FONT CLASS="heading">IR 长度</FONT></A>设定 FSAF 处理要提取的脉冲响应（impulse response，IR）的长度，从 IR 起点算起。IR 越长，计算脉冲响应所需的时间就越长。<BR><BR>如果设定的长度远远超过 IR 衰减到本底噪声（noise floor）所需的时间，可能会因为数值病态（numerical ill-conditioning）而出现处理错误。
+
+            <LI>IR 长度控件旁边是<A name="mic"><FONT CLASS="heading">麦克风选择器</FONT></A>。这里选的麦克风类型会影响 FSAF 内部的一项补偿，这项补偿针对的是麦克风本底噪声的转折频率（corner frequency）。
+
+            <LI><A name="timezero"><FONT CLASS="heading">t=0</FONT></A> 选项决定脉冲响应的 t=0 放在哪里：放在 IR 峰值处，或者放在 IR 起始处。
+
+            <LI>如果输入和输出不在同一台设备上，应在选项面板里勾选<A name="timingmarkers"><FONT CLASS="heading">使用时间标记</FONT></A>。<BR><BR>做文件测量时，残差信号会存成 WAV 文件；另有选项，可以把激励信号（excitation）、麦克风输入和 LTI 响应也存成 WAV 文件。<BR><BR>这些文件默认存放在 REW 日志文件目录下的 temp 子文件夹里，日志文件目录的位置可以在“关于 REW”对话框里看到。temp 文件夹里的 WAV 文件 7 天后会自动删除。要改存放位置，可以用失真图的图表选项里的<EM>设置 FSAF 文件夹</EM>按钮。
+
+            <LI><EM>检查电平</EM>按钮会播放几秒粉红噪声，用来检查输入电平是不是过高或过低。<BR><BR>粉红噪声播放期间按<EM>取消</EM>可以关掉它（3 秒后也会自动停）。测得的 RMS 电平显示在测量对话框上，电平过高或过低时会给出警告。
+
+            <LI>按<EM>开始</EM>进行测量。测量对话框上会显示进度，同时显示这次测量的动态余量（headroom）。
+
+        </UL>
+
+        <H3><a name="results">失真结果</a></H3>
+
+        <P>FSAF 的失真结果显示在<A href="graph_distortion.html">失真</A>图上，包括输入频谱、测量开始前采集的噪声频谱，以及 TD+N。
+
+        <H3><a name="residual">文件测量的残差信号</a></H3>
+
+        <P>用文件作测试信号时，REW 可以选择把测量的残差信号存一份到 mdat 文件里。残差信号就是实测响应与线性响应之差。另外还有选项，可以把激励信号、麦克风输入和 LTI 响应存成 WAV 文件。激励信号按原样保存，文件名以“exc-”开头。
+
+        <P>这些 WAV 文件默认存放在 REW 日志文件目录下的 temp 子文件夹里，日志文件目录的位置可以在“关于 REW”对话框里看到。temp 文件夹里的 WAV 文件 7 天后会自动删除。要改存放位置，可以用失真图的图表选项里的<EM>设置 FSAF 文件夹</EM>按钮。
+
+        <P>残差信号文件的文件名以“res-”开头，后面跟着该测量的 UUID。
+
+        <P>如果保存了残差信号，可以用失真图的图表选项里的<EM>播放 FSAF 残差信号</EM>按钮，在系统默认的 WAV 播放器里播放它。
+
+        <P><EM>增益</EM>控件可以把残差信号放大，便于听清。REW 会自动限制所加的增益，保证残差信号不削波。
+
+        <P>用失真图的图表选项里的<EM>加载 FSAF 残差信号</EM>按钮，可以把残差信号作为音频数据加载进来。用<EM>保存 FSAF 残差信号</EM>按钮，可以把它存成 WAV 文件。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

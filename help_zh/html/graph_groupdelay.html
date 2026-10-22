@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>群延迟图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">群延迟图</A></H2>
+
+        <P>测量的群延迟（group delay）由相位曲线的斜率计算得出。
+
+        <P>请注意，如果对测量做了平滑处理（smoothing），相位曲线和群延迟曲线也会随之被平滑。平滑处理可以通过<A HREF="graph.html#onesmooth">图表</A>菜单及其<A HREF="shortcuts.html#top">快捷键</A>来应用或移除。
+
+        <P>频率响应（frequency response）上的峰和谷，通常在群延迟上也会有对应的峰和谷。
+
+        <P>群延迟包含测量中的各种延迟：电脑或声卡内部的时间延迟、设备的处理延迟，以及声音从声源传到麦克风所用的时间。其中电脑或声卡内部的延迟，可以用<A HREF="analysis.html#ircalc">设置 → 分析</A>里的<FONT CLASS="heading">使用回环作为时间基准</FONT>或<FONT CLASS="heading">使用声学时间基准</FONT>选项消除。
+
+        <P>如果群延迟在测量频段的高端趋向某个固定值，这个值通常就是整个测量的总延迟。
+        <P><IMG SRC="../../images/groupdelay.jpg" ALT="群延迟" width="400" height="250"><BR CLEAR="all">
+
+        <H3><a name="actions">群延迟图的操作</a></H3>
+
+        <P>群延迟图的右键菜单有以下操作：
+        <P><IMG SRC="../../images/actionsgroupdelay.jpg" ALT="群延迟图的操作"><BR CLEAR="all">
+
+        <P>平滑下拉框用来修改图表的平滑设置。
+
+        <P><EM>偏移 t=0</EM> 用来改变脉冲响应（impulse response）中时间零点的位置，并实时预览偏移对群延迟和相位的影响。只有点<EM>应用</EM>或<EM>应用并关闭</EM>按钮，测量才会真正改变。
+
+        <P>偏移量有两个滑块：一个用于粗调，一个用于微调，这样调整范围更宽。单击滑块的拖动钮后，可以用 ← 键和 → 键对该滑块做微调。也可以用鼠标滚轮调整滑块，此时按住 Alt 键即为微调。
+
+        <P>如果测量时用了时间基准（timing reference），系统延迟数值也会随之平移，平移量与零点相同。系统延迟数值可在测量的信息面板里查看。对话框顶部显示已经对脉冲响应施加的累计偏移量。
+        <P><IMG SRC="../../images/t0offsetdialog.jpg" ALT="t=0 偏移对话框"><BR CLEAR="all">
+
+        <P><EM>估算 IR 延迟</EM>（<FONT CLASS="keys">Ctrl+Alt+E</FONT>）把测量与它的最小相位（minimum phase）版本比较，估算出测量中的时间延迟。算出延迟后会弹出一个面板，点其中的<EM>平移 IR</EM> 按钮，就能把这段延迟从脉冲响应中去掉。
+
+        <P>请注意，平移脉冲响应会清除已生成的频谱图（spectrogram），因为那张图已不再有效。
+
+        <P><EM>生成最小相位</EM>会按当前的 IR 时间窗设置，生成测量的最小相位版本。同时会启用最小群延迟曲线和多余群延迟（excess group delay）曲线。拿它们与测量的群延迟对照，就能看出：测量与一个频率响应相同、但相移（phase shift）尽可能小的系统相比，群延迟差在哪里。
+
+        <P>请注意，如果要生成最小相位响应，最好做全频段（full range）测量，因为要得到好的结果，测量范围必须超出被测系统的带宽。
+
+        <P>这项功能还会分别在 SPL &amp; 相位图上启用最小相位和多余相位曲线，在脉冲响应图上启用最小相位 IR 曲线。
+
+        <P><B>注意</B>：IR 时间窗设置很重要。最小相位响应是由测量的频率响应（幅度响应）推导出来的，而频率响应又受 IR 时间窗设置影响。之后如果改了时间窗设置，应重新执行一次<EM>生成最小相位</EM>，让结果反映新的设置。
+
+        <P>另外，左时间窗（即作用在峰值之前的那段时间窗）的形状也会影响最小相位的结果。例如，用矩形窗（rectangular window）得到的响应，相移会比用 Hann（汉宁窗）时更小。
+
+        <P>如果被测系统本身就是最小相位系统（例如大多数分频器都是），那么最小相位响应与去掉测量中全部时间延迟后的响应相同。房间测量一般不是最小相位的，只在部分频段例外，主要是低频。关于最小相位、多余相位和群延迟的更多内容，见<A HREF="minimumphase.html#top">最小相位</A>。
+
+        <H3><a name="controls">群延迟图的图表选项</a></H3>
+
+        <P>群延迟图的图表选项里有以下控件：
+        <P><IMG SRC="../../images/controlsgroupdelay.jpg" ALT="群延迟图的图表选项"><BR CLEAR="all">
+
+        <P>勾选<EM>缩放时显示数据点</EM>后，放大到能分辨单个数据点时，图上会画出构成实测响应和最小相位响应的各个数据点。这可能只出现在曲线的一部分范围内。
+
+        <P>勾选<EM>显示模态频率</EM>后，图表底部会标出理论模态频率（modal frequency），它们是按 EQ 窗口<A href="eqwindow.html#modalanalysis">模态分析</A>一栏里输入的房间尺寸算出来的。
+
+        <P><EM>曲线选项</EM>按钮会打开一个对话框，用来更改图上各条曲线的颜色和线型。改动会应用到这张图上显示的所有测量。
+
+        <P>曲线也可以隐藏。隐藏后，它会从图上和图例中一起消失。
+
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

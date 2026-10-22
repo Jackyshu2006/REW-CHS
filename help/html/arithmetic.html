@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Trace arithmetic</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        
+        <H2><a name="top">Trace Arithmetic</a></H2>
+
+        <P>The <EM>Trace Arithmetic</EM> tool allows the chosen pair of traces to be
+        added, subtracted, multiplied, divided, coherently (aka vector) averaged or merged.
+        Either of the traces may also be inverted (magnitude, phase or both). Division and 
+        inversion can be restricted to a frequency range with the response left unchanged outside 
+        that range. If both the chosen traces have impulse responses, 
+        the result will also have an impulse response, however the sample rates must be either the 
+        same or related by an integer. For example, traces at 44.1kHz and 11.025kHz can be combined 
+        via an arithmetic operation, the result will have the higher of the two rates. This allows 
+        operations on band limited measurements which may have been decimated to a lower sample rate.
+        <P><IMG SRC="../../images/tracearithmetic.jpg" ALT="Trace arithmetic controls"><BR CLEAR="all">
+
+        <P>If the traces have incompatible sample rates, or neither has an impulse response,
+        the result will not have an impulse response, but it may have both magnitude and phase
+        data if both the traces it was applied to had magnitude and phase data, otherwise the
+        result will only have magnitude data and the traces will be treated as incoherent.
+        If one trace has an impulse response and the other does not the result will have an 
+        impulse response. This could be used to merge a cal file response with an IR or apply 
+        a target response adjustment to an IR.
+
+        <P>The frequency span of the result of an arithmetic operation will usually be from the lowest
+        start frequency to the highest end frequency of the traces operated on. Some operations have
+        the option of limiting the result to the overlapping range of the measurements, that is controlled
+        by the <EM>Result spans combined frequency range</EM> control. Outside their
+        frequency range traces are treated as being zero valued, with the exception of the divisor
+        in a division operation which is treated as being unity outside its range. If the
+        measurements actually have significant levels outside the measurement range the zero
+        setting will generate oscillations in frequency and time domains, for best results use
+        traces that span the full frequency range.
+
+        <P><B>Trace arithmetic notes</B>
+        <UL>
+            <LI>For meaningful results measurements that have impulse responses or phase data should
+                be properly time aligned before they are combined. Being properly time aligned may mean 
+                having a common timing reference or may mean removing time delays, it depends on the 
+                operation and what you are trying to achieve. An exception is the Merge operation,
+                for which REW will automatically align both magnitude and phase at the merge frequency,
+                adjusting the trace B time delay as required for the phase match. The amounts of the
+                adjustments are shown in the notes of the newly generated measurement.</LI>
+            <LI>The currently applied impulse response window settings are used for each trace. The 
+                result uses the same window settings as trace A unless the operation was Merge B to A, 
+                in which case the window settings for trace B (the low frequency portion) are used, 
+                or for division and inversion, which use windows that span the entire resulting impulse 
+                response as the result is typically not causal. The 
+                window reference time for the result will be at the peak of the result IR. The
+                left window width will be increased if necessary so that it is at least twice the span 
+                from the start of the result IR to its peak to avoid truncation artefacts in the result. 
+                Any frequency-dependent settings are excluded, applying an FDW to the result would amount 
+                to applying the window twice, as it is already applied to the data used to produce the result.</LI>
+            <LI>The result of arithmetic on measurements that have compatible impulse responses is 
+                smoothed using the measurement A smoothing, unsmoothed data is used during the calculations. 
+                Other measurements use whatever smoothing they already had applied during the calculations
+                and the result is treated as unsmoothed (or 1/48 octave smoothed if data is 96 PPO).</LI>
+            <LI>The division operations have an optional maximum gain parameter  parameter which limits the boost 
+                which occurs when the divisor becomes very small (or zero), such as where the divisor 
+                has notches in its response, and so produces a more stable and manageable result. Division 
+                may also be constrained to operate within a desired frequency span, with an upper and/or 
+                lower frequency limit. Outside those limits the behaviour depends on whether gain limiting
+                is selected. If the gain limit is being used REW treats the operation as an attempt to produce
+                a band limited correction filter and division reverts to unity gain, blended over 
+                a 1 octave span centred on the limit frequency. If the gain limit is not being used 
+                division reverts to the numerator, offset to align with the result within the band limit.</LI>
+            <LI>The inversion operations have an optional maximum gain parameter which limits the boost which occurs
+                when the response being inverted becomes very small (or zero), such as where there are notches,
+                and so produces a more stable and manageable result. Inversion may be constrained to operate 
+                within a desired frequency span, with an upper and/or lower frequency limit. Outside those 
+                limits inversion reverts to unity gain, blended over a 1 octave span centred on the limit 
+                frequency. Inversion also provides a target level for the inversion to use, or a check box 
+                to set the target automatically based on the average level of the measurement, and an option 
+                to exclude parts of the response that look like notches from the inversion. The 1/|A| and
+                1/|B| operations produce a linear phase result.</LI>
+        </UL>
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

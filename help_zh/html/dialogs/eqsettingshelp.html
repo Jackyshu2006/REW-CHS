@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>EQ设置说明</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+ <BODY LANG="zh-CN" DIR="LTR">
+
+    <H4>默认均衡器</H4>
+
+    <P>默认均衡器指定了新测量值将使用的均衡器。现有测量值所使用的均衡器可以通过 EQ 面板更改。
+
+    <H4>目标默认值</H4>
+
+    <P>此处可设置 <FONT CLASS="heading">目标曲线类型</FONT>、
+    <FONT CLASS="heading">目标声压级</FONT>、
+    <FONT CLASS="heading">低音管理斜率</FONT>、
+    <FONT CLASS="heading">低音管理截止频率</FONT>、
+    <FONT CLASS="heading">低频斜率</FONT>、<FONT CLASS="heading">低频截止频率</FONT>、
+    <FONT CLASS="heading">分频器高通类型</FONT>、
+    <FONT CLASS="heading">分频器高通截止频率</FONT>、
+    <FONT CLASS="heading">分频器低通类型</FONT> 以及
+    <FONT CLASS="heading">分频器低通截止频率</FONT>
+    的默认值，这些默认值将用于每个新的测量值。低频截止频率与低频斜率定义了低音炮或全频扬声器的低频延伸下限，以及该延伸的滚降速度。
+
+    <P><FONT CLASS="heading">房间曲线</FONT> 的 <FONT CLASS="heading">低频提升</FONT>
+    与 <FONT CLASS="heading">高频衰减</FONT> 设置定义了用于新测量值的默认房间曲线效果，该效果会叠加在目标形状上。目标曲线会在低频提升起始频率以下，以所选斜率上升，直至达到低频提升结束频率。主观上，低频的提升可能更受偏好。同样地，目标曲线会在高频衰减起始频率以上，以所选斜率下降。高频响应衰减是在聆听位置进行室内测量时的正常特性。
+
+    <H4>滤波器计算</H4>
+
+    <P>若勾选 <FONT CLASS="heading">增益过小时舍弃滤波器</FONT>，在优化过程结束时，任何增益大小小于平坦度目标一半的自动滤波器将会被释放（其类型将设为“无”）。
+
+<!--    <P>若勾选 <FONT CLASS="heading">允许极低频增益</FONT>，REW
+    将允许在响应低于目标的最低频率以下使用提升滤波器。若应用大量提升，可能会将扬声器单元推至超出其冲程限制，使用时请务必谨慎。 -->
+
+  </BODY>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Getting Started with REW</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Getting Started with REW</A></H2>
+
+        <P>REW is a software package that measures the transfer functions of acoustic
+        systems and displays the corresponding frequency, phase and impulse responses and
+        various quantities derived from them. If that sentence made you ask yourself
+        <I>what on earth is he talking about?</I> It would be worth taking a few minutes
+        to read through the introduction to <A HREF="primer.html#top">Signals and Measurements</A>,
+        which explains the basic concepts. Even if you are already familiar with the
+        terminology a quick browse through that introduction may be helpful.
+
+        <H3><A name="explanation">How REW makes Measurements</A></H3>
+
+    	<P>REW uses a logarithmic sine sweep method and a basic explanation follows.
+        If you'd rather not know, you can <A HREF = "#equipment">skip the explanation</A>.</P>
+
+        <P>You can find out a great deal about the log sweep method, and the various alternatives, by
+        reading the paper "Transfer-Function Measurement with Sweeps" by SWEN MÜLLER and PAULO MASSARANI
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD rowspan="2">To make a measurement we need a sound source
+            (a loudspeaker or subwoofer) and a microphone (SPL meters contain
+            a microphone and many can be used instead of a mic). A logarithmic
+            sweep signal is sent to the source, starting low and steadily increasing to a higher
+            frequency. A logarithmic sweep is one that takes the same time to double in frequency. 
+            It takes the same time to go from 40 to 80Hz or 4kHz to 8kHz as from 20 to 40Hz. 
+            The mic picks up the sweep, sensing the sound that
+            travels directly from the source and all the sound that first bounces off the room surfaces. 
+            Some sound paths may bounce off several room surfaces before reaching the microphone.
+            <TD width='110'><IMG SRC="../../images/measurebutton.jpg" ALIGN="left" ALT="Measuring" >
+        <TR>
+            <TD width='110'><IMG SRC="../../images/sweep.jpg" width="103" height="86" ALIGN="left" ALT="Sweep" >
+        </TABLE>
+
+        <P>Once the sweep completes, analysis starts. A process called "Fast Fourier Transform" (FFT) 
+    	is used to calculate the phase and amplitude of the frequency spectrum that made up the sweep. 
+        By comparing the amplitudes and phases of the spectrum of the received microphone signal with those sent in the sweep
+        we can work out how each frequency has been affected by the loudspeaker <i>and room</i> we are measuring. 
+        This is called the "Transfer Function" of the room from the location of the source to the location of the mic. 
+        Note: A different source position or different mic position will have a different transfer function.
+        In other words, <i>our measurement is only valid for one specific source and mic position.</i> Having worked out the
+        transfer function we can use an "inverse FFT" to get from the frequency amplitude
+        and phase information to a time signal that describes the way <I>any</I> signal is changed
+        when travelling from the source to the mic. That time signal is called the "impulse
+        response" - like the transfer function it is derived from, it is only valid for one
+        specific source and mic position.</P>
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+	<TR>
+	<TD>
+            The impulse response is actually exactly the same
+            signal we would see if we could emit a very short but loud click at the source position
+            and record what the mic picks up afterwards ("very short" meaning lasting just the time
+            of 1 sample at the sample rate we are using for our analysis, so for a 48 kHz sample rate
+            that would be just 1/48,000 of a second which is 21 millionths of a second). You might ask
+            why we don't just use a click then. One difficulty is that the click, because it is so short,
+            needs to be extremely loud for us to be able to pick up what happens after the initial click
+            over the background noise of the room. We could no longer use a speaker to generate that,
+            we would need something like a starting pistol or to pop a balloon. We would also need a
+            mic that could cope with both the extremely loud click itself and the much quieter echoes
+            of the click produced by the room. You are likely to find that your family and neighbours
+            are not that keen on you repeatedly firing a pistol to figure out what your room is doing,
+            and even if they put up with it your results would not be as good as using a sweep. To be
+            technical about it, you can achieve a much higher signal-to-noise (S/N) ratio by the sweep
+            method. The S/N is determined by the background noise level and by how much energy is in
+            the test signal, which in turn depends on how loud the signal is and how long it lasts. An
+            impulse is extremely short, a few millionths of a second, so to get any significant energy
+            it needs to be extremely loud. A sweep can last for many seconds, so even at a modest volume its
+            total energy can approach as much as a million times more than an impulse.
+            <TD width='100'><IMG SRC="../../images/pistol.jpg" width="81" height="145" ALIGN="left" ALT="Pistol" >
+        </TABLE>
+
+        <P>Once the impulse response has been obtained, it can be analysed to calculate
+        information about how the room behaves. The simplest analysis is the FFT, to show the
+        frequency response between the source and mic positions. However, we have some
+        control over it. Altering which part of the impulse response is analysed by the FFT
+        changes what aspect of the room's response we see. The early part of the impulse response
+        corresponds to the direct sound from the source to the mic, the shortest path between
+        them. Sound that has bounced off the room's surfaces has to travel further to reach the
+        mic, which takes longer, so the later parts of the impulse response contain the
+        contributions of the room. "Windowing" the impulse response to look at only the
+        initial part shows us the frequency response of the direct sound with little or no
+        contribution from the room. A window that includes later parts of the response lets
+        us see how the room's contribution alters the frequency response. The ability to separate
+        the contributions of the direct and later (reflected) sound is a key difference between
+        the frequency response derived from an impulse response and one from a Real Time Analysis (RTA), 
+        which can only show the total combined response of source and room.
+
+        <P>Other information we can get from the impulse response include a "waterfall" plot,
+        which is generated by moving a window in steps along the response and plotting the various
+        frequency responses in order to produce a 3D picture of the way the response changes over
+        time, and the room's "RT60" data, which is the time it takes sound in various frequency bands
+        to decay by 60dB (or 1,000 times smaller than the original level).<BR>
+
+        <H3><A name="equipment">Equipment Needed</A></H3>
+        <BR><UL>
+            <LI>The first requirement is a way to capture the test signal. There are
+            a few options:
+            <UL>
+                <LI>A USB microphone that comes with a calibration file. Such a mic can be used for low
+                frequency or full range measurements. If the cal file has sensitivity
+                data in a format REW recognises, it can also act as a calibrated SPL meter. USB mics work 
+                well for room measurement but are less suitable for speaker design work as they do not
+                support a loopback connection for a precise timing reference. REW's acoustic timing 
+                reference offers a workaround, but how well that works depends on the particular mic 
+                and the measurement environment.
+                <div  style='display:none'>
+                    <!-- External link launchers for the Java helpset viewer -->
+                    The miniDSP UMIK-1 is recommended and has calibration data in an REW-friendly
+                    format, see 
+                    <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+                    <param name="text" value="www.minidsp.com">
+                    <param name="content" value="https://www.minidsp.com/products/acoustic-measurement/umik-1">
+                    </object> or 
+                    <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+                    <param name="text" value="Amazon">
+                    <param name="content" value="https://www.amazon.com/gp/product/B00N4Q25R8/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00N4Q25R8&linkCode=as2&tag=roomeqwizar07-20&linkId=d3063b35f3c13b526a79c93a5b3c5024">
+                    </object>.
+                </div>
+                <div class="onlineonly">
+                    The miniDSP UMIK-1 is recommended and has calibration data in an REW-friendly
+                    format, see <a href="https://www.minidsp.com/products/acoustic-measurement/umik-1">www.minidsp.com</A> or 
+                    <a href="https://www.amazon.com/gp/product/B00N4Q25R8/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00N4Q25R8&linkCode=as2&tag=roomeqwizar07-20&linkId=d3063b35f3c13b526a79c93a5b3c5024">Amazon</A>.
+                </div>
+                <br>
+                <LI>An alternative to a USB mic is an analog microphone. Most analog mics will require a preamplifier
+                to produce line level and to supply the mic with phantom power. For full range measurements 
+                the mic response must be calibrated for accurate results. An SPL meter is ideally required to 
+                provide a reference SPL figure against which to calibrate REW's SPL display.<BR>
+
+                <LI>A final option is an SPL meter with a line level analogue output.
+                The Radio Shack (RS) meter is perfectly adequate for low frequency room acoustics work,
+                either the analogue or digital display version. The Galaxy CM-140 meter
+                has better tracking of the C-weighting curve and better behaviour above subwoofer
+                frequencies than the RS meter, but is more expensive.<BR>
+
+                <IMG SRC="../../images/rsmeter.jpg" ALT="RS SPL Meter" BORDER=0 ALIGN="left" width="150" height="161">
+                <IMG SRC="../../images/rsmeter2.jpg" ALT="RS SPL Meter" BORDER=0 ALIGN="left" width="90" height="130">
+                <IMG SRC="../../images/rsmeter3.jpg" ALT="RS SPL Meter" BORDER=0 ALIGN="left" width="120" height="170"><BR clear="all"><BR>
+
+            </UL>
+
+            <LI>A tripod to support the mic or meter (hereafter just called "mic"). Small
+            movements of the mic can result in large variations in the measurements, for
+            repeatable results a means of supporting the mic for a prolonged period is
+            essential. For low frequency measurements (below a few hundred Hz) the mic can
+            be set pointing straight up. This avoids having to move it to measure different
+            speakers and makes it easy to read the display on a meter. Use a "90 degree"
+            mic calibration file if pointing the mic upwards. To make measurements at higher
+            frequencies it is best to point the mic directly at the speaker being measured.
+            Use a "0 degree" mic calibration file in that case. In both cases the mic should
+            be placed at ear height in your usual listening position.
+
+            <LI>If you are using a USB mic your computer's headphone output can
+            generate the test signals REW uses without an external interface. If you are using an
+            SPL meter or a mic with a preamp then an audio interface (internal or external) with
+            line inputs and line or headphone outputs is required. <B>Note: Older PC
+            and laptop mic-only inputs are NOT suitable and should not be used</B> as they had
+            too much gain and most suffered from high noise levels and limited bandwidth. 
+            Combination mic/line inputs can be used successfully. Inexpensive or built-in interfaces
+            are typically adequate, a reference measurement of a loopback connection
+            can be used to remove the interface's frequency response from the measurement.
+
+            <LI>Cables to connect from your SPL meter or mic preamp's output to your
+            interface (if you are not using a USB microphone) and from the interface's
+            line or headphone output to an input on your AV processor or equaliser. The
+            leads need to be long enough to reach from your computer to your listening
+            position (where your mic will be placed) and to your AV processor or equaliser.
+            If your interface has phono (RCA) connectors phono-phono leads will be needed,
+            if the interface has 3.5mm (1/8") sockets you will need a pair of <B>stereo</B>
+            jack plug to stereo phono plug leads (also called Y adaptor cables) or stereo 
+            audio adaptors , see images below.<BR>
+            <IMG SRC="../../images/yadaptor.jpg" ALT="Y adaptor cable" BORDER=0 ALIGN="left" width="212" height="171"><BR clear="all">
+            <IMG SRC="../../images/audioadaptor.jpg" ALT="Stereo audio adaptor" BORDER=0 ALIGN="left" width="81" height="79"><BR clear="all"><BR>
+            If you use male to male Y adaptor cables you will also need two phono socket-to-phono
+            socket adaptors (also called RCA phono plug couplers, see image below)
+            to connect to the leads that run to your SPL meter and AV processor.
+			(RCA Y-cables come in all formats: M->2M, M->2F, F->2F, F->2M and a selection often comes in handy when making measurements.)<BR>
+            <IMG SRC="../../images/coupler.jpg" ALT="RCA phono plug coupler" BORDER=0 ALIGN="left" width="136" height="63"><BR clear="all"><BR>
+            If connecting to a BFD Pro DSP1124P or FBQ2496 you will need phono to mono 1/4" jack
+            plug adaptors like that pictured below.<BR>
+            <IMG SRC="../../images/phonotomono.jpg" ALT="RCA phono to mono jack plug coupler" BORDER=0 ALIGN="left" width="182" height="66"><BR clear="all"><BR>
+
+            <LI>An interface to your equaliser if using REW's Midi
+            communication capabilities to set up the equaliser's filters. Requirements
+            for communicating with BFD Pro DSP1124P or FBQ2496 are <A HREF="bfdcomms.html#top">here</A>.<BR>
+            <IMG SRC="../../images/um1xsmall.jpg" ALT="Midi interface" BORDER=0 ALIGN="left" width="180" height="114"><BR clear="all"><BR>
+
+        </UL>
+
+        <H3><A name="connections">Connections</A></H3>
+
+        <P>The overall setup for measuring when using an SPL meter is shown below. If you are
+        using a USB microphone you do not need to make any connections to the interface inputs,
+        just connect the mic to a USB port on your computer.<BR>
+        <IMG SRC="../../images/interconnectsplmeter.jpg" ALT="Connections for SPL Meter" BORDER=0 ALIGN="left"><BR clear="all">
+
+        <BR><UL>
+            <LI>When not using a USB mic, one of the interface's input channels is
+            used to measure the sound pressure signal from your mic or meter. It must be
+            connected to the meter's or mic preamp's analogue output. The default is
+            to use the Right input, but either input can be used. A control in the
+            <A HREF="soundcard.html#top">Soundcard Preferences</A> tells REW which input
+            to listen to.
+
+            <LI>One of the interface's output channels (typically the Right) must be connected
+            to an input channel on your AV processor or to the input of your equaliser. Connecting
+            to your AV processor allows you to make measurements that will show the response of
+            main speakers as well as the subwoofer, and to view the integration between subwoofer
+            and main speakers. The effects of your AV processor's bass management can be included
+            in the measurements. Connecting to the left or right channel of an analog input will
+            allow the corresponding main speaker and the subwoofer responses to be measured. Turn
+            off or disconnect the main speaker or the sub to exclude them from a measurement. 
+            
+            <LI>If your computer and AV processor both support audio over HDMI you can also use an HDMI
+            connection to carry the audio. The HDMI audio driver needs to be selected as the output
+            device under Preferences -> Output Device. If you are on Windows and want to access 
+            multichannel outputs over HDMI you will need to use the Java output device name that starts 
+            with "EXCL" to access a WASAPI Exclusive driver or use an ASIO wrapper like FlexASIO to 
+            access the outputs and inputs.
+
+            <LI>The other input and output channels do not need to be used for basic measurement.
+            The response of the interface itself can be compensated for by taking a reference
+            measurement with the output connected directly to the input and configuring REW to
+            subtract that measured response from subsequent room measurements. However, it is also
+            possible to use a loopback connection from the interface's other output to its other input
+            as a timing reference for REW to automatically compensate for the time delay in the
+            interface and operating system when it makes a measurement. A timing reference is required
+            to compare phase or time delays between measurements or for getting speaker delay settings
+            correct in multi-channel systems. If you wish to do this you may need an additional RCA
+            phono plug coupler to make the loopback connection. Whether REW uses one channel as a
+            timing reference is controlled by a selection on the Measure dialog. When the input is via a USB
+            microphone instead of an interface an acoustic timing reference can be used.
+            If an acoustic timing reference is used REW will generate a timing signal on the
+            output that has been selected to act as the reference before it generates measurement
+            sweeps on the channels being measured. The timing signal is a high frequency sweep
+            to allow accurate timing so a subwoofer cannot be used as the reference channel.
+            Measurements will have a time delay that corresponds to the difference in their
+            distance from the microphone compared to the distance of the reference speaker - if
+            the reference speaker is further away the delay would be negative. <B>Note</B> that
+            multiple sweeps cannot be used with an acoustic timing reference.
+        </UL>
+
+        <H3><A name="eqconnections">Equaliser Connections</A></H3>
+
+        <P>If using an equaliser(such as BFD Pro DSP1124P or FBQ2496) to optimise
+        your subwoofer's response it should be connected between your AV processor's
+        LFE/Sub output and the subwoofer's low level input. <I>For a BFD Pro the
+        operating level switches on the rear panel should be pressed in to select
+        the -10 dBV range.</I><BR><BR>
+        <IMG SRC="../../images/connectionsav2.jpg" ALT="Connections" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <P>If the AV processor input being used has an anti-clipping feature
+        (automatically reducing its sensitivity if it detects large signals)
+        this should be turned off, as it could shift the measurement levels.
+        The sensitivity of the input should ideally be set to 0.5V, though
+        this is not critical.
+
+        <P>The TAG McLaren AV32R DP and AV192R allow the test signal input to be routed
+        to any speaker output via the Test Signal entry within the TMREQ filter menus
+        for each speaker, which is handy for measuring other speakers (see
+        <A HREF="avpcomms.html#avptestsignalselection">this note</A> for details).
+        They seem to be the only AV processors with such a facility, other processors
+        may have 5.1 or 7.1 analog inputs that can be used to similar effect, but in
+        some cases bass management will not be applied to such inputs, limiting the
+        ability to check sub/main speaker integration.
+
+        <H3><A name="meterrange">SPL Meter Range</A></H3>
+
+        <P>If you are using an SPL meter as the input the meter's range should be
+        set to the value normally used for speaker level calibration and must not
+        be altered while using REW. If you are using the Radio Shack meter, select
+        the 80dB range if you calibrate your system at 75dB (this is the standard
+        level recommended by Dolby<FONT SIZE="-1"><SUP>TM</SUP></FONT>). Set your
+        meter to C weighting and "slow". <FONT COLOR=#4076c0>Select the
+        <FONT CLASS="settings">Input device is a C weighted SPL meter</FONT> option in 
+        <A HREF="calfiles.html#top">Preferences -> Cal Files</A></FONT>.
+
+        <P>
+
+        <H3><A name="gotooverview">REW Overview</A></H3>
+
+        <P>Having assembled the equipment required we can look it how REW itself is
+        organised for making and analysing measurements in the
+        <A HREF="rewoverview.html#top">REW Overview</A>.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

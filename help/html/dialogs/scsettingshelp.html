@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Soundcard Preferences initial page</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+ <BODY LANG="en-GB" DIR="LTR">
+    Choose the <FONT CLASS="heading">Output device</FONT> and 
+    <FONT CLASS="heading">Input device</FONT> you wish to use for measurements. After 
+    the devices have been selected the particular <FONT CLASS="heading">Output</FONT> 
+    and <FONT CLASS="heading">Input</FONT> can be chosen. The channels used for output 
+    and input are selected from the drop downs to the right of the output and input 
+    selections, most outputs and inputs are stereo so you have the choice of using
+    the left or right channel, or (for output only) both channels. Some interfaces
+    only provide mono inputs or outputs, if that is the case the channel selectors
+    will be disabled.
+    
+    <P>Make sure that the input channel is the one connected to your SPL meter (or 
+    mic preamp output). If <FONT CLASS="heading">Use loopback as timing reference</FONT> 
+    has been selected in the <FONT CLASS="heading">Analysis preferences</FONT> the 
+    other channel will be used a reference to remove time delays within the 
+    computer and interface, this requires a loopback connection on the reference 
+    channel. 
+
+    <P>If <FONT CLASS="heading">Virtual balanced</FONT> is selected a 
+    <FONT CLASS="heading">Balanced input</FONT> selection is offered. The balanced input 
+    will be added or subtracted from the measurement input according to the mode setting
+    and the result scaled by 0.5. Difference mode simulates the behaviour 
+    of a balanced input, and is appropriate if the balanced input is driven by an inverted
+    signal (such as by selecting the <EM>Invert second output</EM> option on the signal
+    generator.
+    
+    <P>If the interface (or something else in the input chain) inverts the signal check
+    the <FONT CLASS="heading">Invert</FONT> box to have REW automatically correct
+    the inversion. If the input has a DC offset check the <FONT CLASS="heading">High pass</FONT>
+    box to have REW automatically apply a 2 Hz high pass filter.
+
+    <P>If you select <FONT CLASS="settings">Default Device</FONT> REW will use the 
+    devices which have been set as the defaults for your Operating System - under 
+    Windows these are specified via the <B>Sounds and Audio Devices</B> entry in the 
+    Control Panel, under macOS via the Audio Midi Setup tool in Applications - Utilities. 
+    In that case the <FONT CLASS="heading">Output</FONT> and <FONT CLASS="heading">Input</FONT> 
+    used will be those which have been selected in your interface's mixer. Make sure 
+    that the input is not feeding into the output signal in your interface's mixer 
+    and that monitoring is not enabled (if available).
+    
+    <P>If you choose specific devices, outputs and inputs from the REW selection boxes 
+    you have the option to always adjust volume settings yourself via your OS controls 
+    or to allow REW to set them to the last used values on startup. This is determined by the 
+    check boxes above the output and input level controls. Note that REW may not be able to control 
+    levels under some operating systems or for some interfaces, in those cases uncheck the boxes
+    or leave the <FONT CLASS="heading">Output device</FONT> and <FONT CLASS="heading">Input device</FONT>
+    set to <FONT CLASS="settings">Default Device</FONT>.
+    
+    <P>The output device <FONT CLASS="heading">Buffer</FONT> and
+    input device <FONT CLASS="heading">Buffer</FONT> controls set the size of the 
+    buffers used when accessing the interface. The default settings are 32k
+    (meaning the buffer sizes are 32,768 pairs of audio samples). If you 
+    experience occasional glitches or interruptions in the signal generator 
+    output try increasing the output device buffer size, but note that there are other
+    possible causes of this, such as interference from wireless cards. 
+    Similarly if the captured audio signals (as shown in the Scope graph)
+    have occasional dropouts try increasing the input device buffer. Using larger
+    buffers will increase latency (delays when starting and stopping replay
+    and recording) but should otherwise not be detrimental. If you are not 
+    experiencing any problems with audio input or output you may wish to 
+    reduce the buffer sizes to minimise latency. 
+    
+    <P>It is a good idea to measure the interface using the <EM>Calibrate...</EM> button 
+    in the <FONT CLASS="heading">Calibration</FONT> section before making measurements 
+    to allow the response of the interface itself to be compensated for. Before making 
+    measurements you can use <EM>Check Levels</EM> to make sure the replay and input levels 
+    are set correctly.
+
+    <P>32-bit integer sample formats often carry 24-bit data. Treating them as 
+    32-bit data generates low level harmonic artefacts (at around -160 dBFS), to 
+    prevent that they should be treated as 24-bit by selecting 
+    <FONT CLASS="heading">Treat 32-bit data as 24-bit</FONT>. If a device is genuinely 
+    32-bit turning this option off will provide the full resolution of the device, 
+    but note that REW uses 32-bit float to distribute audio data internally which means 
+    the effective integer-equivalent dynamic range is 25 bits.
+
+</BODY>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>REW Overview</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">REW Overview</A></H2>
+
+        <P>When REW is started it looks like this:<BR>
+        <P><IMG SRC="../../images/rewinitial.jpg" ALT="REW Initial Window" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>The main window is blank until we either make a measurement or load some
+        existing measurements. The SPL Meter, Signal Generator, Scope and Level Meters
+        can be used without loading any measurements,<BR>
+        <IMG SRC="../../images/basictools.jpg" ALT="SPL Meter, Signal Generator and Level Meters" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        as can the RTA window, EQ window and the Room Simulator,<BR>
+        <IMG SRC="../../images/rtaeqsimbuttons.jpg" ALT="RTA, EQ and Room Simulator Buttons" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>After making or loading some measurements the main window looks like this:
+        <P><IMG SRC="../../images/rewmeasurements.jpg" ALT="REW with measurements loaded" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        
+        <P>The measurements appear in panels on the left. The currently selected 
+        measurement has a white background, the others are dimmed. Some have tinted
+        backgrounds to distinguish different types of measurement. On the right is
+        the graph area for the current measurement. 
+        
+        <P>Right clicking on a measurement brings up a menu of actions and displays 
+        additional information about the measurement, including any notes made.
+        <P><IMG SRC="../../images/measpanelrightclick.jpg" ALT="Measurement Panel right click menu">
+
+        <P>All the <A name="toolbar">toolbar</A> buttons are now enabled. They are 
+        in 3 groups, firstly the buttons related to measurements:<BR>
+        <IMG SRC="../../images/measurementbuttons.jpg" ALT="Measurement Buttons" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        These buttons allow a new measurement to be made, existing measurement files 
+        to be opened, all the current measurements to be saved in a single measurement
+        (.mdat) file, all the current measurements to be removed, and an Info panel to
+        be opened that shows additional information about the current measurement.
+
+        <P>The next group has the various tools<BR>
+        <IMG SRC="../../images/toolbuttons.jpg" ALT="Tool Buttons" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        The IR Windows button opens a window that allows the type and extent of the
+        Impulse Response windows for the current measurement to be changed. Next to
+        that are the SPL Meter, Signal Generator, Scope and Level Meters buttons. Then there
+        is a button to open the Overlays graph window, which allows any or all of the
+        loaded measurements to be plotted on the same graph. The last three buttons are
+        for the RTA window, the EQ window (which is used to study the effects
+        of EQ on the current measurement) and the Room Simulator.
+
+        <P>The final toolbar button brings up the Preferences panel<BR>
+        <IMG SRC="../../images/settingsbutton.jpg" ALT="Preferences Button" BORDER=0 ALIGN="left" width="67" height="55"><BR CLEAR="All">
+
+        <P>In the graph area there is a button to capture the current graph as an image<BR>
+        <IMG SRC="../../images/capturebutton.jpg" ALT="Capture Button" BORDER=0 ALIGN="left" width="44" height="47"><BR CLEAR="All">
+        a selector strip to pick the graph type<BR><BR>
+        <IMG SRC="../../images/graphselector.jpg" ALT="Graph Selector" BORDER=0 ALIGN="left"><BR CLEAR="All"><BR>
+        and buttons to turn scroll bars for the graph area on/off, toggle the frequency
+        axis between log and linear, set the graph limits and show the graph controls
+        menu.<BR>
+        <IMG SRC="../../images/graphbuttons.jpg" ALT="Graph Buttons" BORDER=0 ALIGN="left" width="231" height="48"><BR CLEAR="All">
+
+        <P>Below the graph is a legend area that shows the trace values at the cursor position<BR>
+        <IMG SRC="../../images/graphlegend.jpg" ALT="Graph Legend" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        If smoothing has been applied the octave fraction (1/48 in the image above) appears 
+        between the trace name and its value. Right clicking in the legend area brings up a menu 
+        of options to help manage trace selections.
+        
+        <P>At the bottom of the main window the <A name="statusbar">status bar</A> shows, 
+        from left to right, the memory usage, sample rate, input and output data formats, 
+        an input data bit monitor and the input data bit width. The bit width data and bit 
+        monitor are updated when REW is capturing input data.<BR>
+        <IMG SRC="../../images/statusbarleft.jpg" ALT="Status bar information for memory, sample rate and data formats" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>Next are the maximum SPL before clipping for the current input SPL calibration, 
+        the full scale RMS voltages for the input and output and the resistance value used 
+        to generate power figures. Those items can be clicked to edit them.<BR>
+        <IMG SRC="../../images/statusbarmid.jpg" ALT="Status bar information for max SPL, full scale input and output voltages and power ref resistance" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>Finally there is a message area and a progress bar that appears when REW is processing data.
+            
+        <P>The first step in getting REW running is to <A HREF="calsoundcard.html#top">
+        set up the audio input and output and calibrate the soundcard</A>.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

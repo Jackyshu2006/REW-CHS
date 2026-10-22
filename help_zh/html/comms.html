@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>通信设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">通信设置</A></H2>
+
+        <P>“设置 → 通信”页签用来选择与均衡器通信所用的 MIDI 接口。<BR><BR>
+        <IMG SRC="../../images/commssettings.jpg" ALT="通信设置" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <P>要选择 MIDI 端口，先勾选<EM>启用 MIDI</EM>。在 macOS 上，默认不能选择 MIDI 端口，因为在部分 Mac 上，访问 MIDI 会导致 Java 运行环境（Java Runtime Environment）崩溃。
+
+        <P>如果使用的均衡器带有 REW 支持的 MIDI 接口，请选择一个 <FONT CLASS="heading">MIDI output port</FONT>（MIDI 输出端口）。
+
+        <P>REW 可以通过 MIDI 给 BFD Pro DSP1124P 和 FBQ2496 写入设置。设备一侧怎么设置，详见帮助页<A HREF="bfdcomms.html#top">与 BFD Pro 通信</A>。
+
+        <P><B><FONT COLOR=#4076c0>注意</FONT></B>：只有第一次打开“通信”页签时已经存在的端口，才能在这里选择。打开过这个页签之后再接上的接口，要重启 REW 才能识别。
+
+        <P><FONT CLASS="heading">FBQ 滤波器延迟</FONT>用来设定 REW 向 FBQ2496 发送滤波器设置时，每发完一组要等待多久再发下一组。如果滤波器设置传输不稳定，加大这个延迟可能会有帮助。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Graph Panel</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Graph Panel</A></H2>
+
+        <P>The graph panel shows plots for the currently selected measurement. The 
+        plots are selected via the buttons at the top of the graph area.<BR>
+        <IMG SRC="../../images/graphselector.jpg" ALT="Graph Selector" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>The various graph types are:<BR>
+        <A HREF="graph_splphase.html#top">SPL and Phase</A><BR>
+        <A HREF="graph_allspl.html#top">All SPL</A><BR>
+        <A HREF="graph_distortion.html#top">Distortion</A><BR>
+        <A HREF="graph_impulse.html#top">Impulse</A><BR>
+        <A HREF="graph_filteredir.html#top">Filtered IR</A><BR>
+        <A HREF="graph_groupdelay.html#top">Group Delay</A><BR>
+        <A HREF="graph_rt60.html#top">RT60</A><BR>
+        <A HREF="graph_clarity.html#top">Clarity</A><BR>
+        <A HREF="graph_csd.html#top">Spectral Decay</A><BR>
+        <A HREF="graph_waterfall.html#top">Waterfall</A><BR>
+        <A HREF="graph_spectrogram.html#top">Spectrogram</A><BR>
+        <A HREF="graph_captured.html#top">Captured</A><BR>
+
+        <P>Options that affect the appearance of the traces can be found in the 
+        <A HREF="view.html#top">View</A> Preferences.
+
+        <P>Each trace on the graphs for individual measurements can be turned on or 
+        off via the selection buttons to the left of the trace name in the legend panel. 
+        On overlay graphs (which includes All SPL) turning off a trace removes it from
+        the graph by deselecting it in the list of overlay measurements. 
+        
+        <P>Trace names are in the same colour 
+        as the trace itself, whilst the line style for the trace is shown between 
+        the label and the trace's value at the current cursor position. If a trace
+        has smoothing applied the octave fraction is shown (1/12th octave in the 
+        example below). Moving the mouse cursor over a trace name in the legend will
+        highlight that trace on the graph, fading other traces to help it stand out.
+        The measurement name can also be shown, this is controlled by the 
+        <EM>Show name of highlighted trace</EM> preference in the <A HREF="view.html#top">View</A>
+        Preferences. The current individual measurement selection can be highlighted on overlay 
+        graphs using the Ctrl+H shortcut, toggling highlight on and off.<BR>
+        <IMG SRC="../../images/graphlegend.jpg" ALT="Graph Legend" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>Right clicking in the legend area of the graphs for individual measurements
+        brings up a small menu that allows all traces to be selected, all selections to 
+        be cleared or the selections to be toggled. On overlay graphs the only option is 
+        to clear the selections, which has the same effect as clearing selection in the 
+        overlays measurements list.
+        
+        <H4><A name="savejpegbutton">Capture Graph Image Button</A></H4>
+
+        <P><IMG SRC="../../images/capturebutton.jpg" ALT="Capture Button" BORDER=0 ALIGN="left" width="44" height="47"><BR CLEAR="all">
+        This button at the top left corner of the graph area allows the current
+        graph view to be captured as an image. It can be activated using the Alt+C shortcut. 
+        A dialog pops up to set the desired width of the image (click <EM>Default</EM> to 
+        set the image to be the same width as the graph). The thickness of the graph traces 
+        can be selected, the REW default is 2 pixels. There is a selector to choose the colour scheme
+        for the captured image, which defaults to the current REW colour scheme. If the <EM>Include title</EM> option is 
+        selected the graph type will be shown at the top of the graph. 
+        
+        <P><EM>IEC 263 ratio</EM> is only applicable for graphs that have
+        a horizontal logarithmic frequency axis and a vertical dB axis. It adjusts the vertical 
+        size of the captured graph image so that one decade on the frequency axis (e.g. 20 to 200 Hz) 
+        has the same length as a 10, 25 or 50 dB span on the dB axis, per the options offered in IEC 263.
+        This ensures a consistent visual appearance of frequency response data and helps avoid graphs 
+        that may seem unduly flat or have response slopes that appear shallower or steeper than they are. 
+        
+        <P>There are a set of options for the captured image. If the <EM>Include legend</EM> 
+        box is checked the image includes the graph legend. <EM>Include cursor</EM> shows the cursor 
+        lines and values on the captured image. If <EM>Include timestamp</EM> is selected the current 
+        date and time will be shown at the bottom right corner of the graph. If <EM>Add border</EM> is 
+        selected a single pixel grey border will be added around the capture.If <EM>Monochrome image</EM> 
+        is selected the traces will be drawn with one of four different line styles instead of in 
+        different colours: solid, dotted, dashed or dash-dotted. If <EM>Scale overlays</EM> is selected
+        and the graph font size chosen for the image is not the same as the current graph font size
+        any overlay boxes on the graph will be scaled correspondingly.
+        
+        <P>Comments can be placed above, below or on the graph image and aligned to left, right or centre 
+        if placed above or below. Comments placed on the graph are centred.
+        
+        <P>A logo file may be selected and its position and opacity chosen in the options panel below the 
+        file chooser.
+        
+        <P>If <EM>Put measurement name in comment</EM> is selected the name of the measurement will appear
+        in the comment before any comment text that is entered. If <EM>Default filename is measurement name</EM>
+        is selected the default name for an image saved to file will be the measurement name. Both options are
+        only available when capturing graphs of single measurements, they are disabled for overlay graph images.
+        
+        <P>Text typed into the box that shows <EM>Type any comment text here</EM> will appear on the graph 
+        image in the selected <EM>Comment position</EM>, either above, below or on the graph. Text can be 
+        styled using HTML 4.01 tags. Text placed above or below the graph can be aligned according to the 
+        <EM>Comment alignment</EM> selection. Comment text entered is kept for the next use of the dialog,
+        it can be cleared using the <EM>Clear comment</EM> button.
+        
+        <P>The <EM>Insert notes from current measurement</EM> button 
+        inserts the notes from the currently selected measurement in the comments. The <EM>Preview comment</EM> 
+        button allows the formatting to be checked before proceeding. Comment text placed on the graph is centred. 
+        The graph will be either saved as JPEG or PNG according to the <EM>Image type</EM> selected, or copied to 
+        the clipboard.
+        <P><IMG SRC="../../images/savejpegdialog.jpg" ALT="Capture Graph Image Dialog"><BR CLEAR="all"><BR>
+
+        <H4><A name="scrollbarsbutton">Scrollbars Button</A></H4>
+
+        <P><IMG SRC="../../images/scrollbarsbutton.jpg" ALT="Scrollbars Button" width="59" height="49"><BR CLEAR="all">
+        The Scrollbars button toggles scrollbars for the graph area on/off, hiding
+        the scrollbars provides more room for the graph. The setting is remembered 
+        for the next startup. If the scrollbars are off, the graph can still be moved 
+        by holding down the right mouse button while in the graph area.
+        
+        <H4><A name="linlogbutton">Frequency Axis Button</A></H4>
+
+        <P><IMG SRC="../../images/linlogbutton.jpg" ALT="Log/Linear Frequency Axis Button" width="57" height="49"><BR CLEAR="all">
+        The Freq Axis button toggles the frequency axis between logarithmic and 
+        linear modes. This function is also available via a command in the
+        <A HREF="graph.html#freqaxis">Graph</A> menu and the associated <A HREF="shortcuts.html#top">shortcut keys</A>.<BR>
+
+        <H4><A name="setextentsbutton">Graph Limits Button</A></H4>
+
+        <P><IMG SRC="../../images/extentsbutton.jpg" ALT="Graph Limits Button" width="36" height="42"><BR CLEAR="all">
+        The Graph Limits button allows desired top, left, bottom and right graph limits 
+        to be defined. A dialog pops up in which the values are entered, they are applied 
+        as they are entered or by clicking the <EM>Apply Settings</EM> button. There are also 
+        buttons to adjust the limits to cover the whole range of the data (<EM>Fit to data</EM>,
+        shortcut Ctrl+Alt+F) and to only adjust the Y axis limits to cover the range of the data 
+        leaving the X axis limits unchanged (<EM>Fit Y to data</EM>, shortcut Ctrl+Alt Y). The 
+        graph limits dialog can also be shown by double-clicking on the graph. The graph limits
+        can alternatively be adjusted by moving the mouse over the end of a graph axis and using
+        the mouse wheel or trackpad scroll gesture.  Hold the Alt key for fine adjustment when 
+        using the mouse wheel.
+        <P><IMG SRC="../../images/extentsdialog.jpg" ALT="Graph Limits Dialog">
+        <BR CLEAR="all">
+
+        <H4><A name="view3dbutton">View 3D Button</A></H4>
+
+        <P><IMG SRC="../../images/view3dbutton.jpg" ALT="View 3D Button"><BR CLEAR="all">
+        The View 3D button opens waterfall or spectrogram data in a 3D viewer.
+        <P><IMG SRC="../../images/spectrogram3dplot.png" ALT="View 3D example">
+        <BR CLEAR="all">
+
+        <H4><A name="controlsbutton">Graph Controls Button</A></H4>
+
+        <P><IMG SRC="../../images/controlsbutton.jpg" ALT="Graph Controls Button" width="48" height="49"><BR CLEAR="all">
+        The Graph Controls button brings up a menu of control options for the currently 
+        selected graph type, if there are any.<BR>
+
+        <H4><A name="zoombuttons">Horizontal Axis Zoom Buttons</A></H4>
+
+        <P><IMG SRC="../../images/zoombuttonscloseup.jpg" ALT="Frequency Axis Zoom Buttons"><BR CLEAR="all">
+        The horizontal axis zoom buttons appear when the mouse pointer is inside the graph 
+        area, they zoom in or out by a factor of approximately 2 centred around the 
+        cursor position. You can also zoom <A href="#keyboardzoom">with the keyboard</A>
+        or by moving the mouse over the graph axis you wish to zoom and using the mouse wheel 
+        or trackpad scroll gesture. Hold the Alt key for fine adjustment when using the mouse wheel.
+
+        <H4><A name="zoomybuttons">Vertical Axis Zoom Buttons</A></H4>
+
+        <P><IMG SRC="../../images/zoomybuttons.jpg" ALT="Y Axis Zoom Buttons"><BR CLEAR="all">
+        The vertical axis zoom buttons appear when the mouse pointer is inside 
+        the graph area, they zoom in and out on the Y axis. You can also zoom 
+        <A href="#keyboardzoom">with the keyboard</A> or by moving the mouse over 
+        the graph axis you wish to zoom and using the mouse wheel or trackpad scroll 
+        gesture. Hold the Alt key for fine adjustment when using the mouse wheel.
+
+        <H4><A name="graphicalzoom">Variable Zoom</A></H4>
+
+        <P>REW provides a variable graphical zoom capability by either pressing
+        and holding the middle mouse button, or pressing the right button then,
+        while the right button is held down, pressing and holding the left button 
+        and dragging the pointer.
+
+        <P>When variable zoom is active a cross is displayed, split into quadrants
+        allowing horizontal and/or vertical zooming in our out depending on the mouse
+        position. The amount of zoom is governed by how far the mouse pointer is
+        dragged from the start position.
+        <P><IMG SRC="../../images/zoomgraph.jpg" ALT="Zoom control grid" width="247" height="134"><BR CLEAR="all"><BR>
+
+        <H4><A name="zoomtoarea">Zoom to Area</A></H4>
+
+        <P>When the Ctrl key is pressed followed by the right mouse button a zoom 
+        box can be drawn by dragging the mouse. Note that on a Mac it may be necessary
+        to press both the Ctrl and fn keys, or to hold down Ctrl and drag two fingers 
+        on the trackpad. Measurement cursors are shown on 
+        the outside of the box, to zoom to the shaded area click within it. If the 
+        shaded area is too small to zoom in to a message will indicate which dimension 
+        is too small for zooming and what the limit is to allow zoom.
+        <P><IMG SRC="../../images/zoomarea.jpg" ALT="Zoom to area" width="255" height="193"><BR CLEAR="all"><BR>
+
+        <H4><A name="mousewheelzoom">Zoom with mouse wheel</A></H4>
+        
+        <P>The mousewheel can be used to zoom in and out on the graph. Hold the Alt 
+        key for fine adjustment. To zoom in the x axis only hold the shift key or move 
+        the moue over the X axis. To disable mousewheel zoom see the <A href="view.html">View</A> preferences.
+        
+        <H4><A name="keyboardzoom">Zoom with Keyboard</A></H4>
+        
+        <P>To zoom in on the horizontal axis press <FONT CLASS="keys">Shift+x</FONT>, 
+        to zoom out press <FONT CLASS="keys">x</FONT>. To zoom in on the vertical axis 
+        press <FONT CLASS="keys">Shift+y</FONT>, to zoom out press <FONT CLASS="keys">y</FONT>. 
+        The zoom is centred on the cursor position. You may need to click on the graph first.
+        
+        <H4><A name="undozoom">Undo Zoom</A></H4>
+
+        <P>To undo the last Variable Zoom or Zoom to Area, press Ctrl+Z or select the
+        <A HREF="graph.html#zoomundo">Undo Zoom</A> entry in the Graph
+        menu. This will restore the graph axes to the settings they had when the right
+        or middle mouse button was last pressed. This Undo feature can be used even if you
+        have not zoomed, just press the right mouse button when the axis settings are
+        to your preference then you can return to these settings (undoing any subsequent
+        movements or control changes) by pressing Ctrl+Z.
+        
+        <H4><A name="arrowkeys">Arrow Keys</A></H4>
+
+        <P>The arrow keys can be used to move the graph cursor in single pixel increments.
+        You may need to click on the graph first. To move the graph instead of the cursor, 
+        hold down the <FONT CLASS="keys">Shift</FONT> key while pressing the arrow keys.
+
+        <H4><A name="pan">Moving the graph</A></H4>
+
+        <P>The graph can be moved by holding the <FONT CLASS="keys">Alt</FONT> key the
+        pressing the left mouse button.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

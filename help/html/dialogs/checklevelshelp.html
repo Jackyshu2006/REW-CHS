@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Check Levels Help</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+  <BODY LANG="en-GB" DIR="LTR">
+    <B>Check Levels</B> generates a subwoofer or speaker calibration signal at the 
+    <FONT CLASS="heading">Sweep Level</FONT> (the level at which REW generates its 
+    measurement sweep, -12 dBFS by default). The replay volume controls, AV processor
+    volume and (if necessary) the <FONT CLASS="heading">Sweep Level</FONT> need to be adjusted 
+    to achieve the in-room SPL at which you wish to measure, typically 75 dB. This
+    level should be checked using your SPL meter, if the SPL is lower or higher than 
+    desired adjust the replay volume, AV processor volume (preferred) or the 
+    <FONT CLASS="heading">Sweep Level</FONT> (if connected directly to an equaliser, 
+    subwoofer or amplifier). The initial setting for the AV processor volume should be
+    the level you normally use for listening.
+    
+    <P>If you are using a USB microphone put the input volume control to its unity 
+    gain (0 dB) setting, which is selected by default when the mic is first plugged in. 
+    The input level with a USB mic will usually be around -30 to -50 dBFS. <B>If not using a 
+    USB microphone</B> the input level should ideally be between -30 and -12 dBFS when the cal 
+    signal is playing. If it is lower or higher adjust the <FONT CLASS="heading">Input Volume</FONT> 
+    either using the REW control (if enabled) or your interface or the OS audio level 
+    controls. Levels higher than -12 dB may result in input clipping during measurement, 
+    levels lower than -30 dB give noisier results, but neither is a hard limit. 
+    
+    <P>Press <B>Next</B> to start the calibration signal or <B>Cancel</B> to quit.
+  </BODY>
+</html>

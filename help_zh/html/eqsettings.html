@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>均衡器设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">均衡器设置</A></H2>
+
+        <P>“设置 → 均衡器”页签里的设置，用来调整 REW 计算 EQ 滤波器的做法。<BR><BR>
+        <IMG SRC="../../images/equalisersettings.jpg" ALT="均衡器设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <H4>默认均衡器</H4>
+
+        <P>默认均衡器，就是新测量使用的均衡器。已有测量所用的均衡器，可以在 EQ 窗口的均衡器面板里更改。
+
+        <H4>目标默认值</H4>
+
+        <P>这里指定以下各项的默认值，每条新测量都会使用它们：<FONT CLASS="heading">目标类型</FONT>、<FONT CLASS="heading">目标声压级</FONT>、<FONT CLASS="heading">低音管理斜率</FONT>、<FONT CLASS="heading">低音管理截止</FONT>、<FONT CLASS="heading">低频斜率</FONT>、<FONT CLASS="heading">低频截止频率</FONT>、<FONT CLASS="heading">分频器高通类型</FONT>、<FONT CLASS="heading">高通截止频率</FONT>、<FONT CLASS="heading">分频器低通类型</FONT>和<FONT CLASS="heading">低通截止频率</FONT>。
+
+        <P>低频截止频率决定低音炮或全频扬声器的低频延伸下限，低频斜率决定低于这个下限后响应滚降得多快。
+
+        <P><FONT CLASS="heading">房间曲线</FONT>下的<FONT CLASS="heading">低频提升</FONT>和<FONT CLASS="heading">高频衰减</FONT>两项，设定新测量默认使用的房间曲线效果。房间曲线效果叠加在目标形状上。
+
+        <P>目标响应会从低频提升起始频率开始，按所选斜率向低频方向上升，直到低频提升结束频率为止。低频适当提升，主观听感上可能更好。同样，目标响应会从高频衰减起始频率开始，按所选斜率向高频方向下降。在房间里的听音位置测量时，高频响应下降本来就是正常特征。
+
+        <H4>滤波器计算</H4>
+
+        <P>勾选<FONT CLASS="heading">移除作用很小的滤波器</FONT>后，REW 会在优化结束时检查勾选了“自动 EQ”的滤波器。如果某个滤波器的增益绝对值小于“平坦度目标”设定值的一半，REW 就把它的类型设为“无”，释放这个滤波器，供其他用途使用。
+    <!--    <P>If <FONT CLASS="heading">Allow boost at frequency extremes</FONT> is selected REW 
+        will permit boost filters at frequencies below the lowest frequency at which the response
+        drops below the target. This could push drive units beyond their excursion limits if large 
+        amounts of boost are applied and should be used with care. -->
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

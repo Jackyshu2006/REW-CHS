@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Cal File Preferences Help</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+     <BODY LANG="en-GB" DIR="LTR">
+
+        <H4>Calibration Files</H4>
+        
+        <P>All the outputs and inputs that have previously been selected in REW are 
+        listed here, along with any calibration files that have been specified for 
+        them. Choosing an output device and output or input device and input will 
+        cause REW to automatically load the associated calibration file. Entries 
+        can be deleted if they are no longer needed. Individual calibration files
+        can be added using the browse buttons or removed using the 
+        delete buttons. The calibration data will be applied to all 
+        new measurements taken after it has been loaded and will be shown on the 
+        SPL &amp; Phase graph for the measurements. The currently active entries are 
+        highlighted. The calibration files that will be used for a new measurement 
+        can be seen by using the <EM>Cal files</EM> button on the Measure dialog.
+        
+        <P>Soundcard calibration files are specific to the sample rate being used.
+        If the sample rate changes a file for that sample rate will be loaded, if 
+        available.
+        
+        <P>Mic calibration entries have additional settings that are accessed by pressing 
+        the settings button for the entry, which has a gear icon. Select 
+        <FONT CLASS="heading">Input device is a C Weighted SPL Meter</FONT> if 
+        you are using a C weighted SPL meter as the input to REW, measurements will then 
+        be corrected to remove the low and high frequency roll-offs of the C weighting 
+        characteristic. If a cal file is also loaded the correction will only be 
+        applied outside the frequency range covered by the cal file.
+        
+        <P>Mic cal files can apply to all inputs on a device or, if 
+        <FONT CLASS="heading">Separate cal for each input</FONT> is selected
+        individual cal files can be specified for the separate inputs of the device.
+        For example, the left and right inputs of a miniDSP EARS headphone measurement
+        system have separate cal files. Note that most USB microphones are mono devices
+        and provide the same data on both left and right channels, a single cal file
+        for the device is appropriate for those.
+        
+        <P>The <EM>dBFS @ 94 dB SPL</EM> and <EM>Full scale SPL</EM> fields can be used 
+        to calibrate the SPL reading for the input. If the mic is put in a 94 dB calibrator 
+        the dBFS input reading (from the <A href="levelmeters.html">Level meters</A> or 
+        <A href="splmeter.html">SPL meter</a>) may be entered. Alternatively,
+        if the SPL corresponding to a full scale input is known, that may be entered. 
+        These fields are disabled if the calibration file contains a sensitivity value,
+        the values displayed are then determined by that sensitivity entry.</P>
+        
+        <P>The <EM>FS sine Vrms</EM> value is used to calibrate the input reading 
+        for electronic measurements. It should be set to the rms voltage of a sine wave 
+        whose peaks reach full scale.</P>
+
+        <P>To apply or remove a calibration file for an existing measurement, 
+        use the <EM>Change cal</EM> action in the measurement panel right click menu.
+        
+        <P>To calibrate the REW SPL meter reading against an external meter use the
+        <em>Calibrate</em> button in the SPL Meter controls.
+  </BODY>
+</html>

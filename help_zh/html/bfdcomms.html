@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>与 BFD Pro DSP1124P 和 FBQ2496 通信</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">与 BFD Pro DSP1124P 和 FBQ2496 通信</A></H2>
+
+        <P>BFD Pro DSP1124P 和 FBQ2496 支持 MIDI 通信，可以通过 MIDI 设置滤波器和工作模式。要通过 MIDI 与这两台设备通信，需要一个 MIDI 接口（MIDI interface），例如 Edirol UM-1X USB-MIDI 接口或 M-Audio UNO。<BR>
+        <IMG ALT="Edirol UM-1X" SRC="../../images/um1x.jpg" width="360" height="227"><BR CLEAR="ALL">
+
+        <P>把 MIDI 接口上标有“OUT”的插头，插到 BFD 上标有“IN”的插座。UM-1X 的 OUT 插头外壳上压印有“Connect to Midi IN”字样。
+
+        <P>BFD 的 MIDI OUT 不必接。
+
+        <P>MIDI 输出端口在<A HREF="comms.html">设置 → 通信</A>中选择。选好端口之前，REW 无法通过 MIDI 通信。所选端口会保存下来，下次启动时沿用。
+
+        <P>Windows 平台支持 MIDI 通信。Linux 平台需要安装 <A HREF="http://www.tritonus.org">Tritonus</A>（www.tritonus.org）才能支持 MIDI 通信。装有 Java 运行环境（JRE）V6 或更高版本的 macOS 应该也支持 MIDI。
+
+        <H3><A name="midiconfig">设置 DSP1124P 的 MIDI 通信</A></H3><BR>
+        <IMG ALT="BFD Pro DSP1124P" SRC="../../images/bfdpro.jpg" width="400" height="96"><BR CLEAR="ALL">
+
+        <P>DSP1124P 出厂默认关闭 MIDI 通信。要启用 REW 用到的 MIDI 功能，需要按下面的步骤设置设备的 MIDI 菜单（下文提到的按钮都在 DSP1124P 前面板上）：
+        <OL>
+        <LI>同时按下 IN/OUT 和 STORE 两个按钮，进入 MIDI 菜单。两个按钮里的 LED 开始闪烁，显示屏显示如下：<BR>
+        <IMG ALT="进入 MIDI 菜单后的显示" SRC="../../images/midichanmenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>这是 MIDI 通道菜单，此时最右一位显示“c”。通道显示为“-”时，MIDI 处于关闭状态。转动飞梭旋钮（jog wheel），把通道改为 1：<BR>
+        <IMG ALT="已选 MIDI 通道 1" SRC="../../images/midichan1.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>按两次 IN/OUT 按钮，切换到 Controller（控制器）菜单，此时最右一位显示“C”。转动飞梭旋钮，选择模式 3：<BR>
+        <IMG ALT="Controller 模式 3" SRC="../../images/midicontrollermenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>再按一次 IN/OUT 按钮，切换到 Program（程序）菜单，此时最右一位显示“P”。转动飞梭旋钮，选择模式 3：<BR>
+        <IMG ALT="Program 模式 3" SRC="../../images/midiprogrammenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>再按一次 IN/OUT 按钮，切换到 Store Enable（允许存储）菜单，此时最右一位显示“S”。转动飞梭旋钮，把数值设为 1：<BR>
+        <IMG ALT="Store Enable 1" SRC="../../images/midistoreenable.jpg" width="100" height="55"><BR CLEAR="ALL">
+        这样 REW 才能把设置存进 DSP1124P 的预设（preset）里。
+        <LI>再按两次 IN/OUT 按钮，退出 MIDI 菜单。
+        </OL>
+
+        <P>至此，DSP1124P 的 MIDI 通信设置完成。除 Store Enable 以外，这些设置在设备下次开机时仍然保留，不必重新设置。
+
+        <H3><A name="midiconfig2">设置 FBQ2496 的 MIDI 通信</A></H3>
+        <IMG ALT="BFD Pro FBQ2496" SRC="../../images/fbq2496.jpg" width="400" height="100"><BR CLEAR="ALL">
+
+        <P>FBQ2496 出厂默认开启 MIDI 通信。如果 MIDI 通信已被关闭，或者通道不是 1，按下面的步骤操作（下文提到的按钮都在前面板上）：
+        <OL>
+        <LI>先确认设备<B>不在</B> PEQ 模式：PEQ 按钮里的 LED 必须是灭的，如果亮着，按一下 PEQ 按钮把它关掉。<BR><BR>
+        然后同时按下 BANDWIDTH 和 BYPASS 两个按钮，进入 MIDI 菜单。两个按钮里的 LED 开始闪烁，数码显示屏下方的 MIDI 指示灯也跟着闪烁。显示屏上显示的是 MIDI 的开关状态：如果显示 <B><FONT COLOR="red">OFF</FONT></B>，转动旋钮，直到变成 <B><FONT COLOR="red">on</FONT></B>。<BR><BR>
+        接着按 BANDWIDTH 按钮，切换到 MIDI 通道菜单，显示屏上显示 <B><FONT COLOR="red">C</FONT></B>，后面跟着通道号。转动旋钮选择通道 1。
+        <LI>按 BANDWIDTH、BYPASS 以外的任意按钮，退出 MIDI 菜单。
+        </OL>
+
+        <P>至此，FBQ2496 的 MIDI 通信设置完成。这些设置在设备下次开机时仍然保留，不必重新设置。
+
+        <H3>注意事项</H3>
+        <OL>
+        <LI>DSP1124P 每次开机都会关掉 Store Enable。因此使用 DSP1124P 时，REW 会在每轮测量开始时提示你打开 Store Enable。<BR><BR>
+        如果不打开 Store Enable，REW 就无法把滤波器设置存进预设。滤波器发送到 DSP1124P 之后，STORE 按钮里的红色 LED 会一直闪烁，提醒你设置已经改动、但还没有存储。<BR><BR>
+        也可以手动存进预设：按 STORE 按钮，转动飞梭旋钮选好要存入的预设，再按一次 STORE 按钮。如果当前已经在要用的那个预设上，直接连按两次 STORE 按钮即可。
+        <LI>MIDI 通信期间，DSP1124P 的 IN/OUT 按钮 LED 会闪动，FBQ2496 则是 MIDI 指示灯闪动。
+        <LI>向 FBQ2496 发送滤波器时，REW 会让接收滤波器的那个通道使用 20 个参数式滤波器（parametric filter）。发送完成后，如果设备处于旁路（bypass）状态，REW 还会关闭旁路。
+        <LI>发送一组滤波器，每个滤波器大约需要 1 秒。
+        </OL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

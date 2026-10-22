@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>RT60 衰减图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">RT60 衰减图</A></H2>
+
+        <P>REW 的 RT60 衰减图采用频域（frequency domain）方法，因此考察混响时间（reverberation time）时，频率分辨率（frequency resolution）可以比常规做法高得多，倍频程分数也可以窄得多，即使在低频也是如此。
+
+        <P><IMG SRC="../../images/rt60model.jpg" ALT="RT60 模型"><BR CLEAR="all">
+
+        <H3><A name="method">频域 RT60 估算</A></H3>
+
+        <P>REW 的 RT60 衰减图用频域方法估算 RT60，而不是更常见的时域（time domain）方法。
+
+        <UL>
+            <LI class = "doublespace"><A href="#background">经典的 RT60 估算方法</A>
+            <LI class = "doublespace"><A href="#frequencydomain">估算 RT60 的频域方法</A>
+            <LI class = "doublespace"><A href="#selectivity">选择性对比</A>
+            <LI class = "doublespace"><A href="#accuracy">准确度对比</A>
+            <LI class = "doublespace"><A href="#implementation">实现细节</A>
+        </UL>
+
+        <H3><A name="background">经典的 RT60 估算方法</A></H3>
+
+        <P>混响时间通常用时域处理求得。各种 RT60 值都通过计算施罗德积分（Schroeder integral）的斜率来估算。施罗德积分画的是脉冲响应（impulse response）的能量（即各采样值的平方）经反向积分（backward integration）后的结果，反向积分就是从响应的末尾开始，逐点往前累加。T20、T30、REW 的 Topt 等不同的 RT60 指标，是在施罗德积分的不同区间上求最佳拟合直线（best fit line）得出的。
+
+        <P>这种方法有一些局限。测量的本底噪声（noise floor）会改变施罗德积分的形状，使它弯曲。为减轻这种影响，人们采取了多种措施：先估算本底噪声的电平，再据此调整积分的起始位置和所用的初始值。
+
+        <P>此外，倍频程频带滤波器存在群延迟（group delay），可能影响算出的混响时间，低频尤其明显。
+
+        <P>这些滤波器的频率分辨能力（frequency discrimination）通常也较差，因为滤波器阶数一般取得较低，通常是 6 阶，以免加重群延迟问题。结果是，强烈的共振会对响应上邻近的频段产生掩蔽效应（masking effect）。
+
+        <H3><A name="frequencydomain">估算 RT60 的频域方法</A></H3>
+
+        <P>混响时间也可以用频域处理来估算：计算一组短时傅里叶变换（short-time Fourier transform，STFT），观察其中各个切片（slice）的衰减。瀑布图和频谱图通常就是用 STFT 画出来的。
+
+        <P>STFT 序列中的各个切片，可以在频域里用砖墙滤波器（brick wall filter）做倍频程频带滤波，这种滤波在时域上不会带来群延迟。这时，频率分辨能力由 STFT 所用时间窗的特性决定。起决定作用的通常是左时间窗的宽度和形状，也就是时间窗的上升时间（rise time）。
+
+        <P>在频域里处理，可以很方便地改用窄得多的倍频程频带滤波器给出结果。这样就能把各个共振单独分辨出来，而且不会对混响时间的估算造成负面影响。
+
+        <P>施罗德积分不适用于频域处理。STFT 切片记录了混响衰减和噪声。把每个时间步上的切片值连成一个数据序列，再用指数衰减加噪声函数（exponential decay plus noise function）去拟合，就能估算混响时间。
+
+        <P>拟合时，如果左时间窗的宽度大于切片间隔，就必须考虑它对数据序列的影响。拟合还必须能容忍衰减数据非单调（non-monotonic）的特点，也就是说，数据在衰减过程中会有起伏，并不是一路下降。
+
+        <P>下图是一张 RT60 衰减图的示例：已经生成了 STFT 数据（点击下方图表左下角的<EM>生成</EM>按钮），但还没有计算 RT60 模型。上方图表显示的是下方图表中光标所在位置的衰减曲线。
+
+        <P><IMG SRC="../../images/rt60decay.jpg" ALT="RT60 衰减图"><BR CLEAR="all">
+
+        <P>下方图表的图表选项面板上有一个按钮，用来计算 RT60 模型。
+
+        <P><IMG SRC="../../images/rt60decaycontrols.jpg" ALT="RT60 衰减图的图表选项"><BR CLEAR="all">
+
+        <P>面板左侧是 STFT 数据的控件。选中<EM>自动设置</EM>时，REW 会自行确定 STFT 图所用的上升时间、时间窗宽度和时间范围。选中<EM>手动设置</EM>后，可以点它右侧的按钮修改这几项设置。
+
+        <P><EM>倍频程分数</EM>是施加在 STFT 数据上的倍频程频带滤波器的宽度。<EM>结果 PPO</EM> 决定 REW 以多高的频率分辨率计算模型，最高为每倍频程 96 个点（points per octave，PPO）。
+
+        <P>勾选<EM>显示施罗德积分</EM>后，衰减曲线旁边会同时显示最接近的那个经典 RT60 计算结果所对应的施罗德积分。<EM>上一个 1/1</EM> 和<EM>下一个 1/1</EM> 按钮把光标移到上一个或下一个 1/1 倍频程中心频率。
+
+        <P>面板右侧是模型拟合所用的频率范围（起始频率和结束频率），以及执行计算的<EM>计算 RT60 模型</EM>按钮。<EM>透视设置</EM>打开一个对话框，用来设置 STFT 数据的显示方式；<EM>配色方案设置</EM>打开另一个对话框，用来设置配色方案。
+
+        <P>各频率的模型算完后，模型结果（T60M）会叠加显示在 STFT 数据上，使用图右侧的时间轴。在图例中勾选或取消勾选 T60M 曲线，可以显示或隐藏它。
+
+        <P>上方图表中，模型结果显示为一条灰色曲线，与算得的 RT60 值对应的回归线显示为蓝色。数据面板显示 T60 时间、模型曲线的起始电平、噪声电平和模型拟合误差（数值越小，拟合越好）。
+
+        <P>衰减曲线上标有三个点：绿点和红点分别是模型拟合所用区间的起点和终点；黑点表示从这一点往后，REW 认为数据不再有效。
+
+        <P><IMG SRC="../../images/rt60model.jpg" ALT="RT60 模型"><BR CLEAR="all">
+
+        <P>如果已经在 RT60 图上为这条测量生成了经典的 RT60 结果，这些数值也会显示出来。如果选择了显示施罗德积分及其回归线，它们也会一并显示。
+
+        <P><IMG SRC="../../images/rt60modelwithclassic.jpg" ALT="RT60 模型与经典结果"><BR CLEAR="all">
+
+        <P>本例中，经典方法得到的 T20 值低于模型值。早期衰减很陡的响应常出现这种情况，做了大量声学处理（acoustic treatment）的空间就可能如此。T20 和 T30 以施罗德积分上的 -5 dB 点为起点，而这个点仍落在早期衰减段内，所以结果有偏差。
+
+        <P>模型算完后，结果也可以在 RT60 图上查看，方便与经典指标对比。
+
+        <P><IMG SRC="../../images/rt60classic.jpg" ALT="RT60 图上的经典结果"><BR CLEAR="all">
+
+        <H3><A name="selectivity">选择性对比</A></H3>
+
+        <P>为了测试经典方法和频域方法的选择性（selectivity），生成了一个合成测试信号：在各个 1/1 倍频程中心频率（centre frequency）上各放一个等幅、按指数衰减的余弦信号，再加入比余弦幅度低 60 dB 的噪声。各余弦信号的 60 dB 衰减时间在 1.000 s 和 0.100 s 之间交替。下图是这个测试信号的频谱。
+
+        <P><IMG SRC="../../images/selectivityspectrum.jpg" ALT="选择性测试信号频谱"><BR CLEAR="all">
+
+        <P>两种方法都要先对信号做倍频程频带滤波。先看经典方法，从通常使用的 6 阶滤波器开始。
+
+        <P><IMG SRC="../../images/selectivityorder6.jpg" ALT="选择性结果，6 阶"><BR CLEAR="all">
+
+        <P>用 6 阶滤波器时，0.100 s 的衰减完全分辨不出来。接下来试试 12 阶滤波器。
+
+        <P><IMG SRC="../../images/selectivityorder12.jpg" ALT="选择性结果，12 阶"><BR CLEAR="all">
+
+        <P>12 阶滤波器开始能分辨出 0.100 s 的衰减，但结果离正确值仍有一段距离。下面换成 18 阶。
+
+        <P><IMG SRC="../../images/selectivityorder18.jpg" ALT="选择性结果，18 阶"><BR CLEAR="all">
+
+        <P>18 阶滤波器基本解决了问题，只有最低的 125 Hz 处 0.100 s 衰减例外，那里的 T30 仍比 T20 略差。继续提高滤波器阶数，结果反而变差，因为滤波器的群延迟开始使结果产生偏差。
+
+        <P><IMG SRC="../../images/selectivityorder24.jpg" ALT="选择性结果，24 阶"><BR CLEAR="all">
+
+        <P>使用 18 阶滤波器并采用时间反转滤波，可以得到完美的结果。
+
+        <P><IMG SRC="../../images/selectivityorder18timereversed.jpg" ALT="选择性结果，18 阶，时间反转滤波"><BR CLEAR="all">
+
+        <P>频域方法的结果取决于所用的时间窗设置。对这个信号，REW 默认选用 20 ms 的上升时间，得到下图的结果。这里按每倍频程 96 个点计算，而不只是在各倍频程中心频率上计算。
+
+        <P><IMG SRC="../../images/selectivityt60m20.jpg" ALT="选择性结果，T60M，上升时间 20 ms"><BR CLEAR="all">
+
+        <P>把上升时间改为 100 ms，T60M 的表现有所改善。不过在 125 Hz 这个倍频程中心频率上，它仍比不上采用 18 阶时间反转滤波的经典方法。
+
+        <P><IMG SRC="../../images/selectivityt60m100.jpg" ALT="选择性结果，T60M，上升时间 100 ms"><BR CLEAR="all">
+
+        <P>继续加大 T60M 的上升时间，选择性还会提高，但 RT60 计算的准确度会下降，因为比衰减时间还宽的时间窗会影响衰减数据。
+
+        <P>尽管如此，频域方法的这个表现已经相当不错。如果在偏离 1/1 倍频程中心频率的地方比较两种方法，这一点更加明显。下图中，T20 和 T30 用的是 1/1 倍频程滤波器带宽、18 阶时间反转滤波。此外，这次还在两个倍频程中心之间的 1/3 倍频程中心频率上计算了结果。T60M 的表现要好得多。
+
+        <P><IMG SRC="../../images/selectivityt60m100third.jpg" ALT="选择性结果：上升时间 100 ms 的 T60M 与 18 阶时间反转滤波，在 1/3 倍频程中心频率上的对比"><BR CLEAR="all">
+
+        <H3><A name="accuracy">准确度对比</A></H3>
+
+        <P>下一项测试的是准确度（accuracy）。又生成了一个合成测试信号，同样由各个 1/1 倍频程中心频率上等幅、按指数衰减的余弦信号组成，但 60 dB 衰减时间以 0.2 s 为步长变化，从 63 Hz 处的 1.600 s 逐级减到 8 kHz 处的 0.200 s。
+
+        <P>噪声按两种电平加入，都是相对于余弦幅度而言：-80 dB 的一组作为干净信号的参照，-40 dB 的一组用来测试有噪声时的表现。下面是这两个测试信号的频谱。
+
+        <P><IMG SRC="../../images/accuracy80.jpg" ALT="准确度测试信号频谱，噪声 -80 dB"><BR CLEAR="all">
+
+        <P><IMG SRC="../../images/accuracy40.jpg" ALT="准确度测试信号频谱，噪声 -40 dB"><BR CLEAR="all">
+
+        <P>对噪声为 -80 dB 的信号，新方法和经典方法都没有遇到困难。
+
+        <P><IMG SRC="../../images/accuracy80rt60.jpg" ALT="准确度 RT60 结果，噪声 -80 dB"><BR CLEAR="all">
+
+        <P>噪声为 -40 dB 的信号对经典方法难度更大，尽管在所有情况下都已用 Lundeby 法（Lundeby's method）成功检测到本底噪声。滤波器阶数的影响可以忽略，18 阶略好一点，下图就是 18 阶滤波器的结果。对这个信号，T60M 频域方法的表现明显优于经典方法。
+
+        <P><IMG SRC="../../images/accuracy40rt60.jpg" ALT="准确度 RT60 结果，噪声 -40 dB"><BR CLEAR="all">
+
+        <P>下面是两种情况下的 RT60 衰减图示例。
+
+        <P><IMG SRC="../../images/accuracy80decay.jpg" ALT="准确度测试的 RT60 衰减图，噪声 -80 dB"><BR CLEAR="all">
+
+        <P><IMG SRC="../../images/accuracy40decay.jpg" ALT="准确度测试的 RT60 衰减图，噪声 -40 dB"><BR CLEAR="all">
+
+        <H3><A name="implementation">实现细节</A></H3>
+
+        <P>以下是 REW 实现 RT60 衰减分析的一些技术细节。
+
+        <H4>衰减数据</H4>
+
+        <P>衰减数据由一系列傅里叶变换（Fourier transform）得出，每一次变换称为一个切片。第一个切片以脉冲响应的峰值为参考点，之后每个切片依次在时间上后移一个切片间隔。全部切片覆盖的总时长，就是“时间范围”设置的值。
+
+        <P>每个切片都要加窗：左时间窗用汉宁窗（Hann window），宽度等于上升时间；右时间窗也用汉宁窗，宽度等于“时间窗宽度”设置的值。
+
+        <P>请注意，在高频段，频域方法的本底噪声通常比经典方法高。原因是为了照顾低频段，FFT 时间窗必须取得较宽。改用更窄的时间窗和更短的上升时间，可以生成本底噪声更低的高频衰减数据。也可以考虑采用频率相关时间窗（frequency-dependent windowing，FDW），但 FDW 的实现通常使用对称时间窗，在低频会造成上升时间过长。
+
+        <P><EM>自动设置</EM>这样确定时间范围：先在 250 Hz、500 Hz 和 1000 Hz 用 1/1 倍频程 6 阶滤波器做一次常规的 T20 分析，取其中最长的 T20 作为时间范围，但最短不少于 500 ms。切片间隔的取法，是让时间范围内大约有 250 个切片，切片步长最大 100 ms。上升时间取时间范围的 2%，最大 400 ms。
+
+        <P>每个切片的数据先做低通滤波，平滑到 1/48 倍频程，再按每倍频程 96 个点采样，得到一组对数间隔（log spaced）的数据。之后的倍频程频带滤波，作用在这组对数间隔数据的幅度平方上。所用的滤波核（kernel）在整个带宽内都为 1，只有两端的值为 0.5。
+
+        <H4>RT60 分析</H4>
+
+        <P>对每一个频率，把各切片在该频率上的值连成一个数据序列，RT60 就由这个序列分析得出。分析前先扫描一遍数据，检查数据末端附近有没有急剧的下跌或上升。如果有，从那里往后的数据不参与分析。
+
+        <P>分析的做法，是用一个指数衰减加噪声函数去拟合这些数据。函数如下：
+
+        <P align="center"><FONT class="keys">f(t) = level*exp(-6*log(10)*t/t60) + noise</FONT>
+
+        <P>三个模型参数 <FONT class="keys">level, t60</FONT> 和 <FONT class="keys">noise</FONT>，通过使误差函数最小来确定。误差函数由各切片时刻上的函数值与衰减数据之差构成。
+
+        <P>REW 用的误差是：以 dB 表示的衰减数据，与以 dB 表示的模型函数值之差的均方值。这个均方值还要用一个误差缩放函数（error scaling function）加权，对低于 -20 dB 的值给予较小的权重。
+
+        <P>模型参数的初始估计值，来自对 -10 dB 到 -20 dB 范围内的衰减数据做最小二乘直线拟合（least squares line fit）。
+
+        <P>模型误差只在衰减数据的一段子区间上计算。模型拟合的名义起点是衰减曲线上的 -5 dB 点，但起点距衰减开始至少要有 10 ms 或一个上升时间。无论如何，起点在衰减曲线上都不能低于 -10 dB。
+
+        <P>需要注意，衰减数据与施罗德积分不同，通常不是单调的。所以“-5 dB 点”指的是响应最后一次穿过 -5 dB 的那个点。
+
+        <P>REW 对衰减数据的幅度平方，应用了一种经过改编的 Lundeby 法，用来估算本底噪声，以及本底噪声与 RT60 衰减线的交点。拟合终点随后设在衰减曲线上更靠后的位置：从衰减开始算起，终点的距离是交点距离的两倍。如果 Lundeby 算法没有找到好的结果，拟合终点就取有效数据的末端。
+
+        <P>REW 用 UNCMIN 的 Java 移植版（由 Steve Verrill 移植）求解最优的模型参数。UNCMIN 是一个无约束优化器（unconstrained optimiser），所以约束要另行施加：在最小化器向量的各分量代入模型函数之前，先对它们做修改。这一约束过程，是参数值从优化器空间变换到函数空间的一部分。
+
+        <P>在最小化器空间中，与 <FONT class="keys">level</FONT> 和 <FONT class="keys">noise</FONT> 对应的参数，是模型值换算成 dB 后再缩放的结果；与 <FONT class="keys">t60</FONT> 对应的参数，是 T60 值的倒数再缩放的结果。各参数的取值上下限，根据初始估计值设定。
+
+        <P>要在低频获得良好的选择性，上升时间通常要大于切片间隔。因此在计算模型拟合误差之前，必须先考虑左时间窗对衰减数据的影响。
+
+        <P>做法是把左时间窗与衰减数据做卷积（convolution）。但参与卷积的不是各切片的衰减值本身，而是相邻切片衰减值之差，因为时间窗实际作用的正是衰减中的这部分差值。
+
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

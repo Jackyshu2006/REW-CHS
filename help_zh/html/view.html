@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>视图设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">视图设置</A></H2>
+
+        “设置 → 视图”页签用来设定 REW 的外观。<BR><BR>
+        <IMG SRC="../../images/viewsettings.jpg" ALT="视图设置" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <FONT CLASS="heading">使用粗线条</FONT>和<FONT CLASS="heading">曲线抗锯齿</FONT>（anti-aliasing）能让图表更好看，但在某些平台上可能拖慢绘图速度。想画得快一些，就取消勾选这两项。
+
+        勾选<FONT CLASS="heading">平均值使用粗线条</FONT>后，由其他测量平均得到的测量，在叠加图或测量缩略图里会画成更粗的曲线。
+
+        <P>勾选<FONT CLASS="heading">启用鼠标滚轮缩放</FONT>后，可以用鼠标滚轮或触控板放大、缩小图表；按住 Shift 键则只缩放横轴。勾选<FONT CLASS="heading">限制滚轮缩放速率</FONT>，可以防止图表缩放得太快。
+
+        <P>勾选<FONT CLASS="heading">保存曲线颜色设置</FONT>后，曲线颜色设置会一起存进测量文件。
+
+        <P>高亮曲线有一组选项（在“曲线高亮选项”下拉框里）。<FONT CLASS="heading">高亮曲线使用粗线条</FONT>和<FONT CLASS="heading">使用黄色底纹高亮</FONT>都能让高亮的曲线更醒目。勾选<FONT CLASS="heading">显示高亮曲线名称</FONT>后，高亮某条曲线时，图表上会显示它的名称。
+
+        <P>勾选<FONT CLASS="heading">图表显示水印</FONT>后，水印文字框里的文字会作为背景显示在所有图表上（瀑布图和频谱图除外），不透明度用<FONT CLASS="heading">水印不透明度</FONT>设定。
+
+        <P><FONT CLASS="heading">频率轴起点</FONT>设定图表上能显示的最低频率。勾选<FONT CLASS="heading">显示宽高比 dB/十倍频</FONT>后，鼠标指针停在频率响应图上时，图表右下角附近会显示该图的宽高比（aspect ratio）。
+
+        <P><FONT CLASS="heading">频率轴预设</FONT> 1 和 2 会以两个按钮的形式出现在图表上。点击按钮，频率轴会快速切换到这里定义的相应预设范围，同时应用对应的 IEC 263 宽高比；如果宽高比选的是“按绘图比例”，则不改变宽高比。
+
+        <P><FONT CLASS="heading">默认曲线颜色</FONT>按钮会打开一个面板，可以修改默认的曲线颜色，或恢复为 REW 的默认值。鼠标指针停在颜色按钮上时，会显示该曲线颜色的 R、G、B 值。这些默认颜色会保存下来，下次启动 REW 时沿用。
+
+        <P>修改默认颜色不会改变已载入测量的曲线颜色。要改已有测量的颜色，用测量面板右键菜单里的颜色按钮，或者点颜色选择面板上的 <EM>Set All Trace Colours To Defaults</EM>（将所有曲线颜色设为默认）按钮。
+
+        <H4>界面</H4>
+
+        <P><FONT CLASS="heading">显示/隐藏选项</FONT>里是一组设置，用来显示或隐藏界面上的各个元素。
+
+        <P>勾选<FONT CLASS="heading">隐藏欢迎信息</FONT>后，REW 启动时不再显示欢迎信息。
+
+        <P>勾选<FONT CLASS="heading">显示辅助网格线</FONT>后，图表除了主网格线，还会显示辅助网格线。
+
+        <P>取消勾选<FONT CLASS="heading">缩略图显示网格</FONT>，就能关掉测量缩略图上的网格。
+
+        <P>勾选<FONT CLASS="heading">显示工具栏</FONT>后，菜单下方会显示工具栏。在低分辨率屏幕上隐藏工具栏，可以给图表腾出更多空间。
+
+        <P>取消勾选<FONT CLASS="heading">显示工具栏文本标签</FONT>，可以隐藏工具栏按钮下方的文字；取消勾选<FONT CLASS="heading">图表按钮显示文字</FONT>，可以隐藏图表按钮下方的文字。
+
+        <P>勾选<FONT CLASS="heading">显示相位缠绕线</FONT>后，相位曲线的缠绕点（wrap point）用虚线标出。
+
+        <P>勾选<FONT CLASS="heading">缩略图显示测量电平</FONT>后，每条测量的缩略图上会显示这次测量所用的信号电平。
+
+        <P>勾选<FONT CLASS="heading">在缩略图上显示测量索引</FONT>（默认勾选）时，测量的索引号显示在它的缩略图上。
+
+        <P>关掉这一项，索引号改为显示在测量名称前面。这样缩略图不必重新生成，测量很多时，列表的更新会更快。
+
+        <P>勾选<FONT CLASS="heading">移除未保存测量时确认</FONT>后，如果要移除的测量在最近一次修改之后还没保存，REW 会先请你确认。这项设置也可以在移除确认对话框里修改。
+
+        <P>勾选<A name="shownotes"><FONT CLASS="heading">显示测量面板备注</FONT></A>后，测量的备注会显示在测量面板上，显示的行数不超过<FONT CLASS="heading">显示备注行数</FONT>的设定值。
+
+        <P>勾选<FONT CLASS="heading">显示叠加面板备注</FONT>后，测量的备注会显示在叠加图的测量面板上，显示的行数不超过<FONT CLASS="heading">显示备注行数</FONT>的设定值。
+
+        <P>勾选<FONT CLASS="heading">禁用工具提示</FONT>后，鼠标指针停在控件或组件上时，不再弹出工具提示（tooltip）。
+
+        <P>勾选<FONT CLASS="heading">控制面板不透明</FONT>后，图表曲线不会透过图表选项面板显示出来。
+
+        <P>勾选<FONT CLASS="heading">右键拖拽平移图表</FONT>后，按住鼠标右键即进入图表平移（pan）模式。如果图表平移超过几个像素，就不会弹出右键菜单。
+
+        <P>另外，按住鼠标左键不放，或者按住 Alt 键再按鼠标左键，也可以平移图表。
+
+        <P>勾选<FONT CLASS="heading">抑制声卡错误</FONT>后，如果启动时无法访问声卡，REW 不会显示错误信息或警告。如果只是在一台没有测量用音频接口的电脑上用 REW 分析测量，这一项会有用。
+
+        <P>勾选<FONT CLASS="heading">动画显示测量列表</FONT>后，测量列表的变化会以动画方式呈现。
+
+        <P>勾选<FONT CLASS="heading">满量程正弦波 RMS 为 0 dBFS</FONT> 后，满量程（Full Scale）正弦波的 RMS 电平显示为 0 dBFS；不勾选时，显示为 -3 dBFS。
+
+        <P>勾选这一项后，某些信号的 RMS 电平可能会大于 0 dBFS，例如满量程方波的 RMS 电平是 +3 dBFS。
+
+        <P>勾选<FONT CLASS="heading">鼠标悬停时滚轮调整控件</FONT>后，鼠标指针停在数值框（spinner）或下拉框上时，滚动滚轮就能调整它的值；滚动时按住 Alt 键可以微调。
+
+        <P>不勾选这一项，也可以先选中数值框，再用滚轮调整。
+
+        <P><FONT CLASS="heading">窗口置顶选项</FONT>里是一组设置，用来让某些窗口始终显示在其他窗口上面。
+
+        <P>在<FONT CLASS="heading">配色方案</FONT>里选择要用的配色方案。重启 REW 后，所有组件的颜色才会全部更新。
+
+        <P><FONT CLASS="heading">距离单位</FONT>用来选择距离以米显示，还是以英尺和英寸显示。
+
+        <P><FONT CLASS="heading">声速</FONT>设定 REW 所用的声速值，用于把时间换算成距离、计算模态共振（modal resonance）等。默认值是 343.0 m/s，约为 20 ℃ 干燥空气中的声速。
+
+        <P><FONT CLASS="heading">调音基准频率</FONT>设定音名（musical note）的参考频率，默认 440 Hz。
+
+        <P><FONT CLASS="heading">八度标记法</FONT>用来选择显示音名时采用哪种标记方式。
+
+        <P><FONT CLASS="heading">字体选项</FONT>里是影响 REW 字号的几项设置。
+
+        <P><FONT CLASS="heading">全局字体大小</FONT>是 REW 的基础字号（单位：磅）。<FONT CLASS="heading">图表字体大小</FONT>是图表坐标轴所用的字号。改动字号后，要到下次启动 REW 才生效。
+
+        <P><FONT CLASS="heading">最大测量数</FONT>是 REW 里最多能载入的测量条数。改动后要到下次启动 REW 才生效。
+
+        <P>注意：最大测量数设得很高时，REW 可能会内存不足。遇到这种情况，可以在安装时调大 REW 启动时申请的内存。
+
+        <P><FONT CLASS="heading">最大 RTA 输入数</FONT>和<FONT CLASS="heading">最大电平表输入数</FONT>设定多通道测量（Pro 升级功能）时最多显示多少路输入。改动后要到下次启动 REW 才生效。
+
+        <P>在 macOS 上勾选<FONT CLASS="heading">使用 macOS 文件对话框</FONT>后，文件选择对话框会换成更接近 macOS 原生样式的文件选择器。但要注意，macOS 的选择器没有预览面板，而 REW 正是用这个面板显示 mdat、req、校准数据和图片文件的内容。
+
+        <P>有用户反映，原生文件选择器偶尔不出现。遇到这种情况，可以试着改回 Java 文件选择器。
+
+        <P><FONT CLASS="heading">使用 AZERTY 键盘</FONT>是 macOS 上提供的一个选项，用来绕开一个导致快捷键映射出错的 Java 缺陷（JDK-8019498）。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

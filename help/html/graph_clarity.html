@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Clarity Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Clarity Graph</A></H2>
+        
+        <P>The C50, C80 and custom clarity and D50 definition curves at each octave or one-third octave 
+        filter centre frequency are displayed on this graph. See below for descriptions of each of
+        these parameters.
+        <P><IMG SRC="../../images/singleclarity.jpg" ALT="Clarity and definition graph"><BR CLEAR="all">
+        
+        <H3>Controls</H3>
+        
+        <P>The control panel for the Clarity graph has these controls:
+        <P><IMG SRC="../../images/claritycontrols.jpg" ALT="Clarity controls"><BR CLEAR="all">
+
+        <P>The band selector chooses either octave or one-third octave filtered results. 
+        The filtering settings used are those on the <A href="graph_rt60.html">RT60 graph</A>.
+        
+        <P>A custom clarity trace can be generated with the division between early and late
+        selected between 1 and 99 ms. The typical 50 and 80 ms times are suitable for large spaces,
+        but for smaller rooms 20 ms or even lower may be more appropriate.
+        
+        <P>The plot can show horizontal bars centred on each filter frequency and 
+        spanning the filter's bandwidth, or lines joining the filter centre frequencies, 
+        according to the <EM>Use bars on plot</EM> control setting.
+
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+        <P><A NAME="claritymeasures">The clarity measures</A> available are:
+        <DL>
+            <DT>Clarity C50
+            <DD>The early to late energy ratio in dB, using sound energy in the first 50 ms as 
+            the 'early' part. C50 is most often used as an indicator of speech clarity.
+            <DT>Clarity C80
+            <DD>The early to late energy ratio in dB, using sound energy in the first 80 ms as 
+            the 'early' part. C80 is most often used as an indicator of music clarity.
+            <DT>Custom clarity
+            <DD>The early to late energy ratio in dB, using sound energy up to the chosen custom 
+            figure as the 'early' part.
+            <DT>Definition D50
+            <DD>The early to total energy ratio as a percentage, using sound energy in the first 
+            50 ms as the 'early' part
+        </DL>
+        
+        <P>The parameter values (RT60 and clarity) for the current measurement can be written 
+        to a text file using the File &rarr; Export &rarr; <EM>RT60 data as text</EM> menu entry.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

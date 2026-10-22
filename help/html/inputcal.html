@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Calibrating the SPL Reading</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Calibrating the SPL Reading</A></H2>
+
+        <P>Calibrating the SPL reading gives REW an absolute SPL reference by entering
+        a reading from your SPL meter while a speaker or subwoofer calibration signal 
+        is playing. Alternatively a microphone calibrator may be used. This step is not required
+        if you are using a USB mic with a cal file that contains a sensitivity figure.
+
+        <H3><A name="splcalprocedure">SPL Calibration Procedure</A></H3>
+        <OL>
+            <LI>Select the <A HREF="calfiles.html#top">Cal files</A> tab of the Preferences panel
+            
+            <LI>If you are using an SPL meter as the microphone when making your measurements:
+                <UL>
+                    <LI>Set the meter to C weighting and select the <FONT CLASS="settings">Input device is a C Weighted SPL Meter</FONT> 
+                        option in the settings for the mic cal file entry for the input being used
+                    <LI>Set the meter range to suit the measurement level used in the 
+                        <A HREF="measurementlevel.html#top">check levels</A> process (the 80dB range is 
+                        recommended for the Radio Shack meter)
+                </UL>
+                
+            <LI>If you are using a measurement microphone leave 
+                <FONT CLASS="settings">Input device is a C Weighted SPL Meter</FONT> unchecked
+
+            <LI>Open the REW SPL meter by clicking the <EM>SPL Meter</EM> button in the toolbar
+            then press the <em>Calibrate</em> button
+
+            <LI>On the dialog which appears choose whether to calibrate the meter
+            reading using your subwoofer or a main speaker driven by a calibration
+            signal generated within REW, or to use an external test signal you provide,
+            making the appropriate selection in the drop-down box and clicking <em>OK</em>.<BR>
+            <IMG SRC="../../images/choosecalsignal.jpg" ALT="Choose SPL Cal Signal" BORDER=0 width="254" height="74">
+            <BR CLEAR="all"><BR>
+        
+            <LI>Enter the reading from your external SPL meter (not the REW meter) in the 
+            calibration panel and press <EM>Finished</EM> when done<BR>
+            <IMG SRC="../../images/splcalibration.jpg" ALT="Calibrating the SPL Reading" BORDER=0 width="264" height="123">
+        </OL>
+        
+        <P>For more information about the REW SPL Meter see the <A HREF="splmeter.html#top">SPL Meter help</A>
+
+        <H3><A name="splcalnotes">SPL Calibration Notes</A></H3>
+        <UL>
+            <LI>If you are using a USB mic with a cal file that contains a sensitivity
+            figure SPL calibration is not required, REW will show this message:.<BR>
+            <IMG SRC="../../images/calnotrequired.jpg" ALT="Calibration not required" BORDER=0 width="264" height="150">
+            <BR CLEAR="all"><BR>
+            
+            <LI>If you switch between a number of analog microphones or interfaces
+            there is a method to include sensitivity information in the mic cal file.
+            Add a line at the start of the file of the form:<BR>
+            <PRE>Sensitivity -12.34 dBFS</PRE>
+            where "-12.34" is replaced by the REW dBFS input level when the microphone 
+            is driven by 94 dB SPL. When that cal file is used REW will use the sensitivity
+            data to calculate the SPL calibration offset. Note, however, that this 
+            calibration will <B>only be valid when using the same mic interface gain and input
+            volume that were used when it was measured</B>. 
+
+            <LI>At the end of the calibration process a message is displayed showing the
+            maximum SPL that can be measured with the current input level settings. If
+            higher SPL needs to be measured the input sensitivity must be reduced (by lowering
+            the soundcard input volume setting or, if using an external microphone preamp,
+            reducing the preamp gain or, if using an external SPL meter, increasing the range 
+            setting) and repeating the calibration
+
+            <LI>A warning is shown if measurements are attempted before 
+            calibrating the SPL reading as the results of the measurement would
+            not reflect the actual SPL. The SPL reading is shown in red
+            until the SPL calibration procedure has been completed
+
+            <LI>REW remembers the calibration setting for the next startup, so it will 
+            usually not be necessary to repeat this process, but check the REW SPL 
+            reading against your SPL meter or calibrator before starting a new set
+            of measurements
+
+            <LI>If the input volume setting is changed it will be necessary to repeat 
+            the calibration process
+            
+            <LI>If another input device is selected it will be necessary to repeat 
+            the calibration process for that device if it has not been done previously.
+            If the device has previously been calibrated REW will automatically adjust 
+            calibration settings to suit
+            
+            <LI>if the signal generator is already playing a signal when you click 
+            <EM>Calibrate</EM> it will continue to play the same signal
+
+            <LI>If the dBFS input level at 94 dB is known, or the SPL corresponding to full
+            scale input, either of those values can be entered directly in the settings of
+            the mic cal file entry.<BR>
+            <IMG SRC="../../images/miccalsettings.jpg" ALT="Mic cal file settings" BORDER=0>
+            <BR CLEAR="all"><BR>
+            
+        </UL>
+
+        <P>REW is now ready to 
+        <A HREF="makingmeasurements.html#top">make measurements</A>.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

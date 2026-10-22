@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Analysis Settings</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+    <BODY LANG="en-GB" DIR="LTR">
+
+        <H2><A name="top">Equaliser preferences</A></H2>
+        <P>The Equaliser preferences alter the way REW carries out its EQ filter calculations.
+        <BR><BR>
+        <IMG SRC="../../images/equalisersettings.jpg" ALT="Equaliser Preferences" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <H4>Default equaliser</H4>
+
+        <P>The Default equaliser specifies the equaliser that will be used for new measurements. 
+        The equaliser used for an existing measurement can be changed via the EQ panel.
+
+        <H4>Target defaults</H4>
+
+        <P>The default values to use for <FONT CLASS="heading">Target type</FONT>,
+        <FONT CLASS="heading">Target level</FONT>,
+        <FONT CLASS="heading">Bass management slope</FONT>, 
+        <FONT CLASS="heading">Bass management cutoff</FONT>, 
+        <FONT CLASS="heading">LF slope</FONT>, <FONT CLASS="heading">LF cutoff</FONT>, 
+        <FONT CLASS="heading">Crossover HP type</FONT>,
+        <FONT CLASS="heading">Crossover HP cutoff</FONT>,
+        <FONT CLASS="heading">Crossover LP type</FONT> and
+        <FONT CLASS="heading">Crossover LP cutoff</FONT>
+        are specified here, these will be used for each new measurement. The LF cutoff 
+        and LF slope define the lower extension limit for subwoofers or full range 
+        speakers and how quickly that extension rolls off.
+
+        <P>The <FONT CLASS="heading">Room curve</FONT> <FONT CLASS="heading">LF rise</FONT> 
+        and <FONT CLASS="heading">HF fall</FONT> settings define the defaults that will be used for
+        a room curve effect superimposed on the target shape for new measurements. The target curve
+        will rise below the LF rise start frequency at the slope selected until reaching 
+        the LF rise end frequency. A rise at low frequencies may be subjectively preferred.
+        Similarly, the target curve will fall above the HF fall start frequency at the slope 
+        selected. Falling HF response is a normal characteristic of in-room measurements 
+        at the listening position.
+
+        <H4>Filter calculation</H4>
+
+        <P>If <FONT CLASS="heading">Drop filters if gain is small</FONT> is selected any Automatic
+        filters which have gain of magnitude less than half the flatness target at the 
+        end of the optimisation process will be freed up (their Type will be set to "None")
+
+    <!--    <P>If <FONT CLASS="heading">Allow boost at frequency extremes</FONT> is selected REW 
+        will permit boost filters at frequencies below the lowest frequency at which the response
+        drops below the target. This could push drive units beyond their excursion limits if large 
+        amounts of boost are applied and should be used with care. -->
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    
+    </BODY>
+</HTML>

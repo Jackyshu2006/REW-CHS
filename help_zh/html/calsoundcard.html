@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>测量前的准备</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">测量前的准备</A></H2>
+
+        <P>在启动 REW 之前插好要用的音频接口（audio interface）和 USB 麦克风，REW 运行期间不要拔掉。
+
+        <P>在 macOS 上可能还需要给 REW 开放麦克风权限，位置在系统设置的“安全性与隐私”下的“麦克风”一项。
+
+        <P>用 REW 测量时，最好退出其他所有程序，断开网络连接，并关闭无线网络。
+
+        <P>无线网卡会对音频输入造成干扰；其他程序、杀毒软件更新之类则会占用大量处理器资源。这两者都可能让生成或采集的音频信号出现断续，测量结果因此出错。
+
+        <P>做房间测量，最初<A name="stepsreqd">需要完成这几步：</A>
+
+        <OL>
+            <LI><A HREF="#audioconfig">选择音频输入与输出</A>
+
+            <LI><A HREF="calsoundcard.html#calmeasure">校准音频接口</A>
+                （<b>使用 USB 麦克风时不需要这一步</b>）
+
+            <LI><A HREF="measurementlevel.html#setmeaslevel">检查电平</A>
+
+            <LI><A HREF="inputcal.html#splcalprocedure">校准 SPL 读数</A>
+                （如果用的是 REW 能识别的 USB 麦克风，并且它的校准数据里带有 REW 兼容的灵敏度值，就不需要这一步。截至 2022 年 9 月，能识别的型号有 UMIK-1、UMIK-2、UMIK-X、EARS、CARIO-A2B、UMM-6、Omnimic 和 Beta Three）
+        </OL>
+
+        <P>这几项校准和电平检查通常只需要做一次。
+
+        <P>第一次使用 REW，建议按顺序读完这几章入门内容，不要直接跳到某一个设置步骤。如果这台电脑已经为其他声学测量软件配置过，可以直接跳到<A HREF="makingmeasurements.html#top">开始测量</A>。
+
+        <H3><A name="audioconfig">选择音频输入与输出</A></H3>
+
+        <P>在 Windows 上，REW 既可以用 Java 音频驱动，也可以用 ASIO 驱动；其他平台只支持 Java 驱动。
+
+        <P>Windows 上的 Java 驱动有两种访问音频接口的方式：WASAPI 独占模式，或 JavaSound 自带的访问方式。JavaSound 自带方式最高只支持 192 kHz 的采样率（sample rate），而且<B>只支持 16 位立体声数据</B>（以上两项限制以撰写本文时的 Java 8 运行环境为准，时间是 2020 年 12 月）。WASAPI 独占模式则是音频接口支持哪些通道和采样率就提供哪些，并采用该接口所能提供的最高采样分辨率。
+
+        <P>用 WASAPI 独占模式的设备，在 REW 的设备选择框里会带 EXCL: 前缀。注意，只有在 Windows 的设备音频属性里勾选了“允许应用程序独占控制该设备”的设备，才能使用 WASAPI 独占模式。
+
+        <P>在 macOS 和 Linux 上，只要音频接口支持，就会使用 32 位或 24 位数据。macOS 最高支持 192 kHz 采样率，Linux 最高 1536 kHz。当前的采样率和采样格式／位宽（bit depth）显示在 REW 主窗口底部。用 Java 驱动时，输入和输出可以分属不同设备。
+
+        <P>Windows 上的 ASIO 驱动，只要音频接口支持，最高可到 1536 kHz；支持哪些数据格式则随驱动而定。
+
+        <P>ASIO 驱动只支持一个 ASIO 设备，输入和输出都得用这一个，而且 REW 无法控制它的电平。FlexASIO 这类伪 ASIO 驱动，做法是在设备的 WDM 驱动外面套一层 ASIO 封装驱动（ASIO wrapper）。有了这层封装，输入和输出就可以分别走不同的设备。
+
+        <P>用 Java 驱动时，REW 默认使用操作系统里设为默认的那个音频输入和输出。这个默认项会随着音频设备的插拔而变化；而且保持默认时，REW 无法判断设备的具体能力，比如它支持哪些位宽和采样率。
+
+        <P>所以强烈建议在<A HREF="soundcard.html#top">设置 → 声卡</A>面板里，明确选定测量要用的设备、输入和输出，不要让它停留在默认。点击工具栏上的“设置”按钮即可打开该面板。
+
+        <P>设备列表里列出的是 REW 检测到的全部音频接口。选中某个接口后，输入和输出列表就会显示这个接口上可用的输入／输出。ASIO 设备只要装了驱动就会出现在列表里，接口没接上也一样；把接口接上，支持的采样率列表才会填出来。
+
+        <P><I><B>注 1：</B>如果在 REW 启动之后才插入 USB 接口，它可能要过一分钟才会出现在设备列表里——这是 Java 运行环境（Java Runtime Environment）本身的特性。</I>
+        <P><I><B>注 2：</B>如果用的是 ASIO4All，并且在 ASIO4All 控制面板里改选了别的设备或输入／输出，REW 必须重新加载 ASIO4All 驱动，才能显示新可用的通道。做法是点击 <EM>ASIO 控制面板</EM>按钮右边的<EM>重新加载</EM>按钮。</I>
+
+        <P>用 Java 驱动时，列表里可能同时包含内置设备、外接设备，以及操作系统提供的默认驱动。<BR><BR>
+        <IMG SRC="../../images/devices.jpg" ALT="音频输出设备选择框" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <P>尽量直接选音频接口本身，不要选“主声音采集驱动程序”“主声音驱动程序”“Java Sound Audio Engine”这类操作系统驱动。
+
+        <P>REW 要自动检测电平，就必须直接访问音频接口上的控制项；选了操作系统驱动，往往做不到这一点。Java Sound Audio Engine 还容易在播放时产生爆音和杂音，测量质量会因此下降。
+
+        <P>设备选好之后，就可以选输入和输出了。
+
+        <P>用 Java 驱动时，输入一般叫“LINE_IN”或“MICROPHONE”，输出一般叫“SPEAKER”或“LINE_OUT”。USB 接口上的名称可能不一样，比如输入可能标成“Digital Audio Interface”。ASIO 设备对可用输入输出的命名更具体，每个单声道通道都会单独列出。
+
+        <P><FONT COLOR=#4076c0>如果用的是 USB 麦克风，而且它的校准文件里带灵敏度值，REW 必须读到输入音量设置才能正确显示 SPL。所以必须明确选定这只麦克风所用的输入设备和输入通道，不能停留在“默认设备”。</FONT>
+
+        <P>现在越来越多的 Windows 笔记本和台式机，会对立体声麦克风输入做降噪处理，把两个声道共有的内容压掉。UMIK-1 这类 USB 麦克风两个声道的信号完全相同，等于全部都是共有内容，低频可能被压得很厉害。
+
+        <P>如果输入端有降噪处理的开关，务必把测量所用输入的降噪关掉。关闭方法：打开 Windows 的<EM>声音设置</EM>，在<EM>相关设置</EM>下选<EM>声音控制面板</EM>；在<EM>录制</EM>选项卡里选中要用的麦克风，点<EM>属性</EM>按钮，再切到<EM>高级</EM>选项卡；如果有<EM>启用音频增强</EM>复选框，确认它<B>没有</B>勾选。
+
+        <P>WASAPI 独占模式的设备一般不受这类处理影响。
+
+        <P><FONT COLOR=#4076c0><I><B>排查提示：</B>如果不想让 REW 访问音频接口的音量控制，取消勾选<EM>控制输入音量</EM>和<EM>控制输出音量</EM>两个复选框。之后所有电平调整都要改用操作系统的音量控制，或音频接口自带的混音器来做。</I></FONT>
+
+        <H4><A name="multichannel">多通道输入与输出</A></H4>
+
+        <P>用 Java 驱动时，选完输入或输出，还可以再选具体通道。音频接口一般提供立体声输入输出，所以测量输入可以选 Left 或 Right；输出可以选 Left、Right，也可以选 Left+Right，把测量信号同时送到两个声道。
+
+        <P>在 Windows 上，Java 自带驱动只提供立体声连接。即使所接的音频接口本身支持多通道，或者已经配置成多通道（比如输出多通道 PCM 音频的 HDMI 输出），也是如此。要取得多通道访问能力，请选该设备的 WASAPI 独占模式条目，或者改用 ASIO 驱动，也可以用 FlexASIO 这类 ASIO 封装驱动。
+
+        <P>WASAPI 独占模式会按常见通道数逐一探测，最多到 16 通道，采样率最高到 1536 kHz。如果某个接口没有给出预期的通道数，可以在 roomeqwizard.vmoptions 文件里加一行，指定 REW 要探测哪些 WASAPI 独占通道数。例如 <tt>-DcsjsoundChannels=1,2,4,32</tt> 就表示只检查设备是否支持 1、2、4 或 32 通道。
+
+        <P>在 macOS 和 Linux 上，配置为多通道的设备可以把全部通道都开放出来。下面是在 macOS 上从一块多通道声卡的 8 个输出里任选一个的例子。从“音频 MIDI 设置”那张截图可以看到，这块卡配置为 8 通道、16 位、48 kHz。
+
+        <P>要注意 macOS 给这块卡排的通道顺序有点特别：后置声道排在侧环绕声道前面。REW 按顺序把通道标为 Left、Right、C、LFE、SL、SR、SBL、SBR，但在这块卡上，比如在 REW 里选 SL，实际出声的是音频接口上标着 Rear 的那个插口的左声道；选 SBL 出声的则是标着 Side 的插口的左声道。
+
+        <P>除了这处顺序上的怪异，各通道都可以单独选择。遇到这类不常规的通道对应关系，用<a href="soundcard.html#outputmapping">输出通道映射</A>功能处理即可。<BR><BR>
+        <IMG SRC="../../images/channelselection.jpg" ALT="8 通道输出选择" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+        <IMG SRC="../../images/osx8channeloutput.jpg" ALT="macOS 8 通道输出" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <H4><A name="samplerate">采样率选择</A></H4>
+
+        <P>用 ASIO 驱动时，只要音频接口支持，最高可提供到 1536 kHz 的采样率。ASIO 建议用较大的缓冲区大小（也就是较高的延迟），采样率越高越要如此。高采样率下能不能稳定工作，取决于电脑的运算速度和内存容量。
+
+        <P>Java 驱动在 macOS 上最高提供 192 kHz，在 Linux 上最高 1536 kHz；选用 WASAPI 独占模式的设备时，可用采样率取决于设备本身的能力。视操作系统和设备而定，有些设备可能只提供 44.1 kHz 和 48 kHz。
+
+        <P>如果没有使用 WASAPI 独占模式，<B>务必在操作系统里把输入和输出设备也配置成 REW 中所选的采样率</B>，否则操作系统会在所选采样率和设备实际运行的采样率之间做重采样。
+
+        <P>WASAPI 独占模式的设备分两种情况：一种提供多个采样率，这些采样率会出现在 REW 里供选择，设备就按所选值运行；另一种只能工作在单一采样率下，而且这个采样率要由其他途径设定。例如 RME 的音频接口可能要在 MADIface Series Settings 对话框里选采样率，在那里选定之后，该设备就只有这一个采样率可用。
+
+        <P>做声学测量，建议用 44.1 kHz 或 48 kHz，除非这次测试确实需要 20 kHz 以上的结果（比如研究高音单元的谐振）。采样率再高只会增加内存占用、拖慢处理速度，并不会提高精度。
+
+        <H3><A name="calmeasure">校准音频接口</A></H3>
+
+        <P><B>用 USB 麦克风作输入时不需要这一步，直接跳到<A HREF="measurementlevel.html#top">检查电平</A></B><BR><BR>
+        音频输入和输出选定之后，REW 就可以对音频接口的频率响应（frequency response）做一次校准测量了。
+
+        <P>这一步很重要：它能确认音频接口配置正确，尤其是确认监听功能没有开着——只要有一部分输入信号被绕回输出，测量结果就是无效的。
+
+        <P>这次校准的结果还可以用来把音频接口自身的响应从测量中扣除。
+
+        <OL>
+            <LI>把音频接口的线路输出或耳机输出，直接接到它自己的线路输入上。用哪个通道做测量就接哪个通道，而且要与<EM>输入通道</EM>选择框里选中的通道一致。<FONT COLOR="red">如果这个接口的输入带幻象电源（phantom power），务必把幻象电源关掉，以免损坏输出端。</FONT>
+
+            <LI>点击<B>设置 → 声卡</B>面板上的<B>校准声卡...</B>按钮，按弹出对话框里的说明操作。
+
+            <LI>测量结果应当比较平直，大部分频段内的起伏远小于 1 dB；但最低频和最高频会出现滚降（roll off），高频端往往还带一些波纹（ripple）。如果 20 Hz 到 20 kHz 之间起伏过大，REW 会给出警告，这样的测量结果不能用。下面是一条有效的测量结果，来自某台笔记本的内置声卡，20 Hz 以下滚降较快（图表纵轴为 1 dB/格）：<BR>
+            <IMG SRC="../../images/realteksc.jpg" ALT="笔记本声卡测量结果（1dB/格）" BORDER=0 width="379" height="146"><BR CLEAR="ALL"><BR>
+
+            下面是另一台笔记本音频接口的测量结果，低频响应更好，高频响应也更平滑：<BR>
+            <IMG SRC="../../images/soundmaxsc.jpg" ALT="笔记本音频接口测量结果（1dB/格）" BORDER=0 width="379" height="146"><BR CLEAR="ALL"><BR><BR>
+
+            <LI>这次测量的部分结果会显示在备注里：<BR>
+            <IMG SRC="../../images/soundcardresults.jpg" ALT="笔记本音频接口测量结果" BORDER=0 width="273" height="233"><BR CLEAR="ALL"><BR>
+
+            <LI>如果测出来是这个样子：<BR>
+            <IMG SRC="../../images/badsccal.jpg" ALT="无效的音频接口校准结果" BORDER=0 width="365" height="146"><BR CLEAR="ALL"><BR>
+            多半是线路输入到输出之间形成了反馈环路（feedback loop）。音频接口带录音监听功能时就容易这样。比如线路输入有一个“Monitor”（监听）功能必须关掉，或者有一项“Record without monitoring”（录音时不监听）设置必须勾选。另外，如果音频接口的播放混音器里没有把“Line In”静音，或者 Windows 的录音属性里给该输入勾选了“侦听此设备”，同样会产生反馈。<BR>
+
+            <LI>测出结果后，要把它保存为校准文件。点击<B>设置 → 声卡</B>里的<B>创建校准文件...</B>按钮，为文件选好名称和位置。文件保存后会自动重新载入，作为校准文件用于此后用这个接口做的所有测量。下次启动 REW 时，它也会自动载入。
+
+            <LI>校准文件载入之后，会应用到之后所有新的测量。若要给已有的测量加上或去掉声卡校准文件，用测量面板右键菜单里的<A HREF="measurementspanel.html#changecal"><EM>更改校准</EM>功能</A>。
+
+            <LI>拆掉回环连接，把音频接口接到麦克风或声压计，以及 AV 处理器／均衡器上。
+        </OL>
+
+        <P><B>注意</B>：从<B>设置 → 声卡</B>面板发起的音频接口测量，扫频范围一律是完整范围，一直到接口采样率的一半，与扫频结束频率的设置无关；而且声卡校准文件<B>不会</B>应用到这类接口测量上。
+
+        <P><B>另外注意</B>：声卡校准文件只在测它时所用的那个采样率下有效。采样率改了，就要在新的采样率下重新测一次音频接口。
+
+        <P>下一步是<A HREF="measurementlevel.html#top">检查电平</A>。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

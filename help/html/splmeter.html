@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>SPL Meter</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">SPL Meter</A></H2>
+
+        <P>The SPL Meter is an integrating, logging sound level meter that displays sound
+        pressure level, equivalent sound level or sound exposure level based on
+        the RMS level of the input channel. It offers A, C and Z weightings,
+        fast or slow exponential filters, a high pass filter to suppress wind noise,
+        and records minimum, maximum and unweighted peak levels. The peak reading is based on 
+        the largest absolute sample value seen in each block of audio data.
+        
+        <P>The meter takes into account both the soundcard and microphone calibration files 
+        and corrects its readings accordingly, allowing IEC class 0 performance when used with 
+        a calibrated microphone and SPL calibrator. Note that the maximum boost resulting from
+        the calibration files can be limited by a setting in the 
+        <A HREF="analysis.html#limitcalboost">Analysis Preferences</A>
+        to prevent excessive boosting of the noise floor. 
+        Data recorded by the meter can be logged, graphed and saved to a text file.<br><br>
+        <IMG SRC="../../images/splmeter.jpg" ALT="SPL meter" ALIGN="left"><BR CLEAR="all">
+
+        <P>The meter displays sound pressure level (SPL), time-average equivalent
+        sound level (L<sub>eq</sub>) and sound exposure level (L<sub>E</sub>) according
+        to the selection made on the buttons above the display. In L<sub>eq</sub> mode
+        the figure can be either the level since the last meter start or reset or a rolling 
+        figure over the time interval set below the display. The SPL reading is
+        filtered with either a "Fast" (125ms) or "Slow" (1s) time constant, selected
+        via the F/S buttons. For general use the "Slow" setting is best. When the
+        <em>HP</em> button is pressed a high pass filter is applied that eliminates
+        content below approximately 8Hz.
+
+        <h3><a name="limits">Meter limits</a></h3>
+        
+        <P>Limits can be set independently for the SPL, L<sub>eq</sub> and SEL values.
+        When using the pro upgrade multi-input capture option limits each SPL meter
+        can have different limits. When limits are being used the background of the 
+        meter is green when the level is more than the amber threshold below the limit.<br><br>
+        <IMG SRC="../../images/splmeterlimits.jpg" ALT="SPL limit exceeded" ALIGN="left"><BR CLEAR="all">
+        
+        <P>Within the amber threshold of the limit the background of the meter turns amber.<br><br>
+        <IMG SRC="../../images/approachingspllimit.jpg" ALT="Approaching SPL limit" ALIGN="left"><BR CLEAR="all">
+
+        <P>Above the limit the background of the meter turns red.<br><br>
+        <IMG SRC="../../images/spllimitexceeded.jpg" ALT="SPL limit exceeded" ALIGN="left"><BR CLEAR="all">
+        
+        <h3><a name="weighting">Meter weighting</a></h3>
+
+        <P>SPL measurements use weighting curves to shape the signal they
+        receive and emphasise those regions that are of interest for certain
+        requirements. The A and C-weighting curves are shown in the figure below.<BR>
+        <IMG SRC="../../images/weightings.jpg" ALT="A and C weighing filters" BORDER=0><BR>
+        C-weighting gives the broadest response (apart from the "Flat", "Zero"
+        or "Z" weighting), with -3dB points at 31.5Hz and 8kHz.
+        A-weighting has a much more pronounced low frequency roll-off. It is
+        modelled on the sensitivity of the ear to low level sounds (about 40dB SPL).
+        A-weighting has the same high frequency roll-off shape as C, but the curves
+        do not align at high frequencies because they are adjusted to both have zero
+        gain at 1kHz, which shifts the A-weighting curve up relative to C-weighting.
+        When Z-weighting is used the SPL figure includes the components at DC and the
+        Nyquist frequency (half the sample rate).
+
+        <h3><a name="spldisplay">Meter display</a></h3>
+
+        <P>The meter display shows the currently selected measure, the level and an
+        overload ("OVER") indicator which is lit if the soundcard input range is
+        exceeded. The OVER indicator can be reset by clicking in the display area
+        or using the <em>Reset All</em> button. When SPL is selected the display
+        shows dB, the selected weighting in brackets (A, C or Z) and either F for
+        Fast or S for Slow. When measuring equivalent sound level it shows LAeq,
+        LCeq or LZeq according to the selected weighting. SEL is displayed when
+        measuring sound exposure level. The time over which the equivalent sound
+        level or sound exposure level figures have been calculated is shown in the
+        Elapsed Time display at the bottom of the meter. Note that equivalent
+        sound level is useful for making measurements of subwoofer levels using your
+        processor or receiver's internal calibration signal, usually difficult due
+        to the large fluctuations of the level. Equivalent sound level displays a
+        result averaged over the time since <em>Reset All</em> was last pressed;
+        simply start the test signal, press <em>Reset All</em> and wait for the
+        reading to stabilise to get a precise level.<br><br>
+        <IMG SRC="../../images/spldisplay.jpg" ALT="SPL display" BORDER=0><BR>
+
+        <P>The SPL meter window can be resized as required, the main SPL display digits
+        automatically scale to suit the available space. The meter can also be set to
+        full screen.<br><br>
+        <IMG SRC="../../images/splmeterlarge.jpg" ALT="SPL meter large" BORDER=0><BR>
+        
+        <P>SPL, Leq and SEL can all be shown at the same time, with the weighting chosen 
+        independently for each.<br><br>
+        <IMG SRC="../../images/splmetermulti.jpg" ALT="SPL meter showing SPL, Leq and SEL" BORDER=0><BR>
+
+        <P>Below the main row of controls a level meter shows the current soundcard
+        input level in dBFS, the peak is shown by the red bar while the numeric
+        indicator and the coloured bar show the rms level.<br><br>
+        <IMG SRC="../../images/spllevelmeter.jpg" ALT="SPL display" BORDER=0><BR>
+        
+        <P>Below the soundcard level meter is a <em>MinMax</em> button to display min, max and
+        peak values in the SPL display and a <em>Reset All</em> button to reset the
+        elapsed time, min, max and peak values, equivalent sound level, sound exposure
+        level and the overload indicator. The <em>Calibrate</em> button starts the
+        meter calibration process, whilst the record button turns the meter on or off.
+        When MinMax is selected the values are displayed alongside the main SPL reading.<br><br>
+        <IMG SRC="../../images/splminmax.jpg" ALT="SPL MinMax" BORDER=0><BR>
+
+        <H3><A name="meterinput">Meter input selection</A></H3>
+        
+        <P>The soundcard input channel which is measured is selected in the 
+        <A HREF="soundcard.html#inputchannel">Soundcard Preferences</A>. Setting the 
+        audio input is described in
+        <A HREF="gettingstarted.html#audioconfig">Getting started</A>.
+
+        <H3><A name="splcal">Calibrating the SPL reading</A></H3>
+
+        <P>Valid readings are not displayed until
+        <A HREF="inputcal.html#top">SPL&nbsp;Calibration</A> has been carried out.
+        The SPL reading may be calibrated against an external SPL meter or SPL
+        calibrator by pressing the <EM>Calibrate</EM> button. The text on the button
+        and the SPL meter digits are red if the meter has not been calibrated. If the
+        soundcard input is altered in the REW soundcard preferences, or if the input
+        levels are altered, it will be necessary to re-calibrate the SPL meter reading.
+
+        <H3><A name="spllog">SPL data logging</A></H3>
+
+        <P>The <EM>Logger</EM> button opens the SPL Logger graph window. The record
+        button in the top right corner of the SPL Logger graph starts or stops logging
+        of SPL values. When logging is in progress the SPL meter on/off, calibrate,
+        weighting, filter time constant and high pass filter buttons are disabled. The logger
+        records the SPL (with the currently selected weighting and time constant), the
+        minimum and maximum values, the unweighted and uncalibrated peak value, the
+        equivalent sound level and the sound exposure level. A <EM>Save</EM> button
+        above the SPL Logger graph allows the data recorded to be saved to a text file
+        using the text delimiter set in the REW <A HREF="file.html#top">File</A> menu,
+        log files can be loaded using the <EM>Open</EM> button.
+        
+        <H3>SPL logger controls</H3>
+        
+        <P>The control panel for the SPL logger graph has these controls:
+        <P><IMG SRC="../../images/splloggercontrols.jpg" ALT="SPL logger controls" width="190" height="89"><BR CLEAR="all">
+        
+        <P>If <EM>Show times as time of day</EM> is selected the time axis shows the 
+        time of day of the logged data, otherwise it shows the elapsed time since 
+        logging started. Selecting <EM>Log to file using date as filename</EM> saves
+        logged data to files in the REW logs directory automatically whenever the 
+        logger is running (the directory location is shown in the <B>About REW</B> 
+        dialog box). Filenames are formatted as SPL-YYYY-MMM-dd.txt, e.g. 
+        SPL-2016-Apr-24.txt. If a file for a day already exists a number will be 
+        appended, e.g. SPL-2016-Apr-24-1.txt, SPL-2016-Apr-24-2.txt etc. A new file 
+        is created if the logging continues past midnight, with the new date. Note 
+        that the files can become very large if logging continues for a long period, 
+        growing at about 18 kB per minute. If the option to log to files is selected 
+        remember to check the REW log directory to remove files you no longer need.
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+        <P>The format of the logged data is shown below, in this example the text 
+        delimiter is comma and the SPL meter was set to Z weighting.<BR><BR>
+        
+        <PRE>
+    SPL log data saved by REW V5.19
+    Note: includes Leq over last minute and last 10 minutes
+    Soundcard cal: 
+    Mic cal: 
+    SPL cal offset: 104.85347938537598 dB
+    High Pass Filter: Off
+    Date: 16-Jul-2018 17:43:10
+    Start: 1531762990157
+    Log length: 7061 entries over 1311.6s
+    Log interval: 0.18575963718820862 seconds
+
+    Time[s], LZS, LZSMin, LZSMax, LZpeak, LZeq, LZE, LZeq1m, LZeq10m
+    0.186, 84.7, 84.7, 84.7, 95.1, 84.6, 77.3, 84.6, 84.6, 17:43:10.186
+    0.372, 84.7, 84.6, 84.7, 96.1, 84.7, 80.4, 84.7, 84.7, 17:43:10.372
+    0.557, 84.6, 84.6, 84.7, 96.1, 84.5, 82.0, 84.5, 84.5, 17:43:10.557
+    0.743, 84.7, 84.5, 84.7, 96.1, 84.6, 83.3, 84.6, 84.6, 17:43:10.743
+    0.929, 84.7, 84.5, 84.7, 96.1, 84.6, 84.3, 84.6, 84.6, 17:43:10.929
+        </PRE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

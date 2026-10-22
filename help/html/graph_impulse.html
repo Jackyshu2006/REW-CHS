@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Impulse Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Impulse Graph</A></H2>
+        
+        <P>The Impulse graph shows the <A HREF="impulseresponse.html#top">impulse response</A>
+        for the current measurement. It can also show the left and right windows and 
+        the effect of the windows on the data that is used to calculate the frequency 
+        response; a minimum phase impulse; the impulse response envelope (ETC) and
+        the step response.
+        <P><IMG SRC="../../images/impulseplot.jpg" ALT="Impulse Graph"><BR CLEAR="all">
+
+        <P>The Y axis used for the impulse response can be selected as % FS or dBFS 
+        (FS = Full Scale) via a control in the top left corner which appears when 
+        the mouse cursor is inside the graph area. The dBFS scale is equivalent to
+        a "log squared" view of the impulse.<BR>
+        <IMG SRC="../../images/yaxisselector.jpg" ALT="Impulse Response Y Axis Selector"><BR CLEAR="all">
+        <P><IMG SRC="../../images/impulseplotdbfs.jpg" ALT="Impulse Graph dBFS"><BR CLEAR="all">
+        
+        <H3><A name="navigator">Navigator</A></H3>
+        
+        <P>A navigator view below the impulse graph shows the entire response with the 
+        currently displayed portion highlighted. The highlighted region can be dragged to reposition 
+        the view. Clicking anywhere in the navigator view centres the displayed portion on 
+        the click. If the mousewheel is used while the mouse is over the navigator the 
+        graph will be zoomed along its time axis, centred on the time axis position of the
+        mouse pointer in the main graph. The navigator replaces the scrollbar, if it is
+        turned off (in the graph controls) the scrollbar will be visible again according 
+        to the state of the scrollbars button above the graph.
+        <P><IMG SRC="../../images/impulsenavigator.jpg" ALT="Impulse navigator"><BR CLEAR="all">
+        
+        <H3><A name="windowindicators">Window indicators</A></H3>
+        
+        <P>Indicators above the graph show the extents of the impulse response 
+        windows and the window reference position. The window settings may be changed
+        by clicking above the graph or clicking and dragging on the indicators, the new values are applied when the 
+        mouse button is released. While the window settings are being changed the region 
+        outside the new area is shown shaded until the settings are applied. When the 
+        window indicators are dragged a preview of the effect the new setting will have 
+        on the SPL response is shown below the impulse response. It is best to set the Y 
+        axis to dB to adjust the windows as it is then much easier to see where the 
+        response has decayed into the noise.
+        <P><IMG SRC="../../images/impulsewindowpreview.jpg" ALT="Impulse Response window adjustment"><BR CLEAR="all">
+ 
+        <P>After each measurement the left window width is automatically set up. 
+        For full range measurements (and down to end frequencies of 1kHz) the width 
+        is 125ms, below that it increases to allow for pre-ringing effects of using 
+        a limited sweep range. To change the window settings for a measurement click 
+        the <EM>IR Windows</EM> button:
+        <P><IMG SRC="../../images/irwindowsbtn.jpg" ALT="IR Windows Button"><BR CLEAR="all">
+        <P><IMG SRC="../../images/irwindowcontrols.jpg" ALT="IR Windows dialog"><BR CLEAR="all">
+        
+        <P>The IR windows dialog allows a set of window presets to be defined which
+        can be created with the <EM>Save settings as preset</EM> button and applied 
+        by selecting them from the presets panel.
+        <P><IMG SRC="../../images/irwindowpresets.jpg" ALT="IR Window presets"><BR CLEAR="all">
+
+        <P>The impulse response is that of the whole system, including the mic/meter 
+        and the soundcard. <B>The mic/meter and soundcard calibration files are only applied 
+        when calculating the frequency response, their effect is not included in the 
+        impulse response.</B> However, there is a <EM>Merge cal data to IR</EM> Measurement 
+        action in the <A href=graph_allspl.html#measurementactions>All SPL graph</A> controls 
+        that allows the cal file responses to be merged into the impulse response.
+
+        <H3><A name="minphaseir">Minimum Phase Impulse</A></H3>
+        
+        <P>If the <EM>Generate minimum phase</EM> control has been used to produce a 
+        minimum phase version of the current measurement's magnitude response a
+        minimum phase impulse trace is activated, showing the impulse response the 
+        minimum phase system would have.  Note that it is necessary to make full range 
+        measurements if the minimum phase response is to be generated as a good result 
+        relies on measuring beyond the bandwidth of the system being measured.
+
+        <H3><A name="irenvelope">Impulse Response Envelope</A></H3>
+
+        <P>The envelope of the impulse, also called the energy-time curve or ETC, is useful 
+        to identify reflections and see the overall shape of the impulse response. 
+        The plot below shows the envelope, the spikes after the initial peak are
+        due to reflections from room surfaces, the first spike occurs 3.25ms after
+        the initial peak indicating that the sound travelled an additional 1.11m or
+        3.7 feet to reach the microphone.
+        <P><IMG SRC="../../images/envelope.jpg" ALT="Impulse Response Envelope" width="400" height="253"><BR CLEAR="all">
+
+        <H3><A name="stepresponse">Step Response</A></H3>
+
+        <P>The step response shows the output which would result if the input signal 
+        jumped to a fixed level and stayed there. It is the integral of the windowed impulse 
+        response. If there is an offset in the measurement input chain the step 
+        response will show an overall rise or fall as time progresses, rather than 
+        tending back to zero.
+        <P><IMG SRC="../../images/step.jpg" ALT="Step Response" width="400" height="253"><BR CLEAR="all">
+
+        <H3><A name="irdistortion">Distortion Components</A></H3>
+        
+        <P>A property of the log sweep analysis method is that 
+        the various harmonic distortion components appear as additional impulses 
+        at negative time, with decreasing spacing as the distortion order increases. 
+        For example, this plot shows spikes from distortion components up to the 8th
+        harmonic on a laptop soundcard loopback measurement:
+        <P><IMG SRC="../../images/impulseharmonics.jpg" ALT="Impulse Response with Harmonic Peaks" width="380" height="148"><BR CLEAR="all">
+
+        <P>Here is a similar measurement for an external USB soundcard, it is a 44.1k card rather than 48k, which
+        limits us to the 6th harmonic in the 1s pre-impulse period - however, only the 2nd, 3rd and 5th harmonic peaks
+        are evident, the 4th harmonic peak is barely visible above the noise floor (which is about 10dB lower than the
+        laptop card). The extended lobes after the impulse are due to the card's much lower -3dB frequency, 1.0Hz versus 22.1Hz
+        (note that the right side of the time axis is 2.0s in this plot compared to 0.5s in the previous plot):
+        <P><IMG SRC="../../images/impulseharmonicsusb.jpg" ALT="Impulse Response with Harmonic Peaks" width="380" height="148"><BR CLEAR="all">
+
+        <H3><a name="actions">Impulse Actions</a></H3>
+        
+        <P>The right click menu for the Impulse graph has the following actions:
+        <P><IMG SRC="../../images/actionsimpulse.jpg" ALT="Impulse graph actions"><BR CLEAR="all">
+
+        <P><EM>Offset t=0</EM> allows the position of time zero in the impulse response 
+        to be altered, with a live preview of the effect the offset will have on phase. 
+        The measurement is not changed unless either the <EM>Apply</EM> or <EM>Apply &amp; close</EM>
+        button is pressed. Adjustment of the offset can be made by entering a value or by using
+        the up and down arrow keys after clicking on the offset spinner. The cumulative shift that has been 
+        applied to the impulse response is shown at the top of the dialog. That includes any shifts
+        applied to the original measured IR to align it to the peak or to the timing reference, if used.
+        The offset can be set to the value required to set the cumulative shift to zero by pressing the 
+        <EM>Zero cumulative shift</EM> button. If a timing reference was used 
+        the System Delay figure (which can be viewed in the measurement Info panel) is 
+        shifted by the same amount as the zero time. 
+        <P><IMG SRC="../../images/t0offsetdialogIR.jpg" ALT="t=0 offset dialog"><BR CLEAR="all">
+        <P><IMG SRC="../../images/impulsetzeropreview.jpg" ALT="t=0 offset preview"><BR CLEAR="all">
+
+        <P><EM>Invert</EM> inverts the polarity of the measurement.
+
+        <P><EM>Apply 2Hz HP</EM> applies a 2Hz zero phase high pass filter to the measurement. 
+        This may be useful if the measurement has a DC offset that is affecting its step response.
+        <B>This action is not reversible</B>, if unsure make a response copy and apply the filter to the copy.
+
+        <P><EM>Set t=0 at cursor</EM> will align the zero position to the current 
+        cursor position. 
+        
+        <P><EM>Set t=0 at IR start</EM> will align the zero position to the time 
+        at which the impulse starts (emerges from the noise floor). 
+        
+        <P><EM>Set t=0 at IR peak</EM> sets t=0 to the peak of the IR.
+
+        <P><EM>Undo t=0 changes</EM> resets t=0 to the as measured state.
+        
+        <P><A name="scaleirdata"><EM>Scale IR data...</EM></A> brings up a dialog that allows the impulse 
+        response values to be scaled by a chosen gain or to achieve a specified peak
+        value. If the peak value is known type it into the "New peak" field and the gain 
+        will be adjusted to suit. The SPL values will not be affected by this action, when 
+        the impulse response data is changed a corresponding adjustment is made to the SPL offset.
+        <P><IMG SRC="../../images/scaleirdata.jpg" ALT="Scale IR data dialog"><BR CLEAR="all">
+
+        <P><A name="clockadjustment"><EM>Clock adjustment</EM></A> is 
+        enabled for log sweep measurements made with REW V5.20 beta 2 or later. It
+        is used to compensate for differences between the clock rates of the output 
+        device and input device. When the output and input device are different their 
+        clocks may differ sufficiently to distort the shape of the impulse response, 
+        particularly when using longer sweeps. The clock rate difference affects the 
+        phase response (magnitude is not affected). The adjustment is in units of 
+        parts per million, ppm. While the clock rate is being adjusted a live preview 
+        shows the effect the adjustment will have on the impulse response and phase.
+        The measurement is not changed unless either the <EM>Apply</EM> or <EM>Apply &amp; close</EM>
+        button is pressed. Fine adjustment can be made with the left and right arrow 
+        keys after clicking on the slider knob. The control has a range of -500 to +500 
+        ppm, but greater adjustments can be made by using the <EM>Apply</EM> button then
+        applying further changes as required. The cumulative clock adjustment is shown 
+        at the top of the dialog and in the measurement Info dialog. Note that clock 
+        adjustment is a computationally intensive task so the display updates are not 
+        immediate.
+        <P><IMG SRC="../../images/clockadjustment.jpg" ALT="Clock adjustment"><BR CLEAR="all">
+        
+        <P><EM>Estimate IR delay</EM> (<FONT CLASS="keys">Ctrl+Alt+E</FONT>) calculates an estimate of the time delay in the 
+        measurement by comparing it with a minimum phase version. The delay it 
+        calculates can be removed from the impulse response by pressing the
+        <EM>Shift IR</EM> button on the panel shown after the delay is calculated and
+        can additionally be applied as a timing offset for subsequent measurements.
+        <P><IMG SRC="../../images/shiftir.jpg" ALT="Estimate IR delay"><BR CLEAR="all">
+
+        <P><EM>Set t=0 at IR peak and update timing offset</EM> sets t=0 to the peak of the IR
+        and adjusts the timing offset on the Measure dialog so that subsequent measurements
+        apply the same timing shift.
+
+        <P><EM>Generate minimum phase</EM> will produce a minimum phase version
+        of the measurement using the current IR window settings. The minimum phase 
+        impulse then shows the response of a system having the same frequency 
+        response as the measurement but with the lowest phase shift such a system
+        could have.  Note that it is best to make full range measurements if the 
+        minimum phase response is to be generated as a good result relies on measuring 
+        beyond the bandwidth of the system being measured. This control also activates 
+        minimum and excess phase and group delay traces on the SPL &amp; Phase and GD 
+        graphs respectively.
+        
+        <P><B>Note</B> that the IR window settings are important as the minimum 
+        phase response is derived from the frequency (magnitude) response of the
+        measurement, which in turn is affected by the IR window settings. If the 
+        window settings are subsequently changed <EM>Generate minimum phase</EM> 
+        should be used again to reflect the new settings. Note also that the shape 
+        of the left side window (the window applied before the peak) affects the 
+        minimum phase result, a rectangular window will produce a response with 
+        lower phase shift than, for example, a Hann window.
+        
+        <P>If the system being measured was inherently minimum phase (as most 
+        crossovers are, for example) the minimum phase response is the same as 
+        removing any time delay from the measurement. Room measurements are typically 
+        not minimum phase except in some regions, mainly at low frequencies. For more 
+        about minimum and excess phase and group delay see <A HREF="minimumphase.html#top">Minimum Phase</A>.
+        
+        <H3><A name="controls">Impulse Controls</A></H3>
+        
+        <P>The control panel for the Impulse graph has these controls:
+        <P><IMG SRC="../../images/controlsimpulse.jpg" ALT="Impulse Controls"><BR CLEAR="all">
+        
+        <P>The impulse response may be plotted with or without normalisation to 
+        its peak value according to the setting of the <EM>Plot responses normalised</EM> 
+        control. When normalised plotting is selected the peak will be at 100% or 0 dBFS. 
+
+        <P>The step response may be normalised to its own peak value or to the
+        peak value of the impulse response according to the setting of the 
+        <EM>Normalise step to IR peak</EM> control.  
+
+        <P>If <EM>Show magnitude graph</EM> is selected the response SPL graph is shown below 
+        the impulse graph. The view is the same as that shown when adjusting the IR windows
+        using the indicators at the top of the graph. The <EM>IEC 263 ratio</EM> control sets 
+        the aspect ratio of the magnitude graph, <EM>Magnitude span (dB SPL)</EM> sets its SPL span. 
+        The top of the magnitude graph is set automatically if <EM>Set magn top automatically</EM>
+        is selected, otherwise it is controlled by the <EM>Magnitude top (dB SPL)</EM> setting.
+        
+        <P>If <EM>Show IR Navigator</EM> is selected the navigator view is shown below the graph.
+
+        <P>If <EM>Show reflection limits</EM> is selected the thresholds for the audible effects
+        of a single lateral reflection in an anechoic space (Olive & Toole, 1989) are overlaid
+        on the graph, starting at the IR start time. The upper limit is for image shift or spreading,
+        the lower is the detection threshold.
+
+        <P>If <EM>Show points when zoomed in</EM> is selected the individual points 
+        that make up the response are shown on the graph when the zoom level is high 
+        enough for them to be distinguished.
+        <P><IMG SRC="../../images/showpoints.jpg" ALT="Show Points"><BR CLEAR="all">
+        
+        <P>The <A name="iec263"><EM>IEC 263 ratio</EM> control</A> allows the magnitude graph 
+        to be locked to a specified dB/decade aspect ratio. The aspect ratio is maintained by
+        adjusting the margins around the graph as required.
+        
+        <P>The <EM>Magnitude span (dB SPL)</EM> control sets the Y axis span of the magnitude graph.
+
+        <P><EM>ETC Smoothing</EM> is used to smooth the envelope (ETC) trace using a moving
+        average filter of the duration specified in the spinner.
+
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

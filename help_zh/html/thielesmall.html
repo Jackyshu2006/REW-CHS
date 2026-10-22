@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Thiele-Small 参数</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">Thiele-Small 参数</A></H2>
+
+        <p>Thiele-Small 参数窗口的作用，是根据扬声器单元的阻抗测量结果，算出它的各项参数。
+
+        <p>REW 提供三种方法：密闭箱法、附加质量法和双附加质量法。双附加质量法出自 Jeff Candy 与 Claus Futtrup 的论文《An Added-Mass Measurement Technique for Transducer Parameter Estimation》（JAES 第 65 卷第 12 期，1005–1016 页，2017 年 12 月）。
+
+        <p>这个方法结果最准，但三种方法的准确度都取决于测量本身的质量。<br>
+        <p><IMG SRC="../../images/tsparamswindow.jpg" ALT="T/S 参数窗口">
+        <BR clear="all">
+
+        <p>三种方法都需要一次“自由场”测量：单元牢固固定，不装任何障板，并且竖直安装——也就是让振膜朝水平方向发声，与它装进音箱后的姿态一致。
+
+        <p>自由场测量之外的附加测量有两种做法：要么在振膜上加质量块，要么把单元装进一只密闭箱体里（必须不漏气）。箱体容积最好比预估的 Vas 略小一点。
+
+        <p>用单次附加质量法时，加上去的质量大约取预估 Mms 的一半。
+
+        <p>用双附加质量法时，先做一次测量，此时质量块总重略小于预估的 Mms；然后取下一半质量块再测一次；最后做自由场测量。
+
+        <p>开测之前，先用中等电平的信号让单元活动一下。这一步有助于让单元的工作状态和悬挂顺性（suspension compliance）稳定下来，也能减轻悬挂因长期存放或久未使用而留下的记忆效应。
+
+        <p>环境安静对测得准同样重要。扬声器单元本身就相当于一支麦克风，会拾取噪声和振动，从而影响结果。
+
+        <p>测量要一直做到 20 kHz，音圈的有损电感（lossy inductance）才能被准确建模。另外，测量之前要先完成<a href="impedancemeasurement.html#calibrate">阻抗校准</a>那一步。</p>
+
+        <p>附加质量法要想测准，质量块的重量必须称得非常精确，秤越准越好。
+
+        <p>建议把要加的总质量分成 4 块、每块重量大致相同，沿振膜靠近音圈的一圈等间距摆放，并牢固粘住。蓝丁胶（Blu-tack）就很好用；需要更大质量时，可以在胶里埋一颗螺母。
+
+        <p>不要把质量块放在振膜外缘附近，那样会影响振膜的运动。
+
+        <p>做双附加质量法的第二次测量时，轻轻取下其中两块，让剩下的两块分处振膜的对角两侧。
+
+        <p>做密闭箱测量时，界面上会出现<EM>补偿泄漏损失</EM>和<EM>空气负载补偿</EM>两个勾选框。它们分别计入密闭箱的泄漏损失（在结果里以 Q<sub>l</sub> 表示）和密闭箱带来的空气质量负载。
+
+        <p>这两项补偿采用 Carrion-Isbert 方法，由 Claus Futtrup 在他的 <i>Driver Parameter Calculator</i> 程序文档中给出，见 http://www.cfuttrup.com/
+
+        <H3>一个完整示例</H3>
+
+        <p>下面用一只中低音单元演示 T/S 参数的完整计算过程。
+
+        <p>先看图：第一张是自由场状态下的阻抗测量，后两张是加了质量块之后的阻抗测量。
+
+        <p>REW 先对自由场测量做一次最小二乘拟合，用单元阻抗的<a href="#tsmodel">电学模型</a>去拟合，定出模型参数。再对辅助测量做一次最小二乘拟合，定出辅助测量中发生了变化的动生参数，最后算出 T/S 参数。
+        </p><br>
+        <IMG SRC="../../images/freeairz.jpg" ALT="自由场阻抗测量">
+        <BR clear="all">
+        <IMG SRC="../../images/addedmassz.jpg" ALT="附加质量 1 的阻抗测量">
+        <BR clear="all">
+        <IMG SRC="../../images/addedmass2z.jpg" ALT="附加质量 2 的阻抗测量">
+        <BR clear="all">
+
+        <p>算 T/S 参数时，先选好要用的测量，再填入下面这些数值：</p>
+        <ul>
+            <li>音圈直流电阻 R<sub>DC</sub>，单位欧姆。小阻值本来就不容易量准，不过 REW 用的阻抗模型可以对不够精确的直流电阻做补偿。</li>
+            <li>有效振膜面积，单位平方厘米。多数单元的规格书里都给了这个数。<BR><BR>
+                如果查不到，可以让 REW 替你算：只要给出有效直径即可。有效直径等于振膜直径加上一部分折环宽度，这部分通常是折环宽度的 1/3 到 1/2。点“有效面积”框左侧的计算器图标就能打开这个换算工具。
+            <li>空气温度，单位摄氏度。
+            <li>气压，单位毫巴。
+            <li>附加质量，单位克；如果用密闭箱法，则填箱体容积，单位升。
+        </ul>
+
+        <p>然后点<em>计算参数</em>按钮，得到下面的结果。</p><br>
+        <IMG SRC="../../images/tsparamsdone.jpg" ALT="T/S 参数计算结果">
+        <BR clear="all">
+
+        <p>窗口底部的结果区分三列。
+
+        <p>第一列是：扬声器电阻 R<sub>E</sub>，它通常比直流电阻略高一点；阻抗峰之后的最小阻抗 Z<sub>min</sub>，以及出现这个最小值的频率 f<sub>min</sub>；f<sub>3</sub>，也就是阻抗回升到 √2×Z<sub>min</sub> 时对应的频率；f<sub>3</sub> 处的电感；有效直径和有效振膜面积。
+
+        <p>第二列是：谐振频率 f<sub>S</sub>；机械 Q 值 Q<sub>MS</sub>、电 Q 值 Q<sub>ES</sub>、总 Q 值 Q<sub>TS</sub>；以及 F<sub>TS</sub>，它等于 f<sub>S</sub>/Q<sub>TS</sub>。
+
+        <p>前两列的参数只用一条测量就能算出来，不必再选辅助测量。
+
+        <p>第三列的 L<sub>P</sub>，以及 M<sub>MS</sub>、C<sub>MS</sub>、R<sub>MS</sub>、V<sub>AS</sub>、B&#8467; 和 Eta（效率），必须有额外的测量才算得出来。
+
+        <p>在结果区点右键，可以把结果复制到剪贴板；也可以按<em>导出参数至文件</em>按钮写成文本文件。
+
+        <p>写文件时，数值与标签之间用什么分隔，由文件 &rarr; 导出菜单里的设定决定。</p>
+
+        <p>下图把模型算出的阻抗曲线叠在自由场测量的实测值上。</p><br>
+        <IMG SRC="../../images/tsmodel.jpg" ALT="模型阻抗曲线">
+        <BR clear="all">
+
+        <p>双附加质量法还会给出一条 B&#8467; 曲线（图中青色那条）。如果测量做得好，这条曲线在谐振频率附近应当接近水平。
+
+        <p>算出 T/S 参数之后，图上除了总阻抗曲线，还可以画出动生阻抗和阻塞阻抗的幅度与相位。这两种阻抗各有“推导”和“仿真”两个版本。双附加质量法的结果还能画出 ZM* 的幅度和相位。
+
+        <p>仿真曲线由模型参数值直接算出。推导曲线则是用实测值减去模型值得到的——举例来说，推导动生阻抗＝实测总阻抗 − 模型阻塞阻抗。</p><br>
+        <IMG SRC="../../images/tstraces.jpg" ALT="推导阻抗曲线与仿真阻抗曲线">
+        <BR clear="all">
+
+        <H3><A name="tsmodel">电学阻抗模型</A></H3>
+
+        <p>单元阻抗中的电学部分，REW 采用的模型出自 Knud Thorborg 与 Claus Futtrup 的论文《Electrodynamic Transducer Model Incorporating Semi-Inductance and Means for Shorting AC Magnetization》（JAES 第 59 卷第 9 期，612–627 页，2011 年 9 月）。
+
+        <p>下图是这个电学阻抗模型的各个元件。</p><br>
+        <IMG SRC="../../images/voicecoilmodel.jpg" ALT="音圈模型">
+        <BR clear="all">
+
+        <p>模型的起点是单元电阻 R<sub>E</sub>，也就是直流电阻 R<sub>DC</sub>。REW 另外设了一个电阻 dR，用来吸收实际 R<sub>E</sub> 与实测电阻之间的差值。这个差可能来自测量误差，也可能来自音圈温度。
+
+        <p>R<sub>E</sub> 之后接一个串联电感 L<sub>EB</sub>，再接一组并联元件：电感 L<sub>E</sub>、半电感（semi-inductance）K<sub>E</sub> 和电阻 R<sub>SS</sub>。
+
+        <p>L<sub>E</sub> 代表音圈位于磁隙内那一段的电感，L<sub>EB</sub> 代表磁隙外那一段。
+
+        <p>半电感 K<sub>E</sub> 的阻抗随 ω 的平方根变化，用来描述磁芯柱里的涡流和趋肤效应。L<sub>E</sub> 与 K<sub>E</sub> 并联，正好刻画音圈的行为如何从低频时接近普通电感，过渡到高频时的半电感特性。
+
+        <p>R<sub>SS</sub> 这个元件描述的是磁路系统中导电材料带来的影响。
+
+        <p>REW 定出的参数值可以手动修改，改完能在图上看到模型阻抗曲线和相位曲线怎么变；但已经算好的 T/S 参数不会跟着变。</p>
+
+        <H3><A name="motionalmodel">机械阻抗模型</A></H3>
+
+        <p>机械阻抗模型里包含了一些元件，用来处理顺性随频率变化的问题。
+
+        <p>它采用粘弹性（viscoelasticity）的 LOG 模型，出自 Knudsen 与 Jensen 的论文《Low-Frequency Loudspeaker Models That Include Suspension Creep》（JAES 第 41 卷第 1/2 期，3–18 页，1993 年 2 月）。
+
+        <p>在此基础上加入了推迟谱（retardation spectra）函数，见 Agerkvist 与 Ritter 的《Modeling Viscoelasticity of Loudspeaker Suspensions Using Retardation Spectra》（AES 第 129 届会议，2010 年 11 月，论文编号 8217）。
+
+        <H3><A name="simplemodel">简化模型</A></H3>
+
+        <p>很多电路仿真软件不支持元件值随频率变化，所以 REW 另外算了一套简化参数。
+
+        <p>阻塞阻抗部分改用两组“电阻—电感”对，标为 R2-L2 和 R3-L3：每组内的电阻与电感并联，两组之间串联。动生阻抗部分则用传统的 R<sub>ES</sub>、C<sub>MES</sub>、L<sub>CES</sub> 模型，不含随频率变化的阻尼和顺性。
+
+        <p>这些元件的数值显示在“简化模型参数”框里。下图是简化模型的元件构成。</p><br>
+        <IMG SRC="../../images/drivermodel.jpg" ALT="单元简化模型">
+        <BR clear="all">
+
+<!--        <H4><A name="note1">Measuring the driver DC resistance</A></H4>
+        
+        <p>Accurate measurement of low resistances is challenging, LCR meters that are 
+        in calibration may have a suitable range and give good results. If you do not 
+        have access to a calibrated LCR meter an alternative is to get an accurate 
+        measurement of a higher value resistor, perhaps 50 ohm or so, or purchase a 
+        very high precision resistor (such as a Vishay bulk foil part) and form a voltage 
+        divider with a DC source, the reference resistor and the driver.  A decent 
+        multimeter can provide accurate voltage measurements, measuring the voltage 
+        across the driver and the voltage across the reference resistor allows the 
+        driver resistance to be determined from 
+        (ref resistor) * (driver voltage) / (ref resistor voltage). -->
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

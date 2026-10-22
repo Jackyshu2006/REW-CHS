@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>示波器</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">示波器</A></H2>
+
+        <BR><IMG SRC="../../images/scopescreen.jpg" ALT="示波器" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P>REW 的示波器模拟一台双通道示波器（oscilloscope），并额外提供一个运算通道。它实时显示测量通道和参考通道上的音频数据。
+
+        <P>各通道用颜色区分：蓝色是 CH1（测量通道），黄色是 CH2（参考通道），绿色是运算通道。
+
+        <P>REW 以每块 8k 个采样的方式采集输入数据，示波器每次收到的也是一整块采样。因此，它的表现与硬件示波器略有不同。
+
+        <P>屏幕顶部显示当前选中的通道、各通道的电压档位（voltage scale）、时基（timebase）和触发设置。<BR>
+        <BR><IMG SRC="../../images/scopestatus.jpg" ALT="示波器状态" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P>屏幕底部显示采集缓冲区（capture buffer），当前正在显示的那一段会高亮。触发位置用一条白线标出。
+
+        <P>示波器停止时，可以拖动高亮段，改变主显示区里显示的范围。要更精细地调整显示范围，可以直接在主显示区里按住鼠标拖动。<BR>
+        <BR><IMG SRC="../../images/scopebuffer.jpg" ALT="示波器缓冲区" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P>触发电平和触发位置用三角形标记表示，分别位于显示区的左侧和底部，颜色与触发通道的曲线颜色相同。用鼠标点住三角形拖到想要的位置，就能调整它们。触发位置在曲线上还会用一个十字标记标出。<BR>
+        <BR><IMG SRC="../../images/scopetriggerindicators.jpg" ALT="示波器触发标记" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P>控制面板上有：各通道的通道选择按钮和电压档位控件、截取屏幕图像按钮、保存按钮、游标开关按钮、时基控件、触发控件，以及用来开始和停止采集的“运行 / 停止”按钮。
+
+        <P>鼠标光标位于显示区内时，也可以用滚轮调整时基。
+
+        <P>保存按钮会用当前选中的各条曲线生成测量，屏幕上显示的数据就作为这些测量的脉冲响应（impulse response）。<BR>
+        <BR><IMG SRC="../../images/scopecontrolpanel.jpg" ALT="示波器控制面板" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <H3><A name="channelsettings">通道设置</A></H3>
+
+        <P>通道选择按钮旁边有一个齿轮图标按钮，用来打开通道设置。通道设置包括：通道偏移、输入标定（按各测量通道上满量程正弦波的 RMS 电压来定义）、满量程线、余辉（persistence）、运算函数和数据导出。
+
+        <P>偏移可以用<EM>重置</EM>按钮归零。每条曲线的零伏位置，用显示区右侧一个与曲线同色的三角形标出。
+
+        <P>垂直偏移可以在通道设置里调，也可以在显示区右侧点住偏移标记拖动。水平偏移会按当前时基，把偏移量换算成相应的采样数，再把曲线平移这么多个采样。直流偏移则直接加到曲线的数据值上。
+
+        <P>勾选<EM>显示满量程线</EM>后，会在每个输入通道正、负满量程对应的电压处各画一条虚线。
+
+        <P>余辉设置仿照模拟示波器的余辉效果：最近 10 次扫描都会留在屏幕上，越早的一次越淡。<BR>
+        <BR><IMG SRC="../../images/scopechannelsettings.jpg" ALT="示波器通道设置" ALIGN="left"><BR CLEAR="all"><BR>
+
+        <P><EM>导出数据</EM>把示波器数据及其设置写入一个文本文件，分隔符沿用“文件 &rarr; 导出”菜单里设定的文本分隔符。下图是导出为 .csv、再用电子表格打开的一个文件。
+
+        <P>请注意：数据按采集时的采样率导出，写的是归一化的浮点采样值，1.0 代表满量程。每个通道 1 伏对应的采样值，写在文件头信息里。<BR>
+        <BR><IMG SRC="../../images/scopeexport.jpg" ALT="示波器数据导出" ALIGN="left" width="340" height="503"><BR CLEAR="all"><BR>
+
+        <H3><A name="cursors">游标</A></H3>
+
+        <P>游标按钮用来显示或隐藏示波器游标（cursor）。按钮旁边的设置图标会弹出一个菜单，用来控制游标的工作方式。
+
+        <P>游标有两种模式：<EM>手动</EM>和<EM>跟踪</EM>。两种模式下，游标读数都显示在图表下方。时间以触发位置为基准，触发位置就是 t=0。
+
+        <P><EM>手动</EM>模式提供两条时间游标和两条电压游标。按设置里的选择，可以只显示其中一组，也可以两组都显示。
+
+        <P>电压游标以当前选中的通道为准，游标也用该通道的颜色绘制。
+
+        <P>每对游标都有一条主游标（1，长虚线）和一条副游标（2，短虚线）。移动主游标时，副游标会跟着一起移动；副游标也可以单独移动。游标用鼠标点住拖动即可移动。
+        <P><IMG SRC="../../images/scopecursorsmanual.jpg" ALT="示波器游标菜单（手动模式）"><BR CLEAR="all">
+        <P><IMG SRC="../../images/manualcursors.jpg" ALT="示波器手动游标" ALIGN="left"><BR CLEAR="all">
+
+        <BR><BR>
+        <P><EM>跟踪</EM>模式提供两条可以调整的时间游标，以及两条自动跟随所选通道曲线的电压游标。按设置的不同，两条游标可以读同一个通道，也可以分别读不同的通道。
+        <P><IMG SRC="../../images/scopecursorstracking.jpg" ALT="示波器游标菜单（跟踪模式）" ALIGN="left"><BR CLEAR="all">
+        <P><IMG SRC="../../images/trackingcursors.jpg" ALT="示波器跟踪游标" ALIGN="left"><BR CLEAR="all">
+
+        <H3><A name="triggersettings">触发设置</A></H3>
+
+        <P>示波器可以用 CH1 或 CH2 触发，触发沿可选上升沿或下降沿。触发电平、触发滞回（trigger hysteresis）和触发抑制时间（holdoff）可以在触发设置菜单里调整，也可以在显示区里点住触发标记拖动来调整。拖动触发电平时，还可以用鼠标滚轮调整滞回。
+
+        <P>在<EM>自动</EM>模式下，如果在整个显示时间范围内都没有检测到触发，示波器会自动扫描。在<EM>单次</EM>模式下，示波器会等待触发，扫描一次后就停止采集。<BR>
+        <BR><IMG SRC="../../images/triggersettings.jpg" ALT="触发设置" ALIGN="left" width="305" height="59"><BR CLEAR="all"><BR>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

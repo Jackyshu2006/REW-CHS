@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Graph Menu</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Graph Menu</A></H2>
+        <DL>
+            <DT><A name="grid">Show/hide grid</A><FONT CLASS="keys"> Ctrl+Shift+G</FONT>
+            <DD>Toggle the grid on/off by using this menu entry or the associated
+            shortcut keys.
+
+            <DT><A name="grid">Show/temporarily hide cursors</A><FONT CLASS="keys"> Ctrl+Shift+H</FONT>
+            <DD>Toggle the cursors on/off by using this menu entry or the associated
+            shortcut keys. If the cursors have been hidden left clicking on the graph 
+            or actions that would move a cursor will restore the cursors.
+
+            <DT><A name="freqaxis">Frequency Axis Log/Linear</A><FONT CLASS="keys"> Ctrl+Shift+A</FONT>
+            <DD>Toggle the frequency axis between logarithmic and linear display.
+            The button on the toolbar provides the same function.<BR>
+            <IMG SRC="../../images/linlogbutton.jpg" ALT="linear/logarithmic frequency axis button" width="57" height="49"><BR CLEAR="all">
+
+            <DT><A name="zoomundo">Undo Zoom</A><FONT CLASS="keys"> Ctrl+Z</FONT>
+            <DD>Restore the graph axis settings that were in use when the middle or right
+            mouse button was last pressed with the pointer in the graph area. The
+            main application is to undo the last
+            <A HREF="graphpanel.html#graphicalzoom">Variable Zoom</A> or
+            <A HREF="graphpanel.html#zoomtoarea">Zoom to Area</A> action, but
+            it can also be used to undo a pan or any other action that altered the
+            axis settings since the right mouse button was last pressed in the graph 
+            area.
+            
+            <DT><A name="fit">Fit graph to data</A><FONT CLASS="keys"> Ctrl+Alt+F</FONT>
+            <DD>Set the graph axes to show the full span of the data. The <EM>Fit to data</EM>
+            button on the graph limits dialog has the same effect.
+
+            <DT><A name="fit">Find position on graph</A><FONT CLASS="keys"> Ctrl+Alt+P</FONT>
+            <DD>Shift the X axis of the graph to bring a position into view. Currently this is 
+                only active on the Impulse graph, where it places the peak of the IR 20% of the 
+                way across the graph as a quick way to locate the peak when zoomed in.
+
+            <DT><A name="onesmooth">1/1 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+1</FONT>
+            <DT><A name="onehalfsmooth">1/2 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+2</FONT>
+            <DT><A name="onethirdsmooth">1/3 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+3</FONT>
+            <DT><A name="onesixthsmooth">1/6 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+6</FONT>
+            <DT><A name="onetwelfthsmooth">1/12 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+7</FONT>
+            <DT><A name="onetwentyfourthsmooth">1/24 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+8</FONT>
+            <DT><A name="onefortheightssmooth">1/48 Octave Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+9</FONT>
+            <DT><A name="variablesmooth">Variable Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+X</FONT>
+            <DT><A name="psychoacousticsmooth">Psychoacoustic Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+Y</FONT>
+            <DT><A name="erbsmooth">ERB Smoothing</A><FONT CLASS="keys"> Ctrl+Shift+Z</FONT>
+            <DD>Apply a smoothing filter to the current channel. Repeating the action 
+            removes the smoothing. Variable smoothing applies 1/48 octave below 100 Hz, 
+            1/3 octave above 10 kHz and varies between 1/48 and 1/3 octave from 
+            100 Hz to 10 kHz, reaching 1/6 octave at 1 kHz. Variable smoothing is recommended 
+            for responses that are to be equalised. 
+            Psychoacoustic smoothing uses 1/3 octave below 100Hz, 1/6 octave above 1 kHz and 
+            varies from 1/3 octave to 1/6 octave between 100 Hz and 1 kHz. It also applies more
+            weighting to peaks by using a cubic mean (cube root of the average of the cubed values)
+            to produce a plot that more closely corresponds to the perceived frequency response.
+            ERB smoothing uses a variable smoothing bandwidth that corresponds to the ear's
+            Equivalent Rectangular Bandwidth, which is (107.77f + 24.673) Hz, where f is in kHz. 
+            At low frequencies this gives heavy smoothing, about 1 octave at 50Hz, 1/2 octave at 100 Hz,
+            1/3 octave at 200 Hz then levelling out to approximately 1/6 octave above 1 kHz.<BR><BR>
+            REW's smoothing uses multiple forward and backward passes of first order IIR filters to 
+            implement a Gaussian smoothing kernel of the chosen fractional octave bandwidth. For log 
+            spaced data those are IIR approximations to a Gaussian filter after Alvarez-Mazorra. For linear 
+            spaced data the time constant of the first order filter is varied according to the sample index to 
+            reflect the equivalent fractional octave bandwidth desired at the frequency of the sample.
+
+            <DT><A name="undosmooth">Remove Smoothing for Current Measurement</A><FONT CLASS="keys"> Ctrl+0</FONT>
+            <DD>Set smoothing to None. Pressing the smoothing shortcut again will also remove
+            smoothing - for example, pressing <FONT CLASS="keys">Ctrl+Shift+3</FONT> will smooth the data to 1/3
+            octave, pressing it again will remove the smoothing.
+            
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

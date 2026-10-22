@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>API设置说明</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+
+        <P>REW 提供了一个可通过 http 访问的 REST API，地址为 <FONT class="endpoint">localhost (127.0.0.1)</FONT>，默认端口为 4735。此 API 无法从运行 REW 的机器外部访问。可在端口字段中输入介于 1024 到 65535 之间的端口号，以指定 REW 要使用的端口。若要启动 API 服务器，请使用上方的按钮，或勾选 <FONT CLASS="heading"><A name="apionstartup">REW 启动时启动 API</A></FONT> 选项，或使用 <FONT class="cmd">-api</FONT> 参数运行 REW。在 Windows 上，使用默认安装的 REW 可通过下列方式执行：
+
+        <P><FONT class="cmd">C:\Program Files\REW\roomeqwizard.exe -api</FONT>
+
+        <P>在 macOS 上，可通过终端使用下列命令执行：
+
+        <P><FONT class="cmd">open -a REW.app --args -api</FONT>
+
+        <P>若要指定不同的端口（例如 4567），请再加上另一个参数 <FONT class="cmd">-port 4567</FONT>。低于 1024 的端口号将被忽略。
+
+        <P>当 API 执行时，所有 <FONT class="cmd">GET</FONT> 方法皆可使用，允许通过 API 从 REW 获取数据。对大多数端点而言，默认也支持 <FONT class="cmd">PUT</FONT> 与 <FONT class="cmd">POST</FONT> 方法，但若要通过 API 控制 REW 以进行自动化扫频测量，则需要 <A href="https://www.roomeqwizard.com/upgrades.html" target="_blank">Pro 升级版授权</A>。
+
+        <P>API 帮助文档由 swagger-ui 提供，可通过浏览 <FONT class="endpoint">localhost:4735</FONT> 来访问。API 的 OpenAPI 规范可通过 <FONT class="endpoint">localhost:4735/doc.json</FONT>（JSON 格式）或 <FONT class="endpoint">localhost:4735/doc.yaml</FONT>（YAML 格式）访问。使用数据模型来设置数值时，可通过 <FONT class="cmd">POST</FONT> 方法进行；对于包含多个字段的模型，则可使用 <FONT class="cmd">PUT</FONT> 方法，不过这两种方法都接受仅包含定义字段子集的数据模型。
+
+    </BODY>
+</html>

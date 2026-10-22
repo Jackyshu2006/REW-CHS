@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>3D 图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">3D 图</A></H2>
+
+        <P><IMG SRC="../../images/waterfall3d.png" ALT="3D 瀑布图">
+        <BR CLEAR="all">
+        <P>瀑布图（waterfall plot）和频谱图（spectrogram）的数据可以在 3D 视图中显示。视图可以旋转，从不同角度观察数据。
+
+        <P>按住鼠标左键拖动，或者按方向键，可以旋转视图。调整时会显示当前的水平视角和垂直视角。要移动图形的位置，按住鼠标右键拖动，或者按 Shift+方向键。滚动鼠标滚轮，或者按加号、减号键，可以放大或缩小。
+
+        <P>请注意，可能需要先在图上单击一下，让它获得焦点，按键才会起作用。<BR>
+        <P><IMG SRC="../../images/spectrogram3dplot.png" ALT="3D 频谱图">
+        <BR CLEAR="all">
+
+        <H3><a name="settings">3D 设置</a></H3>
+
+        <P>在图上单击右键，会弹出设置菜单。
+        <P><IMG SRC="../../images/settings3d.jpg" ALT="3D 设置"><BR CLEAR="all">
+
+        <P>设置面板上的滑块也可以用来调整视角，还可以在滑块旁边的输入框里直接输入新数值。光源的角度用光源角度控件（光源水平角、光源垂直角）调整。
+
+        <P>X、Y、Z 轴比例用来调整图形在各个方向上的比例。把 <EM>Z 轴比例</EM>设为零，图形会被压平，变成一张二维频谱图。再把水平角度设为零、垂直角度设为 90 度，就能从正上方俯视这张频谱图。
+
+        <P><EM>焦距</EM>控制透视效果。取消勾选<EM>透视模式</EM>，可以关闭透视效果。
+
+        <P>图形表面会显示光源的反光。取消勾选<EM>显示高光</EM>，可以去掉这些反光。
+
+        <P>勾选<EM>翻转频率轴</EM>或<EM>翻转时间轴</EM>，可以把数据沿相应的轴翻转过来。
+
+        <P>勾选<EM>显示等高线</EM>可以添加等高线（contour），<EM>等高线间距</EM>用对应的滑块或输入框设定。
+
+        <P><EM>带状色谱</EM>把平滑过渡的颜色改为一段一段的色带。<EM>显示色阶条</EM>控制是否在图形旁边显示色阶条。配色方案沿用对应的二维瀑布图或频谱图所选的方案。
+
+        <P>勾选<EM>封闭边缘面</EM>，可以把图形的各个侧面填充起来。
+
+        <P>图形外观设置可以保存为预设配置，也可以从预设配置载入。
+
+        <P><EM>适应面板大小</EM>调整缩放比例，让图形和坐标轴都能完整显示在面板内。<EM>恢复默认值</EM>把各控件恢复为默认设置。
+
+        <H3><a name="overlays">叠加图窗口中的 3D 图</a></H3>
+
+        <P>在 SPL、预测 SPL 和失真这三种叠加图上，可以把一组测量放进一张 3D 图里查看。只有当这组测量能构成一个有意义的曲面时，这样看才有价值。例如一只音箱的一组极坐标频率响应测量，或者在不同电平下测得的一组失真随频率变化的测量。
+
+        <P>在这些图上单击右键，会出现 3D 设置和 3D 配色方案的选项。
+
+        <P>下图是一组极坐标响应数据的示例。把 0° 响应，也就是轴向（on-axis）响应，设为 SPL 参考后，得到的是归一化（normalised）视图。<BR>
+        <P><IMG SRC="../../images/overlayspl3d.png" ALT="3D 极坐标响应">
+        <BR CLEAR="all">
+
+        <P>叠加图 3D 图的设置面板还多一个<EM>突出显示数据集</EM>选项，用来把构成图形的各个数据集分别标示出来。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

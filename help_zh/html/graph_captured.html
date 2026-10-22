@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>采集信号图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">采集信号图</A></H2>
+
+        <P>这张图表显示最后一次生成的扫频测试信号，以及经音频接口采集到的、未经校正的系统响应。排查问题时，它可能用得上。
+
+        <P>它不是实时显示，扫频结束后内容才会更新。图上只显示最后一次测量的信号；从文件载入的测量没有这张图。
+
+        <P>Y 轴是数字满量程（digital full scale）的百分比。如果采集信号曲线达到 ±100%，说明信号已经削波（clipping，即已失真），应当降低扫频电平、AV 处理器音量或输入音量。<BR><BR>
+        <IMG SRC="../../images/captured.jpg" ALT="采集信号图" width="380" height="160"><BR CLEAR="all">
+
+        <H4>注意：</H4>回放链路和采集链路都有延迟（latency），所以采集信号在时间上会有一段偏移。
+
+        <H4>采集信号图操作</H4>
+
+        <P><IMG SRC="../../images/capturedactions.jpg" ALT="采集信号图操作">
+
+        <P>如果声卡输入会把信号反相，可以勾选右键菜单里的“反相采集信号曲线”，把采集信号曲线反过来，方便与测试信号对照。
+
+        <P>更长久的办法是在<A HREF="soundcard.html#inputchannel">设置 → 声卡</A>的输入通道一栏勾选<EM>输入反相</EM>。
+
+        <P>激励信号、采集信号和参考信号（如果用了参考通道）都可以保存为浮点格式的 WAV 文件。
+
+        <H4>采集信号图的图表选项</H4>
+
+        <P><IMG SRC="../../images/capturedcontrols.jpg" ALT="采集信号图的图表选项">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<IMG SRC="../../images/showpointscaptured.jpg" ALT="显示数据点" width="185" height="145">
+		<BR CLEAR="all">
+
+		<P>勾选<EM>缩放时显示数据点</EM>后，只要水平方向放大到能分辨单个采样，图上就会画出各个时域采样点。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

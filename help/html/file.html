@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>File Menu</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">File Menu</A></H2>
+
+        <DL>
+            <DT><A name="filesavemeasured">Save measurement</A><FONT CLASS="keys"> Ctrl+S</FONT>
+            <DD>Save the current measurement in a binary format with the extension ".mdat".  
+            The path to the file is remembered for the next time the dialogue appears.
+
+            <DT><A name="fileloadmeasured">Open measurement</A><FONT CLASS="keys"> Ctrl+O</FONT>
+            <DD>Load measurements from an mdat file. The path to the file is remembered 
+            for the next time the dialogue appears. Mdat files can also be opened by dragging
+            them onto the REW main window.
+            
+            <DT><A name="filesaveallmeasured">Save all measurements</A><FONT CLASS="keys"> Ctrl+Shift+S</FONT>
+            <DD>Save the data for all measurements in a single file with the
+            extension ".mdat".  A note can be entered that is displayed when the
+            data set is next loaded. The path to the file is remembered for the
+            next time the dialogue appears.
+            
+            <DT><A name="fileremovemeasurements">Remove measurements loaded from...</A>
+            <DD>Remove all the measurements that were loaded from the file selected 
+            from the list.
+
+            <DT><A name="filesavechannelfilters">Save filters</A><FONT CLASS="keys"> Ctrl+Alt+S</FONT>
+            <DD>Saves the EQ filter settings for the current measurement in a binary
+            format with the extension ".req". A note can be entered that is
+            displayed when the filters are next loaded. The path to the file is
+            remembered for the next time the dialogue appears.
+
+            <DT><A name="fileloadchannelfilters">Open filters</A><FONT CLASS="keys"> Ctrl+Alt+O</FONT>
+            <DD>Load a set of EQ filters for the current measurement from a .req file.
+            Any note saved with the settings will be displayed. If the .req file has 
+            more than one set of filters a selection box is offered to choose the
+            set to load the filters from. Req files can also be opened by dragging
+            them onto the EQ window or the EQ filters window.
+
+            <DT><A name="filedataimport">Import frequency response</A><FONT CLASS="keys"> Ctrl+I</FONT>
+            <DD>Import frequency response data (SPL or, if the file extension is .zma, impedance) 
+            from other applications or load FR data which has been saved in a text format. See
+            <A HREF="dataimport.html#top">Importing Measurement Data</A> for details.
+            The path to the file is remembered for the next time the dialogue appears.
+
+            <DT><A name="fileimpedanceimport">Import impedance measurement</A><FONT CLASS="keys"> Ctrl+Alt+I</FONT>
+            <DD>Import impedance measurement data from other applications which has 
+            been saved in a text format. See 
+            <A HREF="dataimport.html#top">Importing Measurement Data</A> for details.
+            The path to the file is remembered for the next time the dialogue appears.
+
+            <DT><A name="fileimpulseimport">Import impulse response</A><FONT CLASS="keys"> Ctrl+Shift+I</FONT>
+            <DD>Import an impulse response from a WAV, AIFF, Flac, MP3, TXT,
+            ARTA .pir or a .pcm file (raw data). The sample rate must be 
+            specified manually for .pcm files as it is not contained in the file. 
+            TXT files can be REW IR text exports, COMSOL model files, 
+            IR files in a 2-column format with time and amplitude or a single column
+            of amplitude values (but in that case the sample rate will be requested when importing). 
+            WAV, AIFF, Flac and MP3 files can be mono, stereo or multi-channel, the channel 
+            to be imported is chosen when loading the file. Files with 16, 24 or 32 bit 
+            signed PCM samples and (for WAV) 32-bit or 64-bit float samples are supported.
+            Up to approx 60 seconds of data can be imported.<BR><BR>
+
+            The SPL calibration offset for the current input is used for the imported data,
+            unless the import has float values with magnitudes larger than 10 
+            (the usual maximum for WAV files is 1). In that case REW assumes the values are 
+            attempting to encode SPL figures directly and generates an SPL calibration 
+            offset for the measurement accordingly, ensuring that the magnitude
+            of the peak of the resulting IR is 1.0.<BR><BR>
+             
+            To adjust the SPL offset for a desired peak SPL figure in the frequency response 
+            use the <A HREF="graph_splphase.html#scaleircontrols">Scale FR peak</A> 
+            controls in the SPL &amp; Phase graph group. There is a setting in the 
+            <A HREF="analysis.html#ircalc">Analysis Preferences</A> to control whether
+            the t=0 time for the imported response is placed at the first data sample,
+            at the peak of the impulse response or at the specific sample index shown. 
+            The path to the file is remembered for the next time the dialogue appears. 
+            WAV, AIFF, Flac and MP3 files can also be opened by dragging them onto the main 
+            REW window. <B>N.B. Mic calibration, soundcard calibration and C weighting 
+            compensation are not applied to imported impulse responses.</B> Use the <EM>Change cal</EM> 
+            button in the <A href="measurementspanel.html#changecal">measurement panel</A> 
+            right click menu to apply calibration data after import.
+
+            <DT><A name="fileaudioimport">Import audio data</A><FONT CLASS="keys"> Ctrl+Shift+U</FONT>
+            <DD>Import audio data from a WAV, AIFF, Flac or MP3 file. Files with 16, 24 or 32 bit 
+            signed PCM samples and (for WAV) 32-bit or 64-bit float samples are supported. Only the first 
+            60s (approx) is imported. The path to the file is remembered for the next time the 
+            dialogue appears. Results that need an IR, such as clarity and RT60, are not available 
+            for audio data imports. Windows are set to cover the span of the data, the frequency response
+            is for the windowed span in the same way as for an impulse response. Waterfalls and spectrograms 
+            cover the whole span of the data. WAV, AIFF, Flac and MP3 files dragged onto the main REW window 
+            with the Ctrl key held will be treated as audio data.
+
+            <DT><A name="filesweepimport">Import sweep recordings</A><FONT CLASS="keys"> Ctrl+Shift+N</FONT>
+            <DD>Import sweep stimulus and recorded responses from WAV or AIFF files to make
+            <A HREF="offlinemeasurements.html#top">offline measurements</A>. Files with 16, 24 or 32 bit 
+            signed PCM samples and 32-bit or 64-bit float samples are supported. The sweep stimulus file must
+            be produced by saving a measurement sweep from the REW signal generator. The recorded response
+            can be multi-channel, the first channel of the response file is searched for the acoustic timing reference signals.
+            The path to the files is remembered for the next time the dialogue appears.<BR><BR>
+            <IMG SRC="../../images/importsweepblank.jpg" ALT="Import Sweep Recordings"><BR CLEAR="all">
+
+            <DT><A name="fileexpimpwav">Export impulse response as WAV</A>
+            <DD>Export the impulse response for the selected measurement(s) in WAV
+            format, written as mono or stereo data. The sample format can be chosen
+            as 16, 24 or 32-bit signed PCM or 32-bit Float. Float is recommended if the 
+            application using the data can accept this, particularly if the response is 
+            not normalised.<BR><BR>
+            
+            The dialog provides options 
+            to choose whether to export the measured IR, the IR after any EQ filters 
+            have been applied to it or a minimum phase version of the IR.<BR><BR>
+            The response can optionally be normalised so that the peak value is unity (0 dBFS). 
+            There is also an option to apply the current impulse response window settings 
+            to the response before exporting it and an option to place t=0 at a specific 
+            sample index in the export. The export can be limited to a specific sample count
+            if desired.<BR><BR>
+            
+            The peak of the exported response occurs 1 second after the start unless the 
+            IR window has been applied or the option to place t=0 at a specified sample index
+            is chosen. If the IR window has been applied the export starts at the first windowed 
+            sample and the peak location depends on the IR window settings, unless the option to
+            place t=0 at a specified sample index is chosen. Either can be used to preserve relative 
+            timing for exported impulse responses that have been captured with a timing reference.
+            If t=0 is placed at a specific index that preserves the timing, otherwise define IR windows 
+            for the responses that have the same window ref time and the same left window width - 
+            use rectangular windows if the data should not be altered by the window. The exported IR 
+            for each impulse will then start at the start of the left window, which will be at the 
+            same absolute time for each, so their relative timing will be preserved. If the minimum 
+            phase version is exported with the option to apply windows selected t=0 will be the width 
+            of the left window after the start of the export.<BR><BR>
+            
+            The response can be exported at multiple sample rates, the data
+            is resampled using a windowed sinc for sample rates other than the native rate of 
+            the measurement.<BR><BR>
+            <IMG SRC="../../images/irexportwav.jpg" ALT="Impulse Response WAV Export Settings" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+            
+            <DT><A name="fileexpallimpwav">Export all impulse responses as WAV</A>
+            <DD>Export the impulse responses for all current measurements in WAV
+            format. The dialog provides options 
+            to choose whether to export the measured IR, the IR after any EQ filters 
+            have been applied to it or a minimum phase version of the IR. The response 
+            can optionally be normalised so that the peak value is unity (0 dBFS). 
+            There is also an option to apply the current impulse response window settings 
+            to each response before exporting it and an option to place t=0 at a specific 
+            sample index in the exports. The sample format can be chosen
+            as 16, 24 or 32-bit signed PCM or 32-bit Float. Float is recommended if the 
+            application using the data can accept this, particularly if the response is 
+            not normalised. Exports use the sample rate of each measurement.
+            The peak of the exported response occurs 1 second after the start unless the 
+            IR window has been applied or the option to place t=0 at a specified sample index
+            is chosen. If the IR window has been applied the export starts at the first windowed 
+            sample and the peak location depends on the IR window settings, unless the option to
+            place t=0 at a specified sample index is chosen. Either can be used to preserve relative 
+            timing for exported impulse responses that have been captured with a timing reference.
+            If t=0 is placed at a specific index that preserves the timing, otherwise define IR windows 
+            for the responses that have the same window ref time and the same left window width - 
+            use rectangular windows if the data should not be altered by the window. The exported IR 
+            for each impulse will then start at the start of the left window, which will be at the 
+            same absolute time for each, so their relative timing will be preserved. If the minimum 
+            phase version is exported with the option to apply windows selected t=0 will be the width 
+            of the left window after the start of the export.<BR><BR>
+            
+            <DT><A name="fileexpfiltimpwav">Export filters impulse response as WAV</A>
+            <DD>Export the impulse response of the filters for the current measurement
+            in WAV format, written as mono or stereo data, with the impulse response
+            starting at the first sample in the file. The 
+            response length is 128k samples (131,072). The dialog provides options 
+            to choose the sample rate, sample format and to select whether or not 
+            to normalise the response so that the peak value is unity (0 dBFS). 
+            32-bit Float is recommended if the application using the data
+            can accept this, particularly if the response is not normalised. When 
+            exporting as stereo the first response selected is placed in the left channel, 
+            the second in the right.
+
+            <DT><A name="filewritefilters">Export filter settings as text</A>
+            <DD>Export EQ filter settings for the current measurement in a plain 
+            text format. The file includes the speaker setting and target level 
+            for the measurement. This file is a convenience format only, REW cannot load 
+            filter settings from text files - use the .req format to save and reload
+            settings. The path to the file is remembered for the next time the
+            dialogue appears. An example of the format is shown below.<BR><BR>
+            <PRE>
+    Filter Settings file
+
+    Room EQ V4.00
+    Dated: 07-Jan-2007 17:20:32
+
+    Notes:Example filter settings
+
+    Equaliser: DSP1124P
+    sampledata.txt
+    Bass limited 80Hz 12dB/Octave
+    Target level: 75.0dB
+    Filter 1: ON  PA   Fc   129.1Hz (  125 +2 )   Gain -18.5dB  BW/60  4.0
+    Filter 2: ON  PA   Fc    36.8Hz (   40 -7 )   Gain -15.5dB  BW/60 10.0
+    Filter 3: ON  PA   Fc    99.1Hz (  100 -1 )   Gain  -3.5dB  BW/60  1.0
+    Filter 4: ON  None
+    Filter 5: ON  None
+    Filter 6: ON  None
+    Filter 7: ON  None
+    Filter 8: ON  None
+    Filter 9: ON  None
+    Filter 10: ON  None
+    Filter 11: ON  None
+    Filter 12: ON  None
+            </PRE>
+
+            <DT><A name="filewritefiltersformatted">Export filter settings as formatted text</A>
+            <DD>Export EQ filter settings for the current measurement in a plain 
+            text format with a header and the export text delimiter as a field separator. 
+            This file is a convenience format for third party use. The path to the file is 
+            remembered for the next time the dialogue appears.<BR><BR>
+
+            <DT><A name="filewritemeasured">Export measurement as text</A>
+            <DD>Export the measured data for the current measurement as a text file.
+            The file includes the measurement settings. <B>N.B.</B> If a measurement has
+            been set as the SPL reference the SPL data will be exported as displayed on screen. 
+            The text files can be re-loaded using Import Measured Data. The path to the file is 
+            remembered for the next time the dialogue appears. When the menu item is selected a 
+            settings dialog appears that allows a note to be entered and features of the export to be 
+            controlled. <BR><BR>
+            <IMG SRC="../../images/textexportsettings.jpg" ALT="Text Export Settings" BORDER=0 ALIGN="left"><BR CLEAR="All">
+            <BR>
+            The entire measurement can be exported (<EM>Use range of measurement</EM>) or
+            a range can be selected, if the selected range starts before or ends after the 
+            range of data within the measurement only the range that overlaps the measurement 
+            will be exported. If the data is exported at the measurement resolution that may
+            be 96 PPO log spaced if the <A href="analysis.html#frcalculation">Allow 96 PPO log spacing</A>
+            Analysis preference is selected or linear spaced at the FFT resolution. Linear
+            spaced exports are very large files (typically more than 1 MB). If a custom 
+            (log spaced) export resolution is selected REW picks a start frequency that is as 
+            close as possible to the desired start but that ensures the exported frequencies 
+            include the nominal octave centres (e.g. 20 Hz, 40 Hz etc). Smoothing should be applied
+            when using log exports, the dialog will warn if insufficient smoothing has been selected 
+            for the chosen output resolution. Exports can use whatever smoothing is currently applied 
+            to the measurement, or any other smoothing selected from the dialog (the selection will not 
+            change the smoothing of the measurement in REW, only the smoothing for the exported data).
+            By default REW's export number format uses dot as the decimal delimiter and no digit 
+            grouping, for ease of import in other packages subsequently, but <EM>Use computer's number 
+            format</EM> will mean the current format of the computer on which REW is running will be 
+            used. The delimiter between exported values can also be selected here, this is the same
+            selection as offered in the export menu. A preview of the export output is shown in the 
+            dialog including the first few lines of exported data. The format is compatible with the 
+            .FRD format. Comment lines start with *, data lines begin with the frequency, then the SPL 
+            in dB and finally the phase in degrees (0.0 if the measurement does not have phase 
+            information).
+            <DT><A name="filewriteallmeasured">Export all measurements as text</A>
+            <DD>Export the measured data for all loaded measurements as text files in
+            a chosen directory. The file names use the measurement titles. The same settings 
+            dialog appears as for a single measurement, the settings are applied to all the files. 
+            Any note entered will appear in all the files, followed by any notes from each 
+            individual measurement. There is an option to export to individual files or to a 
+            single file for all measurements.  <B>N.B.</B> If a measurement has
+            been set as the SPL reference the SPL data will be exported as displayed on screen.
+            
+            <DT><A name="filewritemeasuredfrq">Export measurement as MLSSA .frq</A>
+            <DD>Export the measurement in the MLSSA .frq format. The path to the 
+            file is remembered for the next time the dialogue appears.
+
+            <DT><A name="filewritedistortion">Export distortion data as text</A>
+            <DD>Export the distortion data for the current measurement as a text file.
+            A dialog is displayed to control the content and format of the export<BR><BR>
+            <IMG SRC="../../images/distexport.jpg" ALT="Distortion Data Export Settings" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+            An example of the file format is shown below. Comment lines start with *.
+            Data lines begin with the frequency or, for stepped sine measurements stepped
+            in level, the generator level, then the fundamental SPL (if selected for export) in dB,
+            then the selected distortion measurements. The fundamental will be 0 dB if the 
+            distortion data is normalised to the fundamental. Note that if the end frequency for
+            the export is not configured to automatically adjust to suit the highest harmonic selected,
+            the number of harmonics on each line will reduce as frequency increases, 
+            eventually leaving only the second harmonic and THD values. <BR><BR>
+            <PRE>
+    * Distortion data saved by REW V5.01
+    * Dated: 16-Sep-2012 18:52:27
+    * Measurement: Sep 16 18:52:27
+    * Frequency Step: 3 ppo
+    * Freq(Hz) Fundamental (dB) THD (%) H2 (%) H3 (%) H4 (%) H5 (%) H6 (%) H7 (%) H8 (%) H9 (%) H10 (%)
+    20.000 76.068 0.016 0.014 0.002 0.001 0.004 0.003 0.001 0.002 0.002 0.001
+    25.198 76.133 0.011 0.008 0.000 0.001 0.001 0.006 0.001 0.001 0.001 0.003
+    31.748 76.181 0.015 0.013 0.002 0.002 0.002 0.001 0.002 0.005 0.001 0.001
+    40.000 76.215 0.014 0.013 0.001 0.003 0.001 0.002 0.002 0.001 0.003 0.001
+            </PRE>
+            
+            <DT><A name="filewritedistortionspectrum">Export distortion spectrum data as text</A>
+            <DD>Export the distortion spectrum data for the current measurement as a text file, if it
+            is a stepped sine measurement that includes spectrum data. Data is exported for the spectrum 
+            captured at each test frequency in a stepped sine measurement and for the noise floor. The 
+            spectrum data is log spaced, the frequency of each data point is included at the start of each 
+            row. The data header includes the frequency steps in the measurement. Note that
+            exported spectrum data should not be used to try and calculate distortion levels as
+            it does not have sufficient frequency resolution to accurately calculate the energy in
+            each harmonic.
+            
+            <DT><A name="filewriteimpulse">Export impulse response as text</A>
+            <DD>Export the impulse response data for the current measurement as a text file.
+            A dialog is shown to enter a note that is displayed when the data set is next loaded
+            and preview the output. The file includes the speaker setting, target level and 
+            settings for the measurement. The path to the file is remembered for the next
+            time the dialogue appears.<BR><BR> 
+            <IMG SRC="../../images/irexport.jpg" ALT="Impulse Response Text Export Settings" BORDER=0 ALIGN="left" width="383" height="467"><BR clear="all"><BR>
+            An example of the format is shown below.<BR><BR>
+            <PRE>
+    Impulse Response data saved by REW V5.19
+    IR is normalised
+    IR window has not been applied
+    IR is not the min phase version
+    Source: Microphone (Umik-1  Gain:  0dB  ), MICROPHONE (Master Volume), Right channel, volume: 0.550
+    Dated: 05-May-2014 14:12:40
+    Measurement: Artist 3+Q2070Si
+    Excitation:  256k Log Swept Sine, 1 sweep at -12.0 dB FS
+    Response measured over: 2.2 to 24,000.0 Hz
+    4.33353241533041E-4 // Peak value before normalisation
+    48000 // Peak index
+    131072 // Response length
+    2.0833333333333333E-5 // Sample interval (seconds)
+    -1.0 // Start time (seconds)
+
+    -3.1990022E-4
+    4.7188485E-4
+    -3.4590682E-4
+    -2.916168E-4
+    -3.5212302E-5
+            </PRE>
+
+            <DT><A name="filewriteallimpulseresponses">Export all impulse responses as text</A>
+            <DD>Export the impulse responses for all loaded measurements as text files in
+            a chosen directory. The file names use the measurement titles. The same settings 
+            dialog appears as for a single impulse response, the settings are applied to all the files. 
+            
+            <DT><A name="filewritert60">Export RT60 data as text</A>
+            <DD>Export the RT60 data for the current measurement as a text file.
+            A note can be entered that is displayed when the data set is next loaded.
+            The file includes both octave and one-third octave results if those have
+            been generated. If RT60 Decay model data has been generated for octave or 
+            one-third octave a T60M figure will be included in the export, otherwise it 
+            will be zero. The path to the file is remembered for the next time the dialogue 
+            appears. A dialog is displayed to control the format of the export<BR><BR>
+            <IMG SRC="../../images/rt60export.jpg" ALT="RT60 Export Settings" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+            <DT><A name="filewriteallrt60">Export RT60 data for all measurements as text</A>
+            <DD>Export the RT60 data for all the measurements in individual text files, 
+            in the same way as the current measurement RT60 export described above. RT60 data
+            for each measurement will only be exported if it has been generated, to quickly
+            generate the data for all measurements view the <A href="overlays.html">Overlay</A>
+            RT60 graph. If an average RT60 value is required the Overlay RT60 graph controls
+            have a button to export the average of the currently displayed ISO3382 parameter,
+
+            <DT>Export &rarr; Set text delimiter
+            <DD>Set the character to use as a delimiter between values on a line
+            when exporting a measurement as a text file.
+
+            <DT><A name="deletedata">Remove Current Measurement</A><FONT CLASS="keys"> Ctrl+Backspace</FONT>
+            <DD>Remove the current measurement. An unsaved measurement can be recovered using
+            <EM>Restore Last Removed</EM>.
+            
+            <DT><A name="deletealldata">Remove All Measurements</A><FONT CLASS="keys"> Ctrl+Shift+Backspace</FONT>
+            <DD>Remove all measurements. Unsaved measurements cannot be recovered!
+            
+            <DT><A name="restoredata">Restore Last Removed</A>
+            <DD>Restore the last measurement that was removed, placing it at the end of the measurement list.
+            Note that this is only available for individual measurements, if <EM>Remove All Measurements</EM>
+            is used it is not possible to restore.
+            
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Captured Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Captured Graph</A></H2>
+        
+        <P>This graph is available for the LAST generated sweep test signal and the uncorrected system
+        response acquired via the interface. This may be useful for troubleshooting.
+        This is not a live display. Content updates after a sweep is complete.
+		Only the signals for the last measurement are shown. It is not available on measurements loaded from disk.
+		The Y axis is the percentage of digital full scale. If the captured trace reaches ±100%, it is clipping [distorted]
+        and the sweep level, AV processor volume or input volume should be reduced.<BR><BR>
+        <IMG SRC="../../images/captured.jpg" ALT="Captured Plot" width="380" height="160"><BR CLEAR="all">
+			
+		<H4>Note:</H4>The Captured signal is offset by latencies in the replay and capture chains.
+
+        <H4>Captured actions</H4>
+
+        <P><IMG SRC="../../images/capturedactions.jpg" ALT="Captured actions">
+
+        <P>A check box is provided to invert the captured trace for easier comparison with
+        the test signal if the soundcard input is inverting. As a more permanent solution
+        for this select the <EM>Invert</EM> checkbox in the soundcard 
+        <A HREF="soundcard.html#inputchannel">Input Channel</A> settings.
+        
+        <P>The stimulus, captured and (if used) ref signals may be saved as float WAV files.
+
+        <H4>Captured controls</H4>
+
+        <P><IMG SRC="../../images/capturedcontrols.jpg" ALT="Captured Controls">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<IMG SRC="../../images/showpointscaptured.jpg" ALT="Show Points" width="185" height="145">
+		<BR CLEAR="all">
+
+		<P><EM>Show points when zoomed in</EM> shows the individual time samples 
+        if the horizontal zoom level is high enough to distinguish them.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

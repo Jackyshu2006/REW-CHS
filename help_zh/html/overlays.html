@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>叠加图窗口</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">叠加图窗口</A></H2>
+
+        <P><IMG SRC="../../images/overlayswindow.jpg" ALT="叠加图窗口" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>叠加图窗口（overlays window）可以把当前载入的所有测量画在同一组图表上。点 REW 主窗口工具栏上的“叠加图”按钮即可打开。<BR>
+        <IMG SRC="../../images/overlaysbutton.jpg" ALT="叠加图按钮" BORDER=0 ALIGN="left" width="49" height="52"><BR CLEAR="All">
+
+        <P>叠加图窗口左侧是测量选择列表（measurement selector），用来选择哪些测量显示在图表上。
+
+        <P>如果测量归在分组里，展开分组时组内测量会全部选中，折叠分组时则全部取消选中。
+
+        <P>单击某条测量，可以单独选中或取消选中它。要选中连续的一段测量，可以从一条未选中的测量开始按住左键拖动；也可以先单击起点，再在终点处按 Shift+左键单击。
+
+        <P>选中的测量可以拖到列表里的新位置，重新排序。拖动必须从一条已选中的测量开始，否则会被当作选择一段范围。
+
+        <P>如果只想移动一条选中的测量，在它上面按住鼠标，等鼠标指针变成移动图标后，再把它拖到新位置。
+
+        <P>测量列表获得焦点时（某一项周围有蓝色边框），还可以用快捷键全选（Ctrl+A）、剪切（Ctrl+X）和粘贴（Ctrl+V）。粘贴的测量会放在第一条选中的测量之前；如果没有选中任何测量，就放在列表末尾。
+
+        <P>REW 主窗口中当前选中的那条测量，在列表里右侧会有一条蓝色竖条。双击某条测量，就能把它设为主窗口的当前测量。
+
+        <H3><A name="actionsmultiple">多选时的操作</A></H3>
+
+        <P>选中多条测量后，在测量选择列表上单击右键，会弹出一组针对所选测量的操作：保存、移除、锁定、解锁、加入分组、更改颜色、更改校准数据。
+
+        <P>另外还有全选、取消选择、反选，以及按文件选中或取消选中其中测量的操作（适用于同时载入了多个文件的情况）。
+
+        <P>这些操作下方，是针对鼠标所点那条测量的一组操作。
+
+        <P><IMG SRC="../../images/overlayrightclickmulti.jpg" ALT="叠加图测量选择列表多选时的右键菜单">
+
+        <H3><A name="actionsmultiple">单选时的操作</A></H3>
+
+        <P>没有选中测量或只选中一条时，在测量选择列表上单击右键，会弹出全选、取消选择、反选、按文件选中或取消测量这几项操作，还有一个针对所点测量的菜单，内容与测量面板的右键菜单类似。
+
+        <P>这个菜单里还有随当前图表变化的附加操作。下图示例中用橙色高亮的部分就是这类附加控件：一个用来调整 SPL 偏移，一个用来把这条测量设为其他测量的参考。
+
+        <P><IMG SRC="../../images/overlayrightclick.jpg" ALT="叠加图测量选择列表单选时的右键菜单">
+
+        <H3><A name="graphtypes">叠加图类型</A></H3>
+
+        <P>叠加图（overlay graph）的各种图表，用图表区顶部的按钮选择。<BR><BR>
+        <IMG SRC="../../images/overlaygraphselector.jpg" ALT="叠加图类型选择条" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>各类叠加图如下：
+
+        <DL>
+            <DT>SPL
+            <DD>所有测量的 SPL 曲线（trace）。
+
+            <DT>预测 SPL
+            <DD>每条测量应用 <A HREF="eqwindow.html#top">EQ 窗口</A>中为它设定的 EQ 滤波器后，预测得到的 SPL。
+
+            <DT>相位
+            <DD>所有测量的相位曲线。
+
+            <DT>预测相位
+            <DD>每条测量应用 <A HREF="eqwindow.html#top">EQ 窗口</A>中为它设定的 EQ 滤波器后，预测得到的相位。
+
+            <DT>失真
+            <DD>各测量的失真曲线，显示的是在图表选项里选定的失真指标：可以是 IMD、TD+N、THD、THD+N、N、10 次以内任一可用谐波，或者基波（fundamental）。<BR><BR>
+                如果同时载入了步进电平测量和其他测量，叠加时只能选其中一类：要么是步进电平测量，要么是其他测量。<BR><BR>
+                最简单的做法是：在图例上单击右键、取消选择，然后选中一条你想叠加的那类测量。之后就只有同类测量可以选。取消全部选择后，所有测量又都可以选了。
+
+            <DT>脉冲响应
+            <DD>所有测量的脉冲响应（impulse response）。这里有一组滤波控件，与<A href=graph_filteredir.html>滤波 IR 图</A>上的相同，可以快速对一组脉冲响应做滤波。
+
+            <DT>ETC
+            <DD>所有测量的脉冲响应包络（ETC）曲线。
+
+            <DT>阶跃响应
+            <DD>所有测量的阶跃响应（step response）。
+
+            <DT>群延迟
+            <DD>所有测量的群延迟（group delay）曲线。
+
+            <DT>RT60
+            <DD>所有测量的 RT60 曲线，可以显示所选曲线的平均值，也可以导出平均值。
+
+            <DT>清晰度
+            <DD>所有测量的清晰度 / 明晰度曲线。
+        </DL>
+
+        <H3><A name="separatetraces">分离曲线</A></H3>
+
+        <P>叠加图的基本控件在<A HREF="graphpanel.html#top">图表面板</A>帮助里已有说明，叠加图窗口另外多一个按钮：<BR>
+            <IMG SRC="../../images/separatetracesbtn.jpg" ALT="分离曲线按钮" BORDER=0 ALIGN="left" width="53" height="51"><BR CLEAR="all">
+            <P>图表类型选择条右侧的<EM>分离</EM>按钮，会让每条曲线相对上一条向下错开一段距离。几条曲线电平相近、叠在一起时，这样更容易看清各自的细节。按下按钮后，旁边会出现一个滑块，用来调整错开的距离。<BR>
+            <IMG SRC="../../images/separationslider.jpg" ALT="分离曲线滑块" BORDER=0 ALIGN="left" width="71" height="57"><BR CLEAR="all">
+
+        <H3><A name="actions">操作</A></H3>
+
+        <P>在图表上单击右键，会弹出当前图表类型可用的操作菜单，另外还有一些快捷方式，可以快速切换到 REW 的其他窗口。
+
+        <P><IMG SRC="../../images/actionsoverlayspl.jpg" ALT="SPL 叠加图的操作" BORDER=0 ALIGN="left"><BR CLEAR="all">
+
+        <P>SPL、预测 SPL、相位、预测相位和群延迟叠加图，都有对当前选中的全部曲线做平滑处理（smoothing）的操作。
+
+        <P>SPL 叠加图还有一项操作，可以把所有选中的测量导出为文本。
+
+        <P>预测 SPL 叠加图有一项操作，可以把某一条测量的均衡器和滤波器设置复制到所有选中的测量。
+
+        <P>相位和预测相位叠加图有相位缠绕（wrap）和相位解缠绕（unwrap）操作，作用于当前选中的相位曲线。
+
+        <P>脉冲响应叠加图有以下操作：设置 t=0 位置、撤销 t=0 变更、移除 IR 延迟、导出为文本、导出为 WAV。
+
+        <P>RT60 叠加图有两项导出操作：一是导出所选测量的平均值，二是导出所有选中测量的 RT60 数据。
+
+        <H3>图表选项</H3>
+
+        <P><IMG SRC="../../images/controlssploverlay.jpg" ALT="SPL 叠加图的图表选项" BORDER=0 ALIGN="left"><BR CLEAR="all">
+
+        <P>SPL、相位、脉冲响应、阶跃响应和群延迟叠加图都有<EM>缩放时显示数据点</EM>选项。勾选后，放大到能分辨单个数据点时，图上会画出构成测量响应的各个数据点。这可能只出现在曲线的一部分范围内。
+
+        <P>SPL 和预测 SPL 叠加图有 <A name="iec263"><EM>IEC 263 比例</EM>控件</A>，可以把图表锁定在指定的“dB/十倍频程”宽高比（aspect ratio）上。REW 会按需要调整图表四周的边距，来保持这个宽高比。
+
+        <P>脉冲响应叠加图有对所选测量做滤波的控件。
+
+        <P>所有叠加图都有<EM>曲线选项</EM>按钮，点击后会弹出对话框，可以修改图表曲线的线型。
+
+        <H4>图例区</H4>
+
+        <P>在叠加图的图例区（legend area）单击右键，会弹出一个小菜单，可以选中全部曲线、取消全部选择或反选。
+
+        <P>把鼠标指针停在图例区里某条测量的名称上，图表上的这条测量就会高亮。在叠加图上，可以按 Ctrl+H 高亮当前选中的那条测量，再按一次取消高亮。<BR>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

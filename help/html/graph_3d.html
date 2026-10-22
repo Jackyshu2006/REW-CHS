@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>3D Plot</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">3D Plot</A></H2>
+        
+        <P><IMG SRC="../../images/waterfall3d.png" ALT="3D Waterfall">
+        <BR CLEAR="all">
+        <P>Waterfall and spectrogram data can be shown in a 3D view allowing rotation 
+        to examine the data from different angles. The view can be rotated by pressing 
+        the left mouse button and dragging or by using the arrow keys. The horizontal 
+        and vertical viewing angles are shown while adjusting. To reposition the plot 
+        use right click and drag or shift plus arrow keys. The mouse wheel or the plus and 
+        minus keys zoom in or out. Note that you may need to click on the plot to give 
+        it focus before keys will work.<BR> 
+        <P><IMG SRC="../../images/spectrogram3dplot.png" ALT="3D Spectrogram">
+        <BR CLEAR="all">
+
+        <H3><a name="settings">3D settings</a></H3>
+        
+        <P>Right clicking on the plot brings up a menu of settings.
+        <P><IMG SRC="../../images/settings3d.jpg" ALT="3D settings"><BR CLEAR="all">
+            
+        <P>The setting panel has sliders which can also be used to adjust the viewing
+        angle, or new values can be typed into the adjacent text fields. The angle of
+        of the light source can be changed using the light angle controls. 
+        
+        <P>The X, Y and Z axis ratios allow the proportions of the plot to be adjusted. 
+        Setting the <EM>Z axis ratio</EM> to zero flattens the plot, producing a 2D 
+        spectrogram. Set the horizontal angle to zero and the vertical angle to 90 
+        degrees to view that spectrogram from above. 
+        
+        <P><EM>Focal length</EM> controls the perspective effect. The effect can be 
+        turned off by unchecking the <EM>Perspective</EM> box.
+        
+        <P>The plot includes reflections of the light source from the surface, those 
+        can be removed by unchecking the <EM>Show highlights</EM> box. The data can be 
+        flipped along either axis using the <EM>Flip Frequency axis</EM> and <EM>Flip 
+        Time axis</EM> boxes. Contours can be added by ticking the <EM>Show contours</EM>
+        box, with <EM>Contour interval</EM> controlled by the slider or its text field. 
+        <EM>Banded colours</EM> changes from a smooth variation to bands of colour. 
+        <EM>Show colour bar</EM> controls whether the colour bar appears alongside the 
+        plot. The colour scheme is that selected for the corresponding 2D waterfall or 
+        spectrogram plots. The sides of the plot can be filled by selecting 
+        <EM>Close edge faces.</EM>
+        
+        <P>The plot appearance settings can be saved to and loaded from presets.
+
+        <P><EM>Fit to panel</EM> adjusts the scale to accommodate the plot and its axes.
+        <EM>Restore defaults</EM> will reset the controls.
+        
+        <H3><a name="overlays">3D plots on the Overlays window</a></H3>
+        
+        <P>The SPL, Predicted SPL and Distortion overlays allow groups of measurements to be 
+        viewed in a 3D plot. That makes sense where the measurements form a meaningful surface, 
+        such as a set of polar loudspeaker frequency response measurements or a set of measurements
+        of distortion vs frequency at different levels. Right clicking on the graphs shows options
+        for the 3D settings and for the 3D colour scheme. Below is an example of a set of polar 
+        response data, shown in a normalised view by setting the zero degree (on-axis) response as
+        the SPL reference.<BR> 
+        <P><IMG SRC="../../images/overlayspl3d.png" ALT="3D polar responses">
+        <BR CLEAR="all">
+        
+        <P>The settings panel for the overlays 3D plot includes a <EM>Highlight data sets</EM> 
+        option to show the individual data sets that make up the plot.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

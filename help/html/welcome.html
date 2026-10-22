@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Welcome to REW</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+	<BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Welcome to REW</A></H2>
+
+        <P>REW (Room EQ Wizard) is a Java application for measuring room responses and 
+        countering room modal resonances. It includes tools for generating test signals;
+        measuring SPL; measuring frequency and impulse responses;  generating phase, 
+        group delay, spectral decay plots, waterfalls, spectrograms and energy-time curves; generating 
+        real time analyser (RTA) plots; calculating reverberation times; displaying
+        equaliser responses and automatically adjusting the settings of parametric 
+        equalisers to counter the effects of room modes and adjust responses to match a target.
+
+        <P>REW uses a logarithmically swept sine signal for its measurements. This 
+        is much faster than manual measurements, more accurate, less likely to suffer 
+        from clipping at resonances, less sensitive to system non-linearity than MLS
+        and allows the impulse response of the room to be determined, which in turn 
+        is the basis for many additional features. When using the Real Time Analyser
+        displays REW can generate Pink Periodic Noise sequences for much better
+        visibility of low frequency behaviour than obtained using random Pink Noise
+        without the need for lengthy averaging.<br>
+        
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p>The REW home page is at <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.roomeqwizard.com">
+            <param name="content" value="https://www.roomeqwizard.com">
+            </object>. For hints, tips and help visit the REW forum at <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.avnirvana.com">
+            <param name="content" value="https://www.avnirvana.com/forums/official-rew-room-eq-wizard-support-forum.10/">
+            </object>.
+        </div>
+        
+        <div class="onlineonly">
+            <!-- External links for the online help -->
+            The REW home page is at <A HREF="https://www.roomeqwizard.com">www.roomeqwizard.com</A>. 
+            For hints, tips and help visit the REW forum at  
+            <A target="_blank" HREF="https://www.avnirvana.com/forums/official-rew-room-eq-wizard-support-forum.10/">www.avnirvana.com</A>.
+        </div>
+
+        <H3><A name="requirements">Requirements</A></H3>
+        <UL>
+            <LI>REW can be used on Windows XP Pro x64/Vista/7/8/8.1/10/11, macOS 10.15 or later and Linux. 
+                32-bit builds of Win XP are no longer supported.
+            <LI>Minimum screen resolution: 1024 x 768
+            <LI>Minimum RAM: 2 GB, 4 GB or more recommended
+            <LI>The Windows and Linux AMD64 installers include private Java runtimes for use by REW. 
+                A separate Linux installer without runtime is provided for architectures other 
+                than AMD64, a Java 17 runtime must be installed to use that. Do not install 
+                a headless version of the Java runtime, they lack audio I/O
+            <LI>The macOS download includes a private Java runtime for use by REW. Java does not 
+                need to be installed. Microphone access permissions are part of the code signature 
+                and should be automatic. To force a mic access permission prompt for REW run 
+                <PRE>tccutil reset Microphone</PRE> from a terminal before starting REW. You may 
+                need to use the mac's Privacy settings to grant REW access to the folders where
+                measurements are to be saved, particularly if they are on the desktop.
+            <LI>Midi communication (used to set filters on Behringer BFD Pro DSP1124P 
+                and FBQ2496 equalisers) is supported on Windows. macOS should also support Midi.
+        </UL>
+        
+        <H3>Windows XP Pro x64, Vista, 7, 8 or 8.1</H3>
+        
+        <P>When installing REW on Windows XP Pro x64, Vista, 7, 8 or 8.1 you may encounter a somewhat cryptic 
+        error message:
+
+        <P><i>"The program can't start because api-ms-win-core-timezone-l1-1-0.dll is 
+        missing from your computer. Try reinstalling the program to fix this problem."</i>.
+        
+        <P>This is caused by the Java runtime using components from the Windows Universal C Runtime which 
+        are not present on older Windows installations. To fix it see this Microsoft knowledge 
+        base article, KB2999226 at https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows. 
+
+        <H3><A name="linuxinstall">Linux installation</A></H3>
+        
+        <UL>
+            <LI>Open a terminal window in the folder where the installation file was downloaded
+            <LI>After downloading the installation file set permissions to allow it to run and install it as follows (example is for 5.19):
+                <PRE>chmod u+x REW_linux_5_19.sh</PRE>
+                <PRE>sudo ./REW_linux_5_19.sh</PRE>
+            <LI>If your terminal working directory is not where the installer was downloaded include the 
+                path to the downloaded file. For example, if the terminal is open in your home directory
+                and the installer was downloaded to the Downloads folder put Downloads/ in front of the 
+                installer filename.
+            <LI>Start REW by running 
+                <PRE>roomeqwizard</PRE>
+        </UL>
+
+        <H3><A name="diagnostics">Diagnostics</A></H3>
+
+        <P>REW saves diagnostic logs in the user's home directory in a folder called REW,
+        the location is displayed in the <EM>Help &rarr; About REW</EM> window.
+        The logs contain information from the last 10 startups, including any error
+        messages or warnings that may have been generated. On macOS the logs are in
+        an REW folder in the user library folder, which no longer appears in Finder by default. To 
+        display it either browse to ~/Library/Logs or open your Home folder in Finder 
+        (Shift Command + H), select View > Show View Options then select the checkbox 
+        to show the library folder.
+
+        <P>REW saves a temporary copy of each measurement in a /temp sub-folder of the logs 
+        folder. Seven days of measurements are retained, any older than 7 days are deleted on 
+        shutdown. If REW did not shut down normally it will offer to load any measurements made since
+        it last started up.
+
+        
+        <H3><A name="vmoptions">Java Runtime Environment options</A></H3>
+
+        <P>The <FONT class="cmd">roomeqwizard.vmoptions</FONT> file in the REW program directory 
+        on Windows or <FONT class="cmd">REW.vmoptions</FONT> in the REW Applications folder on mac
+        contains settings for the Java Runtime Environment (JRE). The REW installer makes an entry 
+        in the file to define the amount of memory to request fore the JRE on startup using the 
+        <FONT class="cmd">-Xmx</FONT> option, for example <FONT class="cmd">-Xmx1024m</FONT> for 
+        1 GB. The file could be edited to request a memory size larger than the installer offers, 
+        such as <FONT class="cmd">-Xmx4096m</FONT> for 4 GB, but note that if the OS refuses 
+        the request for the memory size specified in the file REW will not start. 
+        
+        <P>On Windows Admin privileges are required to change the <FONT class="cmd">roomeqwizard.vmoptions</FONT> file: 
+        copy it to a user-accessible directory, make the edits, then copy it back using Admin privileges.
+
+        <P>As an alternative to editing the <FONT class="cmd">roomeqwizard.vmoptions</FONT> file 
+        parameters can be passed to the runtime via the command line (e.g. by editing the Target 
+        of a shortcut). To do that they must be preceded by -J, so to force REW to start 
+        with 4 GB allocation (for example) regardless of the contents of the vmoptions file 
+        the shortcut target on Windows could be<BR>
+        <FONT class="cmd">"C:\Program Files\REW\roomeqwizard.exe" -J-Xmx4096m</FONT>
+        
+        
+        <H3><A name="preferences">REW Preferences</A></H3>
+
+        <p>By default the preferences for REW on Windows systems are stored
+        in this registry key:<br>
+        <PRE>HKEY_CURRENT_USER\Software\JavaSoft\Prefs\room&nbsp;eq&nbsp;wizard</PRE>
+        <p>On macOS the preferences are stored under a key called room eq wizard in:<br>
+				<PRE>~/Library/Preferences/com.apple.java.util.prefs.plist</PRE> 
+        <p>Linux preferences are typically stored in:<br>
+                <PRE>~/.java/.userPrefs/room eq wizard/prefs.xml</PRE>
+
+        <P>REW can alternatively use a file for its preferences. There are three ways to configure that,
+        The easiest is to put a file in the REW log files folder with the name <FONT class="cmd">rewprefs.txt</FONT>. 
+        If that file is found on startup REW will use it to store all preferences. To use a different file 
+        run REW with a <FONT class="cmd">-prefs</FONT> argument or make a <FONT class="cmd">-Drew.preferences.file</FONT>
+        entry in the <A href="#vmoptions">roomeqwizard.vmoptions</A> file. The <FONT class="cmd">-prefs</FONT> argument 
+        is checked first, then the <FONT class="cmd">-Drew.preferences.file</FONT> entry and finally REW looks for 
+        rewprefs.txt. Switching to file-based preferences can be done quickly by saving preferences to rewprefs.txt
+        in the log files folder using the entry in the Preferences menu and restarting REW. On Windows systems startup 
+        is faster with file-based preferences, on macOS shutdown is much faster with file-based preferences.
+
+        <P>On Windows with the default REW installation a preferences file could be specified by launching REW using
+        
+        <P><FONT class="cmd">C:\Program Files\REW\roomeqwizard.exe -prefs "C:\Users\johnm\Documents\myrewprefs.txt"</FONT>
+
+        <P>or editing the Target field of the properties of an REW Windows shortcut to add the prefs argument, 
+        so the target would look like
+    
+        <P><FONT class="cmd">"C:\Program Files\REW\roomeqwizard.exe" -prefs "C:\Users\johnm\Documents\myrewprefs.txt"</FONT>
+
+        <P>On macOS it could be done from a terminal using
+        
+        <P><FONT class="cmd">open -a REW.app --args -prefs "/Users/johnm/Documents/myrewprefs.txt"</FONT>
+
+        <P>To use the <A href="#vmoptions">roomeqwizard.vmoptions</A> file add an entry to specify the path 
+        to the file, for example:
+        <PRE>-Drew.preferences.file=C:\Users\johnm\Documents\myrewprefs.txt</PRE>
+		
+        <P>If a preferences file is being used the file name will be shown in the About REW dialog. If
+        the specified file cannot be accessed, created or written to REW will instead use a file
+        called rewprefs.txt in the REW log files folder and show a warning to that effect.
+
+        <P>A preferences file can be created from an existing installation using the 
+        <EM>Preferences &rarr; Save preferences to file</EM> menu entry.
+
+        <P>Preferences can be deleted with the <EM>Preferences &rarr; Delete preferences and shut down</EM>
+        menu entry or by running the REW uninstaller.
+
+        <H4><A name="initialprefs">Initial preferences</A></H4>
+
+        <P>REW can be made to always start with an initial set of preferences by specifying a file with those
+        initial values. There are three ways to do that. The easiest is to put the file in the REW log files folder
+        with the name <FONT class="cmd">initialprefs.txt</FONT>. If that file is found on startup REW will use it to 
+        initialise all preferences. To force preferences to be initialised from a different file run REW with a 
+        <FONT class="cmd">-initialprefs</FONT> argument specifying the file name for the starting preferences, or 
+        add a <FONT class="cmd">-Drew.initialpreferences.file</FONT> entry in the roomeqwizard.vmoptions file. The
+        <FONT class="cmd">-initialprefs</FONT> argument is checked first, then the <FONT class="cmd">-Drew.initialpreferences.file</FONT> 
+        entry and finally REW looks for initialprefs.txt. 
+        If a preferences file has also been specified REW will copy the initial preferences to that file, if not 
+        it will create a preferences file and copy the initial preferences into it. Any file specified as the initial 
+        preferences should be different to the file specified for the preferences. Note that the initial preferences 
+        file does not need to contain all preference settings. It can be edited to contain only those preferences
+        which are to be initialised, any not included in the file will not be altered.
+
+
+        <H3><A name="languages">Language support</A></H3>
+
+        <P>REW has support for English, French, German, Simplified Chinese and Traditional Chinese (Taiwan).
+        A "bundles" folder in the installation folder allows other languages to be supported by providing
+        a set of files for that language.<BR><BR>
+        <IMG SRC="../../images/bundles.jpg" ALT="Bundles folder" BORDER=0><BR CLEAR="ALL">
+
+        <P>The bundles folder has a set of .properties files, which are text files with REW's user interface 
+        text. The end of the file name indicates the language and country the file will be used for. As an 
+        example, files for Korea would have names ending _ko_KR, e.g. apiprefs_ko_KR.properties. To create 
+        translation files, first make copies of the bundles folder files, then change the names of the copies 
+        to have the correct ending. After entering translated text the files can be copied back into the bundles 
+        folder (keeping any existing files) and when REW is restarted it will pick up the new content if the 
+        machine's default locale settings match the filename. The default locale can be seen in the About REW box:<BR><BR>
+        <IMG SRC="../../images/localeinfo.jpg" ALT="About dialog locale info" BORDER=0><BR CLEAR="ALL">
+
+        <P>The files contain entries in a KEY=text format, here are the first few lines of the apiprefs properties 
+        file as an example:<BR>
+<PRE>
+# Copyright (c) 2025 John Mulcahy All Rights Reserved
+# API preferences elements not already covered by prefboxlabels and prefhints
+PORT_HINT_TEMPLATE=Enter a port number between {0} and {1}, default is {2}
+START_SERVER_BUTTON=Start server
+</PRE>
+
+        <P>The key must not be altered, the translated text should appear after the =. Entries with _TEMPLATE 
+        in the name have values inserted by REW when using the contents, those values are indicated by the {0},
+        {1} etc parts of the text. Those must be retained by the translation, with the {0} etc. placeholders 
+        in the position they should occupy in the translation. Entries with _HINT are used for the tooltips 
+        that appear when hovering over a UI element. There is a lot of freedom when translating those. Other 
+        entries may be for buttons, labels or headings and that is generally indicated in the key. There may be 
+        layout issues in REW when translations are much longer or shorter than the English text. If you notice 
+        those, let me know where they occur and I will address them. Long lines of text in the properties files 
+        can be broken up by using a \ character, which indicates that the text continues on the next line. That 
+        is just a convenience for editing, it does not change how the text appears in REW. Some text has embedded 
+        html tags, e.g. &lt;br&gt; for a line break. Those should be preserved in translations, but placed appropriately. 
+        Do not add html tags in text that does not already have them.
+
+        <P>Completed properties file translations can be sent to me to include in a future REW release to add 
+        support for more languages.
+
+        <H3><A name="warranty">No Warranty</A></H3>
+
+        <P>THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+        EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+        MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+        IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+        FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+        DEALINGS IN THE SOFTWARE
+
+        <H3><A name="acknowledgements">Acknowledgements</A></H3>
+
+        <P>Traditional Chinese (Taiwan) and Simplified Chinese translations by DC-Audio Lab &#x6797;&#x4f51;&#x53e1;
+
+        <P>French translations by Eric Masssicotte de chez Maison Adam
+
+        <P>German translations by Andreas Lartz, Automotive Consultant, office@audiosquare.de
+
+        <div  style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <P>REW uses the JTransforms pure Java FFT library available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="JTransforms">
+            <param name="content" value="https://github.com/wendykierp/JTransforms">
+            </object>.
+
+            <P>ASIO interfaces are supported using Martin Roth's JAsioHost, available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="JAsioHost">
+            <param name="content" value="https://github.com/mhroth/jasiohost">
+            </object>.
+
+            <P>WASAPI exclusive on Windows and ALSA PCM on Linux AMD64 are supported using Pavel Hofman's csjsound-provider, available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="csjsound-provider">
+            <param name="content" value="https://github.com/pavhofman/csjsound-provider">
+            </object>.
+
+            <P>REW's installers are built with the Install4J multi-platform installer builder, available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="ej-technologies">
+            <param name="content" value="http://www.ej-technologies.com/products/install4j/overview.html">
+            </object>.
+
+            <p>Thanks to Gerrit Grunwald for ideas and elements from his Steel Series components, available at 
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Harmonic Code">
+            <param name="content" value="http://harmoniccode.blogspot.com/">
+            </object>.
+            
+            <P>REW uses the Hola Multicast DNS Service Discovery library available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Hola">
+            <param name="content" value="https://github.com/fflewddur/hola">
+            </object>.
+
+            <P>REW uses the Java WebSocket client available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Java WebSocket">
+            <param name="content" value="https://github.com/TooTallNate/Java-WebSocket">
+            </object>.
+
+            <P>REW uses the FormDev FlatLaf look and feel available at
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="FlatLaf">
+            <param name="content" value="https://www.formdev.com/flatlaf/">
+            </object>.
+
+            <p>The Airy CWT and Morlet CWT spectrogram modes are Java implementations of a continuous wavelet 
+            transform using the algorithm described in <I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous 
+            wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency 
+            analysis. Nat Comput Sci, 2(1), 47–58.</I>  <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="https://doi.org/10.1038/s43588-021-00183-z">
+            <param name="content" value="https://doi.org/10.1038/s43588-021-00183-z">
+            </object>.
+        </div>
+        
+        <div class="onlineonly">
+            <!-- External links for the online help -->
+            <BR><BR>REW uses the JTransforms pure Java FFT library available at 
+            <A target="_blank" HREF="https://github.com/wendykierp/JTransforms">JTransforms</A><BR><BR>
+
+            ASIO interfaces are supported using Martin Roth's JAsioHost, available at
+                <a target="_blank" href="https://github.com/mhroth/jasiohost">JAsioHost</a><BR><BR>
+
+            WASAPI exclusive on Windows and ALSA PCM on Linux AMD64 are supported using Pavel Hofman's csjsound-provider, available at
+                <a target="_blank" href="https://github.com/pavhofman/csjsound-provider">csjsound-provider</a><BR><BR>
+                
+            REW's installers are built with the Install4J multi-platform installer builder, available at
+                <a target="_blank" href="http://www.ej-technologies.com/products/install4j/overview.html">ej-technologies</a><BR><BR>
+
+            Thanks to Gerrit Grunwald for ideas and elements from his Steel Series components, available
+                at <a target="_blank" href="http://harmoniccode.blogspot.com/">Harmonic Code</a><BR><BR>
+            
+            REW uses the Hola Multicast DNS Service Discovery library available at
+            <A  target="_blank" href="https://github.com/fflewddur/hola">Hola</A><BR><BR>
+            
+            REW uses the Java WebSocket client available at
+            <A  target="_blank" href="https://github.com/TooTallNate/Java-WebSocket">Java WebSocket</A><BR><BR>
+            
+            REW uses the FormDev FlatLaf look and feel available at
+            <A  target="_blank" href="https://www.formdev.com/flatlaf/">FlatLaf</A><BR><BR>
+
+            The Airy CWT and Morlet CWT spectrogram modes are Java implementations of a continuous wavelet 
+            transform using the algorithm described in <I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous 
+            wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency 
+            analysis. Nat Comput Sci, 2(1), 47–58. </I>
+            <A target="_blank" HREF="https://doi.org/10.1038/s43588-021-00183-z">https://doi.org/10.1038/s43588-021-00183-z</A><BR><BR>
+        </div>
+            
+        <P>Copyright &copy; 2004-2026 John Mulcahy All Rights Reserved
+        
+        <H3><A HREF="gettingstarted.html#top">Get started with REW</A></H3>
+        
+        <P>Send feedback to feedback@roomeqwizard.com
+
+        <DIV class="onlineonly"><A  HREF="index.html#top">Help Index</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

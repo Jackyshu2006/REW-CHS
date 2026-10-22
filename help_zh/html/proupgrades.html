@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>专业版升级</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">专业版升级</A></H2>
+
+        <P>REW 专业版升级（Pro Upgrade）为专业用户增加了一些功能，目前包括同时从多个输入采集信号，
+        以及按 IEC 60268-16:2020 用间接法计算语音传输指数（speech transmission index，STI）。今后还会继续增加。
+
+        <P>专业版升级许可证一次付费，解锁多通道测量（multi-input capture）和 STI，今后新增的专业功能也一并解锁。
+
+        <h3>多通道测量</h3>
+
+        <P><A HREF="multichannelcapture.html#top">多通道测量</A>让 REW 同时从多个输入采集信号，
+        既可以用于测量，也可以用于 RTA。每个输入可以有各自的校准文件。
+        前四个输入可独立进行 SPL 计量，电平计量最多支持 32 个输入。
+
+        <P>用多通道测量做出来的测量结果，显示的是所有采集通道幅度的 RMS 平均值，并用底色显示各通道的范围。
+        此外还可以选择保留每个通道各自的测量，也可以把任意几个输入编成分组，各组分别求平均。
+
+        <P>多通道测量通常配合麦克风阵列（mic array）使用，例如 miniDSP UMIK-X；
+        也可以用一台多通道音频接口，外接多支模拟麦克风。REW 只能采集编号连续的一段输入通道。
+
+        <P>在 Windows 上借助 ASIO 封装驱动（ASIO wrapper），也能把多支 USB 麦克风用于这个功能，
+        但<B>不建议</B>这么做，原因有两点：
+        <UL>
+            <LI>REW 只能读到第一支 USB 麦克风的输入音量设置，然后拿这个值去换算所有麦克风的声压级。
+                也就是说，所有 USB 麦克风在操作系统里的音量必须调成一样。
+            <LI>USB 麦克风通常对外提供一对立体声输入，两个通道送的是同一份数据，
+                所以每支麦克风都会被采到两路完全相同的信号。
+        </UL>
+
+        <P><IMG SRC="../../images/measresult.jpg" ALT="多通道测量结果" BORDER=0 ALIGN="left" width="500" height="289"><BR CLEAR="All">
+
+        <P>在“声卡”设置页或“测量”对话框里，选择要采集的起始通道和最后一个通道。
+        下图是使用 ASIO 驱动时的样子，Java 驱动的选择方式与此类似。
+
+        <P>在 Windows 上用 Java 驱动时，要选 WASAPI 独占模式的设备条目才支持多通道，
+        也就是设备选择框里以 EXCL: 开头的那些条目。在 macOS 或 Linux 上，
+        Java 驱动能提供的通道数，与音频接口本身支持的通道数相同。
+
+        <P><IMG SRC="../../images/multichanselection.jpg" ALT="输入选择" BORDER=0 ALIGN="left" width="500" height="198"><BR CLEAR="All">
+
+        <P>一份许可证适用于单一用户，可在其使用的任意计算机上使用。
+
+        <P><B>miniDSP UMIK-X 多通道麦克风系统<I>已包含</I>一份 REW 专业版升级许可证。</B>
+
+        <P>购买许可证<B>之前</B>，先确认 REW 在默认的单通道采集模式下已经能正常工作、满足你的需要。
+
+        <P>要启用许可证，打开 REW 的“专业版升级”菜单，选择“多通道测量”，
+        把许可证代码粘贴进去，然后点击“验证许可证”。
+        <P><IMG SRC="../../images/multchan.jpg" ALT="多通道测量许可证对话框" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

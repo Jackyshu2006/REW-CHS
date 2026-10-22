@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>频谱衰减图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">频谱衰减图</A></H2>
+
+        <P>本图显示频谱衰减（spectral decay）曲线。图中数据按对数间隔分布，每倍频程 96 个点，并做了 1/48 倍频程平滑。
+
+        <P>生成频谱衰减图时，每生成下一个切片（slice），就把脉冲响应（impulse response）上的时间窗向右移动一个切片间隔。
+
+        <P>这里用到两个时间窗。左时间窗让待分析区段起点之前的数据逐渐减小到零；右时间窗覆盖所选的时间窗宽度。左时间窗的默认类型是 Hann（汉宁窗），右时间窗是 Tukey 0.25（Tukey 窗）。其他类型可以在<A HREF="analysis.html#windowdefaults">设置 → 分析</A>的“IR 衰减/瀑布图左侧”“IR 衰减/瀑布图右侧”两项里选择。
+
+        <P>两个时间窗的初始参考点（即左时间窗的终点、右时间窗的起点）是脉冲响应的峰值。
+
+        <P>选中这张图表时，频谱衰减图会自动生成；也可以点击图表区左下角的<EM>生成</EM>按钮，手动重新生成。<BR>
+
+        <H3><a name="actions">频谱衰减图操作</a></H3>
+
+        <P>在图表上单击右键，会弹出操作菜单：
+        <P><IMG SRC="../../images/actionsdecay.jpg" ALT="频谱衰减图操作"><BR CLEAR="all">
+
+        <P>切片所用的<EM>平滑</EM>，可以从 1/48 倍频程（最小值，也是推荐值）一直加大到 1/3 倍频程。
+
+        <P><EM>导出数据</EM>把各个时间切片的 SPL 值导出为文本。
+
+        <H3><A name="controls">衰减图的图表选项</A></H3>
+
+        <P><IMG SRC="../../images/controlsdecay.jpg" ALT="衰减图的图表选项"><BR CLEAR="all">
+
+        <P>切片之间相隔多长时间，由<EM>切片间隔</EM>设定。生成每个切片所用的那一段脉冲响应有多宽，由<EM>时间窗</EM>控件设定。对应的频率分辨率（frequency resolution）显示在控件右侧。
+
+        <P><EM>上升时间</EM>（rise time）控件设定左时间窗的宽度。设得越短，时间分辨率（time resolution）越高，但频率上的起伏越不容易看清。默认值 100 ms，是为显示房间共振而设的。
+
+        <P>用全频段测量检查扬声器单元或箱体的共振时，上升时间要短得多，一般取 1.0 ms 或更短，时间范围和时间窗也设在 10 ms 左右。这类测量往往更适合用 CSD 模式（CSD 即累积频谱衰减，cumulative spectral decay），因为脉冲响应的后段可能噪声较大，掩盖后面几个切片的真实表现。
+
+        <P>如果测量里的噪声污染了衰减后段的切片，就应勾选<EM>衰减图使用 CSD 模式</EM>。检查扬声器单元或箱体共振时，通常都会勾选它。
+
+        <P>CSD 模式把时间窗的右端固定在一点，只移动左端。不过这也带来一个后果：每个切片的时间窗总宽度都比前一个略短，所以切片越往后，频率分辨率越低，能生成的最低频率也越高。
+
+        <P>每个切片的曲线可以画成普通线条，也可以画成填充区域，由<EM>填充切片</EM>勾选框控制。两种画法的效果见下图。<BR>
+        <IMG SRC="../../images/csdunfilled.jpg" ALT="频谱衰减图，普通曲线" width="400" height="225"><BR CLEAR="all">
+        <IMG SRC="../../images/csdfilled.jpg" ALT="频谱衰减图，填充曲线" width="400" height="225"><BR CLEAR="all">
+
+        <P>勾选<EM>显示模态频率</EM>后，图表底部会标出理论模态频率（modal frequencies）。这些频率按 EQ 窗口<A href="eqwindow.html#modalanalysis">模态分析</A>一节中输入的房间尺寸计算。
+
+        <P>这些控件的设置会被记住，下次运行 REW 时继续沿用。<EM>应用默认设置</EM>按钮把各控件恢复为默认值。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

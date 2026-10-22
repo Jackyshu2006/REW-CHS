@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Why Can't I Fix All my Acoustic Problems with EQ?</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Why Can't I Fix All my Acoustic Problems with EQ?</A></H2>
+        
+        <P>This topic deals with an important question: why isn't EQ enough to sort out 
+        acoustic problems? There are plenty of products that claim to be able to correct
+        room responses, so why would anyone need to bother with acoustic treatments and
+        bass traps and absorbers and all that stuff? Technology to the rescue, right?
+        
+        <P>Those are important questions, and understanding the answers to them can help
+        a lot with better understanding acoustics in general. There are a few places where
+        the answer gets a little technical, but for the most part the explanation is fairly
+        easy to follow. Along the way to answering the questions above, we will touch on 
+        the answers to two other questions:
+        
+        <H4>Why does phase matter?</H4>
+        <H4>Why should I look at time domain signals instead of just frequency responses?</H4>
+        
+        <H3>What does EQ do?</H3>
+        
+        <P>As a starting point we need to take a look at what an equaliser can do for us.
+        The basic function of an equaliser is to alter the frequency response. We can use
+        it to try and make all the frequencies in the response equal - the clue is definitely 
+        in the name there! Particular equalisers are sometimes described as operating 
+        in the frequency domain, or operating in the time domain, or operating in both. In 
+        fact all equalisers, <EM>without exception</EM>, operate in the time <I>and</I> 
+        frequency domains and have effects in both.
+        
+        <H3>What are the limits of applying EQ?</H3>
+
+        <H4>Location, location, location</H4>
+
+        <P>Before we start adjusting an EQ to alter the frequency response, we need to see a response
+        to adjust, so we need to make a measurement. This brings up the first limitation. The 
+        measurement is made at a single position, and the frequency response of that measurement 
+        is only valid at that position, moving the mic elsewhere and making another measurement 
+        will produce a different frequency response. It may be a little different, or it may be 
+        (and usually is) a lot different. The changes made by an equaliser in the path to the speaker 
+        are the same no matter where we are in the room, so since the response is changing in different 
+        positions and the EQ isn't, it stands to reason that the EQ is only going to be good in
+        places where the frequency response is the same as the one we used when setting the EQ.
+        
+        <P>Reading some of the advertising blurb for EQ products you could be forgiven for thinking
+        that some clever guys somewhere have figured out a way around this. They haven't.
+        The best you can do is to look at the frequency responses measured at many positions in the
+        area where you need the correction to work, figure out which bits of them are sufficiently 
+        common, and come up with a compromise EQ setting that helps somewhat in most places and 
+        doesn't do too much harm elsewhere. It can help, but it is no magic bullet.
+        
+        <H4>What if I only listen in one spot?</H4>
+        
+        <P>So if the EQ is only good for one position, and I only sit in one position, what's
+        the problem? The problem is very small movements make big differences. At high frequencies 
+        the wavelength of sound is very short. At 20kHz it is just 17mm, about 5/8". The frequency response 
+        varies dramatically at high frequencies over very short distances, so even if you only sit in 
+        one spot, and sit very still, the best you could hope for is an EQ setting that would work up 
+        to a few kHz. For a more reasonable range of motion a few hundred Hz is more likely.
+        
+        <H4>Resolution</H4>
+        
+        <P>So we are prepared to make some compromises. One sweet spot will do, and fixing the 
+        response up to a few hundred Hz would actually help a lot, it's usually all over the place 
+        down low. So let's break out the EQ and start adjusting. The next problem we run into is the
+        adjustments don't seem to be working right. Say the frequency response shows a 6dB dip at 100Hz.
+        We put in 6bB of boost there and tweak the width so it matches the dip we saw. But the frequency
+        response hardly moved, especially in the middle of the dip. What's going on? The problem is 
+        probably with the resolution of the measurement. If you have used a 1/3 octave RTA, for example, 
+        to measure the response, the bar at 100Hz actually spans the range from about 89Hz to 112Hz.
+        That 6dB dip is probably due to a much deeper but very narrow dip within that 23Hz span. You
+        have to make a high resolution measurement to see what is going on, an RTA isn't going to cut it
+        for this work.
+        
+        <H4>Headroom</H4>
+        
+        <P>The RTA has left the scene and we are making high resolution measurements. And they look
+        awful. There are big peaks and some huge, narrow dips. The 6dB dip we saw at 100Hz actually 
+        turns out to be a 17dB dip at 98Hz. Never mind, the EQ allows up to 24dB gain. But listening 
+        with the fix in place reveals massive distortion. We have run right out of headroom, with
+        clipping all over the place. Even after playing around with the levels to get rid of the 
+        clipping the result even slightly out of the sweet spot is much, much worse. Sharp dips in 
+        the response are very sensitive to position, even at very low frequencies. The sensitivity to
+        position and the headroom problems mean we cannot do anything about them with EQ. The best
+        we can do is deal with the broad, shallow dips and work on the peaks.
+        
+        <H3>Minimum phase and all that</H3>
+        
+        <P>We know most of the limitations of the equaliser now. We moved things around a bit and 
+        used a few absorbers and got rid of the worst of the dips. After a lot of painstaking tweaking
+        of the EQ the frequency response is actually pretty flat. But it still sounds awful. So now 
+        what is going on?
+        
+        <P>The next few paragraphs get a little more technical, but it is worth sticking with it. 
+        Equalisers are, with a few exceptions, minimum phase devices (some are linear phase, but that 
+        doesn't help with the problem facing us). When we make an adjustment to the frequency response 
+        on the EQ, we also change the phase response, an often ignored part of the measurement we made. 
+        We need to take a short diversion to look at why we should care about the phase.
+        
+        <H4>Why does phase matter?</H4>
+        
+        <P>Measurement software measures the Transfer Function of the system it is hooked up to. The 
+        transfer function has two parts, the familiar frequency response, and the phase response.
+        Systems can have the same frequency response but actually have totally different effects
+        on signals passed through them - the difference lies in their phase responses. As a simple 
+        example of how big a difference phase can make, consider the results from measuring two
+        very different signals: an impulse and a period of periodic noise. Both of these signals
+        have perfectly flat frequency responses, looking at the frequency responses we could not tell 
+        them apart. The time signals obviously look completely different, so what happened to that 
+        difference when the signal went through an FFT to make the frequency response? It is all in 
+        the phase responses. The impulse has zero phase at all frequencies. The periodic noise has
+        random phase. Just as looking at frequency response alone cannot tell us what a signal looks 
+        like, looking at the frequency response of a transfer function alone cannot tell us what
+        the system does to signals that pass through it, we have to look at the phase response as well.
+
+        <P>So the answer to why our system, with its nicely flattened frequency response, still
+        doesn't sound right lies in the phase response. Room responses are, for the most part, not
+        minimum phase. The technical explanation of that probably would not help with our understanding
+        of the problem we are faced with, but the outcome is this: we can do almost what we like with 
+        the frequency response (within the limits we have discussed already) but the phase response is 
+        beyond the reach of our EQ. Anything we do in the EQ's frequency response adjustments will
+        have a corresponding effect in the phase response, and while the frequency response adjustment 
+        we make can be equal and opposite to the room's frequency response, the same is not true of the
+        phase. That is what it means for the room not to be minimum phase, it has done things to 
+        the phase of the signal that we cannot mirror in our EQ. Fixing the frequency response but not the
+        phase response means we cannot make the time signal look like it did before the room got hold of 
+        it, however much time we spend fiddling with the EQ. We have hit the limit.
+        
+        <H3>The value of looking at time signals</H3>
+        
+        <P>That brings us to another item I said we would touch on, the value of looking at time
+        signals and not just at frequency responses. The frequency response is only half of the 
+        description of what the system is doing to signals that pass through it, the phase response
+        is the other half. Trying to understand systems by looking at the frequency response alone
+        is like trying to understand a book by reading only the even numbered pages. To really
+        understand you need to look at both. That is a bit problematic, however. The frequency 
+        response is fairly easy to understand, but the phase response doesn't give up its secrets
+        quite so easily. To properly use it we end up looking at various quantities derived from it, 
+        such as group delay or phase delay. It gets complicated. But there is an alternative.
+        
+        <P>The systems we measure can be described in two ways: in the frequency domain by their 
+        transfer function (frequency and phase responses) or in the time domain by their impulse
+        response. They are two views of the same system, the transfer function is the FFT of the
+        impulse response and the impulse response is the inverse FFT of the transfer function. To
+        study how the system behaves and what it does to signals, we can look at both. The impulse
+        response has the benefit that it captures all the information in one signal, which puts 
+        it one up on the transfer function, though it is not as immediately intuitive as a frequency 
+        response. It readily gives up information that is less easily spotted in the transfer
+        function though, such as early reflections or the slow decays of room modes. It is well 
+        worth taking some time to become familiar with the impulse response and some of the quantities 
+        derived from it, such as the impulse response envelope (aka ETC).
+        
+        <H3>Does EQ help or not?</H3>
+        
+        <P>Given all the limitations we have uncovered, and with the problem of non-minimum
+        phase on top, we might wonder whether the equaliser is any good to us. All is not 
+        lost, however. The non-minimum phase behaviour of the room is connected to the dips in the 
+        response. It means we are even less able to deal with them, but there wasn't a lot we could 
+        do about them anyway, so we are really not much worse off. On the plus side, the peaks of
+        the response are caused by features that lie firmly in the region our minimum phase
+        equaliser can handle. We can use the equaliser to help tame the peaks, and
+        the lower down they occur, the better the results we are likely to get - a nice complement 
+        to our acoustic treatments, since they start to struggle (or we start to struggle with the 
+        size of them!) at low frequencies. EQ is a useful tool to keep handy when trying to fix our
+        acoustical problems, but it can only ever be a small part of the solution.<BR><BR><BR><BR>
+        
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

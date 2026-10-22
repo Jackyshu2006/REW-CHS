@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>RT60 图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">RT60 图</A></H2>
+
+        <P><IMG SRC="../../images/singlert60.jpg" ALT="RT60 图"><BR CLEAR="all">
+
+        <P>本图显示每个 1/1 倍频程或 1/3 倍频程中心频率（centre frequency）上的 RT60 混响时间（reverberation time）。早期衰减时间（Early Decay Time，EDT）、重心时间（Centre Time，TS），以及 60 dB 衰减时间 T20、T30 和 REW 自己定义的 Topt、T60M，各用一条曲线表示。
+
+        <P>这些参数，以及与之相关的清晰度（clarity）、明晰度（definition）和重心时间参数，含义见下文。
+
+        <H3>RT60 的含义</H3>
+
+        <P>RT60 衡量的是：在具有扩散声场（diffuse soundfield）的空间里，声音衰减 60 dB 需要多长时间。所谓扩散声场，是指房间足够大，声源发出的声音经过反射后，从各个方向以相同的声压级到达麦克风。
+
+        <P>家用房间通常太小，在低频段远远达不到扩散声场的条件，因为这个频段的声学表现主要由模态共振（modal resonance）决定。所以在这类房间里，几百 Hz 以下的 RT60 通常没有意义。
+
+        <P>要考察家用尺寸房间里低频的衰减情况，请使用 <A href="graph_rt60decay.html">RT60 衰减图</A>、<A href="graph_waterfall.html">瀑布图</A>、<A href="graph_spectrogram.html">频谱图</A>和<A href="graph_csd.html">频谱衰减图</A>。
+
+        <H3>RT60 的计算方法</H3>
+
+        <P>RT60 数值通过计算施罗德曲线（Schroeder curve）的斜率来估算。施罗德曲线画的是脉冲响应（impulse response，IR）的能量（即各采样值的平方）经反向积分（backward integration）后的结果。反向积分就是从响应的末尾开始，逐点往前累加。曲线的纵轴以 dB 为单位。
+
+        <P>不同的 RT60 指标（如 T20、T30、REW 的 Topt），是在施罗德曲线的不同区间上求出最佳拟合直线（best fit line），再取这条直线的斜率得到的。各指标的区间见下文。
+
+        <P>在扩散声场中，以 dB 为纵轴的施罗德曲线在降到本底噪声（noise floor）之前，基本是一条直线。
+
+        <P>经典的 T20、T30 两种 RT60 指标，都以施罗德曲线从峰值下降 5 dB 的位置作为起点。这在大空间里效果很好，而大空间正是 RT60 最适用的场合；测量用的声源是全指向（omnidirectional）声源时尤其如此。
+
+        <P>在家用尺寸的房间里，如果用普通的指向性音箱作声源，施罗德曲线开头会下降得很陡，也就是早期衰减时间很短。这样一来，-5 dB 点落在早期衰减区，而不在扩散声场区，结果 T20 和 T30 会低估 RT60。
+
+        <P>如果 EDT 比 T30 算出的 RT60 短得多，REW 的 Topt 会改用另一个起点：取 EDT 回归线与 T30 回归线（regression line）的交点，确保起点落在扩散声场区内。然后以 1 dB 为步长，逐个尝试所有可能的终点，选出线性拟合最好的那条回归线。这样得出的 RT60 更可靠。
+
+        <P>结果按 1/1 倍频程或 1/3 倍频程频带给出，从中可以看出声音衰减的快慢怎样随频率变化。按 ISO 3382 的规定，RT60 图的最低中心频率在 1/3 倍频程时是 50 Hz，在 1/1 倍频程时是 63 Hz。
+
+        <P>容积小于 50 立方米（1,800 立方英尺）的家用听音室和录音棚，建议的 RT60 是 0.3 s。更大的房间，容积在 200 立方米（7,000 立方英尺）以内的，建议值是 0.4～0.6 s。两种情况下，RT60 在整个频率范围内都应比较均匀，不过在低频通常会有所升高。
+
+        <P><B>重要：</B>如果在比家用房间大的空间里测量 RT60，请到设置 → 分析里修改 <A href="analysis.html#irtruncation">IR 截断</A>设置，保证保留足够长的脉冲响应，让衰减能一直延伸到本底噪声。
+
+        <P>可能还需要用更长的扫频。例如用 256k 扫频时，在做任何截断之前，峰值之后大约有 6 秒的脉冲响应数据。
+
+        <H3>RT60 及相关参数</H3>
+
+        <P>REW 计算的<A NAME="decaymeasures">参数</A>如下：
+        <DL>
+            <DT>EDT
+            <DD>早期衰减时间，由施罗德曲线在 0 dB 到 -10 dB 之间的斜率得出。它不是 RT60 值，而是反映测量位置上最初到达的声音衰减得有多快。EDT 比 RT60 更依赖测量位置。早期衰减快（EDT 较小），说明这个位置的清晰度比 EDT 较大的位置好。
+            <DT>T20
+            <DD>由施罗德曲线在 -5 dB 到 -25 dB 之间的斜率得出的 RT60 衰减时间。
+            <DT>T30
+            <DD>由施罗德曲线在 -5 dB 到 -35 dB 之间的斜率得出的 RT60 衰减时间。
+            <DT>Topt
+            <DD>“最佳”RT60 衰减时间，由施罗德曲线在一个可变区间上的斜率得出，这个区间按线性拟合最好的原则选定。如果早期衰减时间比 T30 短得多，Topt 以 EDT 回归线与 T30 回归线的交点作为起点；否则以 -5 dB 为起点。终点则由 REW 以 1 dB 为步长一直试到施罗德曲线末端，从中选出线性拟合最好的一个。
+            <DT>T60M
+            <DD>模型 T60 衰减时间：用指数衰减加噪声模型（exponential decay plus noise model）拟合频域（frequency domain）数据得出，详见 <A href=graph_rt60decay.html>RT60 衰减图</A>。只有在 RT60 衰减图上生成了模型数据之后，才会出现这条曲线。
+            <DT>清晰度 C50
+            <DD>早期声能与后期声能之比（early to late energy ratio），单位为 dB，以最初 50 ms 内的声能作为“早期”部分。C50 最常用来衡量语言听起来是否清晰。
+            <DT>清晰度 C80
+            <DD>早期声能与后期声能之比，单位为 dB，以最初 80 ms 内的声能作为“早期”部分。C80 最常用来衡量音乐听起来是否清晰。
+            <DT>明晰度 D50
+            <DD>早期声能与总声能之比（early to total energy ratio），以百分比表示，以最初 50 ms 内的声能作为“早期”部分。
+            <DT>重心时间 TS
+            <DD>脉冲响应平方后，其“重心”所在的时间点。
+        </DL>
+
+        <H3><A name="actions">RT60 图操作</A></H3>
+
+        <P>在 RT60 图上单击右键，弹出的菜单里有这一项操作：
+        <P><IMG SRC="../../images/actionsrt60.jpg" ALT="RT60 图操作"><BR CLEAR="all">
+
+        <P><EM>将 RT60 数据导出为文本</EM>用来把 RT60 数据写入文件。导出时可以输入一段备注，下次载入这组数据时会显示出来。
+
+        <P>只要 1/1 倍频程和 1/3 倍频程的结果已经生成，文件就会把两者都包含进去。如果已针对 1/1 倍频程或 1/3 倍频程生成了 RT60 衰减模型数据，导出内容里会有 T60M 数值，否则该值为零。
+
+        <P>REW 会记住文件路径，下次打开对话框时沿用。导出时会弹出一个对话框，用来设置导出格式。<BR><BR>
+        <IMG SRC="../../images/rt60export.jpg" ALT="RT60 导出设置" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <H3><A name="controls">RT60 图的图表选项</A></H3>
+
+        <P>RT60 图的图表选项面板上有以下控件：
+        <P><IMG SRC="../../images/rt60controls.jpg" ALT="RT60 图的图表选项"><BR CLEAR="all">
+
+        <P>RT60 数据可以按 1/1 倍频程频带或 1/3 倍频程频带显示。<EM>滤波器阶数</EM>决定分数倍频程频带滤波器（fractional octave band filter）滚降（roll off）的陡峭程度。默认阶数是 6，这样得出的结果可以与大多数其他软件相互比较。
+
+        <P>阶数越高，各频带的选择性（selectivity）越强，有助于把较长的衰减准确归到它所在的那个频带。但阶数越高，滤波器本身的延迟也越大。使用<EM>时间反转滤波</EM>或<EM>零相位滤波</EM>可以减轻这个问题。
+
+        <P>滤波类型下拉框有三个选项：<EM>正向滤波</EM>、<EM>时间反转滤波</EM>和<EM>零相位滤波</EM>。
+
+        <P><EM>时间反转滤波</EM>把倍频程频带滤波器在时间上倒过来应用，能大大减少滤波器自身对测得衰减的影响。在低频使用 1/3 倍频程滤波器时，滤波器自身的衰减时间可能相当长，例如 100 Hz 的 1/3 倍频程滤波器会超过 200 ms。反向应用滤波器可以把这段衰减缩短到 50 ms 以下，但对响应会有一定影响，因此使用时间反转滤波器时，早期衰减时间（EDT）的数值可能不可靠。
+
+        <P><EM>零相位滤波</EM>让滤波器在数据上走两遍，一遍正向、一遍反向，使总的相移为零。它同样能减少滤波器衰减时间带来的影响，效果与时间反转滤波相近（但不如后者明显），而且不会明显影响早期衰减时间。
+
+        <P>零相位滤波正向和反向两遍所用的滤波器阶数，都是“滤波器阶数”设定值的三分之二。再配合带宽上的调整，两遍合起来的响应接近按设定阶数单遍滤波的响应。
+
+        <P>勾选<EM>显示数据面板</EM>后，图上会显示一个面板，列出各项参数的计算结果。不可靠的数值以橙色斜体显示。
+        <br><br>
+        <IMG SRC="../../images/rt60datapanel.jpg" ALT="RT60 数据面板"><BR CLEAR="all">
+
+        <P>勾选<EM>显示相关系数</EM>后，图例中各衰减指标的名称后面会显示直线拟合的质量。名称后面的“r”值是相关系数（correlation coefficient），衡量数据与一条直线吻合的程度。
+
+        <P>r 等于 -1 表示完全吻合。r 的绝对值小于 0.99（即比 -0.99 更接近 0）时，对应的衰减数值可能不可靠。可能不可靠的数值以斜体显示。
+
+        <P>RT60 图上的数据有两种画法：一种是横条，每根横条以滤波器中心频率为中心，宽度覆盖该滤波器的带宽；另一种是连线，把各滤波器中心频率上的点依次连起来。用哪一种，由<EM>以横条显示</EM>勾选框决定。
+
+        <P>勾选<EM>显示 EBU RT60 限制</EM>后，会按输入的房间容积，在图上叠加显示 EBU（欧洲广播联盟）的推荐范围。容积的单位跟随设置 → 视图里的距离单位。<EM>标称 RT60</EM> 是参考容积 100 m<sup>3</sup> 对应的 RT60 值。限制范围所依据的目标 RT60 按下式计算：<br><br>
+        <center>T<sub>m</sub> = 标称 RT60 * (房间容积 / 参考容积)<sup>1/3</sup></center>
+        <br><br>
+        <IMG SRC="../../images/ebulimits.jpg" ALT="显示 EBU 限制的 RT60 图"><BR CLEAR="all">
+
+        <P><EM>曲线选项</EM>按钮会打开一个对话框，用来更改图上各条曲线的颜色和线型。改动会应用到这张图上显示的所有测量。
+
+        <P>曲线也可以隐藏。隐藏后，它会从图上和图例中一起消失。
+
+        <P>当前测量的参数值（RT60 与清晰度）可以写入文本文件，菜单项是“文件 &rarr; 导出 &rarr; <EM>将 RT60 数据导出为文本</EM>”。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

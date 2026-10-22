@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Analysis Preferences help</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H4><A name="windowdefaults">Impulse response window defaults</A></H4>
+
+        <P>The <FONT CLASS="heading">Left side</FONT> and 
+        <FONT CLASS="heading">Right side</FONT> window selectors offer a choice
+        of window types to be applied to the impulse response data before and after 
+        the peak. These are the defaults applied to new measurements, window types
+        for existing measurement can be altered via the IR Windows toolbar button.
+        By default REW will set the widths of the windows automatically to show the
+        whole room response, with a 500 ms right side window and a 125 ms left side window
+        if the end frequency of the sweep is above 200 Hz, or a larger left side window for
+        end frequencies below 200 Hz. To override this uncheck the
+        <FONT CLASS="heading">Set window widths automatically</FONT> box and set
+        the default widths you wish to be applied to new measurements.
+
+
+        <P>If <A name="fdw"><FONT CLASS="heading">Add frequency dependent window</FONT></A> is selected
+        a frequency dependent window (FDW) will be applied to the measurement after the left
+        and right windows have been applied. The width of the FDW is set by the controls
+        to the right and can be specified in cycles or in octaves. If the width is in cycles
+        a 15 cycle window (for example) would have a width of 150 ms at 100 Hz (15 times 10 ms),
+        15 ms at 1 kHz (15 times 1 ms) and 1.5 ms at 10 kHz (15 times 0.1 ms).
+
+        <P>If <A name="mtw"><FONT CLASS="heading">Add multi-time window</FONT></A> is selected
+        a window (MTW) whose width is specified at octave centre frequencies will be 
+        applied to the measurement after the left and right windows have been applied. 
+        The widths of the MTW are set by the controls to the right and are in milliseconds.
+        The effect is close to that of a Blackman right side window of the same width. 
+        Values are interpolated at intermediate frequencies so the window width varies smoothly 
+        with frequency. Extreme differences in width between adjacent octave bands may cause 
+        artefacts in the response. The default values approximate a psycho-acoustic windowing 
+        reflective of echo fusion times. The reset button sets the widths back to the default.
+
+        <P>The <FONT CLASS="heading">IR decay/waterfall left</FONT> and 
+        <FONT CLASS="heading">IR decay/waterfall right</FONT> window selections
+        are applied to the impulse response data when generating Spectral Decay 
+        and Waterfall plots.
+
+        <P>The <FONT CLASS="heading">Waterfall (audio data)</FONT> window selection is 
+        applied when generating waterfall plots for imported audio data. This is the default,
+        the window type used for any particular measurement can be altered via the selector 
+        in the graph controls.
+
+        <P>The <FONT CLASS="heading">Spectrogram</FONT> window selection is applied to 
+        the response data when generating Fourier Spectrogram plots. This is the default,  
+        the window type used for any particular measurement can be altered via the selector 
+        in the graph controls.
+
+        <H4><A name="ircalc">Impulse response calculation</A></H4>
+
+        <P>After REW has made a measurement it can 
+        <FONT CLASS="heading"><A name="irtruncation">truncate</A> the derived impulse response</FONT> to 
+        preserve the important information while minimising the storage required for the 
+        measurement file. A 1 second period is retained before the peak, and by default 
+        a 1.7 second period is retained after the peak (this varies a little depending on the sample 
+        rate, at 44.1k (or multiples) it is approx 2 seconds, at 48k 1.7 seconds). In some 
+        cases it may be useful to retain more of the impulse response, such as measurements 
+        in very large spaces which have very long impulse responses. REW provides options to 
+        truncate the response after approx 4.4 seconds, or 9.9 seconds, or to retain the entire 
+        impulse response. It may also be necessary to use a longer sweep (with a 256k sweep there
+        is about 6 seconds of impulse response data available after the peak). <B>WARNING:</B> retaining 
+        the entire impulse response ("Keep full IR") will produce an impulse response that is twice as 
+        long as the sweep used, generating much larger measurement files and slowing down IR plotting 
+        and processing. If the entire response is retained the peak will be centred within the response.
+
+        <P>When impulse responses are imported the t=0 position can be set to either the
+        first sample in the imported data, the location of the peak of the impulse response
+        or the specific sample index shown.
+
+        <P>When REW generates an impulse response it is oversampled to provide data for graph 
+        rendering. The method used to generate that oversampled data is set by the 
+        <FONT CLASS="heading"><A name="iroversampler">IR oversampler</A></FONT> setting. 
+        <EM>Windowed sinc</EM> uses a bandlimited interpolator, <EM>FFT time shift</EM> uses 
+        fractional delays implemented via the time shift property of the FFT, <EM>None</EM> 
+        disables IR oversampling (in which case Hermite interpolation is used in the graph plot 
+        generation between the original sample points). <EM>Windowed sinc</EM> is the default setting.
+        This setting does not affect IR imports, which are not oversampled.
+
+        <P>The <FONT CLASS="heading">Decimate IR</FONT> selection controls whether
+        REW reduces the sample rate of the impulse response to correspond to the range 
+        of frequencies in the measurement. Selecting this option greatly reduces the
+        impulse response size for low frequency measurements and speeds up processing
+        of the data.
+
+        <P>The <FONT CLASS="heading"><A name="adjustclockacoustic">Adjust clock with acoustic ref</A></FONT> selection 
+        controls whether REW compensates for clock rate differences between input and 
+        output when using the acoustic timing reference. If this option is selected an 
+        additional timing reference signal is played at at the end of the sweep and the 
+        time between the timing reference signals is used to calculate any clock adjustment 
+        required to match the input and output device clock rates.
+
+        <P>The <FONT CLASS="heading"><A name="adjustclockloopback">Adjust clock with loopback</A></FONT> selection 
+        controls whether REW compensates for clock rate differences between input and 
+        output when using a loopback as a timing reference. If this option is selected 
+        the loopback signal is analysed to calculate any clock adjustment required to 
+        match the input and output device clock rates. To apply this correction the sweep
+        must start below 1 kHz and end above 10 kHz.
+        
+        <P>If <FONT CLASS="heading"><A name="loopbackdelayref">Loopback delay reference is IR peak</A></FONT>
+        is selected the system delay figure for loopback measurements is the relative times of the measured 
+        and loopback IR peaks. That may be appropriate when measuring the relative delays of sources with the
+        same bandwidth, such as a set of speakers. It is not appropriate when measuring sources with limited 
+        bandwidth, like subwoofers. If <FONT CLASS="heading">Loopback delay reference is IR peak</FONT> 
+        is not selected the system delay figure will use the estimated IR delay
+        relative to the loopback when the peak is close to the IR start or the estimated IR start time
+        relative to the loopback when the peak is later (limited bandwidth devices). The system delay
+        figure for the acoustic timing reference always uses the estimated IR delay/estimated IR start.
+
+        <P>If <FONT CLASS="heading"><A name="multicore">Use multiple cores</A></FONT> is selected 
+        (the default) REW will use multiple processor cores during calculations to speed up processing. 
+        That has been the default in REW since V5.30, but it might lead to thermal throttling on systems 
+        with limited cooling, such as laptops. Thermal throttling can cause dropouts during audio signal 
+        generation or capture.
+
+        <P>If <FONT CLASS="heading"><A name="alignirpeak">Align IR peak</A></FONT> is selected the impulse 
+        response for a new measurement will be shifted (if necessary) by a fraction of a sample so that the 
+        peak, which typically lies between samples (depending on the system delay), occurs at a sampling instant. 
+
+        <P>If <FONT CLASS="heading"><A name="aligntzero">Align t=0 to a sampling instant</A></FONT> is selected 
+        any change to the impulse response t=0 position will include any fractional sample shift necessary to
+        ensure t=0 occurs at a sampling instant. 
+
+        <H4><A NAME="frcalculation">Frequency response calculation</A></H4>
+
+        <P>The <FONT CLASS="heading">Allow 96 PPO log spacing</FONT> selection controls whether
+        REW is permitted to convert frequency responses from linearly spaced data to logarithmically
+        spaced data at 96 points per octave. The FFT that calculates the frequency responses 
+        produces data that is linearly spaced in frequency, i.e. there is a constant frequency
+        step from each value to the next. For the high frequency parts of responses this means
+        there are a very large number of points, using a lot of memory but not contributing anything 
+        useful to the displayed data. When this option is selected (it is on by default) REW
+        will automatically convert frequency responses to more efficient logarithmic spacing
+        with 96 data points in each octave of the response if this will reduce memory usage
+        (which is usually the case for sweeps that end above 300 Hz or so). As part of the conversion
+        process REW first applies a 1/48th octave smoothing filter to the data to remove
+        any high frequency combing from the response. The conversion takes place on any new 
+        measurement or when an IR Window is applied. Whether a measurement is log spaced or
+        linearly spaced can be seen by bringing up the measurement info window by clicking
+        the info button in the toolbar.
+
+        <P><B>Note</B> that conversion to 96 PPO is inhibited if the impulse peak is far from 
+        the impulse zero time, where "far" means the peak is offset from zero by a time that 
+        corresponds to more than 90 degrees of phase shift between samples at the measurement 
+        end frequency. This is to prevent aliased phase data at high frequencies which would 
+        lead to incorrect group delay figures.
+
+        <P>The <FONT CLASS="heading">Show response below window limit</FONT> selection controls 
+        whether REW displays the frequency and phase responses at frequencies lower than those
+        valid for the current impulse response window width. For example, if the window width 
+        were 10 ms frequencies below 100 Hz would not be valid and are normally not displayed. 
+        There are circumstances in which it may be helpful to see that data, which this option
+        allows, but the responses are drawn dashed to indicate they lie below the window cutoff.
+        The <FONT CLASS="heading">Use right window width for min valid frequency</FONT> selection
+        controls whether the total or right hand window width is used for the minimum frequency 
+        calculation, the right hand window is the determining factor when the window reference 
+        time is at or near the IR peak, which is usually the case.
+
+        <P>The default smoothing to apply to new SPL measurements can be selected from the
+        drop-down box next to the log spacing check box.
+
+        <P>If <FONT CLASS="heading">Limit cal data boost to 20 dB</FONT> is selected REW will  
+        limit the total gain applied to compensate for calibration data attenuation to 20 dB. This 
+        prevents excessive boosting of the noise floor in areas where the combined mic/meter and
+        soundcard response is more than 20 dB down. This setting affects the frequency response,
+        RTA trace and SPL meter readings and is also applied when carrying out trace arithmetic.
+
+        <P>If <FONT CLASS="heading">Apply cal files to distortion</FONT> is selected REW will  
+        applying the cal files to distortion results. Applying the files provides more accurate 
+        results in regions where the fundamental or harmonics are affected by interface roll-offs 
+        but also boosts the noise floor in those regions.
+
+    </BODY>
+</html>

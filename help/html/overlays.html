@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Overlays Window</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Overlays Window</A></H2>
+
+        <P><IMG SRC="../../images/overlayswindow.jpg" ALT="Overlays Window" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>The overlays window shows plots for all the currently loaded measurements. 
+        It is shown by pressing the Overlays button in the toolbar of the main REW window.<BR>
+        <IMG SRC="../../images/overlaysbutton.jpg" ALT="Overlays button" BORDER=0 ALIGN="left" width="49" height="52"><BR CLEAR="All">
+
+        <P>At the left hand side of the overlays window is the measurement selector, used 
+        to choose which measurements appear on the graphs. If measurements are in groups
+        they will all be selected when the group is expanded and all deselected when the 
+        group is collapsed. Individual measurements can be selected or deselected by clicking
+        on them. A range of measurements can be selected by left click and drag starting on an 
+        unselected measurement, or by clicking and then doing a Shift+left click at the 
+        end of the range.
+        
+        <P>The selected measurements can be rearranged by dragging them to a new position in the 
+        list. The drag must start from a selected measurement, otherwise it will be
+        interpreted as a range selection. To move a single selected measurement to a new position
+        click and hold on it until a move cursor appears then drag it to the new position. 
+        If the measurement list has focus (blue border around an entry)
+        keyboard shortcuts to select all (Ctrl+A), cut (Ctrl+X) and paste (Ctrl+V) may 
+        also be used. Pasted measurements are placed before the first selected 
+        measurement or, if there are no selections, at the end of the list.
+        
+        <P>The measurement which is currently selected in the main REW window has a 
+        blue bar at the right hand side. A measurement can be made the current main
+        window selection by double-clicking it.
+        
+        <H3><A name="actionsmultiple">Actions for multiple selections</A></H3>
+
+        <P>Right clicking on the selector after multiple measurements have been
+        selected brings up a set of actions to save, remove, lock, unlock,  
+        add to group, change colour or change cal data for the selected measurements.
+        There are also actions to select all, clear selections, toggle selections
+        and select or clear measurements for a specific file amongst those files loaded.
+        Below those actions are a set of actions for the measurement where the mouse
+        was clicked.
+        
+        <P><IMG SRC="../../images/overlayrightclickmulti.jpg" ALT="Overlay selector right click panel for multiple selections">
+        
+        <H3><A name="actionsmultiple">Actions for individual selections</A></H3>
+
+        <P>Right clicking on the selector when there are no selections or just one selection
+        brings up a set of actions to actions to select all, clear selections, toggle selections
+        and select or clear measurements for a specific file amongst those files loaded and a menu 
+        like the measurement panel right click menu for the measurement clicked on. That menu has
+        additional actions that depend on the current graph, in the example below there are controls 
+        to adjust the SPL offset and to set a measurement as a reference for other measurements, 
+        highlighted in orange.
+        
+        <P><IMG SRC="../../images/overlayrightclick.jpg" ALT="Overlay selector right click panel for single selection">
+        
+        <H3><A name="graphtypes">Overlay graph types</A></H3>
+
+        <P>The overlay graphs are selected via the buttons at the top of the graph area.<BR><BR>
+        <IMG SRC="../../images/overlaygraphselector.jpg" ALT="Overlay Graph Selector" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>The various graph types are:
+
+        <DL>
+            <DT>SPL
+            <DD>All the measurement SPL traces
+
+            <DT>Predicted SPL
+            <DD>The predicted SPL for each measurement after applying any EQ filters 
+                that have been defined for the measurement in the <A HREF="eqwindow.html#top">EQ Window</A>.
+
+            <DT>Phase
+            <DD>All the measurement phase traces
+
+            <DT>Predicted Phase
+            <DD>The predicted phase for each measurement after applying any EQ filters 
+                that have been defined for the measurement in the <A HREF="eqwindow.html#top">EQ Window</A>
+
+            <DT>Distortion
+            <DD>Distortion traces for each measurement, showing the distortion measure selected
+                in the graph controls, which can be IMD, TD+N, THD, THD+N, N, any available harmonic 
+                up to the 10th or the fundamental. If a mix of stepped level and other measurements are loaded 
+                either the stepped level or the others will be selectable for the overlay. The 
+                easiest method is to right click on the graph legend and clear the selections, 
+                then select one of the measurements of the type you want to overlay. Only other 
+                measurements of that type will then be enabled for selection. Clearing all the 
+                selections will mean all measurements become enabled for selection.
+
+            <DT>Impulse
+            <DD>All the measurement impulse responses. There are a a set of filter controls matching those
+                on the <A href=graph_filteredir.html>Filtered IR</A> graph providing a quick way to filter 
+                a set of impulse responses.
+
+            <DT>ETC
+            <DD>All the measurement impulse response envelope traces
+
+            <DT>Step
+            <DD>All the measurement step responses
+
+            <DT>GD
+            <DD>All the measurement group delay traces
+
+            <DT>RT60
+            <DD>All the measurement RT60 traces, with options to show an average of the selected traces and to export the average values
+
+            <DT>Clarity
+            <DD>All the measurement clarity/definition traces
+        </DL>
+
+        <H3><A name="separatetraces">Separate Traces</A></H3>
+
+        <P>The basic controls for the overlay graphs are described in the main 
+            <A HREF="graphpanel.html#top">Graph Panel</A> help, but the Overlays window
+            has one additional button:<BR>
+            <IMG SRC="../../images/separatetracesbtn.jpg" ALT="Separate Traces Button" BORDER=0 ALIGN="left" width="53" height="51"><BR CLEAR="all">
+            <P>The <EM>Separate Traces</EM> button to the right of the graph selector offsets
+            each trace downwards from the preceding trace to make it easier to distinguish
+            individual features when the traces are at similar levels. When the button has 
+            been pressed a slider next to it allows the amount of separation to be adjusted.<BR>
+            <IMG SRC="../../images/separationslider.jpg" ALT="Separate Traces Slider" BORDER=0 ALIGN="left" width="71" height="57"><BR CLEAR="all">
+
+        <H3><A name="actions">Actions</A></H3>
+
+        <P>Right clicking on the graph brings up a menu of actions for the currently selected graph type,
+        along with some shortcuts to quickly move to other REW windows.
+
+        <P><IMG SRC="../../images/actionsoverlayspl.jpg" ALT="SPL Overlay actions" BORDER=0 ALIGN="left"><BR CLEAR="all">
+
+        <P>The SPL, Predicted SPL, Phase, Predicted Phase and Group Delay overlays have actions to apply 
+        smoothing to all the currently selected traces.
+        
+        <P>The SPL overlay also has an action to export all the selected measurements as text.
+
+        <P>The Predicted SPL overlay has an action to copy equaliser and filter settings from 
+        one measurement to all the selected measurements.
+
+        <P>The Phase and Predicted Phase overlays have actions to wrap or unwrap the currently 
+        selected phase traces.
+        
+        <P>The Impulse overlay has actions to set the t=0 position, undo t=0 changes, remove IR 
+        delays, export as text and export as WAV.
+        
+        <P>The RT60 overlay has actions to export the average of the selected measurements and an action to export 
+        the RT60 data for all the selected measurements.
+
+        <H3>Graph Controls</H3>
+
+        <P><IMG SRC="../../images/controlssploverlay.jpg" ALT="SPL Overlay controls" BORDER=0 ALIGN="left"><BR CLEAR="all">
+
+        <P>The SPL, Phase, Impulse, Step and Group Delay overlays have a <EM>Show points when zoomed in</EM> 
+        control. If selected the individual points that make up the measured responses are shown 
+        when the zoom level is high enough for them to be distinguished (which may only be over part of 
+        the plot).
+
+        <P>The SPL and Predicted SPL overlays have an <A name="iec263"><EM>IEC 263 ratio</EM> control</A> 
+        which allows the graph to be locked to a specified dB/decade aspect ratio. The aspect ratio is 
+        maintained by adjusting the margins around the graph as required.
+        
+        <P>The Impulse overlay has controls to filter the selected measurements. 
+
+        <P>All overlay graphs have a <EM>Trace options</EM> button which brings up a dialog that allows 
+        the line type of the graph traces to be changed.
+
+        <H4>Legend area</H4>
+        
+        <P>Right clicking in the legend area of an overlay graph brings up a small menu
+        that allows all traces to be selected, all selections to be cleared or the 
+        selections to be toggled.
+
+        <P>Hovering the cursor over the name of a measurement in the legend panel will
+        highlight the measurement on the graph. The current individual measurement selection 
+        can be highlighted on overlay graphs using the Ctrl+H shortcut, toggling highlight 
+        on and off.<BR>.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

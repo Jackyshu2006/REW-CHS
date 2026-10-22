@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Offline Measurements</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Offline Measurements</A></H2>
+
+        <P>Sometimes it isn't possible or practical to connect a computer to the 
+        system you wish to measure and the live 
+        <A href="makingmeasurements.html#fileplayback">File playback</A> option 
+        is not suitable. In those cases REW's measurement sweep signal can be 
+        played back through the system and the response recorded by other means, 
+        the sweep signal and response recording can then be imported to generate 
+        a new measurement. This is done using the 
+        <A HREF="file.html#filesweepimport">Import Sweep Recordings</A> entry in 
+        the File menu.
+
+        <H3><a name="makesweep">Generating the sweep signal</a></H3>
+
+        <P>The first step is to produce the sweep measurement signal that will be played back
+        when making the response recording. It is generated from the 
+        <A HREF="siggen.html#meassweep">Signal Generator</A>.<BR><BR>
+        <IMG SRC="../../images/siggenmeassweep.jpg" ALT="Signal generator measurement sweep"><BR CLEAR="ALL"><BR>
+
+        <P>Using a timing reference signal is required for offline measurement. 
+        Set the signal level for the sweep and the timing reference trim (typically 
+        the trim will be zero) and choose the sample rate at which the sweep signal 
+        will be generated - this should be the same as the sample rate at which the 
+        response will be recorded, or an integer multiple or fraction of the recording 
+        rate. Choose 32-bit float as the WAV sample resolution if the system you are 
+        measuring supports that, if not try 24-bit.
+        
+        <H3><a name="makesweep">Importing sweep recordings</a></H3>
+        
+        <P>Bring up the import dialog by using the 
+        <A HREF="file.html#filesweepimport">Import Sweep Recordings</A> 
+        entry in the File menu (or using the Ctrl+Shift+N shortcut).<BR><BR>
+        <IMG SRC="../../images/importsweepblank.jpg" ALT="Import Sweep Recordings"><BR CLEAR="all">
+        
+        <P>Load the measurement sweep file first, either browsing to the file 
+        location or dragging it onto the stimulus window. You will be asked to 
+        choose which channel to import, 1 is the left channel, 2 is the right. 
+        If the current mic and soundcard cal files specified in the REW cal files 
+        preferences should be applied to the files you are importing 
+        (for example, if you made the recordings with a calibrated mic and the mic 
+        cal file is loaded in REW) select the <EM>Apply cal files</EM> box. An image 
+        of the signal waveform is displayed.
+        
+        <P>Now load the recorded response file. You can browse to the file or drag 
+        the file onto the response window. If you have more than one response 
+        recording you can drag them all onto the response window at once and a 
+        separate measurement will be generated for each. If the recording sample 
+        rate is an integer multiple or fraction of the measurement sweep sample 
+        rate the recording will be resampled to match the sweep rate before 
+        processing.<BR><BR>
+        <IMG SRC="../../images/importsweeploaded.jpg" ALT="Import Sweep Recordings loaded"><BR CLEAR="all">
+        
+        <P>That's it, a new measurement will be generated from the recordings and 
+        can be processed in REW like any other measurement. The measurement notes 
+        will include the file names used to generate it and the measurement name 
+        defaults to the file name of the response recording.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

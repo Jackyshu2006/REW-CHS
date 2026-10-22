@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>工具菜单</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">工具菜单</A></H2>
+
+        <DL>
+            <DT><A name="measure">测量</A><FONT CLASS="keys"> Ctrl+M</FONT>
+            <DD><A href=makingmeasurements.html>做一次新的测量</A>（打开测量对话框）<BR><BR>
+            <IMG SRC="../../images/measuredialog.jpg" ALT="测量对话框"><BR CLEAR="all">
+
+            <DT><A NAME="irwindows">IR 时间窗</A><FONT CLASS="keys"> Ctrl+Shift+W</FONT>
+            <DD>显示脉冲响应（impulse response）时间窗对话框<BR><BR>
+            <IMG SRC="../../images/irwindowcontrols.jpg" ALT="IR 时间窗面板">
+            <BR CLEAR="all"><BR>
+
+            <DT>声压计<FONT CLASS="keys"> Ctrl+Shift+M</FONT>
+            <DD>显示<A href=splmeter.html>声压计</A><BR><BR>
+            <IMG SRC="../../images/splmeter.jpg" ALT="声压计">
+            <BR CLEAR="all"><BR>
+
+            <DT>声压记录器<FONT CLASS="keys"> Ctrl+Shift+O</FONT>
+            <DD>显示<A href=splmeter.html#spllog>声压记录器</A>窗口
+
+            <DT>信号发生器<FONT CLASS="keys"> Ctrl+Shift+R</FONT>
+            <DD>显示<A href=siggen.html>信号发生器</A><BR><BR>
+            <IMG SRC="../../images/siggen.jpg" ALT="信号发生器">
+            <BR CLEAR="all"><BR>
+
+            <DT>电平表<FONT CLASS="keys"> Ctrl+Shift+L</FONT>
+            <DD>显示<A href=levelmeters.html>电平表</A><BR><BR>
+            <IMG SRC="../../images/levelmeters.jpg" ALT="电平表"><BR CLEAR="all">
+
+            <DT>EQ<FONT CLASS="keys"> Ctrl+Shift+Q</FONT>
+            <DD>显示 <A href=eqwindow.html>EQ 窗口</A>
+
+            <DT>叠加图<FONT CLASS="keys"> Ctrl+Shift+V</FONT>
+            <DD>显示<A href=overlays.html>叠加图</A>窗口
+
+            <DT><A NAME="infopanel">信息</A><FONT CLASS="keys"> Ctrl+N</FONT>
+            <DD>显示测量信息窗口<BR><BR>
+            <IMG SRC="../../images/infopanel.jpg" ALT="测量信息面板"><BR CLEAR="all">
+
+            <DT>RTA<FONT CLASS="keys"> Ctrl+Shift+T</FONT>
+            <DD>显示 <A href=spectrum.html>RTA</A> 窗口
+
+            <DT>Thiele-Small 参数<FONT CLASS="keys"> Ctrl+Shift+P</FONT>
+            <DD>显示 <A href=thielesmall.html>Thiele-Small 参数</A>窗口
+
+            <DT>房间仿真<FONT CLASS="keys"> Ctrl+Shift+K</FONT>
+            <DD>显示<A href=modalsim.html>房间仿真</A>窗口
+
+            <DT>曲线运算<FONT CLASS="keys"> Ctrl+Alt+T</FONT>
+            <DD>显示<A href=arithmetic.html>曲线运算</A>窗口
+
+            <DT>相对增益与相位
+            <DD>显示<A href=interchan.html>相对增益与相位</A>面板<BR><BR>
+            <IMG SRC="../../images/interchan.jpg" ALT="相对增益与相位"><BR CLEAR="all">
+
+            <DT>频率计
+            <DD>显示频率计。频率计显示测量输入信号的平均频率。它的测法是：先对输入数据做过采样（oversampling）；再在每块输入数据里，用插值（interpolation）求出信号由负到正穿过其平均值的各个时刻；然后测量这些时刻之间的间隔，由此算出频率。<BR><BR>
+            可测的最低频率约为 10 Hz；要得到可靠的读数，输入电平至少约为 -60 dBFS。请注意，频率计的显示精度虽然达到 0.01 Hz，但它的准确度不会超过 ADC 时钟的准确度。<BR><BR>
+            <IMG SRC="../../images/freqmeter.jpg" ALT="频率计"><BR CLEAR="all">
+
+            <DT>IACC
+            <DD>显示 <A href=iacc.html>IACC</A> 面板，用来计算双耳互相关（Inter-Aural Cross Correlation）<BR><BR>
+            <IMG SRC="../../images/iacc.jpg" ALT="IACC 面板"><BR CLEAR="all">
+
+            <DT>STI
+            <DD>显示 <A href=sti.html>STI</A> 面板，用来按 IEC 60268-16:2020 的间接法（indirect method）计算语音传输指数（Speech Transmission Index）<BR><BR>
+            <IMG SRC="../../images/sti.jpg" ALT="STI 面板"><BR CLEAR="all">
+
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

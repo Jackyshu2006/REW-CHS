@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>REW 快速入门</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">REW 快速入门</A></H2>
+
+        <P>REW 是一款测量声学系统传递函数（transfer function）的软件。它能显示对应的频率响应、相位响应和脉冲响应，以及由这些响应推导出的各种参数。
+
+        <P>如果这句话让你想问：<I>这到底在说什么？</I>那不妨花几分钟读一读 <A HREF="primer.html#top">信号与测量</A> 这篇入门介绍，先弄明白基本概念。即使你已经熟悉这些术语，快速浏览一遍也会有帮助。
+
+        <H3><A name="explanation">REW 如何进行测量</A></H3>
+
+    	<P>REW 采用对数正弦扫频法（logarithmic sine sweep）来测量，下面做个基本说明。你要是没兴趣了解原理，可以 <A HREF = "#equipment">跳过这一部分解释</A>。</P>
+
+        <P>想深入了解对数扫频法及其各种替代方法，可以读 Swen Müller 与 Paulo Massarani 的论文《使用扫频进行传递函数测量》（Transfer-Function Measurement with Sweeps）。
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD rowspan="2">做一次测量，需要一个声源（音箱或低音炮）和一支麦克风。声压计里也有麦克风，很多声压计可以代替麦克风使用。<BR><BR><BR><BR>
+            测量时，把一个对数扫频信号送到声源。信号频率从低开始，平稳升高。对数扫频的特点是：频率每翻一倍，所用时间都相同。所以从 20 Hz 到 40 Hz、从 40 Hz 到 80 Hz、从 4 kHz 到 8 kHz，各用同样的时间。<BR><BR><BR><BR>
+            麦克风拾取这段扫频。它既收到从声源直达的声音，也收到所有先经房间表面反射再传来的声音。有些声音可能在房间里反射好几次，才到达麦克风。
+            <TD width='110'><IMG SRC="../../images/measurebutton.jpg" ALIGN="left" ALT="测量中" >
+        <TR>
+            <TD width='110'><IMG SRC="../../images/sweep.jpg" width="103" height="86" ALIGN="left" ALT="扫频" >
+        </TABLE>
+
+        <P>扫频结束后，开始分析。REW 用一种叫“快速傅里叶变换（FFT）”的算法，算出构成这段扫频的频谱，得到各个频率上的幅度和相位。再把麦克风收到的信号与发出的扫频比较各频率的幅度和相位，就能算出我们所测的音箱<i>和房间</i>对每个频率产生了什么影响。
+
+        <P>这就是房间从声源位置到麦克风位置的“传递函数（transfer function）”。注意：声源位置不同，传递函数就不同；麦克风位置不同，传递函数也不同。换句话说，<i>一次测量只对某一个特定的声源位置和麦克风位置有效</i>。
+
+        <P>有了传递函数，再做一次“快速傅里叶逆变换（IFFT, inverse FFT）”，就能把频率上的幅度和相位信息还原成一个时间信号。这个信号描述的是：<I>任意</I>信号从声源传到麦克风时会怎样变化。它叫“脉冲响应（impulse response）”。和它所依据的传递函数一样，脉冲响应也只对某一个特定的声源和麦克风位置有效。</P>
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+	<TR>
+	<TD>其实，假如能在声源位置发出一个极短促却很响的声学脉冲（click），再录下麦克风随后收到的声音，录到的信号就和脉冲响应完全相同。（这里的“极短促”是指这个声学脉冲只持续一个采样点的时间。比如采样率为 48 kHz 时，就是 1/48000 秒，约 21 微秒。）<BR><BR><BR><BR>
+            你可能会问：那干脆用一声脉冲声不就行了？难点在于，脉冲太短，就必须极响，这样才能在房间背景噪声之上听清它之后发生的一切。音箱发不出这样的声音，得靠发令枪或戳破气球之类才行。另外，还得有一支麦克风，既扛得住那一声极响的脉冲，又收得到房间里更细微的回声。<BR><BR><BR><BR>
+            你的家人和邻居多半也受不了你为摸清房间一遍遍开枪。就算他们忍了，效果也不如扫频。<BR><BR><BR><BR>
+            说得专业点，扫频法能得到高得多的信噪比（S/N）。信噪比取决于背景噪声电平，也取决于测试信号含有多少能量，而能量又取决于信号多响、持续多久。脉冲极短，要有可观的能量就得极响。扫频可以持续好几秒，即使音量适中，总能量也可以接近脉冲的一百万倍。
+            <TD width='100'><IMG SRC="../../images/pistol.jpg" width="81" height="145" ALIGN="left" ALT="手枪" >
+        </TABLE>
+
+        <P>拿到脉冲响应后，就能对它做分析，算出房间的各种表现。最简单的分析是做一次 FFT，得到声源与麦克风位置之间的频率响应。不过有一点由我们掌控：让 FFT 分析脉冲响应的哪一段，决定了我们看到房间响应的哪个方面。
+脉冲响应的前段，对应从声源到麦克风的直达声，也就是两者之间最短的路径。经房间表面反射的声音要走更远，到得更晚。所以脉冲响应的后段，反映的是房间本身对声音的影响。
+对脉冲响应做“窗函数处理（windowing）”、只取最开始的一段，得到的就是直达声的频率响应，几乎不受房间（环境）影响。把窗口放宽到包含后段，就能看到房间的影响如何改变频率响应。由脉冲响应推导出的频率响应，能把直达声和后续（反射）声各自的成分分开。这正是它与实时分析（RTA）的一个关键区别：RTA 只能显示声源和房间共同产生的总响应。
+
+        <P>我们还能从脉冲响应里得到其他信息，比如“瀑布图（waterfall plot）”。做法是沿着脉冲响应逐步移动一个时间窗口，把每一步算出的频率响应依次画出来，形成一张三维图，展示响应随时间的变化。
+还有房间的“RT60”数据，也就是声音在各个频段里衰减 60 dB（即声压降到原来的千分之一）所需的时间。<BR>
+
+        <H3><A name="equipment">所需设备</A></H3>
+        <BR><UL>
+            <LI>首先，你得有一个能采集测试信号的办法，可选方案有几种：
+            <UL>
+                <LI>自带校准文件（calibration file）的 USB 麦克风。这类麦克风可用于低频或全频段测量。如果校准文件里的灵敏度数据是 REW 能识别的格式，它还能当作校准过的声压计使用。USB 麦克风做房间测量效果很好，但不太适合扬声器设计，因为它不支持回环（loopback）连接，无法取得精确的时间基准。REW 的声学时间基准（acoustic timing reference）可以作为替代办法，但效果如何，要看具体的麦克风和测量环境。<BR><BR>
+            <div style='display:none'> <!-- Java帮助系统查看器的外部链接启动器 --> <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher"> <param name="text" value="www.minidsp.com"> <param name="content" value="https://www.minidsp.com/products/acoustic-measurement/umik-1"> </object> <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher"> <param name="text" value="亚马逊"> <param name="content" value="https://www.amazon.com/gp/product/B00N4Q25R8/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00N4Q25R8&linkCode=as2&tag=roomeqwizar07-20&linkId=d3063b35f3c13b526a79c93a5b3c5024"> </object> </div> <div class="onlineonly"> 推荐用 miniDSP UMIK-1，它的校准数据就是 REW 友好的格式，见 <a href="https://www.minidsp.com/products/acoustic-measurement/umik-1">www.minidsp.com</A> 或 <a href="https://www.amazon.com/gp/product/B00N4Q25R8/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00N4Q25R8&linkCode=as2&tag=roomeqwizar07-20&linkId=d3063b35f3c13b526a79c93a5b3c5024">亚马逊</A>。 </div> <br>
+                <LI>USB 麦克风之外，另一种选择是模拟麦克风。多数模拟麦克风都需要一个前置放大器（preamplifier），把信号放大到线路电平（line level），并给麦克风供幻象电源（phantom power）。做全频段测量时，必须先校准麦克风的响应，结果才准。最好再有一支声压计，提供一个基准声压级读数，用来校准 REW 的 SPL 显示。<BR>
+
+                <LI>最后一种选择是带线路电平模拟输出的声压计。Radio Shack（RS）声压计不论模拟还是数字显示版，做低频房间声学都完全够用。Galaxy CM-140 声压计的频率响应更贴合 C 计权曲线，在低音炮频段以上的表现也比 RS 好，只是价格更贵。<BR>
+
+                <IMG SRC="../../images/rsmeter.jpg" ALT="RS 声压计" BORDER=0 ALIGN="left" width="150" height="161">
+                <IMG SRC="../../images/rsmeter2.jpg" ALT="RS 声压计" BORDER=0 ALIGN="left" width="90" height="130">
+                <IMG SRC="../../images/rsmeter3.jpg" ALT="RS 声压计" BORDER=0 ALIGN="left" width="120" height="170"><BR clear="all"><BR>
+
+            </UL>
+
+            <LI>一个用来支撑麦克风或声压计（下文统称“麦克风”）的三脚架。麦克风哪怕轻微移动，测量结果都可能有很大变化。要拿到可重复的结果，就必须能把麦克风长时间稳稳固定住。<BR><BR>
+            做低频测量（几百 Hz 以下）时，可以让麦克风垂直朝上。这样测不同音箱时不必来回挪它，读声压计也方便，此时用“90 度”麦克风校准文件。要测更高的频率，最好让麦克风正对着被测音箱，这时改用“0 度”校准文件。两种情况下，麦克风都应放在你日常聆听位置的耳朵高度。
+
+            <LI>如果用 USB 麦克风，电脑的耳机输出就能生成 REW 要用的测试信号，不需要外接音频接口。如果用的是声压计，或带前置放大器的麦克风，就需要一个带线路输入、线路或耳机输出的音频接口（内置或外置都行）。<BR><BR>
+            <B>注意：老式 PC 和笔记本上那种只供麦克风用的输入口不适合，别用它</B>——它们增益过高，多数噪声大、带宽也窄。麦克风/线路二合一的输入口则可以正常使用。便宜的或内置的接口通常就够用。对着接口做一次回环连接的基准测量，就能把接口本身的频率响应从测量结果里扣掉。
+
+            <LI>用来连接的线缆有两组：一组从声压计或麦克风前置放大器的输出，接到你的音频接口（不用 USB 麦克风时）；另一组从接口的线路或耳机输出，接到你的 AV 处理器（AV processor）或均衡器（equaliser）的输入。线要够长，能从电脑分别接到聆听位置（放麦克风处）和 AV 处理器或均衡器。<BR><BR>
+            如果接口是莲花（RCA）接口，就要莲花对莲花的线。如果接口是 3.5 mm（1/8"）插孔，就需要一对 <B>立体声</B> 插头转立体声莲花插头的线（也叫 Y 型适配器线缆），或者立体声音频适配器，如下图所示。<BR>
+            <IMG SRC="../../images/yadaptor.jpg" ALT="Y 型适配器线缆" BORDER=0 ALIGN="left" width="212" height="171"><BR clear="all">
+            <IMG SRC="../../images/audioadaptor.jpg" ALT="立体声音频适配器" BORDER=0 ALIGN="left" width="81" height="79"><BR clear="all"><BR>
+            如果你用的是公对公的 Y 型线，还得再加两个莲花母对母转接头（也叫 RCA 莲花耦合器，见下图），才能接上通往声压计和 AV 处理器的线缆。
+			（RCA Y 型线有各种规格：公转双公、公转双母、母转双母、母转双公，做测量时手头备几种常能派上用场。）<BR>
+            <IMG SRC="../../images/coupler.jpg" ALT="RCA 莲花插头耦合器" BORDER=0 ALIGN="left" width="136" height="63"><BR clear="all"><BR>
+            如果要接 BFD Pro DSP1124P 或 FBQ2496，则需要莲花转单声道 1/4" 插头的转接头，如下图。<BR>
+            <IMG SRC="../../images/phonotomono.jpg" ALT="RCA 莲花转单声道插头耦合器" BORDER=0 ALIGN="left" width="182" height="66"><BR clear="all"><BR>
+
+            <LI>如果要用 REW 的 MIDI 通信功能来设置均衡器的滤波器，还需要一个连到均衡器的接口。与 BFD Pro DSP1124P 或 FBQ2496 通信的具体要求见 <A HREF="bfdcomms.html#top">此处</A>。<BR>
+            <IMG SRC="../../images/um1xsmall.jpg" ALT="MIDI 接口" BORDER=0 ALIGN="left" width="180" height="114"><BR clear="all"><BR>
+
+        </UL>
+
+        <H3><A name="connections">连接</A></H3>
+
+        <P>用声压计测量时的整体接法如下图。如果你用的是 USB 麦克风，就不必接任何接口输入，直接把麦克风插到电脑的 USB 口即可。<BR>
+        <IMG SRC="../../images/interconnectsplmeter.jpg" ALT="声压计连接示意图" BORDER=0 ALIGN="left"><BR clear="all">
+
+        <BR><UL>
+            <LI>不用 USB 麦克风时，接口的一个输入通道用来测量麦克风或声压计送来的声压信号。这个通道必须接到声压计或麦克风前置放大器的模拟输出。默认使用右输入通道，但任一输入通道都可以用。监听哪个输入，由 <A HREF="soundcard.html#top">设置 → 声卡</A>（Soundcard Preferences）里的一个选项决定。
+
+            <LI>接口的其中一个输出通道（通常是右通道），必须接到你 AV 处理器的一个输入通道，或均衡器的输入。<BR><BR>
+            接到 AV 处理器，就能测出主音箱和低音炮的响应，看主音箱与低音炮之间的衔接，还能把 AV 处理器低音管理（bass management）的效果一并算进测量。接到 AV 处理器模拟输入的左通道或右通道，则能测出对应那只主音箱和低音炮的响应。想把某只主音箱或低音炮排除在测量之外，把它关掉或断开即可。
+
+            <LI>如果你的电脑和 AV 处理器都支持通过 HDMI 传输音频，也可以用 HDMI 连接传音频。这时要在“设置 → 输出设备（Preferences → Output Device）”里，把 HDMI 音频驱动选为输出设备。如果你用 Windows，还想通过 HDMI 访问多通道输出，就要选名字以“EXCL”开头的那个 Java 输出设备（对应 WASAPI 独占驱动），或者用 FlexASIO 这类 ASIO 封装。
+
+            <LI>其余的输入、输出通道，做基本测量用不到。要补偿接口本身的响应，可以做一次基准测量：把输出直接接到输入，再让 REW 从之后的房间测量里减去这条已测响应。<BR><BR><BR><BR>
+            不过，也可以把接口的另一路输出接到另一路输入，做一个回环连接，当作时间基准（timing reference）。这样 REW 测量时就能自动补偿接口和操作系统带来的时间延迟。要比较不同测量之间的相位或时间延迟，或者要在多通道系统里把各音箱的延迟设置调对，都需要一个时间基准。这样做时，可能还要再加一个 RCA 莲花耦合器来接这条回环。REW 是否把某个通道用作时间基准，由“测量”对话框上的一个选项控制。<BR><BR><BR><BR>
+            如果输入用的是 USB 麦克风而不是接口，可以改用声学时间基准（acoustic timing reference）。使用声学时间基准时，REW 先在被选作参考的输出通道上生成一段时间基准信号，再在被测通道上生成测量扫频。这段时间基准信号是一段高频扫频，目的是定时准确，所以低音炮不能用作参考通道。<BR><BR><BR><BR>
+            这样测出的每条测量都带一个时间延迟，对应被测音箱和参考音箱到麦克风的距离之差。参考音箱更远时，这个延迟是负的。<BR><BR>
+            <B>注意</B>：声学时间基准不能和多次重复扫频一起使用。
+        </UL>
+
+        <H3><A name="eqconnections">均衡器连接</A></H3>
+
+        <P>如果用均衡器（比如 BFD Pro DSP1124P 或 FBQ2496）来优化低音炮的响应，应把它接在 AV 处理器的 LFE/超低音输出和低音炮的低电平输入之间。<I>对 BFD Pro，要把后面板上的工作电平开关按进去，选到 -10 dBV 挡。</I><BR><BR>
+        <IMG SRC="../../images/connectionsav2.jpg" ALT="连接示意图" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <P>如果所用的 AV 处理器输入带防削波（anti-clipping）功能（一检测到大信号就自动降低灵敏度），应把它关掉，否则可能让测量电平发生偏移。输入的灵敏度最好设到 0.5 V，不过这一点并不关键。
+
+        <P>TAG McLaren AV32R DP 和 AV192R，可以通过每只音箱的 TMREQ 滤波器菜单里的“测试信号”项，把测试信号输入路由到任意一路音箱输出，测其他音箱时很方便（详见 <A HREF="avpcomms.html#avptestsignalselection">此说明</A>）。
+
+        <P>它们似乎是唯一带这种功能的 AV 处理器。其他处理器的 5.1、7.1 模拟输入或许也能达到类似效果，但有些情况下，这类输入不经过低音管理，就没法充分检查低音炮与主音箱的衔接。
+
+        <H3><A name="meterrange">声压计量程</A></H3>
+
+        <P>如果拿声压计作输入，把它的量程设到你平常做音箱电平校准时用的值，并且使用 REW 期间不要再动它。如果用 Radio Shack 声压计，而你的系统校准在 75 dB（这是 Dolby<FONT SIZE="-1"><SUP>TM</SUP></FONT> 推荐的标准电平），就选 80 dB 量程。
+
+        <P>把声压计设成 C 计权、“慢（slow）”响应。<FONT COLOR=#4076c0>然后在 <A HREF="calfiles.html#top">设置 → 校准文件</A>（Preferences → Cal Files）里勾选 <FONT CLASS="settings">输入设备为 C 计权声压计</FONT> 这一项。</FONT>
+
+        <P>
+
+        <H3><A name="gotooverview">REW 概述</A></H3>
+
+        <P>设备都备齐了，接下来可以在 <A HREF="rewoverview.html#top">REW 概述</A> 里，看看 REW 本身是怎样组织起来做测量、分析测量的。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>均衡器选择</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">均衡器选择</A></H2>
+
+        <P><IMG SRC="../../images/equaliserselector.jpg" ALT="均衡器选择" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>均衡器面板用来选择均衡器（equaliser）的类型，REW 会按所选均衡器模拟各个滤波器的响应。可选的均衡器按制造商和型号分组。
+
+        <P>更换均衡器类型后，<A href="eqfilters.html#top">EQ 滤波器面板</A>会随之更新，改用所选均衡器对应的设置。已经设好的滤波器会尽量保留；但必要时参数值会被调整，以符合新均衡器的调节范围和步进。
+
+        <P>当前选中的均衡器显示在面板标题里，括号内是它的工作采样率。EQ 滤波器面板里也会显示当前均衡器。
+
+        <P>如果所选均衡器还有附加设置，型号下拉框旁边会出现一个齿轮图标。目前只有可配置 PEQ 有附加设置。
+        <P><IMG SRC="../../images/equaliseradditionalsettings.jpg" ALT="带附加设置的均衡器" BORDER=0><BR CLEAR="ALL">
+
+        <H3>支持的均衡器</H3>
+
+        <DL>
+            <DT><A name="acoustas">AirDSP by Acoustas</A>
+            <DD>Acoustas AirDSP 均衡器有 15 个频段，提供峰值、低频搁架和高频搁架滤波器，另加 2 个分频滤波器。分频滤波器支持巴特沃斯、贝塞尔和 Linkwitz-Riley 三种特性，最高 8 阶（48 dB/倍频程）。<BR><BR>
+            峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.25 dB
+                <TR ALIGN="center"><TD>峰值 Q<TD>0.1<TD>10<TD>0.01
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.1<TD>1<TD>0.01
+            </TABLE>
+
+            <DT><A name="ADA">ADA PEQ</A>
+            <DD>ADA 均衡器只支持参数式滤波器（parametric filter），最多 12 个。<BR><BR>
+            滤波器带宽指两个半增益点（half gain points）之间的频率宽度，单位为 Hz。半增益点是增益达到设定值一半（按 dB 计）的两个频率点。带宽由中心频率（centre frequency）和 Q 值按下式算出：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            <B>注意：ADA 的滤波器形状尚未用实机验证。</B><BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-10<TD>+10<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>0.1
+            </TABLE>
+
+            <DT><A name="aunbandeq">Apple AU N-Band EQ</A>
+            <DD>AU N-Band EQ 是软件 EQ，运行时的采样率跟随它所作用的测量。这个均衡器支持 16 个滤波器。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            不过，带宽在界面上要按倍频程输入。<BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>22000<TD>100 Hz 以下 0.01 Hz，1 kHz 以下 0.1 Hz，1 kHz 以上 1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-96<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>带宽<TD>0.02<TD>5<TD>0.01 倍频程
+            </TABLE>
+
+            <DT><A name="audiotec">Audiotec Fischer</A>
+            <DD>Audiotec Fischer 有四个条目：Full EQ（30 段）、Half EQ（15 段）、Input EQ（7 段）和 EQ with TC（27 段）。<BR><BR>
+            四个条目都提供峰值滤波器（peak filter）、模态滤波器（modal filter）、低频搁架滤波器（low shelf filter）和高频搁架滤波器（high shelf filter）。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-30<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>峰值 Q<TD>0.5<TD>50<TD>0.01
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.1<TD>2<TD>0.1
+            </TABLE>
+
+
+            <DT><A name="audison">Audison/Hertz</A>
+            <DD>Audison/Hertz 有四个条目：31 bands (Outputs)、15 bands (Outputs)、12 bands (Inputs) 和 5 bands (User tuning)，分别是输出 31 段、输出 15 段、输入 12 段和用户调音 5 段。<BR><BR>
+            四个条目都提供峰值滤波器；除 5 段条目外，其余三个还提供低频搁架和高频搁架滤波器。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>峰值 Q<TD>0.5<TD>16<TD>0.01
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.5<TD>1.41<TD>0.01
+            </TABLE>
+
+
+            <DT><A name="bfdpro">Behringer BFD Pro DSP1124P/FBQ1000</A>
+            <DD>DSP1124P 均衡器支持该机的参数式滤波器，最多 12 个。注意，这款均衡器现在改以 FBQ1000 的型号销售。<BR><BR>
+            滤波器设置可以用<EM>发送滤波器设置至均衡器</EM>操作，经 <A href="bfdcomms.html">MIDI 连接</A>传给均衡器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>见下文
+                <TR ALIGN="center"><TD>增益<TD>-48<TD>+16<TD>1 dB
+                <TR ALIGN="center"><TD>BW/60<TD>1<TD>120<TD>1
+            </TABLE><BR>
+
+            频率控件按 DSP1124P 支持的近似 1/60 倍频程步进调节，也就是把 ISO 1/3 倍频程的每个间隔再均分成 20 份。<A HREF="eqfilters.html#top">EQ 滤波器面板</A>会在实际频率旁边，同时显示 DSP1124P 自己使用的 1/3 倍频程值和微调值。<BR><BR>
+
+            “BW/60”控件模拟 DSP1124P 带宽设置的效果。它按下式设定滤波器在两个半增益点之间的带宽：<BR><BR>
+
+            <DIV ALIGN="center">带宽 (Hz) = 中心频率*(BW/60)*sqrt(2)</DIV><BR>
+
+            例如，带宽设为 60/60 时，一个中心频率 1 kHz、增益 -6 dB 的滤波器，在响应穿过 -3 dB 的两点之间，带宽为 1414 Hz。调节滤波器增益时，这个带宽保持不变。<BR><BR>
+            注意：Behringer 的 DSP1100 软件包<B>没有</B>正确再现带宽控件的实际工作方式，它算出的带宽只有实际值的 1/sqrt(2)。<BR><BR>
+
+            用这种方式定义滤波器带宽并不少见，TMREQ 的滤波器也用类似的定义。DSP1124P 的 Q 值与带宽的关系为：<BR><BR>
+            <DIV ALIGN="center">Q = 60/[(BW/60)*sqrt(2)]</DIV><BR><BR>
+
+            因此，带宽范围 1/60 至 120/60 对应的 Q 值范围是 42.4 至 0.35。
+
+            <DT><A name="fbq2496">Behringer BFD Pro FBQ2496</A>
+            <DD>FBQ2496 均衡器支持该机的参数式滤波器，最多 20 个。滤波器设置可以用<EM>发送滤波器设置至均衡器</EM>操作，经
+            <A href="bfdcomms.html">MIDI 连接</A>传给均衡器，但传输并不总是可靠。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1/60 倍频程
+                <TR ALIGN="center"><TD>增益<TD>-36<TD>+15<TD>0.5 dB（-15 dB 以下为 1 dB）
+                <TR ALIGN="center"><TD>带宽<TD>1/60<TD>10<TD>单位为倍频程，见下文
+            </TABLE><BR>
+
+            频率控件大约按 1/60 倍频程步进，准确地说是 1/200 十倍频程。<BR><BR>
+
+            带宽控件在 1/60 至 5/60 倍频程之间按 1/60 倍频程步进，此后依次为 1/10、1/9、1/8、1/7、1/6、1/5、1/4、1/3、1/2、3/4、1、1.5、2、3、4、5、6、7、8、10 倍频程。<BR><BR>
+
+            FBQ2496 的 Q 值与带宽（以倍频程计）的关系为：<BR><BR>
+            <DIV ALIGN="center">Q = sqrt(2)/带宽</DIV><BR><BR>
+
+            因此，带宽范围 1/60 至 10 倍频程对应的 Q 值范围是 84.85 至 0.14。
+
+            <DT><A name="dcx2496">Behringer DCX2496</A>
+            <DD>DCX2496 均衡器支持参数式滤波器（界面上标为“BP”，即带通 Band Pass），以及斜率为 6 dB/倍频程和 12 dB/倍频程的低频、高频搁架滤波器。<BR><BR>
+            它还可以定义两个分频滤波器（crossover filter），低通（LP）或高通（HP）均可。分频特性可选：巴特沃斯（Butterworth）6、12、18、24、48 dB/倍频程；贝塞尔（Bessel）12、24 dB/倍频程；Linkwitz-Riley 12、24、48 dB/倍频程。<BR><BR>
+            每个通道最多 9 个 EQ 滤波器，具体数量取决于设备同时在做的其他处理。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>每十倍频程 106 步
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>每十倍频程 20 步
+            </TABLE><BR>
+
+            频率控件每步为 1/106 十倍频程。Q 值控件每步为 1/20 十倍频程，也就是说，0.1 到 1 之间有 20 个 Q 值，1.0 到 10 之间也有 20 个。
+
+            <DT><A name="timezero">Beta Three TimeZero2.6D/4.8D</A>
+            <DD>Beta Three TimeZero2.6D/4.8D 均衡器提供峰值、低频搁架、高频搁架、陷波（notch）和全通（all pass）滤波器。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            TimeZero2.6D/4.8D 最多 5 个滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-16<TD>+12<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.31<TD>19.4<TD>0.01
+            </TABLE>
+
+            <DT><A name="camilla">CamillaDSP</A>
+            <DD>CamillaDSP 均衡器是软件 EQ，运行时的采样率跟随它所作用的测量。<BR><BR>
+            它支持多种只用一个 biquad（二阶滤波单元）实现的滤波器，包括：峰值（即参数式）、Q 可调的二阶低通和高通、Q 可调的低频搁架和高频搁架、Q 可调的陷波、全通，以及 Linkwitz 变换（Linkwitz Transform）。<BR><BR>
+            它还提供由多个 biquad 级联而成的分频滤波器，特性可选巴特沃斯或 Linkwitz-Riley，最高 8 阶。<BR><BR>
+
+            滤波器可以保存为 YAML 文件（CamillaDSP 使用的配置文件格式），也可以从 YAML 文件载入。已有的 CamillaDSP 滤波器配置可以导入；其中不支持的滤波器类型会被跳过，并给出警告信息。要导入的数据必须在文件开头带有“filters:”标签。<BR><BR>
+
+            峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            这个均衡器最多支持 20 个参数式滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>22000<TD>100 Hz 以下 0.01 Hz，1 kHz 以下 0.1 Hz，1 kHz 以上 1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-120<TD>+30<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE>
+
+            <DT><A name="usm810">Crown USM810</A>
+            <DD>USM810 均衡器只支持参数式滤波器，最多 10 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            <B>注意：USM810 的滤波器形状尚未用实机验证。</B><BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-24<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>35<TD>0.01
+            </TABLE>
+
+            <DT><A name="dbaudio">d&amp;b audiotechnik tuning filters</A>
+            <DD>d&amp;b audiotechnik tuning filters（d&amp;b 调音滤波器）提供 PEQ、Q 可调的陷波、斜率最高 24 dB/倍频程的低频搁架和高频搁架，以及 d&amp;b 非对称滤波器（asymmetric filter）。非对称滤波器对一段频率范围做搁架式调节，范围两端的斜率可以分别选择。<BR><BR>
+            滤波器可以保存为 .rcp 文件，也可以从 .rcp 文件载入，这种文件与 d&amp;b 的 R1 软件兼容。PEQ 滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            d&amp;b 调音滤波器最多 16 个滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-18<TD>+12<TD>0.2 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>25<TD>0.05
+            </TABLE>
+
+            <DT><A name="dualcore">DSPeaker Anti-Mode Dual Core</A>
+            <DD>Dual Core 均衡器只支持参数式滤波器，最多 16 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*(-3 dB 带宽)</DIV><BR>
+            <DIV ALIGN="center">Q = 中心频率/(sqrt(增益)*(-3 dB 带宽))</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>5<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-36<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>-3 dB 带宽<TD>1<TD>10000<TD>1
+            </TABLE>
+
+            <DT><A name="eightc">Dutch &amp; Dutch 8c</A>
+
+            <DD>Dutch &amp; Dutch 8c 均衡器支持 24 个滤波器，类型为峰值和搁架。这些滤波器设置可以经局域网写入扬声器，也可以从扬声器读回。它还会显示扬声器的低音、高音和低音炮滤波器设置。<BR><BR>
+            在 Windows 上第一次选择 8c 均衡器时，系统会弹出防火墙提示，需要允许 REW 访问网络。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>15<TD>20000<TD>100 Hz 以下 0.01 Hz，1 kHz 以下 0.1 Hz，1 kHz 以上 1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-120<TD>+3<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE><BR><BR>
+
+            选择 8c 均衡器时，REW 会扫描局域网，寻找扬声器。如果在设置 → 均衡器里把 8c 设为默认均衡器，REW 启动时也会扫描。滤波器任务面板里还有<EM>扫描网络寻找扬声器</EM>操作，可以重新扫描，并在对话框里列出结果。<BR><BR>
+            <EM>发送滤波器至扬声器或组</EM>操作把滤波器设置写入所选的扬声器或扬声器组。<EM>从扬声器或组载入滤波器</EM>操作读回所选扬声器或扬声器组的滤波器设置。<BR><BR>
+            刚读回时，各滤波器的<EM>自动 EQ</EM> 都不勾选，即由手动控制；但如果某个滤波器在发送到扬声器时已勾选自动 EQ，读回后它仍保持勾选。要让 REW 在自动目标匹配中使用某个滤波器，勾选它的<EM>自动 EQ</EM>。<BR><BR>
+
+            如果在设置 → 均衡器里把 8c 设为默认均衡器，测量对话框会多出一个选项：由扬声器自己播放测量信号。这种方式使用扬声器内置的测量扫频文件。<BR><BR>
+            由扬声器播放测量信号时，REW 会在测量的同时记录扬声器当时的滤波器设置，这些设置可以在信息面板里查看。它们随测量文件一起保存。这样，后续调整滤波器时可以把测量时已经生效的滤波器考虑进去，一轮一轮迭代调整。<BR><BR>
+            如果测量时记录了滤波器设置，滤波器任务面板里的<EM>重置当前测量结果的滤波器</EM>操作会让你选择：把滤波器重置为测量时的设置（按测量值），或重置为“无”。<BR><BR>
+
+            选择 8c 作为均衡器时，目标设置会被设为：
+            <UL>
+                <LI>扬声器类型：全频扬声器
+                <LI>低频斜率：24 dB/倍频程
+                <LI>低频截止 (Hz)：20
+                <LI>低频提升起始 (Hz)：100
+                <LI>低频提升结束 (Hz)：20
+                <LI>低频提升斜率 (dB/octave)：1.0
+                <LI>高频衰减起始 (Hz)：1000
+                <LI>高频衰减斜率 (dB/octave)：0.0
+            </UL>
+            同时，目标匹配范围设为 20 至 100 Hz，匹配结束频率最高为 1000 Hz。
+
+            <DT><A name="ucm200">Emotiva UMC-200</A>
+            <DD>UMC-200 均衡器只支持参数式滤波器，最多 11 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            <B>注意：UMC-200 的滤波器形状尚未用实机验证。</B><BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>共 256 档
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+3<TD>0.25 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>24<TD>0.125
+            </TABLE>
+
+            <DT><A name="xmc1">Emotiva XMC-1</A>
+            <DD>XMC-1 均衡器只支持参数式滤波器，最多 11 个。<EM>保存滤波器设置至文件</EM>操作把滤波器设置写入文件，格式可直接供 Emotiva 软件使用。
+            滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-64<TD>+6<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.6<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="rmc1">Emotiva RMC-1</A>
+            <DD>RMC-1 均衡器支持的滤波器数量和类型与 XMC-1 相同，但保存或载入 .emo 文件时，可选的声道更多。RMC-1L 和 XMC-2 也可以使用这个条目。
+
+            <DT><A name="twk88">JL Audio TwK-88</A>
+            <DD>TwK-88 均衡器只支持峰值滤波器，最多 10 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益按倍数计，衰减时小于 1，所以 Q 值相同时，衰减滤波器的带宽比提升滤波器窄。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+6<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>10<TD>0.01
+            </TABLE>
+
+            <DT><A name="etonaudio">ETON Audio</A>
+            <DD>ETON Audio 的各个均衡器条目支持参数式、HSQ 和 LSQ 滤波器。HSQ、LSQ 是 Q 可调的高频搁架和低频搁架。<BR><BR>
+            所有条目都工作在 96 kHz，滤波器数量因型号而异。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-24<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>15<TD>0.1
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.1<TD>2.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="esxaudio">ESX Audio</A>
+            <DD>ESX Audio 的各个均衡器条目支持参数式、HSQ、LSQ 滤波器，部分型号还支持 AP 滤波器。HSQ、LSQ 是 Q 可调的高频搁架和低频搁架，AP 是全通。<BR><BR>
+            所有条目都工作在 96 kHz，滤波器数量因型号而异。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>15<TD>0.1
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.3<TD>2.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="gracedesign">Grace Design m908</A>
+            <DD>Grace Design m908 均衡器提供峰值、模态、低通、高通、低频搁架和高频搁架滤波器。<BR><BR>
+            滤波器可以保存为 .csv 文件，方法是用<EM>保存滤波器设置至文件</EM>操作，或点滤波器面板上的保存按钮。也可以从 .csv 文件读回，方法是用<EM>从文件载入滤波器设置</EM>操作，或点滤波器面板上的载入按钮。REW 的模态滤波器保存时会存成峰值滤波器。<BR><BR>
+            峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            Grace Design m908 最多 12 个滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>随频率而定
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.2<TD>50<TD>10 以下为 0.02，10 以上为 0.1
+            </TABLE>
+
+            <DT><A name="hypex">Hypex</A>
+            <DD>Hypex Input EQ 均衡器支持参数式、低频搁架和高频搁架滤波器，最多 9 个。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>40000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-15.9<TD>+15.9<TD>0.01 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>20<TD>0.001
+            </TABLE>
+
+            <DT><A name="jrultr">JRULTR</A>
+            <DD>JRULTR 低音炮均衡器支持参数式、低频搁架和高频搁架滤波器，最多 12 个，另加 2 个分频滤波器。分频滤波器支持巴特沃斯、贝塞尔和 Linkwitz-Riley 三种特性，最高 8 阶（48 dB/倍频程）。<BR><BR>
+            参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>200<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>150<TD>0.01
+            </TABLE>
+
+            <DT><A name="kali">Kali Audio Santa Monica</A>
+            <DD>Kali Audio Santa Monica 均衡器提供一阶低通和高通、Q 可调的二阶低通和高通、峰值、模态、Q 可调的低频搁架和 Q 可调的高频搁架滤波器。<BR><BR>
+            滤波器可以用<EM>保存滤波器设置至文件</EM>操作保存为 .keq 文件，也可以用<EM>从文件载入滤波器设置</EM>操作从 .keq 文件读回。REW 的模态滤波器保存时会存成峰值滤波器。<BR><BR>
+            峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            Kali Audio SM 最多 8 个滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>40000<TD>100 Hz 以下 0.1 Hz，以上 1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-24<TD>+18<TD>0.05 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="minidsp">MiniDSP 48 kHz plug-ins</A>
+            <DD>miniDSP 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 6 个滤波器，工作在 48 kHz。它面向 miniDSP 插件的 Advanced（高级）模式，这种模式允许直接用 biquad 系数指定滤波器。<BR><BR>
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用（注意，按 miniDSP 的格式要求，a1 和 a2 系数取反）。这种方式的好处是频率和 Q 值的步进极细，可以精确对准模态共振（modal resonance）。<BR><BR>
+            miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="minidsp96k">MiniDSP 96 kHz plug-ins</A>
+            <DD>miniDSP-96k 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 5 个滤波器，面向工作在 96 kHz 的 miniDSP 插件。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="minidsp2x4hd">MiniDSP 2x4 HD</A>
+            <DD>miniDSP 2x4 HD 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 96 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="nanoavr">MiniDSP nanoAVR</A>
+            <DD>miniDSP nanoAVR 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 96 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12</A>
+            <DD>miniDSP C-DSP 8x12 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 192 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12 DL</A>
+            <DD>miniDSP C-DSP 8x12 DL 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 48 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="minidspflex">MiniDSP Flex</A>
+            <DD>miniDSP Flex 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 96 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="minidspflexdl">MiniDSP Flex with Dirac Live</A>
+            <DD>miniDSP Flex with Dirac Live 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 48 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
+
+            <DT><A name="minidsptide16">MiniDSP Tide-16</A>
+            <DD>miniDSP Tide-16 均衡器支持 20 个参数式、搁架或全通滤波器，工作在 48 kHz。<BR><BR>
+            参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-16<TD>+16<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>20<TD>0.1
+            </TABLE>
+
+            <DT><A name="mosconi">Mosconi</A>
+            <DD>Mosconi 有两个条目：Channel EQ（9 段）和 Main EQ（30 段）。Main EQ 只有峰值和模态滤波器；Channel EQ 提供峰值、模态、低频搁架、高频搁架和全通滤波器。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.51<TD>40<TD>0.01
+            </TABLE>
+
+            <DT><A name="model976">Outlaw Audio Model 976</A>
+            <DD>Model 976 均衡器支持 10 个滤波器。第一个是低频搁架，最后一个是高频搁架，两个搁架滤波器的斜率都是 12 dB/倍频程。其余 8 个是峰值滤波器，它们在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>200 Hz 以下 1 Hz，2 kHz 以下 10 Hz，再往上 100 Hz
+                <TR ALIGN="center"><TD>增益<TD>-20<TD>+3<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>可选值为 0.5、1.0、1.4、2.0、2.4、2.9、3.6、4.8、7.2 和 14
+            </TABLE>
+
+            <DT><A name="musway">Musway</A>
+            <DD>Musway 有两个条目：10 bands (Input) 和 31 bands (Output)，即输入 10 段和输出 31 段。两个条目都提供峰值、低频搁架和高频搁架滤波器，搁架滤波器的 Q 值可调。<BR><BR>
+            滤波器可以用<EM>保存滤波器设置至文件</EM>操作保存为 .json 文件，也可以用<EM>从文件载入滤波器设置</EM>操作从 .json 文件读回。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>峰值 Q<TD>0.2<TD>16<TD>0.01
+                <TR ALIGN="center"><TD>搁架 Q<TD>0.2<TD>1.42<TD>0.01
+            </TABLE>
+
+            <DT><A name="model976">Outlaw Audio Model 976</A>
+            <DD>Model 976 均衡器支持 10 个滤波器。第一个是低频搁架，最后一个是高频搁架，两个搁架滤波器的斜率都是 12 dB/倍频程。其余 8 个是峰值滤波器，它们在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            滤波器调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>200 Hz 以下 1 Hz，2 kHz 以下 10 Hz，再往上 100 Hz
+                <TR ALIGN="center"><TD>增益<TD>-20<TD>+3<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>可选值为 0.5、1.0、1.4、2.0、2.4、2.9、3.6、4.8、7.2 和 14
+            </TABLE>
+
+            <DT><A name="perlisten">PerListen Audio</A>
+            <DD>PerListen Audio 均衡器只支持参数式滤波器，最多 10 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>200<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-20<TD>+3<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>20<TD>0.01
+            </TABLE>
+
+            <DT><A name="dsp30">QSC DSP-30</A>
+            <DD>DSP-30 均衡器只支持参数式滤波器，最多 20 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            <B>注意：DSP-30 的滤波器形状尚未用实机验证。</B><BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-120<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="rephase">rePhase</A>
+            <DD>rePhase 均衡器只支持参数式滤波器，每个通道最多 17 个。<EM>保存滤波器设置至文件</EM>操作把滤波器设置写入文件，格式可直接供 rePhase 软件使用。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>24000<TD>0.01 Hz
+                <TR ALIGN="center"><TD>增益<TD>-96<TD>+96<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>0.01
+            </TABLE>
+
+            <DT><A name="rf3sixty">Rockford Fosgate 3Sixty.3</A>
+            <DD>3Sixty.3 均衡器只支持参数式滤波器，最多 20 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
+
+            式中的增益取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-24<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>6<TD>0.01
+            </TABLE>
+
+            <DT><A name="sonance">Sonance/Blaze</A>
+            <DD>Sonance/Blaze 均衡器条目支持 10 个滤波器，类型很多。滤波器可以用<EM>保存滤波器设置至文件</EM>操作保存到文件。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q（峰值）<TD>0.4<TD>30<TD>0.01
+                <TR ALIGN="center"><TD>Q（搁架）<TD>0.4<TD>10<TD>0.01
+            </TABLE>
+
+            <DT><A name="stormaudio">StormAudio</A>
+            <DD>StormAudio 均衡器有两个选项：“EQ only”（仅 EQ）支持 20 个参数式滤波器；“All models”（全部型号）支持 12 个参数式滤波器和 2 个分频滤波器。分频滤波器支持巴特沃斯和 Linkwitz-Riley 两种特性，最高 8 阶（48 dB/倍频程）。<BR><BR>
+            <EM>保存滤波器设置至文件</EM>操作把滤波器设置写入文件，格式可直接供 StormAudio 软件使用。参数式滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>16<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-96<TD>+48<TD>0.25 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>32<TD>0.25
+            </TABLE>
+
+            <DT><A name="tmreq">TMA TMREQ</A>
+            <DD>TMREQ 均衡器是软件 EQ，运行时的采样率跟随它所作用的测量。它提供 TMREQ 支持的全部滤波器类型和设置：峰值（即参数式）、低通、高通、低频搁架、高频搁架和陷波。峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            TMREQ 最多 8 个滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-15<TD>+6<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.1
+            </TABLE>
+
+            <DT><A name="sms">Velodyne SMS-1</A>
+            <DD>SMS-1 均衡器只支持参数式滤波器，最多 8 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            <B>注意：SMS-1 的滤波器形状尚未用实机验证。</B><BR><BR>
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>15<TD>120<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-13<TD>+6<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>20.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="dspa8">waveFLEX DSP A8</A>
+            <DD>DSP A8 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 5 个滤波器，工作在 96 kHz。
+            <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 waveFLEX 软件使用。
+
+            <DT><A name="Xilica">Xilica XP2040</A>
+            <DD>XP2040 均衡器只支持参数式滤波器，最多 16 个。滤波器带宽按倍频程设定，但滤波器控件里会同时显示对应的带宽（Hz）。
+
+            调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>20<TD>30000<TD>1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-30<TD>+15<TD>0.25 dB
+                <TR ALIGN="center"><TD>带宽<TD>0.02<TD>3.61<TD>0.01 倍频程
+            </TABLE>
+
+            <DT><A name="generic">通用</A>
+            <DD>通用均衡器是软件 EQ，运行时的采样率跟随它所作用的测量。它有两个变体：“通用”和“扩展”。<BR><BR>
+            “通用”提供全套只用一个 biquad 实现的滤波器及其设置：峰值（即参数式）、一阶和二阶低通与高通（二阶含 Q 可调的版本）、低频搁架和高频搁架（含 Q 可调的版本）、陷波、全通，以及 Linkwitz 变换。这些滤波器依据 Robert Bristow-Johnson 的“Cookbook”公式（Audio EQ Cookbook）设计。它还提供一对分频滤波器，特性可选贝塞尔、巴特沃斯或 Linkwitz-Riley，最高 8 阶。<BR><BR>
+            “扩展”的滤波器类型相同，但每个滤波器位置都可以用多个 biquad 级联，因此搁架、低通和高通滤波器的斜率最高可达 48 dB/倍频程。<BR><BR>
+
+            <EM>保存滤波器系数至文件</EM>操作按所选采样率算出对应的滤波器系数，以所选格式写入文件。目前支持 miniDSP 和 SigmaStudio 两种格式。注意，miniDSP 格式中的 a1 和 a2 系数是取反的。<BR><BR>
+
+            用 LPQ 和 HPQ（Q 可调的二阶低通、高通）这两种滤波器类型，可以把多个 biquad 级联（cascade）起来，实现更高阶的滤波器。下表列出几种常见分频类型和阶数所需的各节 Q 值。<B>奇数阶时，最后一节为 LP1/HP1</B>（一阶节），表中以蓝色标出：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TD>2<TD>巴特沃斯<TD>0.707<TD><TD><TD>
+                <TR ALIGN="center"><TD>3<TD>巴特沃斯<TD>1.000<TD><FONT COLOR=#4076c0>LP1/HP1</FONT><TD><TD>
+                <TR ALIGN="center"><TD>4<TD>巴特沃斯<TD>1.307<TD>0.541<TD><TD>
+                <TR ALIGN="center"><TD>5<TD>巴特沃斯<TD>1.618<TD>0.618<TD><FONT COLOR=#4076c0>LP1/HP1</FONT><TD>
+                <TR ALIGN="center"><TD>6<TD>巴特沃斯<TD>1.932<TD>0.707<TD>0.518<TD>
+                <TR ALIGN="center"><TD>7<TD>巴特沃斯<TD>2.247<TD>0.802<TD>0.555<TD><FONT COLOR=#4076c0>LP1/HP1</FONT>
+                <TR ALIGN="center"><TD>8<TD>巴特沃斯<TD>2.563<TD>0.900<TD>0.601<TD>0.510
+                <TR ALIGN="center"><TD>2<TD>Linkwitz-Riley<TD>0.500<TD><TD><TD>
+                <TR ALIGN="center"><TD>4<TD>Linkwitz-Riley<TD>0.707<TD>0.707<TD><TD>
+                <TR ALIGN="center"><TD>8<TD>Linkwitz-Riley<TD>1.307<TD>0.541<TD>1.307<TD>0.541
+            </TABLE><BR>
+
+            峰值滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
+
+            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
+
+            通用均衡器最多 20 个参数式滤波器。调节范围如下：<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
+                <TR ALIGN="center"><TD>频率<TD>10<TD>22000<TD>100 Hz 以下 0.01 Hz，1 kHz 以下 0.1 Hz，1 kHz 以上 1 Hz
+                <TR ALIGN="center"><TD>增益<TD>-120<TD>+30<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE>
+
+            <DT><A name="extended">扩展</A>
+            <DD>扩展均衡器具备通用均衡器的全部功能，另外增加了高阶滤波器可选，包括斜率最高 48 dB/倍频程的搁架、低通和高通滤波器。
+
+            <DT><A name="configurable">可配置 PEQ</A>
+            <DD>可配置 PEQ 均衡器提供峰值滤波器，但滤波器数量以及各参数的范围和步进都由用户自己设定。<BR><BR>
+            <P><IMG SRC="../../images/configurableeq.jpg" ALT="可配置均衡器的设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <P>峰值滤波器的带宽取决于所选的格式。<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Q/BW 格式<TH>半增益处的带宽
+                <TR ALIGN="center"><TD>RBJ Q<TD>中心频率/Q
+                <TR ALIGN="center"><TD>Classic Q（经典 Q）<TD>sqrt(增益)*中心频率/Q
+                <TR ALIGN="center"><TD>Symmetric Q（对称 Q）<TD>sqrt(absgain)*中心频率/Q
+                <TR ALIGN="center"><TD>BW octaves（倍频程带宽）<TD>带宽以倍频程计
+            </TABLE>
+            <P>“absgain”表示取 dB 值的绝对值再换算成倍数，因此总是 ≥ 1。
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

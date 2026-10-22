@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>图表面板</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">图表面板</A></H2>
+
+        <P>图表面板（graph panel）显示当前选中测量的各种图表。要看哪一种，用图表区（graph area）顶部的按钮选择。<BR>
+        <IMG SRC="../../images/graphselector.jpg" ALT="图表类型选择条" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>图表类型有以下几种：<BR>
+        <A HREF="graph_splphase.html#top">SPL 与相位图</A><BR>
+        <A HREF="graph_allspl.html#top">All SPL 图表</A><BR>
+        <A HREF="graph_distortion.html#top">失真图</A><BR>
+        <A HREF="graph_impulse.html#top">脉冲响应图</A><BR>
+        <A HREF="graph_filteredir.html#top">滤波 IR 图</A><BR>
+        <A HREF="graph_groupdelay.html#top">群延迟图</A><BR>
+        <A HREF="graph_rt60.html#top">RT60 图</A><BR>
+        <A HREF="graph_clarity.html#top">清晰度图</A><BR>
+        <A HREF="graph_csd.html#top">频谱衰减图</A><BR>
+        <A HREF="graph_waterfall.html#top">瀑布图</A><BR>
+        <A HREF="graph_spectrogram.html#top">频谱图</A><BR>
+        <A HREF="graph_captured.html#top">采集信号图</A><BR>
+
+        <P>影响曲线（trace）外观的选项，在<A HREF="view.html#top">设置 → 视图</A>里。
+
+        <P>在单个测量的图表上，每条曲线都可以用图例区（legend panel）里曲线名称左侧的勾选框单独显示或隐藏。
+
+        <P>在叠加图（overlay graph，All SPL 图表也属于叠加图）上，关闭一条曲线就等于在叠加图的测量列表里取消选中这条测量，曲线随之从图表上移除。
+
+        <P>曲线名称的颜色与曲线本身相同。名称和该曲线在当前光标（cursor）位置的数值之间，画着这条曲线的线型。
+
+        <P>如果曲线做过平滑处理（smoothing），这里会标出所用的倍频程分数（下图示例为 1/12 倍频程）。
+
+        <P>把鼠标指针移到图例（legend）中某条曲线的名称上，图表上的这条曲线就会高亮，其他曲线变淡，让它更醒目。高亮时还可以同时显示测量名称，由<A HREF="view.html#top">设置 → 视图</A>里的<EM>显示高亮曲线名称</EM>选项控制。
+
+        <P>在叠加图上，可以按 Ctrl+H 高亮当前选中的那条测量，再按一次取消高亮。<BR>
+        <IMG SRC="../../images/graphlegend.jpg" ALT="图表图例" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>在单个测量图表的图例区单击右键，会弹出一个小菜单，可以选中全部曲线、取消全部选择或反选。在叠加图上，这个菜单只有“取消选择”一项，效果与在叠加图窗口的测量列表里取消选择相同。
+
+        <H4><A name="savejpegbutton">另存图片按钮</A></H4>
+
+        <P><IMG SRC="../../images/capturebutton.jpg" ALT="另存图片按钮" BORDER=0 ALIGN="left" width="44" height="47"><BR CLEAR="all">
+        图表区左上角的这个按钮，用来把当前图表画面保存为图片，快捷键是 Alt+C。
+
+        <P>点击后会弹出一个对话框。先设置图片宽度（点<EM>默认</EM>按钮，图片就与图表等宽）。曲线粗细也可以选，REW 默认是 2 像素。另有一个下拉框用来选图片的配色方案，默认沿用 REW 当前的配色方案。勾选<EM>标题</EM>选项后，图片顶部会显示图表类型。
+
+        <P><EM>IEC 263 比例</EM>只适用于横轴为对数频率轴、纵轴为 dB 轴的图表。它会调整导出图片的高度，使频率轴上一个十倍频程（decade，如 20 Hz 到 200 Hz）的长度，等于 dB 轴上 10 dB、25 dB 或 50 dB 的跨度。这三档取自 IEC 263 标准给出的选项。
+
+        <P>这样，频率响应图在视觉上就有统一的比例。曲线不会因为纵轴被拉伸或压缩而显得过分平坦，响应斜率也不会看起来比实际更缓或更陡。
+
+        <P>导出的图片还有一组选项（在对话框的“选项”下拉框里勾选）。勾选<EM>图例</EM>，图片会包含图表的图例。勾选<EM>光标</EM>，图片上会画出光标线及其数值。勾选<EM>时间戳</EM>，图表右下角会显示当前日期和时间。勾选<EM>边框</EM>，图片四周会加一圈 1 像素宽的灰色边框。
+
+        <P>勾选<EM>单色</EM>后，曲线不再用不同颜色区分，而是分别用四种线型之一绘制：实线、点线、虚线或点划线。
+
+        <P>勾选<EM>缩放信息框</EM>后，如果为图片选定的图表字号与当前图表字号不同，图上叠加显示的信息框会按相应比例缩放。
+
+        <P>注释可以放在图片上方、下方或图片上。放在上方或下方时，可以选左对齐、右对齐或居中对齐；放在图片上的注释一律居中。
+
+        <P>还可以选择一个 Logo 图片文件，并在文件选择框下方的选项面板里设置它的位置和不透明度。
+
+        <P>勾选<EM>注释包含测量名称</EM>后，测量名称会出现在注释里，排在输入的注释文字前面。勾选<EM>默认文件名为测量名称</EM>后，图片保存为文件时，默认文件名就是测量名称。
+
+        <P>这两个选项只在导出单个测量的图表时可用，导出叠加图图片时不可用。
+
+        <P>有一个文本框显示着<EM>在此输入注释文字</EM>。在这个文本框里输入的文字，会按选定的注释<EM>位置</EM>出现在图片上：图表上方、下方或图表上。文字可以用 HTML 4.01 标签设置格式。放在图表上方或下方的文字，按注释的<EM>对齐方式</EM>对齐。
+
+        <P>输入的注释文字会保留到下次打开这个对话框时继续使用，可以用<EM>清除注释</EM>按钮清掉。
+
+        <P><EM>插入当前测量备注</EM>按钮会把当前选中测量的备注（notes）插入注释。<EM>预览注释</EM>按钮用来在继续之前检查格式效果。放在图表上的注释文字居中显示。
+
+        <P>图表会按选定的<EM>图片类型</EM>保存为 JPEG 或 PNG 文件，或者复制到剪贴板。
+        <P><IMG SRC="../../images/savejpegdialog.jpg" ALT="“将图表另存为图片”对话框"><BR CLEAR="all"><BR>
+
+        <H4><A name="scrollbarsbutton">滚动条按钮</A></H4>
+
+        <P><IMG SRC="../../images/scrollbarsbutton.jpg" ALT="滚动条按钮" width="59" height="49"><BR CLEAR="all">
+        滚动条按钮用来打开或关闭图表区的滚动条。隐藏滚动条可以给图表腾出更多空间。这个设置下次启动时仍然有效。关闭滚动条后，仍然可以在图表区内按住鼠标右键拖动来移动图表。
+
+        <H4><A name="linlogbutton">频率轴按钮</A></H4>
+
+        <P><IMG SRC="../../images/linlogbutton.jpg" ALT="频率轴对数/线性切换按钮" width="57" height="49"><BR CLEAR="all">
+        频率轴按钮让频率轴在对数和线性两种模式之间切换。<A HREF="graph.html#freqaxis">图表</A>菜单里有同样功能的命令，也可以用对应的<A HREF="shortcuts.html#top">快捷键</A>。<BR>
+
+        <H4><A name="setextentsbutton">坐标轴范围按钮</A></H4>
+
+        <P><IMG SRC="../../images/extentsbutton.jpg" ALT="坐标轴范围按钮" width="36" height="42"><BR CLEAR="all">
+        坐标轴范围按钮用来设定图表上、左、下、右四边的坐标轴范围（graph limits）。点击后会弹出一个对话框，在里面输入数值。数值边输入边生效，也可以点<EM>应用设置</EM>按钮统一应用。
+
+        <P>对话框里另有两个按钮：<EM>按数据调整范围</EM>（快捷键 Ctrl+Alt+F）把坐标轴范围调整到覆盖全部数据；<EM>按数据调整 Y 轴</EM>（快捷键 Ctrl+Alt+Y）只调整 Y 轴范围来覆盖数据，X 轴范围保持不变。
+
+        <P>在图表上双击，也能打开这个对话框。此外，把鼠标指针移到某条坐标轴的末端，滚动鼠标滚轮或在触控板上做滚动手势，也可以调整坐标轴范围。用滚轮调整时按住 Alt 键，可以微调。
+        <P><IMG SRC="../../images/extentsdialog.jpg" ALT="“设置图表坐标轴范围”对话框">
+        <BR CLEAR="all">
+
+        <H4><A name="view3dbutton">3D 视图按钮</A></H4>
+
+        <P><IMG SRC="../../images/view3dbutton.jpg" ALT="3D 视图按钮"><BR CLEAR="all">
+        3D 视图按钮用 3D 查看器打开瀑布图或频谱图的数据。
+        <P><IMG SRC="../../images/spectrogram3dplot.png" ALT="3D 视图示例">
+        <BR CLEAR="all">
+
+        <H4><A name="controlsbutton">图表选项按钮</A></H4>
+
+        <P><IMG SRC="../../images/controlsbutton.jpg" ALT="图表选项按钮" width="48" height="49"><BR CLEAR="all">
+        如果当前图表类型有可调的控制选项，点图表选项按钮会弹出这些选项的菜单。<BR>
+
+        <H4><A name="zoombuttons">横轴缩放按钮</A></H4>
+
+        <P><IMG SRC="../../images/zoombuttonscloseup.jpg" ALT="频率轴缩放按钮"><BR CLEAR="all">
+        鼠标指针进入图表区时，会出现横轴缩放按钮。它们以光标位置为中心，按约 2 倍放大或缩小。
+
+        <P>也可以<A href="#keyboardzoom">用键盘</A>缩放，或者把鼠标指针移到要缩放的坐标轴上，滚动鼠标滚轮或在触控板上做滚动手势。用滚轮时按住 Alt 键可以微调。
+
+        <H4><A name="zoomybuttons">纵轴缩放按钮</A></H4>
+
+        <P><IMG SRC="../../images/zoomybuttons.jpg" ALT="Y 轴缩放按钮"><BR CLEAR="all">
+        鼠标指针进入图表区时，也会出现纵轴缩放按钮，用来在 Y 轴方向放大或缩小。
+
+        <P>同样可以<A href="#keyboardzoom">用键盘</A>缩放，或者把鼠标指针移到要缩放的坐标轴上，滚动鼠标滚轮或在触控板上做滚动手势。用滚轮时按住 Alt 键可以微调。
+
+        <H4><A name="graphicalzoom">可变缩放</A></H4>
+
+        <P>REW 可以用拖动的方式连续缩放图表，即可变缩放（variable zoom）。操作有两种：按住鼠标中键；或者先按住右键，在不松开右键的同时再按住左键。然后拖动鼠标指针。
+
+        <P>可变缩放启动后，图上会显示一个十字，把区域分成四个象限。根据鼠标指针所在的象限，可以在水平方向、垂直方向或两个方向同时放大或缩小。缩放量取决于鼠标指针从起点拖出的距离。
+        <P><IMG SRC="../../images/zoomgraph.jpg" ALT="缩放控制十字" width="247" height="134"><BR CLEAR="all"><BR>
+
+        <H4><A name="zoomtoarea">框选缩放</A></H4>
+
+        <P>先按住 Ctrl 键，再按住鼠标右键拖动，就能画出一个缩放框。注意：在 Mac 上可能需要同时按住 Ctrl 和 fn 键，或者按住 Ctrl 后在触控板上用两指拖动。
+
+        <P>框的外侧会显示测量标线，标出框的宽度和高度。在阴影区域内单击，就会放大到这个区域。如果阴影区域太小、无法放大，会有提示说明是哪个方向的尺寸不够，以及至少要多大才能缩放。
+        <P><IMG SRC="../../images/zoomarea.jpg" ALT="框选缩放" width="255" height="193"><BR CLEAR="all"><BR>
+
+        <H4><A name="mousewheelzoom">用鼠标滚轮缩放</A></H4>
+
+        <P>鼠标滚轮可以用来放大或缩小图表，按住 Alt 键可以微调。只想缩放 X 轴时，按住 Shift 键，或者把鼠标指针移到 X 轴上。要关闭滚轮缩放，见<A href="view.html">设置 → 视图</A>。
+
+        <H4><A name="keyboardzoom">用键盘缩放</A></H4>
+
+        <P>横轴放大按 <FONT CLASS="keys">Shift+x</FONT>，缩小按 <FONT CLASS="keys">x</FONT>；纵轴放大按 <FONT CLASS="keys">Shift+y</FONT>，缩小按 <FONT CLASS="keys">y</FONT>。缩放以光标位置为中心。可能需要先在图表上单击一下。
+
+        <H4><A name="undozoom">撤销缩放</A></H4>
+
+        <P>要撤销上一次的可变缩放或框选缩放，按 Ctrl+Z，或者选择图表菜单里的<A HREF="graph.html#zoomundo">撤销缩放</A>。图表坐标轴会恢复到上一次按下鼠标右键或中键时的设置。
+
+        <P>即使没有缩放过，也可以用这个撤销功能：在坐标轴设置合适时按一下鼠标右键，之后不管怎样移动图表或改动控件，按 Ctrl+Z 都能回到这组设置。
+
+        <H4><A name="arrowkeys">方向键</A></H4>
+
+        <P>方向键可以让图表光标每次移动一个像素。可能需要先在图表上单击一下。如果要移动的是图表而不是光标，按方向键时同时按住 <FONT CLASS="keys">Shift</FONT> 键。
+
+        <H4><A name="pan">移动图表</A></H4>
+
+        <P>按住 <FONT CLASS="keys">Alt</FONT> 键，再按住鼠标左键拖动，就可以移动图表。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

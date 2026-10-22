@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>图表菜单</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">图表菜单</A></H2>
+        <DL>
+            <DT><A name="grid">显示/隐藏网格</A><FONT CLASS="keys"> Ctrl+Shift+G</FONT>
+            <DD>用这个菜单项或对应的快捷键，打开或关闭网格。
+
+            <DT><A name="grid">显示/暂时隐藏光标</A><FONT CLASS="keys"> Ctrl+Shift+H</FONT>
+            <DD>用这个菜单项或对应的快捷键，显示或隐藏光标（cursor）。光标隐藏后，在图表上单击左键，或者执行任何会移动光标的操作，光标都会重新出现。
+
+            <DT><A name="freqaxis">频率轴对数/线性切换</A><FONT CLASS="keys"> Ctrl+Shift+A</FONT>
+            <DD>让频率轴在对数显示和线性显示之间切换。工具栏上的按钮也有同样的功能。<BR>
+            <IMG SRC="../../images/linlogbutton.jpg" ALT="频率轴线性/对数切换按钮" width="57" height="49"><BR CLEAR="all">
+
+            <DT><A name="zoomundo">撤销缩放</A><FONT CLASS="keys"> Ctrl+Z</FONT>
+            <DD>把图表坐标轴恢复到上一次在图表区内按下鼠标中键或右键时的设置。<BR><BR>
+            它主要用来撤销上一次<A HREF="graphpanel.html#graphicalzoom">可变缩放</A>或<A HREF="graphpanel.html#zoomtoarea">框选缩放</A>操作。此外，自上一次在图表区内按下右键以来做过的平移，或其他任何改动了坐标轴设置的操作，也都能用它撤销。
+
+            <DT><A name="fit">按数据调整图表范围</A><FONT CLASS="keys"> Ctrl+Alt+F</FONT>
+            <DD>调整图表坐标轴，让数据全部显示出来。“设置图表坐标轴范围”对话框里的<EM>按数据调整范围</EM>按钮效果相同。
+
+            <DT><A name="fit">在图表上查找位置</A><FONT CLASS="keys"> Ctrl+Alt+P</FONT>
+            <DD>平移图表的 X 轴，把某个位置移到视野内。目前这项功能只在脉冲响应图上有效：它会把脉冲响应（impulse response，IR）的峰值放到距图表左端 20% 的位置。放大查看时，可以用它快速找到峰值。
+
+            <DT><A name="onesmooth">1/1 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+1</FONT>
+            <DT><A name="onehalfsmooth">1/2 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+2</FONT>
+            <DT><A name="onethirdsmooth">1/3 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+3</FONT>
+            <DT><A name="onesixthsmooth">1/6 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+6</FONT>
+            <DT><A name="onetwelfthsmooth">1/12 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+7</FONT>
+            <DT><A name="onetwentyfourthsmooth">1/24 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+8</FONT>
+            <DT><A name="onefortheightssmooth">1/48 倍频程平滑</A><FONT CLASS="keys"> Ctrl+Shift+9</FONT>
+            <DT><A name="variablesmooth">可变平滑</A><FONT CLASS="keys"> Ctrl+Shift+X</FONT>
+            <DT><A name="psychoacousticsmooth">心理声学平滑</A><FONT CLASS="keys"> Ctrl+Shift+Y</FONT>
+            <DT><A name="erbsmooth">ERB 平滑</A><FONT CLASS="keys"> Ctrl+Shift+Z</FONT>
+            <DD>对当前选中的测量应用平滑滤波器，即做平滑处理（smoothing）。再执行一次同一项操作，就会取消平滑处理。<BR><BR>
+            可变平滑（variable smoothing）在 100 Hz 以下用 1/48 倍频程，10 kHz 以上用 1/3 倍频程；100 Hz 到 10 kHz 之间，平滑宽度在 1/48 到 1/3 倍频程之间逐渐变化，1 kHz 处为 1/6 倍频程。如果要根据测量结果来设置 EQ，推荐使用可变平滑。<BR><BR>
+            心理声学平滑（psychoacoustic smoothing）在 100 Hz 以下用 1/3 倍频程，1 kHz 以上用 1/6 倍频程，100 Hz 到 1 kHz 之间从 1/3 倍频程逐渐过渡到 1/6 倍频程。它还用立方平均（cubic mean）加大峰值的权重：先把各点数值取立方，求平均后再开立方根。这样画出的曲线，更接近人耳实际听到的频率响应。<BR><BR>
+            ERB 平滑的平滑带宽随频率变化，对应人耳的等效矩形带宽（Equivalent Rectangular Bandwidth，ERB）。等效矩形带宽为 (107.77f + 24.673) Hz，其中 f 以 kHz 为单位。它在低频段平滑得很重：50 Hz 处约 1 倍频程，100 Hz 处约 1/2 倍频程，200 Hz 处约 1/3 倍频程；1 kHz 以上基本稳定在约 1/6 倍频程。<BR><BR>
+            REW 的平滑处理用一阶 IIR 滤波器对数据正向、反向各处理多遍，以此实现高斯平滑核（Gaussian smoothing kernel）。平滑核的带宽就是所选的分数倍频程带宽。<BR><BR>
+            对按对数间隔分布的数据，这些滤波器是高斯滤波器的 IIR 近似，构造方法依据 Alvarez 与 Mazorra。对按线性间隔分布的数据，一阶滤波器的时间常数（time constant）随数据点的序号变化，使每个数据点所在频率处都得到所需的等效分数倍频程带宽。
+
+            <DT><A name="undosmooth">移除当前测量的平滑处理</A><FONT CLASS="keys"> Ctrl+0</FONT>
+            <DD>把平滑设置改为“无平滑”。再按一次同一个平滑快捷键，也能移除平滑处理。例如，按 <FONT CLASS="keys">Ctrl+Shift+3</FONT> 会对数据做 1/3 倍频程平滑，再按一次就取消。
+
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

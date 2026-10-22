@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>检查电平</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">检查电平</A></H2>
+
+        <P>REW 的测量通常在 75 dB SPL 左右的声压级下进行。
+        <FONT color=#4076c0>这并不算大声，多数 AV 功放校正各声道电平（speaker trim）时对准的也是这个值。用很大的测试信号很可能损坏音箱和听力。测试信号的电平，不要超过你愿意长时间聆听的音量。</FONT>
+
+        <P>设定 REW 测量所用的信号电平，做法是：让 REW 发出粉红噪声（pink noise）校准信号，再调整 AV 处理器的音量、或者调整校准信号本身的电平，使测量点上声压计的读数在 75 dB 左右。测量点一般取主聆听位置的耳朵高度。
+
+        <P>之后，<B>如果用的不是 USB 麦克风</B>，还要调整音频接口的输入音量，使校准信号播放时，来自声压计或麦克风前置放大器的信号有合适的电平。
+
+        <P>用 USB 麦克风时，输入音量控制保持在单位增益（unity gain，0 dB）这一档即可。麦克风第一次插上时默认就是这一档；如果在设置 → 声卡里勾选了<EM>控制输入音量</EM>，REW 也会自动设成这一档。
+
+        <H3><A name="setmeaslevel">电平检查步骤</A></H3>
+
+        <P>打开<A HREF="soundcard.html#top">设置 → 声卡</A>面板，在<EM>电平</EM>区的下拉框里选定：这次用低音炮还是用主音箱来设定电平。这个选择决定 REW 发出的是低音炮校准信号还是音箱校准信号。
+
+        <P>如果音频接口的输出直接接到低音炮、或接到连着低音炮的均衡器上，这里就选<B>使用低音炮测试信号检查电平</B>；如果接的是 AV 处理器的输入，用低音炮或主音箱两种设置都可以。
+
+        <P>点击<B>检查电平...</B>按钮，按屏幕上的说明操作。测试信号默认的 RMS 电平是 -12 dBFS。
+
+        <P>如果接的是 AV 处理器，先把音量调得比较小，再逐步加大，直到声压计读数在 75 dB 左右，这个数值不必很精确。如果是直接接到 BFD 这类均衡器上，就用<FONT CLASS="heading">扫频电平</FONT>控件来改变所生成信号的电平。
+
+        <P>无论哪种接法，最后定下的扫频电平都会用于之后的测量。所以每次测量时，记得把 AV 处理器的音量也保持在同一档。
+
+        <P><B><FONT color=#4076c0>如果输入电平偏低，不要一味加大测试信号</FONT></B>。输入电平要靠输入通路上的音量控制来设定，不是靠加大输出；用很大的测试信号很可能损坏音箱和听力。
+
+        <H3><A name="volctrlnotes">音量控制说明</A></H3>
+
+        <P>输出音量控制对线路输出的电平可能完全不起作用，但会影响耳机输出和电脑扬声器。如果测量信号走的是真正的线路输出，应当把输出音量调到静音，免得信号从电脑自带的扬声器里放出来。
+
+        <P>在 Windows 上，操作系统的音量控制可能对 WASAPI 独占模式设备的输入输出信号不起作用，除非调整是在设备内部做的。
+
+        <P><I>下面几条，适用于已在 REW 里选定输出设备和输出通道、并且<FONT CLASS="settings">控制输出音量</FONT>复选框可用且已勾选的情况。</I>
+        <UL>
+            <LI>REW 会把音频接口的输出音量设为满量程的一半。
+
+            <LI>REW 里音量控件的取值范围是 0..1，而音频接口内部的增益控制一般是对数的。<BR><BR>
+            用 REW 数值框上的箭头调音量时，每点一下对应约 0.5 dB 的变化。但音频接口自己的控制通常分辨率更低，所以在跨到接口控制的下一档之前，输出可能一直没有变化。
+
+            <LI>在 REW 之外改动音量设置（比如在 Windows 混音器里改），REW 会自动检测到，并反映到自己的控件上。
+
+            <LI>如果有播放混音器，务必把接麦克风或声压计信号的那个输入静音（通常是 Line In），否则麦克风／声压计拾取到的信号会直接回到输出，形成反馈环路（feedback loop）。<BR><BR>
+            下面是 Windows XP 系统上正确的播放混音器设置示例：只有 Wave 没有静音，Wave 的音量为满量程，输出音量为一半。<BR><BR>
+            <IMG SRC="../../images/playbackcontrols.jpg" ALT="Windows XP 音量控制的播放设置" BORDER=0>
+            <BR CLEAR="all"><BR>
+        </UL>
+
+        <H3><A name="inputcaltrouble">输入音量设定的排查</A></H3>
+        <BR><UL>
+            <LI>有些音频接口不提供输入音量控制，比如某些 USB 声卡。<BR><BR>
+            如果用的是声压计、或者麦克风加前置放大器，那么只要音箱／低音炮校准信号播放时，信号的 RMS 电平落在 -30 到 -12 dB 之间，就没有问题。<BR><BR>
+            电平低于 -30 dB，可以调小声压计的量程档位把电平抬上来，但注意不要调得太小、以致声压计过载；电平高于 -12 dB，则调大量程档位把电平降下来。
+
+            <LI>用 USB 麦克风时，信号可能低得多，低到 -50 dB 以下，这是正常的。
+
+            <LI>有些音频接口不开放输入音量控制的程序接口，REW 因此可能找不到音量控制，或者找到了也改不动。这种情况下，改用音频接口自带混音器里的控件、或者操作系统的音频电平控制来手动调整。
+
+            <LI>有些音频接口上，REW 无法通过自己的设备和输入选择框直接选中所需的输入。<BR><BR>
+            以 Audigy 2 为例，要选中 Line In，得先在 Creative Surround Mixer 的 Basic 选项卡的 Record 面板里选“Analog Mix”，再到 Source 面板把 Line In 以外的所有来源全部静音。<BR><BR>
+            如果看起来无法通过 REW 的设备和输入选择框选到所需输入，或者 REW 似乎没有做出正确的设置，就把输入设备保持为<FONT CLASS="settings">默认设备</FONT>，改在音频接口的混音器或操作系统的音频电平控制里选择输入、调整输入音量。下面是 Windows XP 音量控制的一个合适设置示例，其中已选中 Line In。<BR><BR>
+            <IMG SRC="../../images/recordcontrols.jpg" ALT="Windows XP 音量控制的录音设置" BORDER=0><BR CLEAR="all"><BR>
+
+        </UL>
+
+        <P>检查完电平，下一步是<A HREF="inputcal.html#top">校准 SPL 读数</A>。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

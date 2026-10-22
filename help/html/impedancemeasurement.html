@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Impedance Measurement</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Impedance Measurement</A></H2>
+
+        <P>REW can make measurements of impedances up to a few hundred ohms by using 
+        both inputs of the soundcard. Impedance measurements of drive units can be used to 
+        <a href="thielesmall.html#top">calculate the Thiele-Small parameters</a>.
+        The general connection arrangement for impedance measurements is shown below:<BR><BR>
+        <IMG SRC="../../images/impedancesetup.jpg" ALT="Conections for Impedance Measurement">
+        <BR CLEAR="all"><BR>
+        
+        <P>The sense resistor, <B>which must be non-inductive</B>, is used to measure 
+        the current flowing into the load, which will be (Vleft - Vright)/Rsense. 
+        The sense resistor should have a power rating sufficient to cope with a short
+        circuit load and have a low temperature coefficient. 
+        The voltage across the load is Vright, so the impedance is nominally
+        voltage/current = Rsense*Vright/(Vleft - Vright). Note that prior to completing
+        the calibration process the accuracy of impedance measurements is only as good 
+        as the accuracy of the value entered for the sense resistor.
+        
+        <P>The load appears in parallel with the input impedance of the soundcard and 
+        the impedance of the test leads. Before calibration those effects 
+        are partially corrected for by using the parallel equivalent of the sense 
+        resistor and soundcard input resistance in the calculation, the soundcard 
+        input resistance figure is entered on the dialog as R<SUB>INPUT</SUB>.
+        
+        <P>Good results can be obtained using a headphone output (or, even better, 
+        a good headphone amplifier or a device with a high power headphone output) 
+        to drive the load, with a 100 ohm sense resistor. If a line output is used 
+        the sense resistor typically needs to be larger as line outputs have high 
+        output impedance and limited drive capability, try 1 kohm but note that the 
+        results will have much higher noise levels and be more susceptible to background 
+        noise. If the device being used to drive the load can cope with lower loads 
+        a lower sense resistor, 47 ohm for example, will improve the results.
+        
+        <P>An alternative is to drive the load via a power amplifier, which can 
+        deliver the lowest noise levels and most accurate results, but 
+        <B><FONT COLOR="RED">great care must be taken as the levels a power amplifier 
+        can generate can easily damage soundcard inputs.</FONT></B> If using a power
+        amplifier the sense resistor can be much lower, 33 ohms or less, but the 
+        soundcard inputs should be connected via a resistive divider providing around
+        20dB of attenuation and ideally the inputs should also be protected by 
+        back-to-back zener diodes to clamp the input to less than 5V.
+
+        <P><B>The soundcard input connected to the load must be the same one which has
+        been chosen as the input in the REW soundcard settings</B>. In the diagram above 
+        that is the right input, but if the left is being used simply swap left and 
+        right in the diagram. <I>If the left and right connections are the wrong way around the 
+        impedance measurements will show curves that are shifted up by approximately the 
+        value of the sense resistor</I>.
+        
+        <P>The input channels should have the same gain. If the audio interface has 
+        individual channel gain controls adjust them to have the same gain before 
+        starting to measure. An easy way to do that is to connect the impedance rig 
+        with the test leads left open and use the <A href=siggen.html>signal generator</A> 
+        to play a sine tone at 1 kHz at the intended measurement level while observing the 
+        input levels on the <A href="levelmeters.html">Level meters</A>. Adjust the input 
+        gains so the input and reference channel levels match to within 1 dB and are not 
+        clipping.
+        
+        <P>Sweeps of 10 seconds or longer are recommended for impedance measurement
+        to provide good signal to noise ratios in the results.
+        
+        <H3><a name="calibrate">Calibrating the Impedance Rig</a></H3>
+
+        <P>To get the most accurate results the impedance measurement rig must be calibrated. 
+        The calibration can remove the effects of small gain differences between the soundcard input 
+        channels, differences in the frequency responses of the channels, and the impedance of 
+        the test leads. Three measurements are needed to fully calibrate the rig, but as a 
+        minimum the first (open circuit) calibration measurement should be performed. REW
+        automatically saves calibration data from each measurement in the REW log files directory.
+        
+        <H4><A name="opencircuit">Open circuit calibration</A></H4>
+        
+        <P>The first step is to calibrate the measurement rig with the test leads open.
+        They should still be connected to the rig, but left open at the load end. This 
+        measurement compensates for gain differences between the input channels.
+        
+        <UL>
+            <LI>Press the Measure button (or Ctrl+M) to bring up the Measure dialog, 
+            select the <FONT CLASS="heading">Impedance</FONT> button and press the 
+            <EM>Open circuit cal</EM> button - the button text is red if impedance
+            calibration has not been done. Disconnect the test leads at the load end
+            as prompted before clicking OK on the prompt to start the measurement.<BR><BR>
+            <IMG SRC="../../images/measurepanelimpedancecal.jpg" ALT="Impedance Calibration" BORDER=0><BR CLEAR="ALL"><BR CLEAR="ALL">
+            <IMG SRC="../../images/impedanceoccalprompt.jpg" ALT="Impedance open circuit calibration prompt" BORDER=0><BR CLEAR="ALL"><BR>
+            
+            <LI>The completed 
+            measurement shows the level of the measurement channel (usually right)
+            compared to the reference channel, where a reading of 100 Ohms corresponds
+            to 100%, 99 Ohms would be 99% etc. If the difference between the 2 channels 
+            is too large (more than 2 dB) the calibration is abandoned as it is likely 
+            there is a connection error or the input channels have different gain settings, 
+            re-check the connections and channel gains and try again.
+            
+            <LI>After the open circuit calibration gain differences between the input 
+            channels will be corrected.
+        </UL>
+        
+        <H4><A name="shortcircuit">Short circuit calibration</A></H4> 
+        
+        <P>The second step is to calibrate the measurement rig with the test leads 
+        shorted. They should still be connected to the rig, but shorted together at the 
+        load end. The measurement compensates for the series impedance of the test leads,
+        it particularly improves high frequency accuracy. If this measurement is <B>not</B> 
+        carried out the R<sub>LEADS</SUB> box can be used to compensate for the test lead 
+        resistance. After this measurement the R<sub>LEADS</SUB> box is hidden since it is 
+        no longer used.
+        
+        <UL>
+            <LI>Press the Measure button (or Ctrl+M) to bring up the Measure dialog, 
+            select the <FONT CLASS="heading">Impedance</FONT> button and press the 
+            <EM>Short circuit cal</EM> button. Short the test leads together at the load 
+            end as prompted before clicking OK on the prompt to start the measurement.<BR><BR>
+            <IMG SRC="../../images/impedancesccalprompt.jpg" ALT="Impedance short circuit calibration prompt" BORDER=0><BR CLEAR="ALL"><BR>
+            
+            <LI>After the short circuit calibration the series impedance of the test leads 
+            will be calibrated out.
+        </UL>
+        
+        <H4><A name="refresistor">Reference resistor calibration</A></H4> 
+        
+        <P>The third and final step is to make a measurement of a known reference resistor.
+        The reference resistor must be non-inductive and its precise value must be known, 
+        errors in the reference resistor will translate directly into impedance measurement
+        errors since it is used to scale all subsequent measurements. It should have a value 
+        around that of the impedances to be measured, for speaker impedance measurements a
+        reference of 100 ohm or lower is recommended. The reference resistor measurement 
+        compensates for frequency response differences between the input channels. It 
+        particularly improves accuracy at the frequency extremes. After this measurement the 
+        R<sub>INPUT</SUB> box is hidden since it is no longer used.
+        
+        <UL>
+            <LI>Press the Measure button (or Ctrl+M) to bring up the Measure dialog, 
+            select the <FONT CLASS="heading">Impedance</FONT> button and press the 
+            <EM>Reference cal</EM> button. Connect the reference resistor to the test leads 
+            before entering its exact value and clicking OK on the prompt to start the measurement.<BR><BR>
+            <IMG SRC="../../images/impedancerefcalprompt.jpg" ALT="Impedance reference calibration prompt" BORDER=0><BR CLEAR="ALL"><BR>
+            
+            <LI>After the reference resistor measurement calibration is complete.
+        </UL>
+        
+        <P>The calibration data is saved in the REW log files folder and automatically 
+        loaded when REW starts up. If the test leads are changed (swapped for longer or 
+        shorter leads, for example) or the sample rate is changed the calibration steps 
+        should be repeated.
+
+        <H3><a name="measure">Making an Impedance Measurement</a></H3>
+
+        <UL>
+            <LI>Press the Measure button
+            <IMG SRC="../../images/measurebuttonbare.jpg" ALT="measure button" BORDER=0 width="36" height="35">
+            (or Ctrl+M) to bring up the Measure dialog and select the 
+            <FONT CLASS="heading">Impedance</FONT> button<BR><BR>
+            <IMG SRC="../../images/measurepanelimpedance.jpg" ALT="Impedance Measure dialog" BORDER=0><BR CLEAR="ALL"><BR>
+            
+            <LI>Enter the <b>exact</b> value of the sense resistor. This must be measured 
+            accurately with a good quality, calibrated multimeter or impedance bridge, or 
+            a very high precision resistor (0.1% or better) should be used. Any error in the value 
+            of the sense resistor directly affects the measurement results.
+            
+            <LI>Set the <FONT CLASS="heading">Start Freq</FONT> to the lowest frequency 
+            for which you wish to see the response and <FONT CLASS="heading">End Freq</FONT> 
+            to the highest. If measuring a drive unit to determine its Thiele-Small parameters
+            measure up to 20 kHz. The sweep will span the range from half the start frequency 
+            to twice the end frequency (with an overall limit of half the soundcard 
+            sample rate) to provide accurate measurement over the selected range.
+
+            <LI><A name="sweeplevel"><FONT CLASS="heading">Level</FONT></A> controls 
+            the rms signal level at which the sweep is generated. The maximum value 
+            is -3 dBFS or its equivalent in dBu, dBV or volts, unless the 
+            <A href="view.html">View preference</A> 
+            <FONT CLASS="heading">Full scale sine rms is 0 dBFS</FONT> has been 
+            selected, in which case the maximum is 0 dBFS. Using the maximum 
+            value places the peaks of the signal at digital full scale - some soundcards 
+            may distort at the maximum level. If you are using a power amplifier beware 
+            of excessive levels. Loudspeaker impedance is typically best measured at a
+            terminal voltage of around 100 mV to 200 mV at most, the output voltage
+            to achieve that depends on the sense resistor value. For a 100 ohm sense 
+            resistor and an 8 ohm driver the output for 100 mV at the terminals would be
+            around 1.35 V.
+
+            <LI><FONT CLASS="heading">Settings</FONT> for the measurement method 
+            are on the right hand side. <FONT CLASS="heading">Length</FONT> controls 
+            the length of the sweep, specifying the number of samples in the sequence. 
+            The default is 256k. Dividing the number of samples by the soundcard's 
+            sample rate gives the sweep duration in seconds, shown to the right. 
+            The overall duration includes silent periods before and after the sweep.
+            
+            <LI>If <FONT CLASS="heading">Sweeps</FONT> is more than 1 REW uses 
+            synchronous pre-averaging, capturing the selected number of sweeps per 
+            measurement and averaging the results to reduce the effects of noise 
+            and interference. The pre-averaging improves S/N by almost 3dB for each 
+            doubling of the number of sweeps. Averaging is particularly useful if 
+            the measurements are contaminated by interference tones, whether electrical 
+            or acoustic, as they typically will not add coherently in the averaging 
+            and hence will be suppressed by the process. <B>The output and inputs must 
+            be on the same device if using multiple sweeps.</B>
+            
+            <LI>The <EM>Check Levels</EM> button generates a few seconds of a pink 
+            noise signal that spans the frequency range selected for measurement 
+            and checks that the input level is not too high or too low. Pressing
+            <EM>Cancel</EM> while the pink noise signal is playing will turn it off
+            (it turns off automatically after 3 seconds). The rms level that was 
+            measured is shown on the measure dialog, with a warning if the
+            level is too high or too low.
+
+            <LI>Press <EM>Start</EM> to make a measurement, progress is
+            shown on the measure dialog along with a display of the measurement 
+            headroom.
+
+        </UL>
+        
+        <P>The result of the measurement is displayed in the graph area, information 
+        about the measurement appears in the 
+        <A HREF="measurementspanel.html#top">Measurements Panel</A>. Measurements 
+        are given a default name of the date and time at which they are made, a more 
+        appropriate name can be entered in the box at the top of the measurements 
+        panel.
+        
+        <P>For impedance measurements when the mouse cursor is within the graph panel 
+        the equivalent series resistance + inductance or resistance + capacitance
+        and parallel resistance||inductance or resistance||capacitance of the impedance 
+        at the cursor position is shown at the bottom left corner 
+        of the graph. This may be useful when making measurements of inductors or 
+        capacitors to check their value, but the 
+        <A HREF="graph_splphase.html#componentmodel">Component Model</A> provides a much more 
+        accurate equivalent circuit.<BR>
+        <IMG SRC="../../images/impedancereadout.jpg" ALT="Impedance Readout" width="500" height="303">
+        <BR CLEAR="all">
+        
+        <P>For details of the various ways of viewing the measured data, including averaging 
+        multiple measurements, refer to the <A HREF="graphpanel.html#top">Graph Panel</A> 
+        help.
+        
+        <H3><A name="channelsswapped">Input Channels Swapped</A></H3>
+        
+        <P>If the input channels have been connected the wrong way around the impedance
+        measurements will be too high by approximately the value of the sense resistor, make
+        a test measurement of a resistor (of less than 100 ohms) to check that everything is 
+        wired correctly. Swapped channels will also shift the phase by about 180 degrees.
+        
+        <H3><A name="quality">Impedance Measurement Quality</A></H3>
+        
+        <P>The main source of measurement noise is acoustic noise and vibration during 
+        the measurement. Loudspeakers act as microphones, generating small voltages in 
+        response to sounds and vibrations that are picked up as part of the load voltage.
+        To minimise this effect use long sweeps, low sense resistor values, avoid noisy 
+        environments and isolate the loudspeaker from vibration. Using a power amplifier 
+        to drive the speaker provides a much lower drive impedance, which reduces the 
+        effect of noise, and allows a low series resistor to be used.
+        
+        <P>REW provides a <EM>Noise filter</EM> option which applies a bandpass filter to
+        the captured sweep, synchronised to the sweep frequency, to reduce the influence 
+        of noise. The <EM>High</EM> setting is suitable in most circumstances, but it may
+        have a slight smoothing effect on very sharp resonances. If that is observed try 
+        the <EM>Medium</EM> or <EM>Low</EM> settings, or turn the filter off. When the 
+        filter is being used the sweep duration should be at least 10 seconds, a warning 
+        is shown if a shorter sweep is selected. Longer sweeps improve signal to noise 
+        ratios in the results with or without the noise filter.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>欢迎使用 REW</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+	<BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">欢迎使用 REW</A></H2>
+
+        <P>REW（Room EQ Wizard）是一款 Java 应用程序，用于测量房间响应、抑制房间模态共振（room modal resonances）。它内置的工具可以：生成测试信号；测量声压级（SPL）、频率响应和脉冲响应（impulse response）；生成相位、群延迟（group delay）、频谱衰减图、瀑布图（waterfall）、频谱图（spectrogram）和能量-时间曲线；生成实时分析仪（RTA）图表；计算混响时间；显示均衡器（equaliser）响应；自动调整参数式均衡器（parametric equaliser）的设置，用来抵消房间模态的影响，并让响应与目标曲线一致。
+
+        <P>REW 测量时使用对数正弦扫频信号（logarithmic sine sweep）。相比手动测量，它速度快得多，也更准确。在共振点不容易发生削波（clipping），对系统非线性的敏感度也低于 MLS（最大长度序列，Maximum Length Sequence）。它还能算出房间的脉冲响应，而脉冲响应正是许多其他功能的基础。
+
+        <P>使用实时分析仪（RTA）显示时，REW 可以生成粉红周期噪声（Pink Periodic Noise）序列。相比随机粉红噪声，它能更清楚地呈现低频表现，而且不需要长时间平均。<br>
+
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p>REW 官方主页：<object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.roomeqwizard.com">
+            <param name="content" value="https://www.roomeqwizard.com">
+            </object>。需要提示、技巧和帮助，可访问 REW 论坛 <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="www.avnirvana.com">
+            <param name="content" value="https://www.avnirvana.com/forums/official-rew-room-eq-wizard-support-forum.10/">
+            </object>。
+        </div>
+
+        <div class="onlineonly">
+            <!-- External links for the online help -->
+            REW 官方主页：<A HREF="https://www.roomeqwizard.com">www.roomeqwizard.com</A>。
+            需要提示、技巧和帮助，可访问 REW 论坛
+            <A target="_blank" HREF="https://www.avnirvana.com/forums/official-rew-room-eq-wizard-support-forum.10/">www.avnirvana.com</A>。
+        </div>
+
+        <H3><A name="requirements">系统需求</A></H3>
+        <UL>
+            <LI>REW 可运行于 Windows XP Pro x64/Vista/7/8/8.1/10/11、macOS 10.15 及更高版本，以及 Linux。已不再支持 32 位的 Win XP 版本。
+            <LI>最低屏幕分辨率：1024 x 768
+            <LI>最低内存（RAM）：2 GB，建议 4 GB 或更多
+            <LI>Windows 和 Linux AMD64 安装程序内置了 REW 专用的 Java 运行环境（Java runtime）。对于 AMD64 以外的架构，另提供一个不含运行环境的 Linux 安装程序，使用它必须先装 Java 17 运行环境。请勿安装无界面（headless）版本的 Java 运行环境，这类版本没有音频输入/输出（audio I/O）。
+            <LI>macOS 版下载包内置了 REW 专用的 Java 运行环境，无需另外安装 Java。麦克风访问权限已包含在代码签名里，通常会自动授予。如果想让 REW 重新弹出麦克风授权提示，可在启动 REW 前，在终端执行
+                <PRE>tccutil reset Microphone</PRE> 。你可能还需要在 Mac 的“隐私”设置里，允许 REW 访问用于保存测量数据的文件夹，尤其当这些文件夹在桌面上时。
+            <LI>Windows 支持 MIDI 通信（用于在 Behringer BFD Pro DSP1124P 和 FBQ2496 均衡器上设置滤波器）。macOS 应该也支持 MIDI。
+        </UL>
+
+        <H3>Windows XP Pro x64、Vista、7、8 或 8.1</H3>
+
+        <P>在 Windows XP Pro x64、Vista、7、8 或 8.1 上安装 REW 时，可能会遇到一条比较令人费解的错误提示：
+
+        <P><i>“程序无法启动，因为计算机中缺少 api-ms-win-core-timezone-l1-1-0.dll。请尝试重新安装该程序以解决此问题。”</i>
+
+        <P>原因是 Java 运行环境用到了 Windows Universal C Runtime（通用 C 运行库）的组件，而较旧的 Windows 里没有这些组件。解决方法见微软知识库文章 KB2999226：https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows。
+
+        <H3><A name="linuxinstall">Linux 安装</A></H3>
+
+        <UL>
+            <LI>在安装文件的下载文件夹中打开一个终端窗口。
+            <LI>按下面的方式给安装文件加上可执行权限并安装（以 5.19 版为例）：
+                <PRE>chmod u+x REW_linux_5_19.sh</PRE>
+                <PRE>sudo ./REW_linux_5_19.sh</PRE>
+            <LI>如果终端的工作目录不是安装程序的下载位置，需要在文件名前加上下载文件的路径。例如，终端打开在你的主目录，而安装程序下载到了 Downloads 文件夹，就在安装程序文件名前加上 Downloads/。
+            <LI>运行下面的命令启动 REW：
+                <PRE>roomeqwizard</PRE>
+        </UL>
+
+        <H3><A name="diagnostics">诊断日志</A></H3>
+
+        <P>REW 会把诊断日志保存在用户主目录下一个名为 REW 的文件夹里（macOS 的位置见下段），具体路径显示在 <EM>Help &rarr; About REW</EM>（帮助 &rarr; 关于 REW）窗口中。日志包含最近 10 次启动的信息，其中包括可能产生的错误信息或警告。
+
+        <P>在 macOS 上，日志位于用户资源库（Library）文件夹中的 REW 文件夹内。资源库文件夹默认不再在 Finder 中显示。要显示它，可以直接前往 ~/Library/Logs（REW 文件夹就在这里），也可以在 Finder 中打开你的个人文件夹（Shift + Command + H），选择“显示”>“查看显示选项”，再勾选显示资源库文件夹的选项。
+
+        <P>REW 会在日志文件夹的 /temp 子文件夹里，为每次测量保存一份临时副本。副本保留 7 天，超过 7 天的会在关闭 REW 时删除。如果 REW 上次没有正常关闭，下次启动时会提示你加载上次启动以来所做的测量。
+
+
+        <H3><A name="vmoptions">Java 运行环境（JRE）选项</A></H3>
+
+        <P>Windows 上 REW 程序目录里的 <FONT class="cmd">roomeqwizard.vmoptions</FONT> 文件，或 Mac 上 REW 应用程序文件夹里的 <FONT class="cmd">REW.vmoptions</FONT> 文件，保存着 Java 运行环境（JRE）的设置。
+
+        <P>REW 安装程序会在这个文件里写入一项，用 <FONT class="cmd">-Xmx</FONT> 选项指定启动时向 JRE 申请的内存大小，例如 <FONT class="cmd">-Xmx1024m</FONT> 表示 1 GB。你可以编辑这个文件，申请比安装程序默认值更大的内存，比如 <FONT class="cmd">-Xmx4096m</FONT> 表示 4 GB。但要注意，如果操作系统拒绝文件里指定的内存大小，REW 就无法启动。
+
+        <P>在 Windows 上，修改 <FONT class="cmd">roomeqwizard.vmoptions</FONT> 文件需要管理员（Admin）权限。做法是先把它复制到普通用户可访问的目录，改好后，再用管理员权限复制回原处。
+
+        <P>除了编辑 <FONT class="cmd">roomeqwizard.vmoptions</FONT> 文件，也可以通过命令行把参数传给 Java 运行环境（例如修改快捷方式的“目标（Target）”字段）。这时每个参数前都必须加上 -J。举例来说，无论 vmoptions 文件里写了什么，要强制 REW 以 4 GB 内存启动，Windows 上快捷方式的目标可以写成：
+
+        <P><BR> <FONT class="cmd">"C:\Program Files\REW\roomeqwizard.exe" -J-Xmx4096m</FONT>
+
+
+        <H3><A name="preferences">REW 设置</A></H3>
+
+        <p>默认情况下，Windows 系统上 REW 的设置保存在下面这个注册表项中：<br>
+        <PRE>HKEY_CURRENT_USER\Software\JavaSoft\Prefs\room&nbsp;eq&nbsp;wizard</PRE>
+        <p>在 macOS 上，设置保存在下面路径中一个名为 room eq wizard 的项下：<br>
+					<PRE>~/Library/Preferences/com.apple.java.util.prefs.plist</PRE>
+        <p>Linux 上的设置通常保存在：<br>
+                <PRE>~/.java/.userPrefs/room eq wizard/prefs.xml</PRE>
+
+        <P>REW 也可以改用文件来保存设置。配置方式有三种。
+
+        <P>最简单的做法，是在 REW 日志文件夹里放一个名为 <FONT class="cmd">rewprefs.txt</FONT> 的文件。REW 启动时如果找到它，就用它保存全部设置。若想用别的文件，可以在启动 REW 时加上 <FONT class="cmd">-prefs</FONT> 参数，或在 <A href="#vmoptions">roomeqwizard.vmoptions</A> 文件里加一条 <FONT class="cmd">-Drew.preferences.file</FONT>。REW 会先检查 <FONT class="cmd">-prefs</FONT> 参数，再看 <FONT class="cmd">-Drew.preferences.file</FONT>，最后才找 rewprefs.txt。
+
+        <P>要快速切换到文件保存方式，可以用“设置”菜单里的相应项，把设置保存为日志文件夹中的 rewprefs.txt，然后重启 REW。在 Windows 上，用文件保存设置时启动更快；在 macOS 上，用文件保存设置时关闭要快得多。
+
+        <P>在默认安装的 Windows 上，可以用下面的方式启动 REW 来指定设置文件：
+
+        <P><FONT class="cmd">C:\Program Files\REW\roomeqwizard.exe -prefs "C:\Users\johnm\Documents\myrewprefs.txt"</FONT>
+
+        <P>或者在 REW 的 Windows 快捷方式属性中，编辑“目标”字段，加上 prefs 参数。目标看起来就像这样：
+
+        <P><FONT class="cmd">"C:\Program Files\REW\roomeqwizard.exe" -prefs "C:\Users\johnm\Documents\myrewprefs.txt"</FONT>
+
+        <P>在 macOS 上，可以在终端里用下面的命令完成：
+
+        <P><FONT class="cmd">open -a REW.app --args -prefs "/Users/johnm/Documents/myrewprefs.txt"</FONT>
+
+        <P>如果要用 <A href="#vmoptions">roomeqwizard.vmoptions</A> 文件来指定，就在其中加一条记录，写明设置文件的路径，例如：
+        <PRE>-Drew.preferences.file=C:\Users\johnm\Documents\myrewprefs.txt</PRE>
+
+        <P>如果正在使用设置文件，文件名会显示在“关于 REW”对话框中。如果指定的文件无法访问、创建或写入，REW 会改用 REW 日志文件夹中名为 rewprefs.txt 的文件，并给出相应警告。
+
+        <P>用 <EM>Preferences &rarr; Save preferences to file</EM>（设置 → 将设置保存到文件）菜单项，可以从现有安装创建一个设置文件。
+
+        <P>用 <EM>Preferences &rarr; Delete preferences and shut down</EM>（设置 → 删除设置并关闭）菜单项可以删除设置，运行 REW 卸载程序也可以。
+
+        <H4><A name="initialprefs">初始设置</A></H4>
+
+        <P>指定一个包含初始值的文件，可以让 REW 每次都以同一组初始设置启动。做法同样有三种。
+
+        <P>最简单的做法，是把这个文件放进 REW 日志文件夹，命名为 <FONT class="cmd">initialprefs.txt</FONT>。REW 启动时如果找到它，就用它初始化全部设置。若想强制从别的文件初始化，可以在启动 REW 时加上 <FONT class="cmd">-initialprefs</FONT> 参数并指定初始设置的文件名，或在 roomeqwizard.vmoptions 文件里加一条 <FONT class="cmd">-Drew.initialpreferences.file</FONT>。REW 的检查顺序是：先看 <FONT class="cmd">-initialprefs</FONT> 参数，再看 <FONT class="cmd">-Drew.initialpreferences.file</FONT>，最后找 initialprefs.txt。
+
+        <P>如果同时还指定了设置文件，REW 会把初始设置复制到那个文件里。如果没有指定，REW 会新建一个设置文件，再把初始设置复制进去。初始设置文件和设置文件应当是两个不同的文件。
+
+        <P>初始设置文件不必包含所有设置项。你可以只保留需要初始化的设置，没写进文件的设置都不会被改动。
+
+
+        <H3><A name="languages">语言支持</A></H3>
+
+        <P>REW 支持英文、法文、德文、简体中文和繁体中文（台湾）。安装文件夹里有一个“bundles”文件夹：只要为某种语言提供一组文件，就能让 REW 支持这种语言。<BR><BR>
+        <IMG SRC="../../images/bundles.jpg" ALT="Bundles 文件夹" BORDER=0><BR CLEAR="ALL">
+
+        <P>bundles 文件夹里有一组 .properties 文件，都是纯文本文件，保存着 REW 的用户界面文字。文件名的结尾表示该文件用于哪种语言和国家/地区。例如，用于韩国的文件名以 _ko_KR 结尾，如 apiprefs_ko_KR.properties。
+
+        <P>要制作翻译文件，先复制 bundles 文件夹里的文件，再把副本改成正确的结尾。填入翻译后的文字后，把文件复制回 bundles 文件夹（保留原有文件）。重启 REW 时，只要机器的默认区域设置（locale）与文件名相符，就会读取新内容。默认区域设置可以在“关于 REW”对话框中查看：<BR><BR>
+        <IMG SRC="../../images/localeinfo.jpg" ALT="关于对话框的区域设置信息" BORDER=0><BR CLEAR="ALL">
+
+        <P>这些文件里的条目是 KEY=text（键=文本）格式，下面是 apiprefs 属性文件开头几行的示例：<BR>
+<PRE>
+# Copyright (c) 2025 John Mulcahy All Rights Reserved
+# API preferences elements not already covered by prefboxlabels and prefhints
+PORT_HINT_TEMPLATE=Enter a port number between {0} and {1}, default is {2}
+START_SERVER_BUTTON=Start server
+</PRE>
+
+        <P>键（key）绝对不能改动，翻译后的文字放在 = 后面。
+
+        <P>名称里带 _TEMPLATE 的条目，REW 在使用时会往里填入实际的值，文字中的 {0}、{1} 等就是这些值的位置。翻译时必须保留它们，并把 {0} 之类的占位符放在译文中对应的位置。
+
+        <P>名称里带 _HINT 的条目，用于鼠标悬停在界面元素上时弹出的工具提示，翻译时自由度较大。其余条目可能对应按钮、标签或标题，通常从键名就能看出来。
+
+        <P>译文比英文长很多或短很多时，REW 界面可能出现排版问题。如果你发现这类问题，请告诉我出现在哪里，我会去处理。
+
+        <P>属性文件里过长的行，可以用 \ 字符断开，表示文字接续到下一行。这只是为了方便编辑，不会改变文字在 REW 中的显示方式。
+
+        <P>有些文字里嵌了 html 标签，例如表示换行的 &lt;br&gt;。翻译时应保留这些标签，并放在合适的位置。原本没有 html 标签的文字，不要自行添加。
+
+        <P>完成的属性文件翻译可以发给我，纳入未来的 REW 版本，以支持更多语言。
+
+        <H3><A name="warranty">免责声明</A></H3>
+
+        <P>本软件按“现状”提供，不附带任何明示或默示的担保，包括但不限于对适销性、特定用途适用性和非侵权性的担保。无论在合同之诉、侵权之诉还是其他诉讼中，作者均不对因本软件、因使用本软件或因对本软件的其他处置而引起的、或与之相关的任何索赔、损害或其他责任负责。
+
+        <H3><A name="acknowledgements">致谢</A></H3>
+
+        <P>简体中文翻译：HIFIMAN 林佑叡、厦门南方公园汽车音响 Jacky Shu、宁波小黑音频测试
+
+        <P>繁体中文（台湾）与简体中文翻译：DC-Audio Lab &#x6797;&#x4f51;&#x53e1;
+
+        <P>法文翻译：Eric Masssicotte de chez Maison Adam
+
+        <P>德文翻译：Andreas Lartz，Automotive Consultant，office@audiosquare.de
+
+        <div  style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <P>REW 使用 JTransforms 纯 Java FFT 库，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="JTransforms">
+            <param name="content" value="https://github.com/wendykierp/JTransforms">
+            </object>。
+
+            <P>ASIO 接口的支持基于 Martin Roth 的 JAsioHost，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="JAsioHost">
+            <param name="content" value="https://github.com/mhroth/jasiohost">
+            </object>。
+
+            <P>Windows 上的 WASAPI 独占模式、Linux AMD64 上的 ALSA PCM，基于 Pavel Hofman 的 csjsound-provider，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="csjsound-provider">
+            <param name="content" value="https://github.com/pavhofman/csjsound-provider">
+            </object>。
+
+            <P>REW 的安装程序用 Install4J 多平台安装程序制作工具构建，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="ej-technologies">
+            <param name="content" value="http://www.ej-technologies.com/products/install4j/overview.html">
+            </object>。
+
+            <p>感谢 Gerrit Grunwald 提供的思路，以及取自其 Steel Series 组件的元素，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Harmonic Code">
+            <param name="content" value="http://harmoniccode.blogspot.com/">
+            </object>。
+
+            <P>REW 使用 Hola 多播 DNS 服务发现（Multicast DNS Service Discovery）库，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Hola">
+            <param name="content" value="https://github.com/fflewddur/hola">
+            </object>。
+
+            <P>REW 使用 Java WebSocket 客户端，见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="Java WebSocket">
+            <param name="content" value="https://github.com/TooTallNate/Java-WebSocket">
+            </object>。
+
+            <P>REW 使用 FormDev 的 FlatLaf 外观主题（look and feel），见
+            <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="FlatLaf">
+            <param name="content" value="https://www.formdev.com/flatlaf/">
+            </object>。
+
+            <p>Airy CWT 和 Morlet CWT 频谱图模式，是连续小波变换（continuous wavelet transform，CWT）的 Java 实现，所用算法见以下文献：<I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency analysis. Nat Comput Sci, 2(1), 47–58.</I> <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher"> <param name="text" value="https://doi.org/10.1038/s43588-021-00183-z"> <param name="content" value="https://doi.org/10.1038/s43588-021-00183-z"> </object>。 </div> <div class="onlineonly"> <!-- External links for the online help --> <BR><BR>REW 使用 JTransforms 纯 Java FFT 库，见 <A target="_blank" HREF="https://github.com/wendykierp/JTransforms">JTransforms</A><BR><BR> REW 通过 Martin Roth 的 JAsioHost 支持 ASIO 接口，见 <a target="_blank" href="https://github.com/mhroth/jasiohost">JAsioHost</a><BR><BR> REW 通过 Pavel Hofman 的 csjsound-provider 支持 Windows 上的 WASAPI 独占模式和 Linux AMD64 上的 ALSA PCM，见 <a target="_blank" href="https://github.com/pavhofman/csjsound-provider">csjsound-provider</a><BR><BR> REW 的安装程序用 Install4J 多平台安装程序制作工具构建，见 <a target="_blank" href="http://www.ej-technologies.com/products/install4j/overview.html">ej-technologies</a><BR><BR> 感谢 Gerrit Grunwald 提供的思路，以及取自其 Steel Series 组件的元素，见 <a target="_blank" href="http://harmoniccode.blogspot.com/">Harmonic Code</a><BR><BR> REW 使用 Hola 多播 DNS 服务发现（Multicast DNS Service Discovery）库，见 <A target="_blank" href="https://github.com/fflewddur/hola">Hola</A><BR><BR> REW 使用 Java WebSocket 客户端，见 <A target="_blank" href="https://github.com/TooTallNate/Java-WebSocket">Java WebSocket</A><BR><BR> REW 使用 FormDev 的 FlatLaf 外观主题（look and feel），见 <A target="_blank" href="https://www.formdev.com/flatlaf/">FlatLaf</A><BR><BR> Airy CWT 和 Morlet CWT 频谱图模式，是连续小波变换（continuous wavelet transform，CWT）的 Java 实现，所用算法见以下文献：<I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency analysis. Nat Comput Sci, 2(1), 47–58. </I> <A target="_blank" HREF="https://doi.org/10.1038/s43588-021-00183-z">https://doi.org/10.1038/s43588-021-00183-z</A><BR><BR> </div>
+
+        <P>Copyright &copy; 2004-2026 John Mulcahy 保留所有权利
+
+        <H3><A HREF="gettingstarted.html#top">开始使用 REW</A></H3>
+
+        <P>请把反馈发送到 feedback@roomeqwizard.com
+
+        <DIV class="onlineonly"><A  HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Multi-input capture</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Multi-input capture</A></H2>
+
+        <P>Multi-input capture is a Pro upgrade feature that allows REW to capture multiple inputs 
+        simultaneously for measurement or for the RTA. Each input can have its own calibration file. 
+        Individual SPL metering is available for the first four inputs, the level meters can show the 
+        input level for the first 32 inputs. Measurements made with multi-input capture will show an 
+        rms average of all the captured channel magnitudes with an underlay showing the span of the 
+        individual channels and can optionally include individual measurements for each channel.
+        
+    	<P><IMG SRC="../../images/measresult.jpg" ALT="Multi-input capture measurement result" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="inputs">Input selection</A></H3>
+
+        <P>The first and last channels to be captured are selected on the Soundcard preferences, Measure 
+        dialog or RTA input dialog. The example below shows selection using ASIO drivers, a similar selection
+        is offered for Java drivers. On Windows when using the Java drivers select the WASAPI exclusive device 
+        entries for multi-channel support (entries starting EXCL: in the device selectors). On macOS or Linux 
+        Java drivers offer as many channels as the interface supports. 
+
+        <P><IMG SRC="../../images/multichanselection.jpg" ALT="Multi channel input selection" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        
+        <H3><A name="weighting">Weighting and SPL alignment</A></H3>
+
+        <P>The weighting of each input in the average can be configured and inputs can be aligned to 
+        a common SPL in a chosen frequency range before being averaged, useful for spatial averaging. 
+        Weighting and SPL alignment can be configured before the measurement is made (using the 
+        <EM>Configure averaging</EM>) button on the Measure dialog) or adjusted afterwards (using the
+        <EM>Adjust average</EM> button in the SPL &amp; Phase graph controls). Four preset weighting 
+        configurations can be saved.  The check boxes next to the weightings provide a 
+        quick way to exclude an input from the average, deselecting a box sets the 
+        weighting for that input to zero. Selecting the box again sets the weighting 
+        to 1. Custom averaging groups can be defined from any combination of the inputs.
+        
+    	<P><IMG SRC="../../images/configureaverage.jpg" ALT="Multi-input averaging configuration" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="rta">Multi-input RTA measurements</A></H3>
+
+        <P>RTA measurements with multi-input capture show an rms average of the individual channel 
+        magnitudes, individual traces up to the number of inputs set on the <A href="view.html">View preferences</A>
+        (16 by default) and/or any averaging groups defined and peak traces for the first two inputs. If averaging groups are being used (either 
+        averaging UMIK-X modules or custom averaging groups) individual inputs that are included in an average
+        can be hidden to prevent the graph becoming too cluttered. The processing and graphics capabilities of 
+        the computer may limit the number of inputs that can be displayed without affecting data capture. 
+        
+        <P>Multi-input RTA measurements are saved in the same format as multi-input sweep measurements allowing 
+        the same weighting and SPL alignment adjustments to be made to them after measurement have been captured. 
+        If the <EM>Save inputs to individual measurements</EM> option is selected saving the current input will 
+        produce a measurement for the average and individual measurements for each input channel. Saving will also 
+        produce measurements for any individual averaging groups that have been selected using <EM>Average each 
+        UMIK-X array</EM> or <EM>Use group averages</EM>. If <EM>Do not plot inputs that are in a group or 
+        module average</EM> is selected the RTA graph will only include those individual inputs which are not in 
+        an averaging group. Weighting and SPL alignment can be configured before or during capture using the 
+        <EM>Configure average</EM> button on the RTA input selection dialog.
+    	<P><IMG SRC="../../images/rtamultiinputdialog.jpg" ALT="RTA multi-input selection dialog" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>If only two inputs are selected for a multi-input RTA measurement distortion and levels will 
+        be shown individually for each and stepped sine measurements can be made for both inputs simultaneously.
+    	<P><IMG SRC="../../images/rtamultiinputdist.jpg" ALT="RTA two-input distortion" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        
+        <H3><A name="sweep">Multi-input sweep measurements</A></H3>
+
+        <P>Sweep measurements with multi-input capture can generate an overall average, group averages and individual
+        measurements for each input according to the options selected on the input selection panel. If a timing reference 
+        is used when making a sweep measurement it will preserve the relative timing for the individual measurement inputs.
+        If a timing reference is not used the <EM>Preserve relative timing</EM> option controls whether relative timing
+        is preserved, if selected timings will be relative to the first input. There are 
+        additional options to use cross correlation alignment to align the individual inputs and/or to vector average 
+        them. If the measurements are to be vector average cross correlation alignment is recommended. <B>Note that the vector
+        average weights all measurements equally</B>.
+        
+    	<P><IMG SRC="../../images/sweepmultiinputdialog.jpg" ALT="Measurement multi-input selection dialog" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        
+        <H3><A name="mics">Microphones</A></H3>
+
+        <P>Multi-input capture would typically be used with a mic array (such as the miniDSP UMIK-X)
+        or a multi-channel interface with multiple analog microphones connected to it. REW captures a 
+        contiguous range of input channels. Whilst it is possible to use this feature with
+        multiple USB microphones on Windows when using an ASIO wrapper, this is <B>NOT</B> recommended because:
+        <UL>
+            <LI>REW would only be able to access the input volume setting for the first USB mic and
+                would use that to adjust SPL values for all the mics, so all the USB mics would need to have the same 
+                OS volume setting
+            <LI>USB mics typically provide a stereo pair of inputs, each carrying the same data, so there would be
+                two identical input captures for each mic
+        </UL> 
+        
+        <P>When using the miniDSP UMIK-X there are options on the Measure and RTA inputs dialog to produce an 
+        average of the four mics on each UMA4 mic array as well as an overall average of all the selected inputs. The 
+        array average measurement names will be prefixed with "A1-" for the first array, "A2-" for the second and so on.
+        
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

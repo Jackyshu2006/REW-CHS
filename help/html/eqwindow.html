@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>EQ Window</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">EQ Window</A></H2>
+
+        <P><IMG SRC="../../images/eqframe.jpg" ALT="EQ Window" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>The EQ Window is used to determine what EQ filters to apply to a response 
+        and to see the effect those filters would have on both the frequency and time 
+        domain behaviour. It always shows the response currently selected in the main 
+        REW window, which can be changed from the REW main window or by pressing
+        ALT + a measurement number (e.g. Alt+3 selects the third measurement) or using
+        ALT+UP/ALT+DOWN to move through the measurements.
+        
+        <P>The window has 3 main areas: a "Filter Adjust" graph of frequency responses; 
+        a second graph area showing the impulse response, waterfall, phase, group delay
+        and pole-zero graphs for the measurement and the predicted results of EQ; and a panel on the 
+        right with various settings related to the EQ functions and modal analysis. The 
+        right hand panel can be hidden/shown using the chevron button at the top of the scroll bar.
+        <P><IMG SRC="../../images/eqhidebtn.jpg" ALT="EQ Window Show/Hide" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="filtadjgroup">Filter Adjust</A></H3>
+
+        <P>The Filter Adjust plot shows the measured and predicted (equalised) response 
+        for the current measurement along with the target response and the response of the 
+        equaliser filters with and without the target. This plot, in common with all 
+        plots that have a frequency axis, also optionally shows where any filters have 
+        been defined, displaying the filter's number along the top margin of the plot 
+        at the position corresponding to its centre frequency.
+        <P><IMG SRC="../../images/filteradjust.jpg" ALT="Filter Adjust Graph">
+
+        <P>The frequency response of the measurement is labelled with the measurement name. 
+        The <EM>Predicted</EM> response shows the predicted effect of the measurement's
+        filters. The <EM>Target</EM> trace shows the target frequency response for the
+        measurement, including any desired House Curve response shape. If a House Curve has been loaded the 
+        <IMG SRC="../../images/housecurve.gif" ALT="" width="19" height="11"> symbol will 
+        be displayed by the trace value. The Target response includes the Bass Management 
+        curve appropriate to the speaker type selected for the measurement in the 
+        <A HREF="#targetsettings">Target Settings</A>. The <EM>Filters</EM> trace shows the combined 
+        frequency response of the filters for this measurement, along with the individual
+        filter responses if this has been selected (see Filter Adjust Controls below). The <EM>Filters+Target</EM>
+        trace shows the frequency response of the filters overlaid on the Target 
+        response. Selecting the filter responses to be drawn inverted and adjusting 
+        the filters so that this curve matches the measured response will result in 
+        the predicted response matching the target.
+        
+        <H4><A name="actions">Filter Adjust Actions</A></H4>
+        
+        <P>Right clicking on the graph brings up a menu of actions:
+        <P><IMG SRC="../../images/actionsfilteradjust.jpg" ALT="Filter adjust actions"><BR CLEAR="all">
+            
+        <H4><A name="filteradjustcontrols">Filter Adjust Controls</A></H4>
+        
+        <P>The control panel for the Filter Adjust graph has these controls:
+        <P><IMG SRC="../../images/controlsfilteradjust.jpg" ALT="Filter Adjust Controls"><BR CLEAR="all">
+
+        <P>When <EM><A name="invertfilters">Invert filter responses</A></EM> is selected 
+        the responses of the filters are drawn inverted. This is useful for graphically 
+        matching the shape of a filter to the shape of the peak it is being used to 
+        correct, when the shapes match the overall response in that region will be flat.
+        
+        <P><EM>Fill filter responses</EM> fills the overall filter response. 
+        <EM>Show each filter</EM> draws the individual filter response shapes separately
+        in different colours. <EM>Fill each filter</EM> fills the individual responses.
+        
+        <P><EM>Show filter numbers</EM> controls whether the numbers of each filter are
+        shown along the top of the graph. 
+        
+        <P>The frequency span selected for target match is highlighted if 
+        <EM>Highlight match range</EM> is selected.
+        
+        <P>If <EM>Graphical filter edit</EM> is selected the gain or frequency of filters can be 
+        adjusted by clicking and dragging on the circular handles at each filter's centre 
+        frequency. The colour of the handles matches the colour of the filter in the EQ filters
+        panel. Q can be adjusted by placing the mouse over the circular handle and using 
+        the mouse wheel. For fine Q adjustment hold the Alt key while moving the mouse wheel.
+        Note that if Graphical edit is enabled it is not possible to zoom the graph with the 
+        mouse wheel, but zooming the X axis (mousewheel plus shift key) remains available when
+        the mouse is not over a filter handle. The response of the filter is highlighted when 
+        the mouse is over the filter's handle.
+        
+        <P><EM>Show modal frequencies</EM> controls whether the positions of the modes 
+        corresponding to the room dimensions entered in the Modal Analysis panel are shown 
+        along the bottom of the graph. 
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog to change the colours or line 
+        types of the graph traces, or hide some of them.
+
+        <H3>EQ Filters Panel</H3>
+
+        <P>The <A HREF="eqfilters.html">EQ Filters panel</A> is displayed by clicking 
+        the button at the top of the EQ window.<BR><BR>
+        <IMG SRC="../../images/eqfiltersbtn.jpg" ALT="EQ Filters Button">
+        <BR CLEAR="all"><BR>
+
+        <H3><A name="eqwaterfall">Waterfall</A></H3>
+
+        <P>The Waterfall plot shows a waterfall for the measurement and for the predicted
+        result of applying the current filters to the measurement. The Predicted waterfall
+        can be configured to update automatically as filters are adjusted (see Waterfall Controls below).
+        
+        <P><IMG SRC="../../images/eqwaterfall.jpg" ALT="EQ Waterfall">
+
+        <H4>Waterfall Controls</H4>
+
+        <P><IMG SRC="../../images/eqwaterfallcontrols.jpg" ALT="Waterfall Controls"><BR CLEAR="all">
+
+        <P><EM>Mode</EM> would usually be <EM>Fourier</EM> to examine the time domain
+        behaviour, but a <EM>Burst decay</EM> mode allows the plot to be generated with
+        a period-based axis, the <A HREF="graph_waterfall.html#burstdecaygen">waterfall graph help</A> has more on that.
+        
+        <P>The Predicted plot can be overlaid on the current measurement. The overlay 
+        is generated slice-by-slice, plotting a slice of the current measurement's 
+        waterfall, then a slice of the overlay, then the next slice of the current 
+        measurement and so on.
+
+        <P>If <EM>Predicted Waterfall Live Update</EM> is selected the waterfall will 
+        be regenerated as filters are adjusted - it may take a few seconds for the 
+        update to appear, depending on the speed of the computer and the frequency
+        span of the measurement. Note that the waterfall colour scheme is forced to 
+        "none" when using live updates as the colour scheme options slow down redraw.
+        
+       <P>The <EM>Total Slices</EM> control determines how many slices are used to produce
+        the waterfall. Fewer slices mean faster processing, but make it less easy to see
+        how the response is varying over time.
+
+        <P>The width of the impulse response section that is used to generate the waterfall
+        is set by the <EM>Window</EM> control (this control sets the Right Hand window width).
+        The corresponding frequency resolution is shown to the right of the window setting. 
+        Longer window settings provide better frequency resolution.
+        
+        <P>The <EM>Time Range</EM> control determines how far the impulse response 
+        window is moved from its start position to generate the waterfall.
+        
+        <P>The <EM>Rise Time</EM> control sets the width of the Left Hand window. Shorter
+        settings give greater time resolution but make the frequency variation less easy 
+        to see. The default setting, 100 ms, is aimed at revealing room resonances. When
+        examining drive unit or cabinet resonances with full range measurements a much shorter
+        rise time would be used, 1.0 ms or lower, with time spans and window settings of 
+        around 10 ms. CSD mode is often more useful for such measurements as the later part
+        of the impulse response can be noisy, obscuring the behaviour in the later slices.
+        
+        <P>The <EM>Smoothing</EM> applied to the waterfall slices can be increased from 1/48th octave 
+        (the minimum, and recommended) to as high as 1/3rd octave.
+        
+        <P>The <EM>Perspective settings</EM> control the appearance of the plot including
+        a <EM>Transparency</EM> setting which can be applied to the main plot, the Predicted overlay, or 
+        both. When transparency is set to 0% both plots are solid. The transparency mode 
+        can be switched between main/overlay/both to ease comparison between the plots.
+ 
+        <P>The control settings are remembered for the next time REW runs. The
+        <EM>Apply Default Settings</EM> button restores the controls to their default values.
+        
+        <H3><A name="eqimpulse">Impulse</A></H3>
+
+        <P>The Impulse plot shows the impulse response of the measurement and of the 
+        predicted result of applying the current filters to the measurement.
+
+        <P><IMG SRC="../../images/eqimpulse.jpg" ALT="EQ Impulse">
+        
+        <H3><A name="eqphase">Phase</A></H3>
+
+        <P>The Phase plot shows the phase response of the measurement and of the 
+        predicted result of applying the current filters to the measurement.
+
+        <H3><A name="eqgd">Group Delay</A></H3>
+
+        <P>The Group Delay plot shows the group delay of the measurement and of the 
+        predicted result of applying the current filters to the measurement.
+
+        <H3><A name="eqsettings">EQ Settings</A></H3>
+        
+        <P>The area to the right of the graphs contains a group of collapsible panels 
+        containing settings that affect the EQ functions.
+        
+        <H4>Equaliser Panel</H4>
+
+        <P><IMG SRC="../../images/equaliserselector.jpg" ALT="Equaliser Selector">
+        
+        <P>The Equaliser panel is used to select the type of equaliser that will be applied
+        to the current measurement. Changing the equaliser type updates the filter panel,
+        applying the settings appropriate to the selected equaliser. Filters already
+        defined are retained where possible, but parameter values will be adjusted if
+        necessary to comply with the ranges and resolutions of the chosen equaliser.
+        The currently selected equaliser is shown in the panel title and in the EQ Filters 
+        panel. Details of the various equaliser types can be found <A HREF="equaliser.html">here</A>.
+
+        <H4><A NAME="targetsettings">Target Settings</A></H4>
+
+        <P><IMG SRC="../../images/targetsettings.jpg" ALT="Target Settings">
+        
+        <P>The Target Settings panel is used to tell REW what you expect or want the 
+        response to look like, so it knows what to aim for when applying EQ. The first 
+        selection (<FONT CLASS="heading"><A name="speakertype">Target Type</A></FONT>) should 
+        reflect the kind of speaker the measurement is from. If it's a Full Range ("Large") 
+        speaker the target is flat with a configurable low end roll off frequency 
+        (<FONT CLASS="heading">LF Cutoff</FONT>) and slope (<FONT CLASS="heading">LF Slope</FONT>). 
+        Setting the LF Cutoff to zero results in a target response that remains flat to 0Hz.
+        
+        <P>If it's a Bass Limited ("Small") speaker the target includes the effect of the bass 
+        management filter, the <FONT CLASS="heading"><A name="crossover">Bass management slope</A></FONT>
+        setting lets you tell REW how steep the bass management filter is and 
+        <FONT CLASS="heading"><A name="cutoff">Bass management cutoff</A></FONT> 
+        is the frequency it is set to, typically 80Hz in Home Theatre systems. 
+        
+        <P>The Subwoofer target is similar, except the high frequencies are rolled off and there
+        is a configurable low end roll off frequency and slope. For a 'Full Range' speaker the 
+        LF cutoff might be 40 Hz, for a sub it might be 20 - 30 Hz. You can usually see from the 
+        measurement where it is rolling off and adjust these settings for the target until it matches.
+        
+        <P>The bass management slope would typically be 24dB/octave for a subwoofer and 12dB/octave 
+        for a bass limited speaker, however the 12dB/octave figure for a speaker is used because 
+        the speaker itself is expected to have around a 12dB/octave acoustic roll-off, hence the 
+        overall effect of the filter and the speaker's roll-off is around 24dB/octave - the 24dB 
+        setting may be a better match to the measured response in those cases.
+	
+        <P>There is also a <EM>Speaker driver</EM> target type to use with measurements of 
+        individual drive units. Low pass and high pass crossover filters of up to 8th order
+        can be configured to form the target.
+        <P><IMG SRC="../../images/drivertarget.jpg" ALT="Speaker driver target">
+        
+        <P>A <A NAME="housecurve">house curve</A> file can be loaded which has a set of data that defines an offset 
+        curve that is added to the target type shape and any room curve (see below for room 
+        curve settings). The file containing the 
+        house curve data is plain text consisting of pairs of frequency and offset 
+        values separated by spaces, tabs or commas. Interpolation is used 
+        between the pairs of values, either linear (default) or logarithmic,
+        according to the state of the <FONT CLASS="heading">Use logarithmic interpolation</FONT>
+        check box. Logarithmic interpolation draws lines between data points which are
+        straight if the frequency axis is logarithmic. The first and last values in the file are used for all 
+        frequencies below and above the range of the data respectively. <BR><BR>
+        <UL>
+            <LI>Each line of data must have a frequency value (which is in Hz) and 
+            an offset value (which is in dB)
+            <LI>The points can be at arbitrary frequency spacing, but each
+            line must have a higher frequency than the one before and there
+            must be at least 2 freq, offset data pairs
+            <LI>Only lines which begin with a number are loaded, others
+            are ignored
+            <LI>In comma-delimited files there must be at least one space after 
+            the comma
+            <LI>Spaces before values are ignored
+        </UL>
+        <P>The house curve would typically be used to define a boost for the subwoofer 
+        range, such as that defined by the data points below. These points give 
+        a boost that is 6dB at 20Hz, dropping to 0dB at 80Hz and above. The boost 
+        remains flat at 6dB below 20Hz. A more elaborate curve might include a roll-off 
+        at high frequencies (if full range equalisation were being applied). 
+        <PRE>
+        House Curve data
+
+        20 6.0
+        80 0.0
+        </PRE>
+        <P>When a house curve has been loaded the <IMG SRC="../../images/housecurve.gif" ALT="H" width="19" height="11"> 
+        symbol is displayed next to the Target trace value in the Filter Adjust graph.
+            
+        <P>An <FONT CLASS="heading">Add room curve</FONT> option is an alternative to specifying 
+        a house curve file that allows the target to to include typical room effects at the listening 
+        position and, if desired, a boost at low frequencies. 
+        <FONT CLASS="heading">HF Fall</FONT> is used to reflect the downward tilt at 
+        high frequencies which is normal for most listening position speaker measurements, the result 
+        of the room's absorption and the speaker's power response. <FONT CLASS="heading">LF Rise</FONT> 
+        allows that tile to be extended to low frequencies, to target a higher bass level which may
+        be subjectively preferred. The target curve will rise below the LF Rise start frequency at 
+        the slope selected until reaching the LF Rise end frequency. Similarly, the target curve will 
+        fall above the HF Fall start frequency at the slope selected. The room curve effect can be 
+        turned on and off using the <FONT CLASS="heading">Add room curve</FONT> box.
+	
+        <P>The <FONT CLASS="heading">Target Level</FONT> control lets you move the 
+        whole target response up or down until it sits in the right place relative to your 
+        measurement. When the target is right the bits that go above it are the peaks you 
+        want to tame and it usually runs more or less through the middle of the measurement.
+        <EM>Calculate target level from response</EM> automatically adjusts the level of the 
+        target response to provide a good match to the measurement over a suitable frequency 
+        range for the target type, but don't be afraid to manually adjust the level to suit.
+        If the target is Full range or None the target level is adjusted to align with the 
+        measurement between 200 Hz and 2 kHz. For Subwoofer targets the alignment range depends 
+        on the sub LF cutoff and the bass management cutoff. For Bass limited targets the lower 
+        end of the alignment range depends on the bass management cutoff and the upper end is 2 
+        kHz. For Speaker driver targets the alignment range depends on the driver crossover frequencies.
+
+        <P><EM>Generate measurement from target shape</EM> creates a new measurement whose response
+        matches the currently configured target. That measurement may be used on the RTA or the ALL 
+        SPL graphs to act as a reference.
+	
+        <P>The default target type, bass management slope, cutoff, LF rise and HF fall to use 
+        for new measurements are specified in the <A HREF="eqsettings.html">Equaliser</A> 
+        Preferences.
+        
+        <H4><A NAME="filtertasks">Filter Tasks</A></H4>
+
+        <P><IMG SRC="../../images/filtertasks.jpg" ALT="Filter Tasks">
+        
+        <P>The <EM>Filter Tasks</EM> panel is used to control REW's automatic filter
+        adjustment feature. REW can automatically assign and adjust filter settings to 
+        match the Predicted response to the target response. 
+        
+        <P>The <FONT CLASS="heading">Match Range</FONT> defines the frequency span 
+        over which REW attempts to match the target response, and within which filters
+        will be assigned. REW can apply filters anywhere across the band, but it is 
+        usually best to limit filters to low frequencies (less than 200 Hz or so) unless 
+        you are compensating for some general characteristic in the speakers (an example 
+        might be a dip in the mid range or a bit too much HF) - that is using EQ as a 
+        fancy tone control.
+
+        <P><FONT CLASS="heading">Individual Max Boost</FONT> sets the maximum boost that 
+        REW will allow for any individual filter. This can be set to zero to prevent 
+        REW assigning any boost filters.
+        
+        <P><FONT CLASS="heading">Overall Max Boost</FONT> sets the maximum boost that 
+        REW will allow for the combined effect of all the filters. This can be set to 
+        zero to prevent REW allowing any overall boost, but individual filters may 
+        still have boost. If the filter set has any overall boost the headroom this 
+        requires will be shown on the <A href="eqfilters.html">EQ filters panel</A>. 
+        
+        <P>In addition to the gain limits, boost filters are subject to Q limits to 
+        avoid inadvertently creating artificial resonances. The Q of boost filters is 
+        not allowed to exceed a value which would cause the filter's 60dB decay time 
+        to exceed approximately 500 ms (the actual Q limit value depends on the filter's gain).
+        
+        <P>The <FONT CLASS="heading">Flatness Target</FONT> controls how tightly REW
+        tries to match the Predicted response to the Target Response. The lower the 
+        Flatness Target, the more filters will be required.
+        
+        <P><FONT CLASS="heading">Allow low shelf</FONT> and <FONT CLASS="heading">Allow high shelf</FONT>
+        let REW use shelf filters at the beginning and/or end of the range to better match the response 
+        to the target. Shelf filters will only be used if the equaliser supports them and the response
+        remains above or below the target for a span of at least half an octave at the beginning or end 
+        of the match range. The allowable gain range for the shelf filters is set to the right of the 
+        check boxes.
+
+        <P><FONT CLASS="heading">Allow narrow filters below 200 Hz</FONT> 
+        determines whether target match uses filters narrow enough to counter modal 
+        resonances at low frequencies. This should be selected when applying EQ to a 
+        room measurement, but is best not selected when applying EQ to a device response
+        (headphone EQ, for example). When this option is not selected the highest Q
+        used will be 5.0.
+        
+        <P>If <FONT CLASS="heading">Allow narrow filters below 200 Hz</FONT> is selected
+        the <FONT CLASS="heading">Vary max Q above 200 Hz</FONT> option tells REW to adjust
+        the maximum Q from 10.0 at 200 Hz to 3.0 at or above 10 kHz. If this is not selected 
+        the max Q above 200 Hz will be 5.0. Selecting this option also reduces the maximum Q
+        of any boost filters from 7.5 at 200 Hz  to 3.0 at or above 10 kHz, otherwise boost 
+        filter Q is limited to the lower of 7.5 or Fc/6.22 to control filter decay time.
+        
+        <P><EM>Match Response to Target</EM> starts REW's automated filter assignment 
+        and adjustment process. REW assigns filters to match the Predicted response
+        to the Target Response, beginning with the area within the 
+        <FONT CLASS="heading">Match Range</FONT> where the measurement is furthest 
+        from the target. After assigning filters, REW adjusts the settings of the 
+        filters to get the closest match. It is best to apply the 'variable' smoothing 
+        to the response before running the target match.
+        
+        <P>For best results it is essential to first ensure the shape of the target 
+        response is correctly selected to suit the type of speaker whose response 
+        is to be equalised and set the Target Level so that REW does not end up 
+        applying filters to try and correct a level difference - equalisers are 
+        not volume controls! 
+        
+        <P>Note that by default REW will not apply filters below the frequency at which the 
+        measurement first exceeds the target or above the frequency at which the 
+        measurement last drops below the target to prevent trying to boost a response 
+        beyond its natural roll-offs, if you wish to lift the low or high end response this 
+        can be done with manually applied filters but beware of exceeding the excursion 
+        limits or headroom of the woofer or power handling limits of the tweeter. 
+<!--        The option
+        <EM>Allow boost at lowest frequencies</EM> in the <A href="eqsettings.html">EQ preferences</A>
+        will permit REW to automatically apply boost filters below the natural roll-off 
+        of the response. If the filter set has any overall boost the headroom this 
+        requires will be shown on the <A href="eqfilters.html">EQ filters panel</A>. -->
+        
+        <P>The Filter Tasks panel also includes a set of controls to optimise the
+        settings of the current filters. Note that only filters that lie within the 
+        <em>Match Range</em> will be adjusted. <EM>Optimise gains</EM> will adjust
+        the gains of all 'Automatic' PK and modal filters to best match the target response.
+        <EM>Optimise gains and Qs</EM> will adjust the gains and Qs of all 'Automatic' PK
+        filters and the gains of all 'Automatic' modal filters. 
+        <EM>Optimise gains, Qs and frequencies</EM> will adjust the gains, Qs and centre
+        frequencies of all 'Automatic' PK filters and the gains of all 'Automatic' modal 
+        filters - it is equivalent to <em>Match response to target</em> without the automatic assignment 
+        of filters. Centre frequencies will be adjusted to within 10% of their initial setting
+        and will remain within the match range. 
+        
+        <P>If REW can read from the equaliser <EM>Retrieve filter settings from equaliser</EM>
+        will be enabled, selecting it will read the settings either directly from the equaliser
+        or from a file exported by the equaliser, depending on the equaliser type. 
+        <EM>Send filter settings to equaliser</EM> will transfer the current filter 
+        settings to the equaliser if the equaliser offers that capability. 
+        <EM>Save filter coefficients to file</EM> writes the biquad coefficients for the 
+        current filters at the selected sample rate in a form the equaliser can import. 
+        <EM>Export filter settings as text</EM> and <EM>Export filter settings as formatted 
+        text</EM> generate text files with the filter types and settings. 
+        <EM>Reset filters for current measurement</EM> will clear all the filters.
+        
+        <P><EM>Generate measurement from predicted</EM> creates a new measurement whose response 
+        matches the predicted effect of any EQ filters. It has the same name as the current
+        measurement prefixed by "EQ".
+
+        <P><EM>Generate measurement from filters</EM> creates a new measurement whose response 
+        matches the current EQ filters. It has the same name as the current measurement prefixed 
+        by "Filters". If there are no active filters the result is a perfect impulse.
+        
+        <P><EM>Measure with these filters</EM> will open the Measure dialog to make a
+        new measurement with the current filter settings applied to the sweep. It provides 
+        a way to test the effect of filter settings on measurements without having an equaliser 
+        or when the equaliser is bypassed (for example, Windows software equalisers are usually
+        bypassed when using WASAPI exclusive or ASIO drivers). The Measure dialog will show a 
+        small image of the filter response and any headroom requirement the filter set has. 
+        if the filter set has overall gain that needs to be taken into account to avoid clipping 
+        the output.
+        <P><IMG SRC="../../images/sweepfilters.jpg" ALT="Filters applied to sweep">
+    
+        <H3><A name="modalanalysis">Modal Analysis</A></H3>
+        
+        <P>REW can analyse the low frequency part of the measured response to search
+        for modal resonances. The search is controlled by the settings in the 
+        <EM>Modal analysis</EM> panel. To determine the modal characteristics a
+        parametric analysis of a segment of the impulse response is carried out to
+        identify the frequencies, amplitudes and rates of decay of the resonant features 
+        that make it up. Such an analysis is not constrained by the frequency resolution 
+        limits of an FFT, allowing precise values for each mode's parameters
+        to be determined. However, the accuracy of the results depends on the signal-to-noise 
+        ratio of the measurement. The better the measurement, the better the results. To get 
+        the highest measurement quality for modal analysis set the sweep end frequency to 
+        match the highest frequency of interest and use a long sweep.
+        
+        <P><IMG SRC="../../images/modalanalysiscontrols.jpg" ALT="Modal Analysis">
+        
+        <P>The modal analysis panel includes selections for the room dimensions. 
+        These are used to determine the room's theoretical modal frequencies up to
+        200 Hz, which may be plotted on the SPL &amp; Phase, Group Delay, Spectral 
+        Decay, Waterfall and Spectrogram graphs. If any dimension is set to zero 
+        the corresponding modal frequencies will not be plotted, if all the dimensions 
+        are zero no modal frequencies will be plotted. The colours used for the 
+        modal frequencies are the same as those used in the 
+        <A href="modalsim.html#modallines">Room Simulator</A>.
+        
+        <P>The panel controls select the range to search for resonances (which will be restricted 
+        to the range of the measurement if smaller), the duration of the impulse response 
+        to analyse and a threshold for filtering out spurious resonances due to noise in
+        the measurement. Best results are obtained by keeping the frequency span to around
+        100 - 200 Hz. The <FONT CLASS="heading">Analysis Length</FONT>, 500 ms by default, may 
+        be reduced if the measurement is noisy or increased if the measurement has particularly 
+        low noise (noise floor of the impulse more than 60 dB below the peak). 
+        
+        <P>Small alterations of the analysis length, 10-20 ms or so, can help establish whether 
+        the modal resonances identified are accurate - modes with consistent frequency, amplitude 
+        and decay time at differing analysis lengths indicate reliable data. 
+        When <EM>Find Resonances</EM> is clicked the analysis begins, it usually completes after 
+        a few seconds. The results are shown in the <EM>Resonances</EM> panel.
+        
+        <P><IMG SRC="../../images/resonancespanel.jpg" ALT="Resonances Panel">
+        
+        <P>The Resonances panel includes controls to filter the results list according to the
+        T60 decay times of the resonances and their amplitude. The list of resonances may be 
+        sorted by frequency, SPL ("Peak dB") or T60 decay time by clicking on the column headers
+        in the table. Clicking on a resonance in the table will show a plot of its shape on the
+        Filter Adjust graph, multiple resonances can be selected by clicking and dragging or using 
+        Ctrl+click or Shift+click. <EM>Clear Selection</EM> clears any selections made.
+        
+        <P><IMG SRC="../../images/filteradjustresonances.jpg" ALT="Resonances on Filter Adjust">
+        
+        <P>Filters which accurately counter specific resonances can be generated by
+        selecting the "Modal" filter type and setting the <FONT CLASS="heading">Target T60</FONT> 
+        value to the T60 time determined by REW. Modal filters are normal parametric EQ filters 
+        whose Q or bandwidth is adjusted by REW as their gain is changed to ensure they target the
+        specified T60 value as closely as the equaliser settings resolution permits.
+
+        <H3><A name="polezero">Pole-Zero Plot</A></H3>
+        
+        <P>REW provides a Pole-Zero plot as an alternative way of viewing the results of the modal
+        analysis. This may be an entirely unfamiliar way of viewing a response to many, but it does 
+        have some virtues when looking at resonances and filters. However, little would be lost by 
+        ignoring this section.
+
+        <P><IMG SRC="../../images/polezeroplot.jpg" ALT="Pole-Zero Plot">
+        
+        <P>The pole-zero plot is a graph of complex numbers with the real part along the horizontal
+        axis and the imaginary part along the vertical axis. There is a circle on the plot with a radius
+        of one unit (referred to as the "unit circle") which corresponds in a way to the frequency
+        axis of a frequency response. The plot shows results up to a frequency a little
+        above the end of the modal analysis search, the upper frequency span of the plot is shown just
+        to the left of the unit circle, near the point (-1, 0). As we move around the upper half of the
+        unit circle the frequency increases from zero at the right side to the upper limit of the plot 
+        at the left. The lower half of the circle corresponds to negative frequencies, but for the signals
+        we are looking at the bottom half is always a mirror image of the top half and can be ignored.
+        
+        <P>The plot shows poles, represented by crosses, and zeroes, represented by circles. Poles are places
+        where the response becomes infinite, zeroes places where it becomes zero. The closer a pole gets
+        to the unit circle, the more it pulls the frequency response upwards. Conversely, zeroes pull 
+        the response towards zero. Poles and zeroes at the same location cancel each other out completely,
+        poles and zeroes close to one another partially counter each other's effects. If the plot has 
+        many pole/zero pairs that overlap they can be reduced by increasing the 
+        <FONT CLASS="heading">Noise Threshold</FONT> setting. Poles outside the unit circle would 
+        correspond to an unstable system, none should appear there. Zeroes outside the circle would 
+        mean the response is not minimum phase, but the analysis may not start at the zero time of the 
+        impulse so this plot is not necessarily a good indicator of whether a response is minimum phase,
+        for the correct method of determining that (using the excess group delay plot) refer to the
+        <A HREF="minimumphase.html#top">Minimum Phase</A> help topic.
+        
+        <P>Each modal resonance has a corresponding pole (actually a pair, the second is a mirror image
+        below the axis). The frequency of the pole can be seen by drawing a line from the (0,0) point out 
+        through the pole to the point it reaches the unit circle, in the plot above the pole is at 
+        approximately 92.7Hz. REW shows the frequency value, and the SPL level at that frequency 
+        (81.3dB above). The closer a pole gets to the unit circle, the longer its T60 decay time. 
+        REW shows the T60 time corresponding to the cursor position, in the example above it is 440ms. 
+        If a resonance is selected in the Resonances panel its pole will be highlighted on the plot.
+        The plot can be zoomed in on to get a closer view, clicking the button just above the x axis
+        zoom buttons will reset the axis ranges to show the upper half of the unit circle.
+        
+        <P>Filters also have poles and zeroes, a parametric EQ filter has a pair of poles and a pair 
+        of zeroes (one pole and one zero above the axis, the other below). The locations of the filter's
+        poles and zeroes vary as the filter's settings (frequency, Q/bandwidth and gain) are adjusted.
+        If the settings of a filter are adjusted so that its zero is directly over the pole of a 
+        resonance, it completely counters the effect of that resonance in the time and frequency domains.
+        Seeing how filter zero locations compare to response pole locations is where the pole-zero 
+        plot can be useful. In the case of the "Modal" filter type REW makes the adjustments 
+        that keep the filter's zero at a distance from the unit circle that matches the filter's target
+        T60 time.
+        
+        <P>Filter poles and zeroes are shown in colour on the plot, corresponding to the colour used 
+        for that filter on the filters panel and the Filter Adjust plot. An example of a set of filters 
+        is shown below. Filters that cut (negative gain) have their zeroes closer to the unit circle
+        than their poles, filters that boost have their poles closer to the unit circle than their zeroes.
+
+        <P><IMG SRC="../../images/filterpolezero.jpg" ALT="Pole-Zero Plot with filters">
+
+        <H4>Pole-Zero Controls</H4>
+
+        <P><IMG SRC="../../images/controlspolezero.jpg" ALT="Pole-Zero Controls" width="177" height="117"><BR CLEAR="all">
+
+        <P><EM>Show cursor annotations</EM> controls whether REW draws a line from the origin through 
+        the cursor position to the unit circle and labels the frequency, response SPL and T60 values. If 
+        <EM>Show 500ms T60 boundary</EM> or <EM>Show 1000ms T60 boundary</EM> are selected REW will draw
+        circles on the plot corresponding to those T60 times, any pole outside those circles has a T60 
+        time greater than the circle value. If <EM>Show Resonance Poles Only</EM> is selected the pole-zero 
+        plot will only show the poles for the resonances displayed in the Resonances panel, otherwise it
+        shows all poles found during the analysis.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

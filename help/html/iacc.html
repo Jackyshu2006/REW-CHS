@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Inter-Aural Cross Correlation</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Inter-Aural Cross Correlation</A></H2>
+        
+        <P>The <EM>IACC</EM> (Inter-Aural Cross Correlation) panel is used to calculate the early, late 
+        and full IACC values for a pair of binaural measurements. The zero time for the measurements is 
+        taken as the earlier of the two measurement IR start times. The division between early and late 
+        is 80 ms later.  The end of the "late" period is 500 ms or the end of the Schroeder integral 
+        (where the integral falls into the noise floor), whichever is later. REW does not change the 
+        alignment of the measurements, if they need to be aligned the Cross corr. align option may be 
+        suitable. The measurements are filtered with one octave, zero phase bandpass filters of the 
+        chosen order.
+        <P><IMG SRC="../../images/iacc.jpg" ALT="IACC panel"><BR CLEAR="all">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

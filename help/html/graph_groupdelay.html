@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Group Delay Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Group Delay Graph</A></H2>
+        
+        <P>The group delay for the measurement is calculated from the slope of the 
+        phase trace. Note that if smoothing has been applied to the measurement that
+        will also smooth the phase and group delay traces. Smoothing can be applied
+        or removed via the <A HREF="graph.html#onesmooth">Graph</A> menu and its
+        <A HREF="shortcuts.html#top">shortcut keys</A>. Peaks and dips in the frequency
+        response will usually be accompanied by corresponding peaks and dips in the group 
+        delay. The group delay will include any delay in the measurement due to time delays 
+        in the PC or soundcard, processing delays in the equipment and delays due to the time 
+        sound takes to travel from source to microphone. Delays in the PC or soundcard can be
+        eliminated by using the <FONT CLASS="heading">Use loopback as timing reference</FONT>
+        or <FONT CLASS="heading">Use acoustic timing reference</FONT>options in the 
+        <A HREF="analysis.html#ircalc">Analysis</A> Preferences. If the group delay 
+        is tending towards a level at the upper end of the measurement that level typically 
+        corresponds to the overall measurement delay. 
+        <P><IMG SRC="../../images/groupdelay.jpg" ALT="Group Delay" width="400" height="250"><BR CLEAR="all">
+            
+        <H3><a name="actions">Group Delay Actions</a></H3>
+        
+        <P>The right click menu for the Group Delay graph has the following actions:
+        <P><IMG SRC="../../images/actionsgroupdelay.jpg" ALT="Group Delay graph actions"><BR CLEAR="all">
+
+        <P>The smoothing box allows the graph smoothing to be changed
+        
+        <P><EM>Offset t=0</EM> allows the position of time zero in the impulse response 
+        to be altered, with a live preview of the effect the offset will have on group
+        delay and phase. 
+        The measurement is not changed unless either the <EM>Apply</EM> or <EM>Apply &amp; close</EM>
+        button is pressed. There are two sliders for offset adjustment, one for coarse 
+        adjustment and one for fine to provide a wide adjustment range. Fine adjustment of 
+        either slider can be made with the left and right arrow keys after clicking on the 
+        slider knob. The sliders can also be adjusted with the mouse scroll wheel, holding 
+        the Alt key provides fine adjustment in that case. 
+        If a timing reference was used the System Delay figure (which can be viewed in 
+        the measurement Info panel) is shifted by the same amount as the zero time. 
+        The cumulative shift that has been applied to the impulse response is shown at 
+        the top of the dialog.
+        <P><IMG SRC="../../images/t0offsetdialog.jpg" ALT="t=0 offset dialog"><BR CLEAR="all">
+
+        <P><EM>Estimate IR delay</EM> (<FONT CLASS="keys">Ctrl+Alt+E</FONT>) calculates 
+        an estimate of the time delay in the measurement by comparing it with 
+        a minimum phase version. The delay it calculates can be removed from the 
+        impulse response by pressing the <EM>Shift IR</EM> button on the panel 
+        shown after the delay is calculated. Note that shifting the impulse 
+        response will clear any spectrogram which had been generated as the 
+        plot would no longer be valid.
+
+        <P><EM>Generate Minimum Phase</EM> will produce a minimum phase version
+        of the measurement using the current IR window settings. This activates
+        minimum and excess group delay traces that show how the measurement's group
+        delay compares with the response of a system having the same frequency 
+        response but with the lowest phase shift such a system could have.  Note 
+        that it is best to make full range measurements if the minimum phase response 
+        is to be generated as a good result relies on measuring beyond the bandwidth 
+        of the system being measured. This control also activates minimum and excess 
+        phase and minimum phase impulse traces on the SPL &amp; Phase and Impulse graphs 
+        respectively.
+        
+        <P><B>Note</B> that the IR window settings are important as the minimum 
+        phase response is derived from the frequency (magnitude) response of the
+        measurement, which in turn is affected by the IR window settings. If the 
+        window settings are subsequently changed <EM>Generate Minimum Phase</EM> 
+        should be used again to reflect the new settings. Note also that the shape 
+        of the left side window (the window applied before the peak) affects the 
+        minimum phase result, a rectangular window will produce a response with 
+        lower phase shift than, for example, a Hann window.
+        
+        <P>If the system being measured was inherently minimum phase (as most 
+        crossovers are, for example) the minimum phase response is the same as 
+        removing any time delay from the measurement. Room measurements are typically 
+        not minimum phase except in some regions, mainly at low frequencies. For more 
+        about minimum and excess phase and group delay see <A HREF="minimumphase.html#top">Minimum Phase</A>.
+        
+        <H3><a name="controls">Group Delay controls</a></H3>
+        
+        <P>The control panel for the Group Delay graph has these controls:
+        <P><IMG SRC="../../images/controlsgroupdelay.jpg" ALT="Group Delay controls"><BR CLEAR="all">
+        
+        <P>If <EM>Show points when zoomed in</EM> is selected the individual points 
+        that make up the measured and minimum phase responses are shown on the graph 
+        when the zoom level is high enough for them to be distinguished (which may 
+        only be over part of the plot)
+
+        <P>If <EM>Show modal frequencies</EM> is selected the theoretical modal
+        frequencies for the room dimensions entered in the 
+        <A href="eqwindow.html#modalanalysis">Modal Analysis</A> section of the
+        EQ Window are plotted at the bottom of the graph. 
+
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

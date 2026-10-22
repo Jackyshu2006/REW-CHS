@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>开始测量</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">开始测量</A></H2>
+
+        <P>音频输入与输出<A HREF="calsoundcard.html#audioconfig">选定</A>之后，还要
+        <A HREF="calsoundcard.html#calmeasure">校准音频接口</A>（audio interface）、
+        <A HREF="measurementlevel.html#setmeaslevel">检查电平</A>、
+        <A HREF="inputcal.html#splcalprocedure">校准 SPL 读数</A>。
+        这几步都做完，REW 就可以开始测量响应了。
+
+        <P>接线方式见<A HREF="gettingstarted.html#connections">快速入门</A>。如果接的是
+        AV 处理器（AV processor），要在处理器上选中音频接口输出所接的那个输入。
+
+        <P>本节讲的是扫频（sweep）测量。要用快速子带自适应滤波（Fast Subband Adaptive Filtering，FSAF）做测量，
+        见 <A href="fsafmeasurement.html#top">FSAF 测量</A>。
+
+        <H3><a name="measure">做一次测量</a></H3>
+
+        <UL>
+            <LI>点击“测量”按钮
+            <IMG SRC="../../images/measurebuttonbare.jpg" ALT="测量按钮" BORDER=0>
+            （或按 Ctrl+M）打开测量对话框<BR><BR>
+            <IMG SRC="../../images/measuredialog.jpg" ALT="测量对话框" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>确认测量对话框顶部的“SPL / 阻抗”选择器已选到 SPL
+            （阻抗（impedance）测量见<A HREF="impedancemeasurement.html#top">阻抗测量</A>）
+
+            <LI>给这次测量起个名字。名称右侧有一组选项：REW 可以在名称前自动加上输出通道，
+            也可以在名称后自动加上序号、日期或时间。<BR><BR>
+
+            如果只想用序号，或者只想用日期或时间，把名称留空，勾选对应选项即可。
+            实际使用的名称显示在输入框下方。命名选项右侧的按钮里还有更多设置。<BR><BR>
+
+            如果给测量用了分组，可以在名称预览下方选择这次测量放进哪个分组。备注写在备注框里。
+            名称和备注事后都能在<A HREF="measurementspanel.html#top">测量面板</A>里改<BR><BR>
+            <IMG SRC="../../images/naming.jpg" ALT="测量命名" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>把<FONT CLASS="heading">起始频率</FONT>设为你想看到响应的最低频率，
+            <FONT CLASS="heading">结束频率</FONT>设为最高频率。<BR><BR>
+
+            为了保证所选范围内测得准确，实际扫频范围会更宽：从起始频率的一半扫到结束频率的两倍，但最高不超过音频接口采样率（sample rate）的一半。<BR><BR>
+
+            测量 LFE 通道时可以另设一个结束频率，见下文<A href="#outputoptions">输出选项</A>。
+
+            <LI><A name="sweeplevel"><FONT CLASS="heading">电平</FONT></A>控件设定扫频信号生成时的 RMS 信号电平。最大值是 -3 dBFS，或者换算成 dBu、dBV、伏特后的对应值。
+            如果在<A href="view.html">设置 → 视图</A>里勾选了
+            <FONT CLASS="heading">满量程正弦波 RMS 为 0 dBFS</FONT>，最大值则是 0 dBFS。<BR><BR>
+
+            用最大值时，信号峰值正好落在数字满量程（Full Scale）上。默认值是 -12 dBFS。<BR><BR>
+
+            这个控件通常预设为<A HREF="measurementlevel.html#setmeaslevel">检查电平</A>过程中
+            确定的扫频电平。如果要比较几只音箱的测量结果，或者比较同一只音箱的一组测量，
+            务必用同一个扫频电平测。<BR><BR>
+
+            测量 LFE 通道时可以自动降低 10 dB，用来抵消 AV 处理器或 AV 功放施加的 10 dB 增益，
+            见下文<A href="#outputoptions">输出选项</A>。
+
+            <LI>输入电平太低、不足以保证测量可靠时，REW 会给出警告。取消勾选
+            <EM>低输入电平时警告</EM>就不再提示。测量音箱的大离轴角（off axis）方向时，
+            电平本来就低，这时关掉警告会更省事。
+
+            <LI>扫频测量有两个保护机制。<BR><BR>
+
+            <EM>输入严重削波时中止</EM>：一个输入数据块里超过 30% 的采样发生削波（clipping），
+            就中止测量。<BR><BR>
+
+            <EM>SPL 超限时中止</EM>：SPL 超过设定的上限就中止测量。注意，如果设定的上限高于输入在削波之前所能测到的最大值，这个机制就起不到保护作用；不过在那种情况下，第一个机制（输入严重削波时中止）可能会被触发。
+
+            <LI>测量进度和输入电平显示在<FONT CLASS="heading">电平</FONT>控件下方。<BR><BR>
+            <IMG SRC="../../images/measprogress.jpg" ALT="测量进度" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>测量方法的<FONT CLASS="heading">设置</FONT>在对话框右侧。
+            <FONT CLASS="heading">长度</FONT>控件设定扫频的长度，也就是序列里的采样点数。
+            默认 256k，多数场合都够用。采样点数除以音频接口的采样率，得到扫频时长（秒），
+            显示在右侧。这个时长里还含扫频前后的静音段。<BR><BR>
+
+            输入和输出在同一台设备上时，两者共用一个时钟，扫频越长，测量的信噪比
+            （signal-to-noise ratio，S/N）越高。<BR><BR>
+
+            输入和输出分属两台设备时（比如用 USB 麦克风），长扫频就可能出问题，
+            因为两边的采样时钟频率不会完全一致。扫频一长，时钟频率上的差异会严重扭曲
+            脉冲响应（impulse response）的形状，也会影响相位响应（phase response）。<BR><BR>
+
+            要修正这个问题，可以改用<A href=#acousticref>声学时间基准</A>（acoustic timing reference），
+            并在设置 → 分析里打开<A href="analysis.html#adjustclockacoustic">用声学时间基准调整时钟</A>；
+            如果用回环（loopback）连接作时间基准，就打开设置 → 分析里的
+            <A href="analysis.html#adjustclockloopback">用回环调整时钟</A>。<BR><BR>
+
+            扫频长度每翻一倍，信噪比提高接近 3 dB。但每次扫频之后的处理时间会增加到两倍以上。<BR><BR>
+
+            如果电脑处理器不快、内存也不大，用短一点的扫频会快很多，代价是长度每减半、
+            信噪比损失约 3 dB。用 1M 扫频建议至少 4 GB 内存并配一颗快处理器，
+            4M 扫频建议至少 8 GB。内存或处理器性能不足的电脑，可能测出无效结果，
+            或者报内存不足的错误。<BR><BR>
+
+            <FONT COLOR="red"><B>警告：</B></FONT>REW 提供长扫频，是为了在测电子设备时拿到
+            高信噪比，尤其是在高采样率下。用在音箱上则不然：扫频越长，高音单元（tweeter）
+            过热的风险越大，必须非常小心地控制 SPL，确保信号始终在高音单元的功率承受能力之内。
+            <B>不</B>建议用长扫频测量音箱。
+
+            <LI>REW 允许对多次扫频取平均，不过一般来说，一次长扫频比多次短扫频效果更好。<BR><BR>
+
+            只有在不使用<FONT CLASS="heading">时间基准</FONT>、或者用回环作时间基准时，
+            才可以选多次扫频。<B>如果输入和输出分属两台设备（例如输入是 USB 麦克风），
+            不要用多次扫频。</B><BR><BR>
+
+            <FONT CLASS="heading">重复次数</FONT>大于 1 时，REW 会做同步预平均
+            （synchronous pre-averaging）：每次测量采集设定次数的扫频，再对结果取平均，
+            以削弱噪声和干扰的影响。扫频次数每翻一倍，预平均能把信噪比提高接近 3 dB。<BR><BR>
+
+            如果测量被干扰音污染——不论来自电气还是声学——取平均往往有效，
+            因为这类干扰在平均过程中一般不会相干叠加，会被压低。<BR><BR>
+
+            <FONT COLOR="red"><B>警告：</B></FONT>有些音频接口在连续几次扫频之间无法保持
+            采样同步，测出来的结果是坏的：脉冲响应上会出现多个间隔很近、幅度大致相同的峰，
+            每次扫频对应一个峰。输入和输出分属两台设备时也会这样。<B>如果多次扫频得到的
+            频率响应与单次扫频明显不同，就坚持使用单次扫频。</B>
+
+            <LI>测量可以选用<FONT CLASS="heading">时间基准</FONT>，使用时间基准时的相关设置见
+            <A href=#acousticref>使用时间基准测量</A>。<BR><BR>
+
+            不使用时间基准时，测得脉冲响应的 t=0 位置有三种取法：<BR><BR>
+
+            （1）<EM>在 IR 峰值处设置 t=0</EM>：把 t=0 放在 IR 峰值的精确位置上，
+            该位置由 IR 的过采样版本插值求得。<BR><BR>
+
+            （2）<EM>在 IR 起始处设置 t=0</EM>：找到 IR 首次超过峰值电平 10% 的那个采样点，把 t=0 放在它的前一个采样点上。<BR><BR>
+
+            （3）<EM>根据延迟估计设置 t=0</EM>：用脉冲的最小相位（minimum phase）版本做
+            互相关（cross-correlation），估算出时间延迟并将其去掉。
+
+            <LI><FONT CLASS="heading">播放方式</FONT>决定扫频怎么放：由 REW 直接播放，或者播放事先用
+            信号发生器生成并<A href="siggen.html#savingsignals">保存</A>好的
+            <A href="siggen.html#meassweep">测量扫频</A>文件。通常由 REW 播放；
+            用文件播放的做法见<A href=#fileplayback>用文件播放做测量</A>。
+
+            <LI><FONT CLASS="heading">采样率</FONT>在<FONT CLASS="heading">播放方式</FONT>
+            控件下方选择。
+
+            <LI><A name="measurementmode">SPL 测量有<FONT CLASS="heading">模式</FONT></A>选择，
+            可选<EM>单次测量</EM>、<EM>重复测量</EM>、<EM>依次测量通道</EM>或<EM>渐变电平</EM>。<BR><BR>
+            <IMG SRC="../../images/measurementmodes.jpg" ALT="测量模式">
+            <BR CLEAR="all"><BR>
+
+            <LI>模式选择下方有<FONT CLASS="heading">设置</FONT>按钮，点开是一组可用的设置项<BR><BR>
+            <IMG SRC="../../images/modesetup.jpg" ALT="测量模式设置" BORDER=0><BR CLEAR="ALL">
+            这些设置项包括：测量开始前的开始延迟；重复、依次或渐变测量之间的间隔；
+            重复或渐变测量的测量次数；渐变测量的起始电平和结束电平；依次测量时要测哪些通道。
+            <FONT CLASS="heading">开始延迟</FONT>可以留出时间让人先离开测量区域，再开始测量。
+
+            <LI>常用的是<EM>单次测量</EM>。<EM>重复测量</EM>和<EM>渐变电平</EM>可以在
+            <FONT CLASS="heading">测量次数</FONT>里填好总次数，然后一口气做完一组测量，
+            中途不需要再干预。<BR><BR>
+
+            做一组极坐标测量（polar measurements）时这很有用：用
+            <FONT CLASS="heading">测量间隔</FONT>指定 REW 在每次扫频前等待多久，
+            好留出时间转动音箱转台。
+
+            <LI><A name="sequential"><EM>依次测量通道</EM>模式</A>会把选中的每个通道
+            逐个测一遍，中途不需要再干预。如果选中的通道里包含 LFE 输出，下文
+            <A href="#outputoptions">输出选项</A>里有专门只针对 LFE 的设置。
+
+            <LI>做重复、渐变或依次测量时，界面上会出现一个面板，显示剩余测量次数、
+            下一次测量将使用的名称，还有一个暂停按钮。按下暂停后，当前这次测量做完就停住；
+            取消暂停后接着往下做。<BR><BR>
+            <IMG SRC="../../images/multiplemeasurements.jpg" ALT="多次测量" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>单次、重复和渐变测量的<FONT CLASS="heading">输出通道</FONT>在
+            <FONT CLASS="heading">播放方式</FONT>控件下方选择。如果用了时间基准，还要配置
+            <FONT CLASS="heading">参考输出通道</FONT>和<FONT CLASS="heading">参考输入通道</FONT>。
+
+            <LI><A name="outputoptions">输出的<FONT CLASS="heading">选项</FONT></A>按钮
+            打开一组与输出有关的设置。<BR><BR>
+            <IMG SRC="../../images/outputoptions.jpg" ALT="输出选项" BORDER=0><BR CLEAR="ALL">
+            勾选<EM>使用 LFE 结束频率</EM>后，测量 LFE 通道时会改用旁边填的那个结束频率。
+            REW 判断哪个是 LFE 通道的方式：Java 驱动看通道标签；ASIO 驱动则找名称里含有
+            “LFE” 的输出，如果一个也没有，就默认第 4 通道是 LFE。勾选 <EM>LFE -10 dB</EM>
+            后，测量 LFE 通道时扫频电平自动降低 10 dB，用来抵消 AV 处理器或 AV 功放
+            施加的 10 dB 增益。
+
+            <LI>同时驱动两个输出时，<EM>反相第二输出通道</EM>选项决定第二个输出送出的是与第一个
+            相同的信号，还是反相的信号。驱动平衡输入，或者用 REW 的<EM>虚拟平衡输入</EM>
+            差分模式时，可能会用到反相信号。
+
+            <LI>勾选<EM>以抖动填充静音区</EM>后，信号发生器会用 16 位抖动（dither）
+            填掉扫频信号里的静音段。有些 DAC 在自己某个输入通道没有信号时会强行静音输出，
+            这个选项就是用来对付这种行为的。代价是脉冲响应的噪声电平会略微抬高，
+            不过它远低于声学测量的本底噪声，只有测电子设备时才可能有影响。即便如此，
+            也只在确实需要对付设备这种行为时才勾选。
+
+            <LI>勾选<EM>扫频前播放抖动</EM>后，信号发生器会在扫频开始前先放一小段带抖动的静音，
+            用来确保扫频信号开始时整条回放链路已经在工作。
+
+            <LI>输入沿用设置 → 声卡里的配置。当前选中的输入显示在对话框上，旁边有个按钮，
+            点开可以更改输入和相关选项。<BR><BR>
+            <IMG SRC="../../images/inputselectbutton.jpg" ALT="输入选择按钮" BORDER=0><BR CLEAR="ALL"><BR>
+            <IMG SRC="../../images/inputselectdialog.jpg" ALT="输入选择对话框" BORDER=0><BR CLEAR="ALL"><BR>
+
+            <LI>做<A href=multichannelcapture.html>多通道测量</A>时，输入选择对话框上有
+            <EM>配置平均...</EM>按钮，用来决定在算平均之前，各个输入要不要加权、
+            要不要先对齐 SPL。还有一个选项可以创建<EM>虚拟平衡输入</EM>：按所选模式，
+            把第二个输入与测量输入相加或相减。
+
+            <LI><EM>校准文件...</EM>按钮打开的对话框，列出当前输入和输出所用的校准文件。
+
+            <LI><EM>检查电平</EM>按钮会播放几秒粉红噪声（pink noise），噪声的频率范围随
+            所选的测量范围而定，用来检查输入电平是不是过高或过低。粉红噪声播放期间按
+            <EM>取消</EM>可以关掉它（3 秒后也会自动停）。测得的 RMS 电平显示在测量对话框上，
+            电平过高或过低时会给出警告
+
+            <LI>按<EM>开始</EM>进行测量。如果设了延迟，界面会显示扫频开始前还剩多少时间
+
+            <LI>扫频开始后，测量对话框上会显示进度，同时显示这次测量的动态余量（headroom）；
+            如果用了时间基准，还会显示参考信号的动态余量<BR><BR>
+            <IMG SRC="../../images/measureprogress.jpg" ALT="测量进度" width="326" height="152">
+            <BR CLEAR="all">
+
+        </UL>
+
+        <P>测量结果显示在图表区，这次测量的相关信息出现在
+        <A HREF="measurementspanel.html#top">测量面板</A>里。想改测量名称，
+        在名称上点右键，输入新名称即可<BR><BR>
+        <IMG SRC="../../images/measname.jpg" ALT="测量名称">
+        <BR CLEAR="all"><BR>
+
+        <P>在测量上点右键会弹出一个对话框，可以输入或修改备注，也可以执行其他一系列操作：<BR><BR>
+        <IMG SRC="../../images/measpanelrightclick.jpg" ALT="测量面板右键菜单">
+        <BR CLEAR="all"><BR>
+
+        <P>查看测量数据的各种方式（包括对多条测量取平均）详见
+        <A HREF="graphpanel.html#top">图表面板</A>帮助。
+
+        <H3><a name="headroom">测量时的动态余量</a></H3>
+
+        <P>测量对话框上的动态余量数值，表示输入离削波还有多远，
+        也就是扫频电平还能再提高多少才会削波。
+
+        <P>动态余量不足 6 dB 时数值显示为红色，提示输入已经接近削波；
+        6 至 40 dB 之间显示为绿色（USB 麦克风是 6 至 60 dB）。
+
+        <P>如果打开了输入电平警告（勾选<EM>低输入电平时警告</EM>），
+        动态余量大得超出合适范围时也会给出提示。这时提高扫频电平或 AV 处理器音量，
+        可以改善测量的信噪比，脉冲响应和频率响应也就更准确。
+
+        <P>注意，这样调整之后，后续测量在图表上的 SPL 会比调整之前测的更高。<BR><BR>
+        <IMG SRC="../../images/lowsignallevel.jpg" ALT="信号电平过低" width="379" height="150"><BR CLEAR="all">
+
+        <P>如果房间共振很强，输入信号电平可能超出输入范围，造成削波。发生这种情况时
+        REW 会给出警告，因为输入削波会让算出来的频率响应出错。
+
+        <P>这时应当降低扫频电平、AV 处理器音量或输入音量，重新测一次。
+        注意，调整之后，后续测量在图表上的 SPL 会比调整之前测的更低。<BR><BR>
+        <IMG SRC="../../images/clippingwarning.jpg" ALT="削波警告" width="356" height="200"><BR CLEAR="all">
+
+        <P>信号电平非常低，往往说明接线有问题：<BR><BR>
+        <IMG SRC="../../images/verylowsignal.jpg" ALT="信号电平极低" width="399" height="182"><BR CLEAR="all">
+
+        <P>测完一个通道的响应后，可以马上去
+        <A HREF="eqwindow.html#top">调整 EQ</A>，也可以先把其他测量做完。
+
+        <P>有些共振在单独测一只音箱时很突出，两只音箱（比如左和右）一起放时却不出现。
+        原因是音箱在房间里的摆位会让某些共振激发不起来。典型例子是房间宽度方向的
+        奇数阶模态：左右音箱沿宽度方向对称摆放时，左右内容相同的信号激发不出这些模态。
+        这类共振通常可以不做修正。想把它们找出来，就拿单通道的测量和两个通道同时驱动的
+        测量作对比。两个通道同时驱动有几种做法：前置通道选 L+R；或者把音频接口的左右输出
+        都接到 AV 处理器所选的那个输入上；或者用一条 Y 型线缆同时驱动两个输入。
+
+        <H3><a name="timingref">使用时间基准测量</a></H3>
+
+        <P>REW 测量时可以使用时间基准，具体看测量对话框上的设置。时间基准选项决定 REW
+        是用音频接口上的回环作时间基准，还是用声学时间基准，或者不用基准。用了时间基准，
+        REW 就能消除电脑和音频接口内部大小不定的传播延迟（propagation delay），
+        让分开做的几次测量在绝对时间上保持一致。<BR><BR>
+        <IMG SRC="../../images/timingrefoptions.jpg" ALT="时间基准选项"><BR CLEAR="all">
+
+        <H4><A name="timingoffset">时间偏移</A></H4>
+
+        <P>可以设置<EM>时间偏移</EM>，让响应相对于时间基准整体平移。例如用回环连接时，
+        就能靠它去掉声音传播所花的那段时间。时间偏移可以手动填，也可以取
+        “估算 IR 延迟”功能算出来的数值。<BR><BR>
+        <IMG SRC="../../images/timingoffset.jpg" ALT="时间偏移控件"><BR CLEAR="all">
+
+        <P>选用回环时，参考通道的信号必须在音频接口上从输出接回输入，测量结果以回环的时间
+        为基准。这样一来，测量结果通常会带一段时间延迟，对应声音从被测音箱传到麦克风
+        所用的时间。后续测量可以用<EM>时间偏移</EM>把这段延迟去掉。
+
+        <H4><A name="loopbackref">回环时间基准</A></H4>
+
+        <P>回环有两个选项。一个是只把回环用于计时（<EM>使用回环作为时间基准</EM>）；
+        另一个是既用于计时，又用来补偿回环通路本身的频率响应
+        （<EM>使用回环作为校准和时间基准</EM>）。
+
+        <P>选择补偿回环通路频率响应时，还有两种做法。第一种是
+        <EM>将回环响应合并到 IR</EM>：从测得的响应里减去回环通路的频率响应，
+        并生成对应的脉冲响应。全频段测量（从 0 Hz 扫到采样率的一半）用这种做法效果很好；
+        但如果扫频只覆盖有限的频率范围，IR 上可能出现伪像。第二种是
+        <EM>从回环响应创建校准数据</EM>：根据回环输入上测得的频率响应，
+        为本次测量生成一条声卡校准数据。
+
+        <P>两种做法都以 1 kHz 处的回环电平作为 0 dB 参考，同时会检查回环响应有没有哪一处
+        比 1 kHz 电平高出 20 dB 以上。如果有，就把回环响应整体偏移，使它的最高电平正好是 20 dB，这样从测量输入响应里最多只会减去 20 dB。如果测量范围不包含 1 kHz，
+        就取测量范围的中间频率（按对数计算）。
+
+        <P>计算测量输入的失真结果时，以施加回环响应修正之前的响应作为基波，
+        否则相对失真数值会不正确。注意，如果选用<EM>使用回环作为校准和时间基准</EM>，来代替由测量输入生成的声卡校准文件，可能在频段两端引入误差，
+        因为那里两个通道的一致性会变差。<BR><BR>
+        <IMG SRC="../../images/loopbackcal.jpg" ALT="使用回环作为校准和时间基准"><BR CLEAR="all">
+
+        <H4><A name="acousticref">声学时间基准</A></H4>
+
+        <P>使用声学时间基准时，REW 会先在选作参考的那个输出上发出一段计时信号，
+        然后才在被测通道上发出测量扫频。计时信号是一段 5 kHz 到 20 kHz 的扫频，
+        时长约 700 ms。它必须送给能放高频的音箱，也就是带高音单元的那种。
+        计时信号的电平用<FONT CLASS="heading">参考电平微调</FONT>控件设定，设的是相对测量电平的差值。
+        作参考的音箱比被测音箱远还是近，决定了这个值要调高还是调低。
+        计时信号之所以用高频扫频，是为了计时准确，因此低音炮不能作参考通道。
+        测量结果会带一段时间延迟，对应被测音箱与参考音箱到麦克风的距离之差；
+        参考音箱更远时，这个延迟是负值。这段延迟可以用<EM>时间偏移</EM>平移。
+        使用声学时间基准时，<B>在同一麦克风位置</B>做的各次测量之间，
+        相对时间关系是一致的，因此可以在 <A href="graph_allspl.html">All SPL</A>
+        图表上对曲线做曲线运算。<B>注意</B>，使用声学时间基准时不能用多次扫频。
+
+        <H4><A name="systemdelay">系统延迟</A></H4>
+
+        <P>用了时间基准时，REW 可以算出被测系统相对于参考的延迟，以<EM>系统延迟</EM>
+        的名义显示在测量的信息面板里，单位是毫秒，括号里给出对应的距离（英尺和米）。
+        <EM>时间偏移</EM>显示在<EM>系统延迟</EM>下方。对音箱来说，延迟按脉冲响应峰值的
+        位置估算。低音炮受带宽限制，峰值很宽、响应也来得晚，所以改成相对脉冲响应的起点
+        来测延迟。但脉冲响应的起点不像峰值那样能精确定位，因此低音炮测量的延迟值
+        准确度较低。
+
+        <H3><a name="fileplayback">用文件播放做测量</a></H3>
+
+        <P>有时没办法接到被测系统的输入上，让它来播放扫频信号。如果这套系统能播放文件，
+        就改用扫频文件。<BR><BR>
+        <IMG SRC="../../images/filemeasurement.jpg" ALT="用文件做测量" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>先用 REW 的信号发生器生成一个<A href="siggen.html#meassweep">测量扫频</A>文件并
+        <A href="siggen.html#savingsignals">保存</A>。文件里必须包含声学时间基准信号，
+        REW 靠它把输入采集与被测系统的播放对齐。把文件复制一份到被测系统上，
+        同时也在 REW 里载入这个文件。REW 会从文件中读出测量频率范围、扫频设置和采样率，
+        并据此完成配置。<BR><BR>
+
+        <IMG SRC="../../images/sweepfileloaded.jpg" ALT="已载入扫频文件" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>用文件测量时，时间基准有两种：声学时间基准和电信号时间基准。用声学时间基准时，
+        REW 在测量输入上等待计时信号，信号由麦克风拾取。但声学时间基准的计时信号必须始终从正在测量的那个输出放出。所以，如果被测系统需要用文件播放，而测量输入又直接接在它的输出上，声学时间基准可能就不合适。这种情况改用电信号时间基准：
+        把计时信号指定到另一个输入通道上，让计时检测与测量分开。<BR><BR>
+        <IMG SRC="../../images/filetimingreference.jpg" ALT="文件测量的时间基准选项" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>载入文件、选好对应的时间基准配置之后，按<EM>开始</EM>。REW 会先采集本底噪声，
+        然后暂停等待，并显示<EM>正在搜索时间基准信号...</EM><BR><BR>
+        <IMG SRC="../../images/waitingforref.jpg" ALT="正在等待时间基准" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>这时在被测系统上播放该文件。REW 一旦检测到时间基准，
+        就会采集扫频信号并生成测量结果。
+
+        <H3>测量数量</H3>
+
+        <P>REW 一次最多可以载入 1000 条测量，具体数量取决于
+        <A href="view.html">设置 → 视图</A>里的<FONT CLASS="heading">最大测量数</FONT>，
+        默认是 100。达到上限之后再要求新建测量，REW 会给出警告，
+        因为要先移除第一条测量，才能给新的腾出位置：<BR><BR>
+        <IMG SRC="../../images/measurementsexistsweep.jpg" ALT="没有空闲位置" width="399" height="182">
+        <BR CLEAR="all"><BR>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

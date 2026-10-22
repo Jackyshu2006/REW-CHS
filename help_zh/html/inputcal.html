@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>校准 SPL 读数</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">校准 SPL 读数</A></H2>
+
+        <P>校准 SPL 读数，是在音箱或低音炮校准信号播放时，把外部声压计上的读数输入 REW，从而给 REW 一个绝对声压级基准。也可以改用声级校准器（SPL calibrator）来做。
+
+        如果用的是 USB 麦克风、而且它的校准文件里带灵敏度值，就不需要这一步。
+
+        <H3><A name="splcalprocedure">SPL 校准步骤</A></H3>
+        <OL>
+            <LI>在设置面板里选中<A HREF="calfiles.html#top">校准文件</A>页签。
+
+            <LI>如果测量时是拿声压计当麦克风用：
+                <UL>
+                    <LI>把声压计设为 C 计权。然后在所用输入的那条麦克风校准文件设置里，勾选<FONT CLASS="settings">输入设备为 C 计权声压计</FONT>。
+                    <LI>把声压计的量程档位调到与<A HREF="measurementlevel.html#top">检查电平</A>时所用测量电平相称的一档（Radio Shack 声压计建议用 80 dB 档）。
+                </UL>
+
+            <LI>如果用的是测量麦克风，就让<FONT CLASS="settings">输入设备为 C 计权声压计</FONT>保持不勾选。
+
+            <LI>点击工具栏上的<EM>声压计</EM>按钮打开 REW 声压计，再点<em>校准</em>按钮。
+
+            <LI>在弹出的对话框里，用下拉框选定校准声压计读数用的信号：用 REW 内部生成的校准信号驱动低音炮，或者驱动主音箱，或者改用你自己提供的外部测试信号。选好后点<em>确定</em>。<BR>
+            <IMG SRC="../../images/choosecalsignal.jpg" ALT="选择 SPL 校准信号" BORDER=0 width="254" height="74">
+            <BR CLEAR="all"><BR>
+
+            <LI>在校准面板里输入外部声压计的读数（不是 REW 里那个声压计的读数），输完点<EM>完成</EM>。<BR>
+            <IMG SRC="../../images/splcalibration.jpg" ALT="校准 SPL 读数" BORDER=0 width="264" height="123">
+        </OL>
+
+        <P>关于 REW 声压计的更多说明，见<A HREF="splmeter.html#top">声压计</A>帮助页。
+
+        <H3><A name="splcalnotes">SPL 校准说明</A></H3>
+        <UL>
+            <LI>如果用的是 USB 麦克风、而且它的校准文件里带灵敏度值，就不需要做 SPL 校准，REW 会显示这条提示：<BR>
+            <IMG SRC="../../images/calnotrequired.jpg" ALT="无需校准" BORDER=0 width="264" height="150">
+            <BR CLEAR="all"><BR>
+
+            <LI>如果要在多只模拟麦克风或多个音频接口之间来回切换，可以把灵敏度信息直接写进麦克风校准文件。在文件开头加一行，格式如下：<BR>
+            <PRE>Sensitivity -12.34 dBFS</PRE>
+            其中的“-12.34”，换成麦克风被 94 dB SPL 声压驱动时 REW 显示的 dBFS 输入电平。<BR><BR>
+            用上这份校准文件后，REW 会用其中的灵敏度数据算出 SPL 校准偏移量。但要注意，这样得到的校准，<B>只在麦克风接口增益和输入音量与当初测灵敏度时相同的前提下才有效</B>。
+
+            <LI>校准结束时会显示一条提示，告诉你在当前输入电平设置下最高能测到多大的声压级。<BR><BR>
+            如果需要测更高的声压级，就得先降低输入灵敏度，再重做一次校准。降低的办法有三种：调低声卡的输入音量；用外接麦克风前置放大器的，调低前级增益；用外部声压计的，调大量程档位。
+
+            <LI>没校准 SPL 读数就去测量，REW 会给出警告，因为这时的测量结果反映不了真实的声压级。SPL 校准做完之前，SPL 读数一直显示为红色。
+
+            <LI>REW 会记住校准设置，下次启动时继续沿用，所以通常不必重做这个过程。但每次开始新一组测量之前，还是要拿外部声压计或校准器核对一下 REW 的 SPL 读数。
+
+            <LI>改动了输入音量设置，就要重做一次校准。
+
+            <LI>换用另一个输入设备时，如果这个设备以前没校准过，就要为它重做一次校准；如果以前已经校准过，REW 会自动切换到与之相应的校准设置。
+
+            <LI>点<EM>校准</EM>时，如果信号发生器已经在播放信号，它会继续播放同一个信号。
+
+            <LI>如果已经知道 94 dB 时的 dBFS 输入电平，或者知道满量程输入对应的声压级，可以把其中任意一个值直接填进所用输入的那条麦克风校准文件设置里。<BR>
+            <IMG SRC="../../images/miccalsettings.jpg" ALT="麦克风校准文件设置" BORDER=0>
+            <BR CLEAR="all"><BR>
+
+        </UL>
+
+        <P>至此，REW 已经可以<A HREF="makingmeasurements.html#top">开始测量</A>了。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

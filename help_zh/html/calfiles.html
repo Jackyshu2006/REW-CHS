@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>校准文件设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">校准文件设置</A></H2>
+
+        <P>“设置 → 校准文件”页签列出曾在 REW 里选用过的所有输出和输入，以及为它们指定的校准文件。选中某个输出设备和输出通道、或某个输入设备和输入通道时，REW 会自动载入对应的校准数据。不再需要的条目可以删除。
+
+        <P>单个校准文件可以用浏览按钮添加，用删除按钮移除。校准数据载入后，会应用到此后进行的所有新测量，并显示在这些测量的 SPL 与相位图上。当前生效的条目会高亮显示。
+
+        <P>要查看新测量会用到哪些校准文件，可以点测量对话框上的<EM>校准文件...</EM>按钮。
+
+        <P><IMG SRC="../../images/calfilessettings.jpg" ALT="校准文件设置" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <P>声卡校准文件与所用的采样率（sample rate）一一对应。采样率改变时，如果有该采样率对应的文件，REW 会载入它。
+
+        <P>麦克风校准条目还有一些附加设置，点该条目上带齿轮图标的设置按钮即可打开。
+
+        <P><IMG SRC="../../images/miccalsettings.jpg" ALT="麦克风校准设置" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <P>如果 REW 的输入接的是一台 C 计权（C weighting）声级计，请勾选<FONT CLASS="heading">输入设备为 C 计权声压计</FONT>。这样 REW 会修正测量结果，去掉 C 计权特性在低频和高频的滚降（roll-off）。
+
+        <P>如果同时还载入了校准文件，这项修正只在校准文件覆盖的频率范围以外进行。
+
+        <P>麦克风校准文件可以应用于一台设备的所有输入；勾选<FONT CLASS="heading">各输入通道独立校准</FONT>后，也可以为设备的每个输入分别指定校准文件。例如 miniDSP EARS 耳机测量系统的左、右两个输入就各有自己的校准文件。
+
+        <P>注意：大多数 USB 麦克风是单声道设备，左右两个通道提供的是同一份数据，这类设备只需要一个校准文件。
+
+        <P><EM>94 dB SPL 对应的 dBFS 值</EM>和<EM>满量程声压级</EM>两个字段，可以用来标定该输入的 SPL 读数。
+
+        <P>如果把麦克风套进 94 dB 的声级校准器，可以从<A href="levelmeters.html">电平表</A>或<A href="splmeter.html">声压计</a>上读出此时的 dBFS 输入读数，填入“94 dB SPL 对应的 dBFS 值”字段。如果已经知道满量程输入对应的 SPL，也可以把它填入“满量程声压级”字段。
+
+        <P>如果校准文件里带有灵敏度（sensitivity）数值，这两个字段不可编辑，其中显示的数值由文件里的灵敏度决定。</P>
+
+        <P><EM>满量程正弦波 Vrms</EM> 用来标定电信号测量时的输入读数。设定方法是：取一个峰值正好达到满量程的正弦波，把它的 RMS 电压填在这里。</P>
+
+        <P>若要给已有的测量加上或去掉校准文件，可以使用测量面板右键菜单里的<EM>更改校准</EM>功能。
+
+        <P>若要以一台外部声级计为准校准 REW 声压计的读数，可以使用声压计窗口里的<em>校准</em>按钮。
+
+        <H4>校准文件格式</H4>
+
+        <P>校准文件是纯文本文件，默认扩展名为 .cal，也接受其他扩展名。文件里应写明声级计或麦克风在各个频率上的实际增益（gain）响应，也可以同时写相位响应。之后的测量会减去这些数值。
+
+        <P>文件里的数值可以用空格、制表符（Tab）或逗号分隔。数值通常以某个参考频率（如 1 kHz）处的电平为基准，所以该频率处的增益值为 0.0。
+        <UL>
+            <LI>每行校准数据都必须有一个频率值和一个增益值，相位值可有可无。
+            <LI>频率单位为 Hz，增益单位为 dB，相位单位为度。
+            <LI>校准点的频率间隔可以任意，但每一行的频率都必须高于上一行，并且至少要有 2 组“频率、增益”数据。
+            <LI>只载入以数字开头的行，其他行一律忽略。
+            <LI>用逗号分隔的文件，逗号后面至少要有一个空格。
+            <LI>数值前面的空格会被忽略。
+        </UL>
+        下面是一段格式有效的文件示例：<BR><BR>
+        <PRE>
+SPL Meter Calibration data
+
+20 -15.38
+50 -3.69
+100 -1.34
+200 -0.62
+500 -0.26
+1000 0.0
+2000 1.80
+5000 3.95
+10000 -0.71
+20000 -6.28
+        </PRE>
+
+        <H4><A name="sensitivity">麦克风灵敏度校准数据</A></H4>
+
+        <P>USB 麦克风的校准文件开头通常有一行用来定义灵敏度，形式如下：<BR><BR>
+        <TT>"Sens Factor =1.2345dB, SERNO: XXXXXXX"</TT><BR>
+
+        <P>Sens Factor 的数值通常在这样的条件下得出：输入音量调到最大，麦克风套在 94 dB 声级校准器上，此时的输入 dBFS 读数即为该值。
+
+        <P>REW 要用上这个数值，还必须知道输入音量设置和增益的对应关系：输入音量设为不同值时，麦克风数据分别加了多少增益（dB）。截至 2022 年 9 月，已知这一关系的麦克风有 UMIK-1、UMIK-2、UMIK-X、EARS、CARIO-A2B、UMM-6、Omnimic 和 Beta Three。其他设备的 Sens Factor 条目，REW 不会使用。
+
+        <P>模拟麦克风的校准文件也可以包含灵敏度信息。在文件开头加一行，形式如下：<BR><BR>
+        <TT>Sensitivity -12.34 dBFS</TT><BR><BR>
+        其中“-12.34”要换成实际数值：麦克风受 94 dB SPL 激励时，REW 读到的输入 dBFS 电平。使用这个校准文件时，REW 会用灵敏度数据算出 SPL 校准偏移（SPL calibration offset）。
+
+        <P>但要注意，<B>只有麦克风接口增益和输入音量都与测灵敏度时的设置相同，这个校准才有效</B>。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

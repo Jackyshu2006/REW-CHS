@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>文件菜单</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">文件菜单</A></H2>
+
+        <DL>
+            <DT><A name="filesavemeasured">测量另存为...</A><FONT CLASS="keys"> Ctrl+S</FONT>
+            <DD>把当前测量以二进制格式（binary format）保存，扩展名为“.mdat”。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="fileloadmeasured">打开测量...</A><FONT CLASS="keys"> Ctrl+O</FONT>
+            <DD>从 mdat 文件载入测量。REW 会记住文件路径，下次打开对话框时沿用。也可以把 mdat 文件直接拖到 REW 主窗口上打开。
+
+            <DT><A name="filesaveallmeasured">全部保存</A><FONT CLASS="keys"> Ctrl+Shift+S</FONT>
+            <DD>把所有测量的数据保存到一个扩展名为“.mdat”的文件里。可以输入一段备注，下次载入这组数据时会显示出来。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="fileremovemeasurements">移除从...加载的测量</A>
+            <DD>移除从列表中所选文件载入的全部测量。
+
+            <DT><A name="filesavechannelfilters">EQ/滤波器另存为...</A><FONT CLASS="keys"> Ctrl+Alt+S</FONT>
+            <DD>把当前测量的 EQ 滤波器设置以二进制格式保存，扩展名为“.req”。可以输入一段备注，下次载入这组滤波器时会显示出来。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="fileloadchannelfilters">载入 EQ/滤波器</A><FONT CLASS="keys"> Ctrl+Alt+O</FONT>
+            <DD>从 .req 文件为当前测量载入一组 EQ 滤波器。随设置一起保存的备注会显示出来。如果 .req 文件里有不止一组滤波器，会弹出一个选择框，用来选择载入哪一组。<BR><BR>
+            也可以把 req 文件拖到 EQ 窗口或 EQ 滤波器窗口上打开。
+
+            <DT><A name="filedataimport">导入频率响应</A><FONT CLASS="keys"> Ctrl+I</FONT>
+            <DD>导入其他程序生成的频率响应（frequency response）数据，或者载入以文本格式保存的频率响应数据。导入的一般是 SPL 数据；文件扩展名为 .zma 时，导入的是阻抗数据。详见<A HREF="dataimport.html#top">导入测量数据</A>。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="fileimpedanceimport">导入阻抗测量</A><FONT CLASS="keys"> Ctrl+Alt+I</FONT>
+            <DD>导入其他程序以文本格式保存的阻抗测量数据。详见<A HREF="dataimport.html#top">导入测量数据</A>。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="fileimpulseimport">导入脉冲响应</A><FONT CLASS="keys"> Ctrl+Shift+I</FONT>
+            <DD>从 WAV、AIFF、Flac、MP3、TXT、ARTA .pir 或 .pcm 文件（原始数据）导入脉冲响应（impulse response）。.pcm 文件本身不含采样率，需要手动指定。<BR><BR>
+            TXT 文件可以是以下几种：REW 导出的 IR 文本、COMSOL 模型文件、“时间、幅值”两列格式的 IR 文件，或者只有一列幅值的文件（这种情况下导入时会要求你输入采样率）。<BR><BR>
+            WAV、AIFF、Flac 和 MP3 文件可以是单声道、立体声或多声道，载入时选择要导入哪个声道。支持 16、24、32 位有符号 PCM（signed PCM）样本，WAV 文件还支持 32 位或 64 位浮点样本。最多可导入约 60 秒的数据。<BR><BR>
+            导入的数据沿用当前输入通道的 SPL 校准偏移（SPL calibration offset）。<BR><BR>
+            只有一种例外：导入的是浮点数值，且绝对值大于 10（WAV 文件的数值通常最大为 1）。这时 REW 会认为这些数值直接表示 SPL 值，据此为这条测量生成一个 SPL 校准偏移，同时让所得 IR 的峰值幅度为 1.0。<BR><BR>
+            如果想让频率响应的峰值达到某个 SPL 值，用 SPL & 相位图表里的<A HREF="graph_splphase.html#scaleircontrols">将频率响应峰值缩放到</A>控件调整 SPL 偏移。<BR><BR>
+            <A HREF="analysis.html#ircalc">设置 → 分析</A>里有一项设置，决定导入响应的 t=0 放在哪里：第一个数据样本处、脉冲响应峰值处，或者设置里显示的指定样本序号处。<BR><BR>
+            REW 会记住文件路径，下次打开对话框时沿用。WAV、AIFF、Flac 和 MP3 文件也可以直接拖到 REW 主窗口上打开。<BR><BR>
+            <B>注意：导入的脉冲响应不施加麦克风校准、声卡校准和 C 计权补偿。</B>导入后如需施加校准数据，用<A href="measurementspanel.html#changecal">测量面板</A>右键菜单里的<EM>更改校准</EM>功能。
+
+            <DT><A name="fileaudioimport">导入音频数据</A><FONT CLASS="keys"> Ctrl+Shift+U</FONT>
+            <DD>从 WAV、AIFF、Flac 或 MP3 文件导入音频数据。支持 16、24、32 位有符号 PCM 样本，WAV 文件还支持 32 位或 64 位浮点样本。只导入前 60 秒左右的数据。REW 会记住文件路径，下次打开对话框时沿用。<BR><BR>
+            清晰度、RT60 这类结果需要 IR 才能算出，导入的音频数据没有这些结果。时间窗会设成覆盖整段数据，频率响应按时间窗内的这一段计算，与脉冲响应的做法相同。瀑布图和频谱图覆盖整段数据。<BR><BR>
+            按住 Ctrl 键把 WAV、AIFF、Flac 或 MP3 文件拖到 REW 主窗口上，会按音频数据导入。
+
+            <DT><A name="filesweepimport">导入扫频录音</A><FONT CLASS="keys"> Ctrl+Shift+N</FONT>
+            <DD>从 WAV 或 AIFF 文件导入扫频激励信号（stimulus）和录下的响应，用来做<A HREF="offlinemeasurements.html#top">离线测量</A>。支持 16、24、32 位有符号 PCM 样本，以及 32 位或 64 位浮点样本。<BR><BR>
+            扫频激励信号文件必须是用 REW 信号发生器保存的测量扫频。录下的响应可以是多声道的，REW 会在响应文件的第一个声道里查找声学时间基准（acoustic timing reference）信号。REW 会记住文件路径，下次打开对话框时沿用。<BR><BR>
+            <IMG SRC="../../images/importsweepblank.jpg" ALT="导入扫频录音"><BR CLEAR="all">
+
+            <DT><A name="fileexpimpwav">将脉冲响应导出为 WAV</A>
+            <DD>把所选测量的脉冲响应以 WAV 格式导出，可写成单声道或立体声数据。样本格式可选 16、24、32 位有符号 PCM 或 32 位浮点。如果使用这些数据的程序支持浮点，建议选浮点，响应没有归一化（normalise）时尤其如此。<BR><BR>
+            对话框里可以选择导出的是实测 IR、施加 EQ 滤波器之后的 IR，还是 IR 的最小相位（minimum phase）版本。<BR><BR>
+            可以选择把响应归一化，使峰值为 1（0 dBFS）。还可以选择导出前先施加当前的 IR 时间窗设置，以及把 t=0 放在导出文件的指定样本序号处。如有需要，也可以把导出限制为固定的样本数。<BR><BR>
+            导出响应的峰值默认位于文件开头之后 1 秒处。施加了 IR 时间窗、或选了把 t=0 放在指定样本序号处时例外。<BR><BR>
+            施加了 IR 时间窗时，导出从加窗后的第一个样本开始，峰值位置取决于 IR 时间窗设置；但如果同时选了把 t=0 放在指定样本序号处，则以后者为准。<BR><BR>
+            如果多条脉冲响应是用时间基准测得的，导出时可以用下面任一种办法，保留它们之间的相对时间关系：<BR>
+            - 把 t=0 放在指定样本序号处，相对时间关系自然保留。<BR>
+            - 不用这个选项时，给这些响应设置相同的 IR 时间窗：时间窗参考点（window ref time）相同，左时间窗宽度也相同。如果不希望时间窗改动数据，就用矩形窗（rectangular window）。这样，每条导出 IR 都从左时间窗的起点开始，而各条的起点在绝对时间上相同，相对时间关系也就保留下来了。<BR><BR>
+            如果导出最小相位版本，同时勾选了施加时间窗，t=0 位于导出起点之后一个左时间窗宽度处。<BR><BR>
+            响应可以同时按多个采样率导出。导出采样率与测量的原始采样率不同时，数据用加窗 sinc 函数（windowed sinc）重采样。<BR><BR>
+            <IMG SRC="../../images/irexportwav.jpg" ALT="脉冲响应 WAV 导出设置" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+            <DT><A name="fileexpallimpwav">将所有脉冲响应导出为 WAV</A>
+            <DD>把当前所有测量的脉冲响应以 WAV 格式导出。对话框里可以选择导出的是实测 IR、施加 EQ 滤波器之后的 IR，还是 IR 的最小相位版本。可以选择把响应归一化，使峰值为 1（0 dBFS）。还可以选择导出前先给每条响应施加当前的 IR 时间窗设置，以及把 t=0 放在导出文件的指定样本序号处。<BR><BR>
+            样本格式可选 16、24、32 位有符号 PCM 或 32 位浮点。如果使用这些数据的程序支持浮点，建议选浮点，响应没有归一化时尤其如此。每个文件都按各自测量的采样率导出。<BR><BR>
+            导出响应的峰值默认位于文件开头之后 1 秒处。施加了 IR 时间窗、或选了把 t=0 放在指定样本序号处时例外。施加了 IR 时间窗时，导出从加窗后的第一个样本开始，峰值位置取决于 IR 时间窗设置；但如果同时选了把 t=0 放在指定样本序号处，则以后者为准。<BR><BR>
+            如果多条脉冲响应是用时间基准测得的，导出时可以用下面任一种办法，保留它们之间的相对时间关系：<BR>
+            - 把 t=0 放在指定样本序号处，相对时间关系自然保留。<BR>
+            - 不用这个选项时，给这些响应设置相同的 IR 时间窗：时间窗参考点相同，左时间窗宽度也相同。如果不希望时间窗改动数据，就用矩形窗。这样，每条导出 IR 都从左时间窗的起点开始，而各条的起点在绝对时间上相同，相对时间关系也就保留下来了。<BR><BR>
+            如果导出最小相位版本，同时勾选了施加时间窗，t=0 位于导出起点之后一个左时间窗宽度处。<BR><BR>
+
+            <DT><A name="fileexpfiltimpwav">将滤波器脉冲响应导出为 WAV</A>
+            <DD>把当前测量的滤波器脉冲响应以 WAV 格式导出，可写成单声道或立体声数据，脉冲响应从文件的第一个样本开始。响应长度为 128k 个样本（131,072）。<BR><BR>
+            对话框里可以选择采样率、样本格式，以及是否把响应归一化，使峰值为 1（0 dBFS）。如果使用这些数据的程序支持浮点，建议选 32 位浮点，响应没有归一化时尤其如此。<BR><BR>
+            按立体声导出时，所选的第一条响应放在左声道，第二条放在右声道。
+
+            <DT><A name="filewritefilters">将滤波器设置导出为文本</A>
+            <DD>把当前测量的 EQ 滤波器设置以纯文本格式导出。文件里包括该测量的扬声器设置和目标声压级。<BR><BR>
+            文本格式只是为了方便查看，REW 不能从文本文件载入滤波器设置。要保存设置并重新载入，请用 .req 格式。REW 会记住文件路径，下次打开对话框时沿用。格式示例如下。<BR><BR>
+            <PRE>
+    Filter Settings file
+
+    Room EQ V4.00
+    Dated: 07-Jan-2007 17:20:32
+
+    Notes:Example filter settings
+
+    Equaliser: DSP1124P
+    sampledata.txt
+    Bass limited 80Hz 12dB/Octave
+    Target level: 75.0dB
+    Filter 1: ON  PA   Fc   129.1Hz (  125 +2 )   Gain -18.5dB  BW/60  4.0
+    Filter 2: ON  PA   Fc    36.8Hz (   40 -7 )   Gain -15.5dB  BW/60 10.0
+    Filter 3: ON  PA   Fc    99.1Hz (  100 -1 )   Gain  -3.5dB  BW/60  1.0
+    Filter 4: ON  None
+    Filter 5: ON  None
+    Filter 6: ON  None
+    Filter 7: ON  None
+    Filter 8: ON  None
+    Filter 9: ON  None
+    Filter 10: ON  None
+    Filter 11: ON  None
+    Filter 12: ON  None
+            </PRE>
+
+            <DT><A name="filewritefiltersformatted">将滤波器设置导出为格式化文本</A>
+            <DD>把当前测量的 EQ 滤波器设置以纯文本格式导出，文件带表头，各字段之间用导出文本分隔符分开。这个格式是为了方便第三方软件使用。REW 会记住文件路径，下次打开对话框时沿用。<BR><BR>
+
+            <DT><A name="filewritemeasured">将测量导出为文本</A>
+            <DD>把当前测量的测量数据导出为文本文件，文件里包括测量设置。<B>注意</B>：如果有某条测量被设为 SPL 参考，导出的 SPL 数据与屏幕上显示的一致。<BR><BR>
+            导出的文本文件可以用“导入频率响应”重新载入。REW 会记住文件路径，下次打开对话框时沿用。选择这个菜单项后，会弹出一个设置对话框，可以输入备注，并控制导出的各项内容。<BR><BR>
+            <IMG SRC="../../images/textexportsettings.jpg" ALT="文本导出设置" BORDER=0 ALIGN="left"><BR CLEAR="All">
+            <BR>
+            <B>范围</B>：可以导出整条测量（<EM>使用测量结果原始范围</EM>），也可以选定一个范围。如果所选范围的起点早于、或终点晚于测量本身的数据范围，只导出与测量重叠的那一段。<BR><BR>
+            <B>分辨率</B>：按测量本身的分辨率导出时，数据点的间隔有两种：如果勾选了<A href="analysis.html#frcalculation">设置 → 分析</A>里的“允许 96 PPO 对数间距”，是每倍频程 96 个点（96 PPO）的对数间隔（log spaced）；否则是按 FFT 分辨率的线性间隔（linear spaced）。线性间隔导出的文件很大，通常超过 1 MB。如果选了自定义（对数间隔）的导出分辨率，REW 选定的起始频率会尽量接近你设定的起点，同时保证导出的频率点里包含各个标称倍频程中心频率（如 20 Hz、40 Hz 等）。<BR><BR>
+            <B>平滑</B>：对数间隔导出时应当加平滑（smoothing）；如果对所选的输出分辨率来说平滑不够，对话框会给出警告。导出可以沿用测量当前的平滑，也可以在对话框里另选一种平滑。这里的选择只影响导出的数据，不会改变 REW 里这条测量本身的平滑。<BR><BR>
+            <B>数字格式与分隔符</B>：REW 默认的导出数字格式以点作小数点，不分千位组，方便之后导入其他软件。选<EM>使用计算机数字格式</EM>，则改用运行 REW 的这台电脑当前的数字格式。导出数值之间的分隔符也在这里选，与“导出”菜单里的分隔符设置是同一项。<BR><BR>
+            <B>预览与格式</B>：对话框里会显示导出内容的预览，包括前几行导出数据。导出格式与 .FRD 格式兼容。注释行以 * 开头；数据行依次是频率、以 dB 为单位的 SPL、以度为单位的相位（测量没有相位信息时为 0.0）。
+
+            <DT><A name="filewriteallmeasured">将所有测量导出为文本</A>
+            <DD>把所有已载入测量的测量数据，以文本文件导出到所选的文件夹，文件名用各测量的名称。弹出的设置对话框与导出单条测量时相同，设置会应用到所有文件。<BR><BR>
+            输入的备注会写进每一个文件，后面再跟各条测量自己的备注。可以选择每条测量导出为单独的文件，或者全部导出到一个文件里。<BR><BR>
+            <B>注意</B>：如果有某条测量被设为 SPL 参考，导出的 SPL 数据与屏幕上显示的一致。
+
+            <DT><A name="filewritemeasuredfrq">将测量导出为 MLSSA .frq</A>
+            <DD>把测量以 MLSSA .frq 格式导出。REW 会记住文件路径，下次打开对话框时沿用。
+
+            <DT><A name="filewritedistortion">将失真数据导出为文本</A>
+            <DD>把当前测量的失真数据导出为文本文件。会弹出一个对话框，用来设定导出的内容和格式。<BR><BR>
+            <IMG SRC="../../images/distexport.jpg" ALT="失真数据导出设置" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+            文件格式示例如下。注释行以 * 开头。数据行开头是频率；如果是按电平步进的步进正弦（stepped sine）测量，开头则是信号发生器电平。接着是以 dB 为单位的基波（fundamental）SPL（如果选了导出），然后是所选的各项失真数据。如果失真数据相对基波归一化，基波为 0 dB。<BR><BR>
+            注意：如果导出的结束频率没有设成随所选最高次谐波（harmonic）自动调整，每行的谐波个数会随频率升高而减少，最后只剩二次谐波和 THD 两项。<BR><BR>
+            <PRE>
+    * Distortion data saved by REW V5.01
+    * Dated: 16-Sep-2012 18:52:27
+    * Measurement: Sep 16 18:52:27
+    * Frequency Step: 3 ppo
+    * Freq(Hz) Fundamental (dB) THD (%) H2 (%) H3 (%) H4 (%) H5 (%) H6 (%) H7 (%) H8 (%) H9 (%) H10 (%)
+    20.000 76.068 0.016 0.014 0.002 0.001 0.004 0.003 0.001 0.002 0.002 0.001
+    25.198 76.133 0.011 0.008 0.000 0.001 0.001 0.006 0.001 0.001 0.001 0.003
+    31.748 76.181 0.015 0.013 0.002 0.002 0.002 0.001 0.002 0.005 0.001 0.001
+    40.000 76.215 0.014 0.013 0.001 0.003 0.001 0.002 0.002 0.001 0.003 0.001
+            </PRE>
+
+            <DT><A name="filewritedistortionspectrum">将失真频谱数据导出为文本</A>
+            <DD>如果当前测量是含频谱数据的步进正弦测量，可以把它的失真频谱数据导出为文本文件。导出的内容包括步进正弦测量在每个测试频率上采集到的频谱，以及本底噪声（noise floor）的频谱。<BR><BR>
+            频谱数据是对数间隔的，每行开头是该数据点的频率。数据表头里列出测量的各个频率步进点。<BR><BR>
+            注意：不要用导出的频谱数据去计算失真电平。它的频率分辨率不够，无法准确算出每个谐波的能量。
+
+            <DT><A name="filewriteimpulse">将脉冲响应导出为文本</A>
+            <DD>把当前测量的脉冲响应数据导出为文本文件。会弹出一个对话框，可以输入备注（下次载入这组数据时显示），并预览导出内容。文件里包括该测量的扬声器设置、目标声压级和测量设置。REW 会记住文件路径，下次打开对话框时沿用。<BR><BR>
+            <IMG SRC="../../images/irexport.jpg" ALT="脉冲响应文本导出设置" BORDER=0 ALIGN="left" width="383" height="467"><BR clear="all"><BR>
+            格式示例如下。<BR><BR>
+            <PRE>
+    Impulse Response data saved by REW V5.19
+    IR is normalised
+    IR window has not been applied
+    IR is not the min phase version
+    Source: Microphone (Umik-1  Gain:  0dB  ), MICROPHONE (Master Volume), Right channel, volume: 0.550
+    Dated: 05-May-2014 14:12:40
+    Measurement: Artist 3+Q2070Si
+    Excitation:  256k Log Swept Sine, 1 sweep at -12.0 dB FS
+    Response measured over: 2.2 to 24,000.0 Hz
+    4.33353241533041E-4 // Peak value before normalisation
+    48000 // Peak index
+    131072 // Response length
+    2.0833333333333333E-5 // Sample interval (seconds)
+    -1.0 // Start time (seconds)
+
+    -3.1990022E-4
+    4.7188485E-4
+    -3.4590682E-4
+    -2.916168E-4
+    -3.5212302E-5
+            </PRE>
+
+            <DT><A name="filewriteallimpulseresponses">将所有脉冲响应导出为文本</A>
+            <DD>把所有已载入测量的脉冲响应，以文本文件导出到所选的文件夹，文件名用各测量的名称。弹出的设置对话框与导出单条脉冲响应时相同，设置会应用到所有文件。
+
+            <DT><A name="filewritert60">将 RT60 数据导出为文本</A>
+            <DD>把当前测量的 RT60 数据导出为文本文件。可以输入一段备注，下次载入这组数据时会显示出来。如果已经生成了倍频程（octave）和 1/3 倍频程结果，文件里两者都有。<BR><BR>
+            如果已经为倍频程或 1/3 倍频程生成了 RT60 衰减模型数据，导出里会带 T60M 值，否则 T60M 为 0。REW 会记住文件路径，下次打开对话框时沿用。会弹出一个对话框，用来设定导出的格式。<BR><BR>
+            <IMG SRC="../../images/rt60export.jpg" ALT="RT60 导出设置" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+            <DT><A name="filewriteallrt60">将所有测量的 RT60 数据导出为文本</A>
+            <DD>把所有测量的 RT60 数据分别导出为单独的文本文件，导出方式与上面讲的当前测量 RT60 导出相同。<BR><BR>
+            只有已经生成了 RT60 数据的测量才会导出。想一次为所有测量生成数据，打开<A href="overlays.html">叠加图</A>窗口的 RT60 图即可。如果需要 RT60 的平均值，RT60 叠加图的图表选项里有一个按钮，可以导出当前显示的 ISO 3382 参数的平均值。
+
+            <DT>导出 &rarr; 设置文本分隔符
+            <DD>设置把测量导出为文本文件时，同一行各数值之间所用的分隔符（delimiter）。
+
+            <DT><A name="deletedata">移除当前测量</A><FONT CLASS="keys"> Ctrl+Backspace</FONT>
+            <DD>移除当前测量。还没保存的测量，可以用<EM>恢复最后移除的项目</EM>找回来。
+
+            <DT><A name="deletealldata">全部移除</A><FONT CLASS="keys"> Ctrl+Shift+Backspace</FONT>
+            <DD>移除全部测量。还没保存的测量将无法恢复！
+
+            <DT><A name="restoredata">恢复最后移除的项目</A>
+            <DD>恢复最后一条被移除的测量，放在测量列表的末尾。注意，只有单条移除的测量才能恢复；用了<EM>全部移除</EM>就无法恢复。
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

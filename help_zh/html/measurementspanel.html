@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>测量面板</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">测量面板</A></H2>
+
+        <P>测量面板列出已经测过或已经载入的测量，并显示每条测量的相关信息，其中包括一张频率响应缩略图。如果这条测量是从某个文件载入的，或者已经保存过，面板上还会显示对应的文件名。
+
+        <P>点击某条测量即可选中它。
+
+        <P>想让备注直接显示在列表里，打开设置 → 视图里的<A href="view.html#shownotes">显示测量面板备注</A>即可；也可以把鼠标停在某条测量上，备注会以提示框的形式浮现。
+
+        <P>把测量拖到列表中的新位置就能重新排序。可以一条一条拖，也可以先用 Ctrl+左键或 Shift+左键选中多条，再整组拖动。
+
+        <P>当测量列表处于激活状态时（当前选中项周围有一圈蓝色边框），还可以用键盘快捷键：全选 Ctrl+A、剪切 Ctrl+X、粘贴 Ctrl+V。
+
+        <P>粘贴进来的测量会放在当前选中项的前面；如果当时没有选中任何一条，就放到列表末尾。
+
+        <P><IMG SRC="../../images/measurementspanel.jpg" ALT="测量面板">
+
+        <H3><A name="collapsed">折叠视图</A></H3>
+
+        <P>测量面板可以收窄，给图表让出更多屏幕空间。点面板上的 <EM>&lt;&lt;</EM> 按钮即可收窄。
+        <P><IMG SRC="../../images/measpanelcollapsed.jpg" ALT="折叠后的测量面板">
+
+        <H3><A name="groups">测量分组</A></H3>
+
+        <P>测量可以归入分组，列表很长时便于管理。
+
+        <P>点分组名旁边的箭头可以展开或折叠该分组。分组按名称的字母顺序排列，排在所有未分组的测量之前。分组还可以指定颜色。
+        <P><IMG SRC="../../images/measpanelgroups.jpg" ALT="测量面板的分组">
+
+        <P>点击某个分组，会出现两个按钮，分别用于保存和移除该分组内的测量。
+        <P><IMG SRC="../../images/groupsaveremove.jpg" ALT="保存或移除分组内的测量">
+
+        <H3><A name="addtogroup">把测量加入分组</A></H3>
+
+        <P>在测量上点右键，菜单里有<EM>加入分组</EM>，可以把当前这一条测量、或者当前选中的全部测量归入某个分组。
+        <P><IMG SRC="../../images/addtogroup.jpg" ALT="把一条测量加入分组">
+
+        <P>选<EM>新建分组...</EM>会弹出一个对话框，用来给新分组起名字；也可以顺便指定颜色、写几句备注。
+        <P><IMG SRC="../../images/newgroup.jpg" ALT="新建一个分组">
+
+        <H3><A name="groupactions">分组操作</A></H3>
+
+        <P>点分组按钮 <IMG SRC="../../images/groupsbutton.jpg" ALT="分组按钮" BORDER=0>，会弹出分组操作菜单。
+        <P><IMG SRC="../../images/groupactions.jpg" ALT="分组操作">
+
+        <P>菜单里有几条<EM>将所有…加入分组</EM>，省略号处是不同的测量类型，每条用来把这一类测量整批归入分组。
+
+        <P><EM>按文件名分组</EM>会用当前已载入文件的文件名建立分组，并把测量放进对应的分组里；之后新载入的文件也照此处理。
+
+        <I>但是</I>已经属于某个分组的测量不受影响。
+
+        <P>叠加图（包括 All SPL 图表）的分组菜单里另有一个选项：<EM>展开时选择分组测量</EM>。
+
+        勾选后，展开某个分组时，组内所有测量都会被选中。不勾选的话，第一次展开分组时，组内测量都是未选中的；以后再展开，会恢复成上一次的选中状态。
+
+        <H3><A name="managegroups">管理分组</A></H3>
+
+        <P><EM>管理分组</EM>会打开一张表，列出 REW 见过的所有分组。双击表格单元格即可改名。
+
+        选中表中的某些行，就可以把不再需要的分组删掉。这张表的大小可以调整。
+        <P><IMG SRC="../../images/managegroups.jpg" ALT="管理分组" BORDER=0>
+
+        <H3><A name="editgroup">编辑单个分组</A></H3>
+
+        <P>在某个分组上点右键，会打开一个面板，用来编辑该分组的标题和备注。
+
+        用 Ctrl+TAB 和 Ctrl+Shift+TAB 可以在几个输入框之间切换，也可以依次翻看当前已载入的各个分组。
+
+        分组备注支持加粗、斜体和下划线：选中文字，再点面板下方的按钮即可。想插入链接，把链接打上去或粘贴进去，然后按一下空格。
+        <P><IMG SRC="../../images/editgroup.jpg" ALT="编辑分组" BORDER=0>
+
+        <H3><A name="filtered">筛选视图</A></H3>
+
+        <P>测量列表可以筛选，只显示某几类测量，或者只显示名称中含有指定文字的测量。
+
+        部分测量类型带有淡色底色，便于区分；如果该测量属于某个已指定颜色的分组，则以分组颜色为准。
+
+        <P><IMG SRC="../../images/measpanelfilters.jpg" ALT="测量面板的筛选器">
+
+        <H3><A name="actions">测量操作</A></H3>
+
+        <P>在测量面板上点右键，会弹出一组控件，可以保存、移除、改曲线颜色、锁定测量、加入分组、改测量名称、查看和编辑备注，还有其他一些操作。
+
+        这个面板还会显示本次测量用过的麦克风／声压计校准文件和声卡校准文件。把鼠标停在那块文字上，会弹出提示框显示完整内容。
+
+        面板打开时，测量名称已处于选中状态，可以直接改。按 Ctrl+TAB 从名称跳到备注区。再按一次 Ctrl+TAB，面板会切换到列表中的下一条测量，到末尾后回到开头。按 Ctrl+Shift+TAB 则反向切换。
+
+        如果只想快速改个名字，在名称区域上点右键，会出现一个文本框供你编辑。
+
+        <P><IMG SRC="../../images/measpanelrightclick.jpg" ALT="测量面板的右键面板">
+
+        <P>右键面板顶部的文本框用来改测量名称，名称长度以文本框宽度为限。
+
+        如果留空，REW 会填上“No Description”。
+
+        新测量、以及有改动尚未保存的测量，名称显示为蓝色。
+
+<!--        <P><A name="disable">Disabled</A> measurements
+        are skipped when using the next/previous measurement shortcuts (Alt+up/down and
+        Ctrl+up/down) and are not shown on overlay graphs. All measurements can be
+        re-enabled via the <EM>Enable all measurements</EM> action or by using the
+        Ctrl+E shortcut. The Ctrl+D shortcut disables the currently selected measurement. -->
+
+        <P><A name="locked">已锁定</A>的测量不能删除：移除操作会变灰，面板上会出现一个锁形图标。
+
+        要解锁测量，用<EM>解锁所选项</EM>，或者按 Ctrl+U。按 Ctrl+L 可锁定当前选中的测量。
+
+        <P>针对每条选中的测量，还有以下操作：
+        <ul>
+            <li><EM>反相</EM>：改变该测量的极性。
+            <li><EM>EQ</EM>：打开均衡器窗口，并选中这条测量。
+            <li><EM>加入分组</EM>：把该测量放进某个分组（选“无”则把它移出所有分组）。
+            <li><EM>更改校准</EM>：打开一个对话框，用来载入、更新或清除麦克风／声压计和声卡的校准数据文件，也可以在这里指定本次测量是否使用了 C 计权声压计。
+
+                注意：改动校准数据或 C 计权设置，会清除已经生成的瀑布图、衰减图和频谱图——它们基于旧数据，已经不再有效。其他受影响的图表会用新的校准数据重新生成。
+                <BR><BR><IMG SRC="../../images/changecaldialog.jpg" ALT="更改校准对话框"><BR clear="all">
+            <li><EM>响应副本</EM>：生成一份响应与原测量相同的副本。副本沿用原测量的脉冲响应（impulse response）和校准数据，但不带失真数据、均衡器设置这类内容。
+            <li><EM>箱内麦克风校正</EM>：生成一条新测量，它带有源测量的 SPL 数据，并针对箱内麦克风法（microphone in box method）测量做了补偿修正。
+
+                修正的做法是加上一个 40*log10(f/f0) 的偏移量，其中 f0 是标称参考频率，取 50 Hz。这条结果通常会与远场（far field）测量合并。
+            <li><EM>多余相位副本</EM>：把多余相位（excess phase）响应复制出来，供后续运算使用。副本的内容是原测量除以该测量的最小相位（minimum phase）版本。
+            <li><EM>最小相位副本</EM>：把最小相位响应复制一份，供后续运算使用。副本带有最小相位的脉冲响应，幅度响应和校准数据与原测量相同。详见<A href="graph_splphase.html#minphase">生成最小相位</A>。
+            <li><EM>幅度副本</EM>：生成一份副本，幅度响应与原测量相同，但不含脉冲响应和相位响应。
+            <li><EM>合并校准至 IR</EM>：生成一份响应与原测量相同的副本，但它的脉冲响应里已经包含了该测量校准文件的影响。
+
+                如果校准数据存在大幅滚降（roll-off），脉冲响应中可能出现伪像（artefact）。另外，新测量会带上原测量的失真数据，但这批失真数据对应的基波仍沿用原测量的，不随合并而改变。
+            <li><EM>按窗口裁切 IR</EM>：生成一份副本，其脉冲响应从左窗起点开始，长度缩短为能覆盖加窗区间的最小的 2 的整数次幂个采样点。
+
+                导出前想把 IR 缩短，或者运算结果的 IR 太长想裁掉一截，都可以用这个操作。
+        </ul>
+
+        <H3><A name="actionsmultiple">多选时的测量操作</A></H3>
+
+        <P>先用 Ctrl+左键或 Shift+左键选中多条测量，再在测量面板上点右键，会弹出一组针对这批测量的操作：保存、移除、锁定、解锁、改颜色、更改校准数据、生成响应副本。
+
+        <P><IMG SRC="../../images/measpanelrightclickmultiple.jpg" ALT="多选时测量面板的右键面板">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

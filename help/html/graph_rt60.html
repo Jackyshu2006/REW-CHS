@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>RT60 Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">RT60 Graph</A></H2>
+        
+        <P><IMG SRC="../../images/singlert60.jpg" ALT="RT60 graph"><BR CLEAR="all">
+
+        <P>RT60 Reverberation Time values at each octave or one-third octave centre
+        frequency are displayed on this graph, with separate traces for the Early Decay time (EDT),
+        Centre Time (TS) and the 60dB decay times T20, T30 and REW's Topt and T60M. See below for 
+        descriptions of each of those parameters and the related clarity, definition and centre 
+        time parameters. 
+        
+        <H3>RT60 Explanation</H3>
+        
+        <P>RT60 is a measure of how long sound takes to decay by 60 dB in a space that 
+        has a diffuse soundfield, meaning a room large enough that reflections from the 
+        source reach the mic from all directions at the same level. Domestic rooms are 
+        usually too small to have anything approaching a diffuse field at low frequencies 
+        as their behaviour in that region is dominated by modal resonances. As a result 
+        RT60 is typically not meaningful in such rooms below a few hundred Hz. Use the 
+        <A href="graph_rt60decay.html">RT60 Decay</A>, <A href="graph_waterfall.html">waterfall</A>, 
+        <A href="graph_spectrogram.html">spectrogram</A> and <A href="graph_csd.html">Decay</A> plots 
+        to examine the decay of low frequencies in domestically-sized rooms.
+        
+        <H3>RT60 Calculation</H3>
+        
+        <P>The RT60 values are estimated by calculating the slope of the Schroeder curve, which is a plot
+        of the energy (squared values) of the impulse response that is backwards integrated (summed starting
+        from the end and moving backwards). The vertical axis of the plot is in dB. The different RT60 measures 
+        (e.g. T20, T30, REW's Topt) are derived by calculating the slope of a best fit line to the Schroeder curve 
+        over different ranges (detailed below). In a diffuse field the curve with the dB vertical scale is quite 
+        linear until it reaches the noise floor. 
+        
+        <P>The start point for the classical T20 and T30 measures of RT60 is where the Schroeder curve has dropped 5 dB 
+        below its peak. That works well in the large spaces for which RT60 is most applicable, particularly if the source 
+        used for the measurement is omnidirectional. In domestically sized rooms using normal, directional loudspeakers as 
+        sources the initial drop of the Schroeder curve is quite sharp (the Early Decay Time is quite short) meaning the
+        -5 dB point lies within the early decay region rather than the diffuse field region. That in turn means the T20 and T30
+        figures underestimate the RT60 time. Where the EDT is much shorter than the T30 RT60 figure REW's Topt RT60 
+        calculation uses a start point based on the intersection of the EDT and T30 regression lines, to determine a point 
+        that lies within the diffuse field region. It then tests each possible end point in 1 dB steps and picks the one
+        that gives a regression line with the best linear fit. That produces a more reliable RT60 figure.
+        
+        <P>The results are presented within octave or 1/3 octave bands, providing a view of how the rate at 
+        which sound decays changes with frequency. The lowest centre frequency for the RT60 plot is 50 Hz at 1/3 octave 
+        and 63 Hz at 1 octave, per ISO3382. For domestic listening rooms and recording studios with volumes of less 
+        than 50 cubic metres (1,800 cubic feet) the recommended RT60 value is 0.3 s. For larger rooms, up to
+        200 cubic metres (7,000 cubic feet) the recommendation is 0.4 to 0.6 s. In both cases the value should be 
+        fairly uniform across the frequency range, though it will typically tend to increase at lower frequencies.
+        
+        <P><B>Important:</B> If you are making RT60 measurements in a large space (bigger than a domestic
+        room) change the <A href="analysis.html#irtruncation">IR truncation</A> setting in the Analysis
+        preferences to make sure enough of the IR is retained for the decay to reach the noise floor. It 
+        may also be necessary to use a longer sweep (with a 256k sweep there are about 6 seconds of IR data 
+        after the peak before any truncation is applied).
+        
+        <H3>RT60 and related parameters</H3>
+        
+        <P><A NAME="decaymeasures">The parameters</A>  which are calculated are:
+        <DL>
+            <DT>EDT
+            <DD>Early Decay Time, based on the slope of the Schroeder curve between 0 dB and -10 dB. This is not
+            an RT60 figure, but rather an indication of how quickly the initial sound at the measurement
+            position decays - it is much more location dependent than RT60. A fast early decay (low EDT figure) 
+            indicates better clarity than at positions where the EDT is higher. 
+            <DT>T20
+            <DD>The RT60 decay time based on the slope of the Schroeder curve between -5 dB and -25 dB.
+            <DT>T30
+            <DD>The RT60 decay time based on the slope of the Schroeder curve between -5 dB and -35 dB.
+            <DT>Topt
+            <DD>An "optimal" RT60 decay time based on the slope of the Schroeder curve over a variable
+            range chosen to yield the best linear fit. If the early decay time is much shorter than
+            T30 the Topt measure uses a start point based on the intersection of the EDT and T30 regression 
+            lines, otherwise it uses -5 dB. REW tests every end point in 1dB steps to the end of the Schroeder
+            curve and chooses the one which gives the best linear fit.
+            <DT>T60M
+            <DD>A model T60 decay time based on fitting an exponential decay plus noise model to frequency domain
+                data, see the <A href=graph_rt60decay.html>RT60 Decay</A> graph. The trace is only available when
+                the model data has been generated on the RT60 decay graph.
+            <DT>Clarity C50
+            <DD>The early to late energy ratio in dB, using sound energy in the first 50 ms as 
+            the 'early' part. C50 is most often used as an indicator of speech clarity.
+            <DT>Clarity C80
+            <DD>The early to late energy ratio in dB, using sound energy in the first 80 ms as 
+            the 'early' part. C80 is most often used as an indicator of music clarity.
+            <DT>Definition D50
+            <DD>The early to total energy ratio as a percentage, using sound energy in the first 
+            50 ms as the 'early' part
+            <DT>Centre Time TS
+            <DD>The time of the 'centre of gravity' of the squared impulse response
+        </DL>
+        
+        <H3><A name="actions">RT60 actions</A></H3>
+        
+        <P>The right click menu for the RT60 graph has this action
+        <P><IMG SRC="../../images/actionsrt60.jpg" ALT="RT60 actions"><BR CLEAR="all">
+
+        <P><EM>Export RT60 data as text</EM> allows the RT60 data to be written to a file.
+        A note can be entered that is displayed when the data set is next loaded.
+        The file includes both octave and one-third octave results if those have
+        been generated. If RT60 Decay model data has been generated for octave or 
+        one-third octave a T60M figure will be included in the export, otherwise it 
+        will be zero. The path to the file is remembered for the next time the dialog 
+        appears. A dialog is displayed to control the format of the export<BR><BR>
+        <IMG SRC="../../images/rt60export.jpg" ALT="RT60 Export Settings" BORDER=0 ALIGN="left"><BR clear="all"><BR>
+
+        <H3><A name="controls">RT60 controls</A></H3>
+        
+        <P>The control panel for the RT60 graph has these controls:
+        <P><IMG SRC="../../images/rt60controls.jpg" ALT="RT60 controls"><BR CLEAR="all">
+
+        <P>RT60 data can be shown in octave or one-third octave bands. The <EM>Filter order</EM>
+        selection controls how steeply the fractional octave band filters roll off. The default order
+        is 6 and that gives results comparable with most other software. Higher filter order makes the
+        bands more selective, which can help isolate longer decays to a particular band, but increasing
+        filter order also increases the delay of the filter itself. That can be mitigated by using
+        <EM>Time-reversed filtering</EM> or <EM>Zero phase filtering</EM>.
+
+        <P>The Filtering control provides a choice of <EM>Forward filtering</EM>, 
+        <EM>Time-reversed filtering</EM> or <EM>Zero phase filtering</EM>. 
+        <EM>Time-reversed filtering</EM> applies the octave band filters backwards in time, 
+        this greatly reduces the filter's own contribution to the measured decay. 
+        When using 1/3 octave filters at low frequencies the filter decay time 
+        can be significant, over 200 ms for a 100Hz 1/3 filter, for example. Applying 
+        the filter in reverse reduces this decay to less than 50 ms, but it does affect 
+        the response somewhat, such that Early Decay Time (EDT) figures using Time-Reversed 
+        filters may not be valid. <EM>Zero phase filtering</EM> applies the filters in two passes
+        through the data, one forwards and one reversed, to give a response with overall zero
+        phase shift. This reduces the contribution of the filter's decay time similar to
+        (though not as much as) time reversed filtering but without significantly affecting 
+        early decay time. The filter order used for the backward and forward passes is two 
+        thirds of the Filter order value, which together with a bandwidth adjustment gives 
+        a response that is close to that of a single pass of a filter of the specified order.
+
+        <P>The <EM>Show data panel</EM> control shows a panel on the graph containing the results
+        for the decay values. Unreliable figures are italicised and shown orange.
+        <br><br>
+        <IMG SRC="../../images/rt60datapanel.jpg" ALT="RT60 Data Panel"><BR CLEAR="all">
+
+        <P>If the <EM>Show correlation factor</EM> box is checked the graph legend names
+        shows the quality of the line fit for the various decay measures. The "r" value shown 
+        after each decay measure is the regression coefficient, which measures how well the data 
+        corresponds to a straight line. A value of -1 would indicate a perfect fit, values lower in 
+        magnitude than -0.99 indicate the corresponding decay figure may not be reliable. 
+        Potentially unreliable values are italicised.
+        
+        <P>The RT60 plot can show horizontal bars centred on each filter frequency and 
+        spanning the filter's bandwidth, or lines joining the filter centre frequencies, 
+        according to the <EM>Use bars on plot</EM> control setting.
+        
+        <P><EM>Show EBU RT60 limits</EM> will overlay the EBU recommendations for the room 
+        volume entered. The units for volume are those set for length units in the View preferences.
+        <EM>Nominal RT60</EM> is the RT60 figure for the reference volume, 100 m<sup>3</sup>.
+        The target RT60 for the limits is derived from:<br><br>
+        <center>T<sub>m</sub> = nominal RT60 * (room volume / reference volume)<sup>1/3</sup></center>
+        <br><br>
+        <IMG SRC="../../images/ebulimits.jpg" ALT="RT60 showing EBU limits"><BR CLEAR="all">
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour
+        and line type of the graph traces to be changed. If a change is made it will be 
+        used for all measurements shown on this graph. Traces can also be hidden, which
+        will remove them from the graph and from the graph legend.
+
+        <P>The parameter values (RT60 and clarity) for the current measurement can be written
+        to a text file using the File &rarr; Export &rarr; <EM>RT60 data as text</EM> menu entry.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

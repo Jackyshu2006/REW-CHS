@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Speech Transmission Index</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Speech Transmission Index</A></H2>
+        
+        <P>The <EM>STI</EM> panel is used to calculate the Speech Transmission Index for
+        an impulse response by the indirect method per IEC 60268-16:2020. Post-processing
+        (optionally including auditory masking) may be applied using noise and signal octave band levels
+        which can be measured by REW or entered manually by clicking on the values. Speech
+        signal octave band levels can be calculated from the IR for a specified overall dBA level.
+        <P><IMG SRC="../../images/sti.jpg" ALT="STI panel"><BR CLEAR="all">
+        
+        <H3><A name="calcsti">Calculating STI</A></H3>
+        
+        <P>To calculate STI for an impulse response that has been obtained through a sweep
+        measurement select the measurement from the drop-down list and press <EM>Calculate STI</EM>.
+        If post-processing is to be applied make sure the signal and noise level values have 
+        been measured or entered.
+        
+        <P>The results may be copied to the clipboard using the copy button.
+        
+        <H3><A name="measurelevels">Measuring or setting levels for post processing</A></H3>
+        
+        <P>The <EM>Measure noise</EM> and <EM>Measure signal</EM> buttons allow Leq
+        figures in each octave band to be measured with the Leq period set on the dialog. 
+        While measuring noise or signal levels the octave band figures will update in the
+        table row and the overall LAeq figure will be shown. If the REW generator is used 
+        when measuring signal levels the IEC 60268-16:2020 speech-shaped noise signal will 
+        be automatically selected and ready to play.
+        
+        <P>Signal or noise levels can be manually entered by clicking on a cell. Tab and shift+tab
+        move forwards and backwards between cells. Levels can be uniformly increased or decreased 
+        in 1 dB increments using the <EM>+1 dB</EM> and <EM>-1 dB</EM> buttons.
+        
+        <P>The levels can be set from saved 1 octave RTA measurements using the 
+        <EM>Load signal Leq from</EM> and <EM>Load noise Leq from</EM> buttons.
+        
+        <P>Speech signal octave band levels can be calculated from the impulse response
+        using the <EM>Calculate Leq at</EM> button for a specified overall dBA level. The 
+        calculation uses the windowed IR.
+        
+        <H3><A name="tests">Modulation depth test results</A></H3>
+        
+        <P>The tables below list the theoretical and calculated m-values and the difference
+        between them for each octave band per Appendix C.3.3 of the specification for the test 
+        signal listed. For all test signals with greater RT60 times the deviations were less 
+        than 0.001 and are not listed.</P><BR>
+        
+<PRE>
+STIPA-expdecay-RT60=0.125.wav
+125.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.995   0.992   0.988   0.982   0.971   0.955   0.931   0.894   0.846   0.781  
+ 0.000   0.000   0.000   0.000   0.001   0.001   0.002   0.003   0.004   0.007   0.010   0.016   0.023   0.034  
+250.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.993   0.990   0.984   0.974   0.960   0.938   0.906   0.862   0.805  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.001   0.001   0.001   0.002   0.003   0.005   0.007   0.010  
+500.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.961   0.941   0.909   0.868   0.813  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.001   0.001   0.002   0.002  
+1000.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.001  
+2000.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000  
+4000.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000  
+8000.0
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.999   0.999   0.998   0.997   0.996   0.994   0.990   0.984   0.975   0.962   0.941   0.910   0.869   0.815  
+ 0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000   0.000  
+
+Maximum error 0.034 at 125.0 Hz, 12.5 Hz modulation
+</PRE>
+        
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

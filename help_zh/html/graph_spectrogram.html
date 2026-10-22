@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>频谱图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">频谱图</A></H2>
+
+        <P>本图显示测量的频谱图（spectrogram）。频谱图是一种时频图（time-frequency plot），展示信号的频率成分如何随时间变化。
+
+        <P>它可以用来查看三类数据：扫频测量的结果；导入的音频文件的频率成分（文件长度有限制）；<A href="spectrum.html#steppedsine">步进正弦测量</A>的结果，但仅限在每个测量频率上都采集了频谱数据的测量。
+
+        <P>频谱图就像从正上方俯视瀑布图（waterfall），电平高低用颜色表示。图的右侧可以选择显示一条色阶条，标明每种颜色对应多大的电平。
+
+        <P>频谱图有五种模式：Fourier（傅里叶）、Wavelet（小波）、Airy CWT、Morlet CWT 和 Burst Decay（猝发衰减）。Fourier 模式使用短时傅里叶变换（short-time Fourier transform，STFT）。Wavelet 模式和两种 CWT 模式都属于小波变换（wavelet transform），区别只在实现方法。
+
+        <P>在 Fourier 模式和小波类模式下，图的纵轴可以是时间（越往上时间越晚），也可以是频率，这时时间放在横轴上。在 Burst Decay 模式下，时间轴换成了周期数轴。
+
+        <P>在 Fourier 模式或小波类模式下查看扫频测量时，时间从脉冲峰值之前开始，这样能看到响应的起始部分。响应衰减得较慢的区域，会沿时间轴拖出长条。
+
+        <P>图中的虚线是<EM>峰值能量时间</EM>曲线，标出每个频率上电平最高点出现的时刻。它能直观地显示峰值能量的到达时间怎样随频率变化。理想的峰值能量时间曲线是一条直线，所有频率的时间值都相同。
+
+        <P><IMG SRC="../../images/spectrogram.jpg" ALT="频谱图">
+
+        <P>Fourier 模式的频谱图，生成方法与频谱衰减图相同：每生成下一个切片（slice），就把脉冲响应（impulse response）上的时间窗向右移动一段，移动量按时间范围的一定比例计算。时间窗类型在图表选项里选择。图中数据按对数间隔分布，每倍频程 96 个点。
+
+        <P>在 Burst Decay 模式下，衰减从脉冲峰值处开始，沿周期数轴展示：轴上的刻度是该频率自身的周期数。这样一来，Q 值相同的共振（resonance），衰减速度看起来也相同。
+
+        <P>对比上面的 Fourier 频谱图和下面的 1/6 倍频程 Burst Decay 频谱图，从 Burst Decay 图上可以明显看出：60 Hz 共振的 Q 值比 27 Hz 共振高，尽管 27 Hz 共振的衰减时间更长。
+
+        <P><IMG SRC="../../images/burstdecayspectrogram.jpg" ALT="Burst Decay 频谱图">
+
+        <P>选中这张图表时，频谱图会自动生成；也可以点击图表区左下角的<EM>生成</EM>按钮（快捷键 Alt+G），手动重新生成。图例区显示竖直、水平两条光标线（cursor line）交点处的数值。
+
+        <P>理想的频谱图会非常快地衰减下去，落到色阶范围底部以下。下图是用 <EM>Fourier</EM> 模式对一次声卡回环测量生成的频谱图示例。
+        <P><IMG SRC="../../images/spectrogramideal.jpg" ALT="理想频谱图">
+
+        <H3><a name="actions">频谱图操作</a></H3>
+
+        <P>在图表上单击右键，会弹出操作菜单：
+        <P><IMG SRC="../../images/actionsspectrogram.jpg" ALT="频谱图操作"><BR CLEAR="all">
+
+        <P><EM>外观设置</EM>会打开下文介绍的对话框。
+
+        <P><EM>导出数据</EM>把频谱图数据导出为文本。
+
+        <H3><a name="appearance">外观设置</a></H3>
+
+        <P><EM>外观设置</EM>对话框用来控制频谱图的外观。
+        <P><IMG SRC="../../images/spectrogramappearance.jpg" ALT="频谱图外观设置">
+
+        <P>图的配色<EM>方案</EM>可以更换。上面几张图用的都是“Heat (热力)”方案；下图用的是“Copper (铜色)”方案，并开启了 3D 光影增强。
+
+        <P><IMG SRC="../../images/spectrogramcopper.jpg" ALT="频谱图，Copper (铜色) 配色方案">
+
+        <P>其中一种配色方案基于 Dave Green 提出的 cubehelix，详见 https://www.mrao.cam.ac.uk/~dag/CUBEHELIX/。它沿 RGB 颜色立方体的对角线绕出一条螺旋路径来取色，并考虑了人眼对不同颜色亮度的感知，使整个方案在视觉上亮度单调递增。
+
+        <P>cubehelix 方案的外观可以用下面的设置面板调整。点击配色方案下拉框右侧的“配色方案设置”图标，即可打开这个面板：
+        <P><IMG SRC="../../images/cubehelixsettings.jpg" ALT="cubehelix 设置">
+
+        <P><EM>起始色相</EM>是色阶底端的色相（hue），单位为度。<EM>旋转</EM>是螺旋绕立方体对角线转过的角度，单位也是度；旋转设为零，得到只有一种色相的方案。旋转可以为正，也可以为负。
+
+        <P><EM>色相系数</EM>是施加在颜色上的缩放系数。系数为 1.0 时，能保证感知均匀（perceptual uniformity）；数值更高，配色更鲜艳。
+
+        <P>原始方案覆盖从黑到白的整个范围。<EM>最小灰度</EM>和<EM>最大灰度</EM>两个控件可以让色阶从高于黑色的亮度开始，这样起始色相就能显现出来；也可以让色阶在到达白色之前结束，使色阶顶端仍保留一些颜色。
+
+        <P><EM>刻度顶部</EM>、<EM>刻度底部</EM>和<EM>刻度范围</EM>三个控件，决定图中颜色与频谱图数据值的对应关系。高于刻度顶部的数值，一律用色阶顶端的颜色绘制；低于刻度底部的数值，一律用色阶底端的颜色绘制。
+
+        <P>三者是联动的：<BR>
+        改刻度顶部时，刻度底部随之调整，刻度范围保持不变；<BR>
+        改刻度底部时，刻度范围随之调整，刻度顶部保持不变；<BR>
+        改刻度范围时，刻度底部随之调整，刻度顶部保持不变。
+
+        <P><EM>绘制等高线</EM>按旁边数值框里设定的 dB 间隔，在图上加画等高线（contour lines）。
+
+        <P><IMG SRC="../../images/spectrogramcontours.jpg" ALT="带等高线的频谱图">
+
+        <P>勾选<EM>带状色谱</EM>后，色阶不再从一种颜色连续过渡到另一种，而是分成若干离散的色级：共用 11 种颜色，在刻度范围内分出 10 个色带。
+
+        <P><IMG SRC="../../images/spectrogrambanded.jpg" ALT="频谱图，带状色谱">
+
+        <P><EM>3D 光影增强</EM>让图看起来更有立体感。
+
+        <P><IMG SRC="../../images/spectrogram3d.jpg" ALT="频谱图，3D 光影增强">
+
+        <P><EM>填充频谱图基底</EM>用刻度范围底端的颜色，填满图的基底（floor），也就是低于刻度底部的区域。填充基底后，网格画在频谱图的上层；网格可以用图表菜单里的“显示/隐藏网格”或快捷键 Ctrl+Shift+G 显示或隐藏。
+        <P><IMG SRC="../../images/spectrogramfilled.jpg" ALT="填充了基底的 Wavelet 频谱图">
+
+        <P>勾选<EM>显示模态频率</EM>后，图表底部会标出理论模态频率（modal frequencies）。这些频率按 EQ 窗口<A href="eqwindow.html#modalanalysis">模态分析</A>一节中输入的房间尺寸计算。
+
+        <P><EM>显示色阶条</EM>控制是否在图表右侧显示色阶条。色阶条标明各种颜色与 SPL 的对应关系。
+
+        <P><EM>刻度顶部匹配峰值</EM>自动调整刻度顶部的数值，使它等于数据中的最高电平。
+
+        <P><EM>时间轴匹配时间窗与范围</EM>自动调整时间轴的范围，让图上显示全部已生成的数据：起点定在零点之前一个时间窗宽度处（例如时间窗设为 300 ms 时，起点为 -300 ms），终点定在时间范围处（例如时间范围设为 1000 ms 时，终点为 1000 ms）。
+
+        <H3><A name="controlsspectrogramsweep">频谱图的图表选项：扫频测量</A></H3>
+
+        <P><IMG SRC="../../images/spectrogramcontrols.jpg" ALT="频谱图的图表选项"><BR CLEAR="all">
+
+        <P><EM>模式</EM>选择要生成哪一种频谱图，可选 <EM>Fourier</EM>、<EM>Wavelet</EM>、<EM>Airy CWT</EM>、<EM>Morlet CWT</EM> 或 <EM>Burst Decay</EM>。
+
+        <P>Fourier 模式使用固定宽度的时间窗，所以图上所有频率的时间分辨率（time resolution）都相同。如果图覆盖的频率范围很宽，这通常意味着：要么高频的时间分辨率太低，要么低频的时间分辨率太高（频率分辨率因此太粗）。
+
+        <P>举例来说，100 ms 的时间窗对应 10 Hz 的频率分辨率（frequency resolution）。在低频，10 Hz 是一个很大的倍频程分数（20 Hz 处约为 1/1.4 倍频程）；在高频，它又是一个极小的倍频程分数（20 kHz 处为 1/1386 倍频程）。
+
+        <P>对时频图来说，更有用的做法是让时间分辨率与频率分辨率的取舍随频率变化：频率分辨率取固定的倍频程分数，而不是固定的赫兹数。这样，高频的时间分辨率更高，低频的时间分辨率更低。小波变换能做到这一点，确切地说，是恒定 Q 的连续小波变换（continuous wavelet transform，CWT）。
+
+        <P>恒定 Q 的小波变换，在数学上等价于用频率相关时间窗（frequency-dependent window）来生成频谱图。REW 的 <EM>Wavelet</EM> 模式就是这样做的。
+
+        <P>它的实现采用复数平滑（complex smoothing）。如果响应延伸到接近采样率一半的频率，这一段可能出现一些伪像（artefact）。提高采样率，可以把这些伪像推到通常关心的频率范围之外。
+
+        <P>与两种 CWT 实现相比，这种平滑方法的核（kernel）形状更尖，因此能把响应中某些高幅度的特征勾勒得更清楚，代价是低幅度处的伪像更多。
+
+        <P><EM>Wavelet</EM> 模式在所选跨度内按一定的时间步长生成数据，每个时间切片都得到一条频率响应。
+
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p><EM>Airy CWT</EM> 和 <EM>Morlet CWT</EM> 模式是连续小波变换的 Java 实现，所用算法见以下文献：<I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous
+            wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency
+            analysis. Nat Comput Sci, 2(1), 47–58.</I>  <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="https://doi.org/10.1038/s43588-021-00183-z">
+            <param name="content" value="https://doi.org/10.1038/s43588-021-00183-z">
+            </object>。
+        </div>
+
+        <div class="onlineonly">
+            <!-- External links for the online help -->
+            <EM>Airy CWT</EM> 和 <EM>Morlet CWT</EM> 模式是连续小波变换的 Java 实现，所用算法见以下文献：<I>Arts, L., &amp; van den Broek, E. (2022). The fast continuous
+            wavelet transformation (fCWT) for real-time, high-quality, noise-resistant time–frequency
+            analysis. Nat Comput Sci, 2(1), 47–58. </I>
+            <A HREF="https://doi.org/10.1038/s43588-021-00183-z">https://doi.org/10.1038/s43588-021-00183-z</A>。
+        </div>
+
+        <P>CWT 模式在图的整个时间范围内，只在若干特定频率上生成数据。在这两种模式下，可以选择频率间隔，范围为每倍频程 24 到 96 个点（points per octave，PPO），默认 48 PPO。PPO 越高，计算时间越长。
+
+        <P>Morlet 小波（Morlet wavelet）是 CWT 最常用的小波，但它在时间分辨率很高时有些不足：它只是近似解析（analytic，即频谱中基本不含负频率成分），因而会产生伪像。
+
+        <P>Airy 小波（Airy wavelet）属于广义 Morse 小波（generalised Morse wavelets）中 &gamma; = 3 的一族。它是严格解析的，在 1/1 到 1/5 倍频程分数下，表现优于 Morlet 小波。但在频率分辨率很高、即 1/12 到 1/24 倍频程分数时，Airy 小波会产生伪像，这时 Morlet 小波更合适。
+
+        <P>分析脉冲响应时，CWT 模式会做尺度归一化（scale normalisation），使理想脉冲的频谱图在所有频率上峰值电平都相同。分析导入的音频数据时不做尺度归一化，这样幅度相同、频率不同的单音，在频谱图上电平也相同。
+
+        <P>下图是上文那次声卡回环测量的 1/6 倍频程 <EM>Wavelet</EM> 频谱图。图形随频率升高而变窄，反映出小波图的时间分辨率随频率升高而提高。
+        <P><IMG SRC="../../images/spectrogramidealwavelet.jpg" ALT="理想脉冲的 Wavelet 频谱图">
+
+        <P>下图是本页第一张示例图所用的同一个测量，改用 1/12 倍频程 <EM>Wavelet</EM> 频谱图显示。
+        <P><IMG SRC="../../images/spectrogramwavelet.jpg" ALT="1/12 倍频程 Wavelet 频谱图">
+
+        <P>下图是同一个测量的 1/12 倍频程 <EM>Morlet CWT</EM> 频谱图。
+        <P><IMG SRC="../../images/spectrogrammorlet.jpg" ALT="1/12 倍频程 Morlet CWT 频谱图">
+
+        <P>查看带反射的响应时，Fourier 频谱图和 Wavelet 频谱图的差别更容易看出来。下面两张图画的是同一个响应，它在峰值之后每隔 1 ms 出现一次反射，形成一串反射。
+
+        <P>在 Fourier 频谱图中（时间窗 10 ms，峰值后跨度 10 ms），反射对频率响应和衰减的影响清晰可见：每隔 1 kHz 出现一个峰。但反射本身分辨不出来。
+        <P><IMG SRC="../../images/spectrogramreflectionsfourier.jpg" ALT="带反射的 Fourier 频谱图">
+
+        <P>小波图（1/12 倍频程）同样显示出反射对频率响应和衰减的影响。而且，由于它在高频的时间分辨率更高，反射本身也能看出来，表现为一道道横条。
+        <P><IMG SRC="../../images/spectrogramreflectionswavelet.jpg" ALT="带反射的 1/12 倍频程 Wavelet 频谱图">
+
+        <P>1/12 倍频程 <EM>Morlet CWT</EM> 同样能显示出这些反射：
+        <P><IMG SRC="../../images/spectrogramreflectionsmorlet.jpg" ALT="带反射的 1/12 倍频程 Morlet CWT 频谱图">
+
+        <P>在 <EM>Wavelet</EM> 和 <EM>CWT</EM> 模式下，<EM>频率分辨率</EM>控件会取代<EM>时间窗</EM>控件，可选 1 倍频程到 1/24 倍频程之间的分辨率。
+
+        <P><EM>Burst Decay</EM> 模式让 Q 值相近、频率不同的共振更容易区分开。它显示的是：在每个频率上，一个经过整形的猝发音（tone burst）会怎样衰减。不过，衰减所沿的那条轴不用时间标注，而是用该频率的周期数标注。在周期数轴上，只要共振的 Q 值相同，衰减的长短就相同，与共振频率高低无关。
+
+        <P>这张图的生成过程是：先把加窗后的脉冲响应（沿用该测量当前应用的时间窗设置），与复 Morlet 小波解析信号（即经高斯窗加权的复指数信号）做卷积（convolution），提取出衰减包络（decay envelope）；再把这条衰减曲线按周期数刻度重新采样。这一过程在测量的整个频率范围内按每倍频程 48 个点重复进行，最低频率为 10 Hz，最高频率为采样率的一半再减去一个猝发带宽。
+
+        <P>但请注意，周期数轴本身会带来一种伪像：衰减的尾部会略微向高频方向偏斜，而不像以时间为轴的图那样，围绕共振的中心频率保持对称。
+
+        <P>在 <EM>Burst Decay</EM> 模式下，可以用<EM>带宽</EM>控件把猝发带宽设为 1/3 或 1/6 倍频程。选 1/3 倍频程偏重时间分辨率，选 1/6 倍频程偏重频率分辨率。
+
+        <P>用 1/6 倍频程猝发时，共振更容易区分；用 1/3 倍频程猝发时，反射在图上更明显，表现为一条条弧线。下图就是上文用 Fourier 和 Wavelet 频谱图分析过的那个带反射的响应，这里改用 1/3 倍频程 Burst Decay 显示。
+        <P><IMG SRC="../../images/spectrogramreflectionsburstdecay.jpg" ALT="带反射的 Burst Decay 频谱图">
+
+        <P>Burst Decay 图在接近高频上限处可能出现可见的伪像，不过通常比峰值电平低 40 dB 以上。<EM>跨度 (周期数)</EM>控件设定图覆盖多少个周期。<EM>频率间隔 (PPO)</EM>控件把图的频率分辨率设为每倍频程 24、48 或 96 个点。
+
+        <P><EM>时间窗类型</EM>控件选择 Fourier 频谱图每个切片所用的时间窗。Hann（汉宁窗）适合查看导入的音频文件的内容；对扫频测量，Gaussian（高斯窗）在时间与频率分辨率之间的取舍更理想。
+
+        <P>对扫频测量，<EM>峰值前跨度</EM>和<EM>峰值后跨度</EM>两个控件决定在脉冲响应峰值前后生成多长一段频谱图数据。导入的音频文件没有跨度控件，频谱图覆盖整个文件的时长。
+
+        <P><EM>幅度</EM>控件可以在线性刻度和对数刻度之间选择。对数刻度有 dB SPL 和 dBFS 两种，线性刻度有 % peak（峰值百分比）和 % FS（满量程百分比）两种。
+
+        <P>在 Wavelet 图上使用线性的 % peak 刻度，更容易看出时间上的错位。查看导入的音频文件时，dBFS 和 % FS 刻度可能更有用。
+
+        <P><EM>频率轴</EM>决定频率放在 X 轴还是 Y 轴。音频数据的频谱图通常把频率放在 Y 轴（纵轴）；把频率放在 X 轴（横轴），则便于和瀑布图直接对照着看。
+
+        <P><EM>各频率归一化至峰值</EM>在每个频率上单独缩放（提升）图形，使各频率的峰值都相同。它消除了各频率之间的电平差异，因此在观察能量衰减、或检查扬声器单元之间的时间对齐时很有用。
+
+        <P>请注意，归一化（normalisation）与 3D 光影增强同时使用时，可能沿频率轴出现伪像。
+        <P><IMG SRC="../../images/spectrogramnormalised.jpg" ALT="归一化后的 Wavelet 频谱图">
+
+        <P>勾选<EM>设置变更时自动生成</EM>后，只要改动任何一项设置，频谱图就会自动重新生成；不勾选时，新设置要等点击<EM>生成</EM>按钮后才会生效。
+
+        <P>勾选<EM>光标位置显示切片</EM>后，图表分成上下两部分：上面是频谱图，下面是光标所在 Y 轴位置处的电平曲线。频率在 X 轴时，下方显示电平随频率变化的曲线；频率在 Y 轴时，显示电平随时间变化的曲线。
+        <P><IMG SRC="../../images/spectrogramshowslice.jpg" ALT="显示切片的频谱图">
+
+        <P>勾选<EM>显示频带</EM>后，当 X 轴为频率时，图表上方会用一条色带标出各音频频段。
+
+        <P>在图表选项面板上单击右键，可以在不同测量之间复制和粘贴设置。
+
+        <P>这些控件的设置会被记住，下次运行 REW 时继续沿用。<EM>应用默认设置</EM>按钮把各控件恢复为默认值。
+
+        <H3><A name="steppedsine">频谱图的图表选项：步进正弦测量</A></H3>
+
+        <P><IMG SRC="../../images/spectrogramcontrolssteppedsine.jpg" ALT="频谱图的图表选项（步进正弦测量）"><BR CLEAR="all">
+
+        <P><A href="spectrum.html#steppedsine">步进正弦测量</A>的控件要少得多，只用来选择幅度和频率轴。对步进正弦测量来说，相当于时间轴的是采集频谱数据时的测试频率，轴上标出的就是这些频率。
+
+        <P>选中一个步进正弦测量时，这条轴会自动缩放，显示该测量的全部测试频率；之后也可以用坐标轴缩放按钮放大或缩小。请注意，只有勾选了<EM>每步捕获频谱</EM>选项的步进正弦测量，才能生成频谱图。
+
+        <P><IMG SRC="../../images/stepspectrogram2.jpg" ALT="步进正弦测量的频谱图"><BR CLEAR="all">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

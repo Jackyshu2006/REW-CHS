@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Thiele Small Parameters</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Thiele Small Parameters</A></H2>
+        
+        <p>The Thiele-Small Parameters window is used to calculate the parameters
+        for a drive unit from measurements of its impedance. Three methods are 
+        offered: sealed box, added mass and dual added mass. The dual added mass
+        method if from the paper "An Added-Mass Measurement Technique for Transducer 
+        Parameter Estimation" by Jeff Candy and Claus Futtrup, JAES Volume 65 Issue 
+        12 pp. 1005-1016; December 2017. It gives the most accurate results, but all
+        the methods are dependent on the quality of the measurements.<br>
+        <p><IMG SRC="../../images/tsparamswindow.jpg" ALT="TS Parameters Window">
+        <BR clear="all">
+        
+        <p>Each method requires a "free air" measurement, with the driver rigidly
+        supported, without any baffle, and mounted vertically (i.e. so that the cone 
+        is firing horizontally as it would be in a typical loudspeaker installation).
+        Additional measurements are with either mass added to the cone or with the 
+        unit in a sealed (air tight!) enclosure (ideally with a volume a little less 
+        than the expected Vas).
+        
+        <p>For single added mass measurements the mass added should be approximately 
+        half the expected Mms figure. For dual added mass make one measurement with 
+        masses that total a little less than the expected Mms, then one with half the masses
+        removed, then finally the free air measurement. Some pre-conditioning of
+        the unit with signals at medium levels helps to stabilise the behaviour and 
+        suspension compliance and reduce memory effects in the suspension from periods 
+        of storage or lack of use. Quiet conditions are important for good measurements,
+        drive units act as microphones and pick up noise and vibration, affecting the results.
+        The measurements should be made up to 20kHz so that the lossy inductance of the 
+        voice coil can be accurately modelled, and the 
+        <a href="impedancemeasurement.html#calibrate">impedance calibration</a> step
+        should be carried out before making measurements.</p>
+        
+        <p>Added mass measurements require very precise figures for the masses to get 
+        accurate results. The more accurate the scale used, the better. It is recommended 
+        that the overall mass to be added is split into 4 pieces, of approximately equal 
+        mass, placed equally spaced around the cone near the voice coil and firmly attached. 
+        Blu-tack works well, either on its own or with a nut embedded in it when more mass 
+        is required. Do not place the masses near the outer edge of the cone, that will 
+        adversely affect the cone behaviour. For the second measurement in a dual added 
+        mass run a pair of the masses are (gently!) removed, leaving two on opposite sides 
+        of the cone.
+
+        <p><EM>Compensate for leakage losses</EM> and <EM>Compensate for Air Load</EM> check 
+        boxes are shown for sealed box measurements, they take into account the leakage loss 
+        of the sealed box (which would be shown as Q<sub>l</sub> in the results) and the air 
+        mass load due to the sealed box. These compensations use the Carrion-Isbert method 
+        described by Claus Futtrup in the documentation for his <i>Driver Parameter Calculator</i>
+        application at http://www.cfuttrup.com/
+        
+        <H3>An Example Run</H3>
+        
+        <p>The results show the process for TS parameter calculation of a mid-bass drive
+        unit. The plots below show the impedance measurements made in free air and then 
+        with the added masses. A least squares fit of an 
+        <a href="#tsmodel">electrical model</a> of the drive unit impedance is carried out on the
+        free air measurement to determine the model parameters. Another least squares fit is 
+        carried out on the secondary measurement to determine the modified motional parameters
+        and the TS parameters are then calculated.
+        </p><br>
+        <IMG SRC="../../images/freeairz.jpg" ALT="Free air impedance measurement">
+        <BR clear="all">
+        <IMG SRC="../../images/addedmassz.jpg" ALT="Added mass 1 impedance measurement">
+        <BR clear="all">
+        <IMG SRC="../../images/addedmass2z.jpg" ALT="Added mass 2 impedance measurement">
+        <BR clear="all">
+        
+        <p>To calculate the TS parameters the measurements are selected and the 
+            required values are entered:</p>
+        <ul>
+            <li>the DC resistance of the voice coil (R<sub>DC</sub>) in ohms. Accurate 
+                measurement of low resistances is not easy, but the impedance model REW 
+                uses can compensate for a DC resistance which is not precise.</li>
+            <li>the effective area in square centimetres, most driver data sheets include an
+                effective area figure but if this is not available REW can calculate the figure
+                for you given the effective diameter, which is the diameter of the cone
+                plus a proportion of the surround, typically 1/3 to 1/2, just click the 
+                calculator icon on the left hand side of the effective area box
+            <li>the air temperature in degrees Celsius
+            <li>the air pressure in millibar
+            <li>the the additional masses in grams or volume of the sealed box in litres.
+        </ul>
+         
+        <p>The <em>Calculate Parameters</em> button is then clicked, with the following results.</p><br>
+        <IMG SRC="../../images/tsparamsdone.jpg" ALT="TS parameter results">
+        <BR clear="all">
+        
+        <p>The first column of results in the bottom of the window show the loudspeaker
+        resistance R<sub>E</sub>, which is generally a little higher than the DC resistance; 
+        the minimum impedance Z<sub>min</sub> after the peak and the frequency f<sub>min</sub> at which it occurs;
+        f<sub>3</sub>, which is the frequency at which the impedance has increased to sqrt(2)*Zf<sub>min</sub>;
+        the inductance at f<sub>3</sub>; the effective diameter and the effective area. The 
+        second column shows the resonant frequency f<sub>S</sub>; the mechanical (Q<sub>MS</sub>), 
+        electrical (Q<sub>ES</sub>) and total (Q<sub>TS</sub>) Q-factors and the F<sub>TS</sub> 
+        figure (f<sub>S</sub>/Q<sub>TS</sub>). These parameters can also be calculated for any 
+        single measurement, without requiring a secondary measurement to be selected. The 
+        L<sub>P</sub> figure and the M<sub>MS</sub>, C<sub>MS</sub>, R<sub>MS</sub>, V<sub>AS</sub>, 
+        B&#8467; and Eta (efficiency) figures in the third column can only be calculated using extra measurements.
+        
+        <p>The results can be copied to the clipboard by right-clicking on the results area,
+        or written to a text file using the <em>Write Parameters to File</em> button. When writing
+        to file the separator between values, labels etc is as defined in the File &rarr; Export
+        menu.</p>
+        
+        <p>The plot below shows the modelled impedance traces overlaying the measured values for
+        the free air measurement.</p><br>
+        <IMG SRC="../../images/tsmodel.jpg" ALT="Modelled impedance">
+        <BR clear="all">
+        
+        <p>Dual added mass measurements include a B&#8467; curve (cyan in the image), it 
+        should be close to horizontal around the resonant frequency if the measurements are 
+        good.
+        
+        <p>When TS parameters have been calculated the derived and simulated motional
+        and blocked impedance magnitudes and phases can be plotted in addition to the 
+        total impedance traces, along with the ZM* magnitude and phase for dual added
+        mass results. The simulated traces are produced using the model parameter 
+        values, the derived traces are produced by subtracting the model values from the 
+        measured values (for example, derived motional impedance is produced by subtracting 
+        the modelled blocked impedance from the total measured impedance).</p><br>
+        <IMG SRC="../../images/tstraces.jpg" ALT="Derived and simulated impedance traces">
+        <BR clear="all">
+        
+        <H3><A name="tsmodel">Electrical impedance model</A></H3>
+        
+        <p>REW uses a model for the electrical impedance component of the driver based on
+        "Electrodynamic Transducer Model Incorporating Semi-Inductance and Means for Shorting 
+        AC Magnetization" by Knud Thorborg and Claus Futtrup, JAES Volume 59 Issue 9 pp. 
+        612-627; September 2011. The diagram below shows the components of the electrical 
+        impedance model.</p><br>
+        <IMG SRC="../../images/voicecoilmodel.jpg" ALT="Voicecoil model">
+        <BR clear="all">
+
+        <p>The model begins with a drive unit resistance R<sub>E</sub> which is 
+        the DC resistance R<sub>DC</sub>. REW has an additional resistance dR which allows 
+        for the difference between the actual RE and the measured resistance, which may 
+        differ due to measurement errors or coil temperature. It is followed by a series 
+        inductance L<sub>EB</sub> and then a parallel combination of an inductance L<sub>E</sub>, 
+        a semi-inductance K<sub>E</sub> and a resistance R<sub>SS</sub>. L<sub>E</sub> represents 
+        the inductance of the part of the voice coil located inside the motor gap. L<sub>EB</sub> 
+        represents the part of the coil outside the motor gap. The semi-inductance K<sub>E</sub> 
+        has an impedance that varies with the square root of omega. It models the effects of eddy 
+        currents and skin depth in the pole piece. The parallel combination of L<sub>E</sub> and 
+        K<sub>E</sub> models the transition of the coil's behaviour from largely that of a conventional 
+        inductor at low frequencies to a semi-inductor at high frequencies. The R<sub>SS</sub> 
+        component models the effect of electrically conductive material in the magnet system. The 
+        parameter values REW determines may be modified if desired and the effect on the modelled 
+        impedance and phase traces viewed on the graph, but the TS parameters which have been 
+        calculated will not be altered.</p>
+            
+        <H3><A name="motionalmodel">Mechanical impedance model</A></H3>
+        
+        <p>The mechanical impedance model incorporates elements that cater for the frequency-dependence 
+        of compliance. It uses the LOG model of viscoelasticity, from "Low-Frequency Loudspeaker 
+        Models That Include Suspension Creep" by Knudsen and Jensen, JAES Volume 41 Issue 1/2 pp. 3-18; 
+        February 1993, with the added Retardation Spectra function as described in "Modeling Viscoelasticity 
+        of Loudspeaker Suspensions Using Retardation Spectra" by Agerkvist and Ritter, AES Convention: 129
+        (November 2010), Paper Number: 8217.
+        
+        <H3><A name="simplemodel">Simplified Model</A></H3>
+        
+        <p>As frequency-dependent component values are not supported by many circuit 
+        simulators REW also calculates values for an alternative blocked impedance model using 
+        two parallel resistor-inductor pairs in series, labelled R2-L2 and R3-L3, and the 
+        conventional R<sub>ES</sub>, C<sub>MES</sub>, L<sub>CES</sub> motional impedance model
+        without the frequency-dependent damping and compliance. The values of these components 
+        are shown in the "Simplified Model" box. This diagram shows the simplified model components.</p><br>
+        <IMG SRC="../../images/drivermodel.jpg" ALT="Driver simplified model">
+        <BR clear="all">
+        
+<!--        <H4><A name="note1">Measuring the driver DC resistance</A></H4>
+        
+        <p>Accurate measurement of low resistances is challenging, LCR meters that are 
+        in calibration may have a suitable range and give good results. If you do not 
+        have access to a calibrated LCR meter an alternative is to get an accurate 
+        measurement of a higher value resistor, perhaps 50 ohm or so, or purchase a 
+        very high precision resistor (such as a Vishay bulk foil part) and form a voltage 
+        divider with a DC source, the reference resistor and the driver.  A decent 
+        multimeter can provide accurate voltage measurements, measuring the voltage 
+        across the driver and the voltage across the reference resistor allows the 
+        driver resistance to be determined from 
+        (ref resistor) * (driver voltage) / (ref resistor voltage). -->
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

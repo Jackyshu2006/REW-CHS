@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>声卡设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">声卡设置</A></H2>
+
+        “设置 → 声卡”页签有三个用途：配置测量用的音频输入和输出，校准音频接口（audio interface），以及为测量设定合适的电平。<BR><BR>
+        <IMG SRC="../../images/scsettings.jpg" ALT="声卡设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <A name="scsettings"></A>页签上各控件的作用如下：
+        <DL>
+            <DT><A name="drivers">驱动程序</A>
+            <DD>在 Windows 上，音频接口可以选用 Java 驱动或 ASIO 驱动。<BR><BR>
+            Java 驱动支持 44.1、48、88.2、96 和 192 kHz 采样率（sample rate），数据为 16 位。在 macOS 和 Linux 上，如果接口支持，会改用 32 位或 24 位数据。用 Java 驱动时，输入和输出可以分别在不同的设备上，REW 也能控制音量。<BR><BR>
+            ASIO 驱动的采样率最高支持 1536 kHz，支持哪些数据格式取决于具体驱动。ASIO 驱动只支持一台 ASIO 设备，输入和输出都必须用这台设备，REW 也无法控制电平。<BR><BR>
+            FlexASIO 这类伪 ASIO 驱动（pseudo-ASIO driver）属于 ASIO 封装驱动（ASIO wrapper）：它在设备原有的 WDM 驱动外面加一层 ASIO 封装，这样输入和输出就可以用不同的设备。
+
+            <DT><A name="samplerate">采样率</A>
+            <DD>用 Java 驱动时，采样率可设为 44.1、48、88.2、96 或 192 kHz，默认 48 kHz。为了避免操作系统做重采样（resampling），要确认音频接口的工作采样率与 REW 里选的一致。<BR><BR>
+            用 ASIO 驱动时，可选的采样率就是接口本身支持的那些，最高 1536 kHz。<BR><BR>
+            注意：输入设备和输出设备列表里，只会列出向系统报告支持所选采样率的设备。如果列表里找不到你的设备，可以换一个采样率试试。
+
+            <DT><A name="stereoonly">仅立体声模式</A>
+            <DD>勾选<EM>仅立体声模式</EM>后，Java 驱动只会以立体声方式连接音频接口。
+
+            <DT><A name="devices">输入与输出（Java 驱动）</A>
+            <DD>输入设备和输出设备列表列出的是 Java 找到的物理设备，只包括向系统报告支持所选采样率的那些；此外还有一些操作系统的虚拟设备（virtual device）。输入通道和输出通道列表里有哪些选项，取决于所选的输入设备和输出设备。<BR><BR>
+            选<FONT CLASS="settings">默认设备</FONT>，就是让 REW 使用操作系统里设定的默认设备（Windows 在“声音和音频设备”控制面板里设，macOS 在“音频 MIDI 设置”实用工具里设）。选了默认设备后，REW 不再管音频输入输出的选择和音量，全部由你自己控制：请用接口自带的混音器（mixer）或操作系统的控制项设电平、选输入输出。<BR><BR>
+            <B>注意</B>：如果用 USB 麦克风，并且它的校准文件里带有灵敏度（sensitivity）数值，REW 需要读取输入音量的设置，才能正确显示 SPL。为此必须明确选中麦克风对应的输入设备和输入通道，不能留在“默认设备”。
+
+            <DT><A name="outputchannel">输出通道（Java 驱动）</A>
+            <DD>REW 可以把测试信号送到两个输出通道中的任意一个，或同时送到两个。<BR><BR>
+            如果可用的输出通道超过 2 个，可以同时驱动第 1 和第 2 个通道；这两个通道具体对应哪路硬件输出，在<EM>设置通道映射</EM>对话框里配置（见下文）。<BR><BR>
+            输出通道也可以直接在测量对话框或信号发生器里选。
+
+            <DT><A name="timingrefoutputchannel">时间基准输出通道（Java 驱动）</A>
+            <DD>使用时间基准（timing reference）时，基准信号从这里选定的通道输出。这项也可以直接在测量对话框里选。
+
+            <DT><A name="outputmapping">输出通道映射（Java 驱动）</A>
+            <DD>在部分平台上，Java 支持多通道输出（multichannel output）。目前 Windows 只有选用 WASAPI 独占模式（EXCL）的条目时才支持。如果平台支持多通道，并且当前输出超过 2 个通道，页签上会出现输出通道映射按钮：<BR>
+            <IMG SRC="../../images/outputmappingbtn.jpg" ALT="输出通道映射按钮" BORDER=0 width="257" height="154"><BR CLEAR="ALL"><BR>
+            点击这个按钮会打开一个对话框，最多可以选 17 个通道供测量使用：<BR>
+            <IMG SRC="../../images/outputmappingdialog.jpg" ALT="设置通道映射对话框" BORDER=0 width="318" height="442"><BR CLEAR="ALL"><BR>
+            每个通道都可以分配给任意一个可用的硬件输出。通道名称可以用环绕声道名（surround channel name），也可以用硬件通道编号或输出编号。
+
+            <DT><A name="inputchannel">输入通道（Java 驱动）</A>
+            <DD>REW 只用接口的一个通道来采集声压计或麦克风前置放大器（preamplifier）的输出。用<FONT CLASS="heading">输入通道</FONT>控件指定接的是哪一个通道，默认是右通道。<BR><BR>
+            如果在<FONT CLASS="heading">设置 → 分析</FONT>里勾选了<A HREF="analysis.html#ircalc">使用回环作为时间基准</A>，另一个通道会用作参考，以消除电脑和接口内部的时间延迟。这需要在参考通道上接一条回环线。
+
+            <DT><A name="inputoptions">输入选项</A>
+            <DD>如果接口（或输入链路上的其他设备）会把输入信号反相，勾选<FONT CLASS="heading">输入反相</FONT>，恢复正确的极性（polarity）。如果输入存在直流偏移（DC offset），勾选<FONT CLASS="heading">高通输入</FONT>，REW 会加一个 2 Hz 高通滤波器。
+
+            <DT><A name="loopbackinputchannel">回环输入（Java 驱动）</A>
+            <DD>输入为立体声时，回环默认使用没有用来测量的那个通道。如果有多个输入通道可用，可以在这里指定回环用哪一路输入。
+
+            <DT><A name="virtualbalanced">虚拟平衡输入</A>
+            <DD>勾选这一项后，会多出一个<EM>平衡输入</EM>选择框。根据所选的模式，平衡输入的信号会与测量输入相加或相减，结果再乘以 0.5。<BR><BR>
+            <EM>Diff</EM>（差分）模式模拟的是平衡输入（balanced input）的工作方式。如果平衡输入接的是一路反相信号（比如在信号发生器上勾选了<EM>反相第二输出</EM>），就适合用这种模式。
+
+            <DT><A name="volumecontrols">音量控制（Java 驱动）</A>
+            <DD>输出音量和输入音量控件只有同时满足三个条件才可用：选定了具体的输入、输出设备；勾选了<FONT CLASS="heading">控制输出音量</FONT>和<FONT CLASS="heading">控制输入音量</FONT>；REW 能从操作系统获取所选设备的音量控件。满足这些条件时，REW 会把音量控件设回上次测量时用的电平，并选中指定的输入。<BR><BR>
+            在 macOS 上这些控件不可用。macOS 只允许音量取某些固定 dB 步进对应的值，步进大小随设备和它的音量范围而不同。在 macOS 上请用“音频 MIDI 设置”调音量。
+
+            <DT><A name="sweeplevel">扫频电平</A>
+            <DD><FONT CLASS="heading">扫频电平</FONT>控件设定 REW 生成测量扫频（sweep）时的 RMS 电平，以数字满量程（Full Scale）为基准。最高可设 -3 dBFS；如果在<A href="view.html">设置 → 视图</A>里勾选了<FONT CLASS="heading">满量程正弦波 RMS 为 0 dBFS</FONT>，最高可设 0 dBFS。设为最高值时，信号峰值正好落在数字满量程上。<BR><BR>
+            常用设置是 -12 dBFS（即默认值）。这项也可以直接在测量对话框里设。
+
+            <DT><A name="buffers">输出缓冲区、输入缓冲区（Java 驱动）</A>
+            <DD><FONT CLASS="heading">输出缓冲区</FONT>和<FONT CLASS="heading">输入缓冲区</FONT>控件设定访问接口时所用缓冲区（buffer）的大小。默认是 32k，即缓冲区能放 32,768 对音频样本。<BR><BR>
+            如果信号发生器的输出偶尔出现毛刺或中断，可以试着加大输出缓冲区。不过要注意，这种现象也可能另有原因，比如无线网卡的干扰。同样，如果采集到的音频信号（在示波器里可以看到）偶尔出现丢帧（dropout），可以试着加大输入缓冲区。<BR><BR>
+            缓冲区越大，延迟（latency）越大，也就是开始和停止播放、录音时的等待时间更长。除此之外，加大缓冲区没有别的坏处。如果音频输入输出都没有问题，也可以把缓冲区调小，尽量减小延迟。
+
+            <DT><A name="treat32as24">32 位视为 24 位</A>
+            <DD>32 位整数采样格式里实际承载的往往是 24 位数据。如果按 32 位数据处理，会产生电平很低的谐波伪像（harmonic artefact），约在 -160 dBFS。为了避免这种情况，应当把它们当作 24 位样本处理。<BR><BR>
+            如果设备确实是 32 位的，关掉这一项就能用上设备的全部分辨率（resolution）。但要注意，REW 内部用 32 位浮点数传递音频数据，按整数折算，有效动态范围（dynamic range）相当于 25 位。
+
+            <DT><A name="sccal">声卡校准面板</A>
+            <DD><B><FONT CLASS="heading">声卡校准</FONT></B>面板里的控件用来校准音频接口。<BR><BR>
+            <A name="calfile">浏览</A>按钮（文件夹图标）用来选择校准文件。校准文件是纯文本文件，默认扩展名为 .cal，也接受其他扩展名，文件格式见下文。<BR><BR>
+            <A name="resetcal">删除按钮</A>（× 图标）会清空校准数据：此后的测量都不再施加任何接口校准修正，下次启动时 REW 也不会再载入之前指定的接口校准文件。<BR><BR>
+            <B>校准声卡...</B>按钮启动校准流程，在外部回环连接下测量接口的响应。<B>创建校准文件...</B>按钮把一条测量保存为校准文件。只应对回环测量的结果使用这个按钮，而且要先确认测量结果有效。测量数据保存为文本文件，SPL 值整体平移，使 1 kHz 处为 0 dB。这个文件在启动时自动载入，并应用到之后的测量。
+
+            <DT><A name="sclevels">电平面板</A>
+            <DD><B><FONT CLASS="heading">电平</FONT></B>面板里的控件用来设定测量用的输出电平和输入电平。设电平时可以用低音炮，也可以用某一只主音箱，在面板的下拉框里选。<BR><BR>
+            <B>检查电平...</B>按钮启动电平的设定和核对流程。<A name="debugfile"><B>生成调试文件...</B></A>按钮会生成一个文本文件，里面是 Java 能识别到的全部音频设备和控件的信息。如果在 REW 里配置接口时遇到问题，请把这个文件连同问题描述一起提供。<BR><BR>
+            勾选<B>全系统使用周期性粉红噪声进行电平检查</B>后，REW 在各处检查电平时都用周期性粉红噪声；不勾选时，用随机粉红噪声（pink noise）。用周期性噪声（periodic noise）时，低频读数稳定得多，但听起来和随机噪声很不一样。
+        </DL>
+
+        <H3>输入输出设置示例</H3>
+
+        <P>下面是几组设置示例。第一组用的是 Java 驱动和一支 USB 麦克风。
+
+        <P>这里选了名称以 EXCL 开头的设备，也就是使用 WASAPI 独占模式驱动。这样可以直接控制采样率，并以完整的采样分辨率访问设备的全部通道。
+
+        <P>所接的 UMIK-1 是单声道（mono）设备，因此没有输入通道可选。早期的 UMIK-1 是立体声设备，但两个通道传的是同一份数据。<br><br>
+        <IMG SRC="../../images/sciosettings.jpg" ALT="声卡输入输出设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>下面一组用的是 ASIO 驱动，具体是 miniDSP 的 ASIO 驱动。
+
+        <P>注意：不使用时间基准时，不必选时间基准输出通道。另外，用 ASIO 驱动时可以多选一个次要输出。<em>ASIO 控制面板</em>按钮会打开该接口的 ASIO 控制面板。<br>
+        <P><IMG SRC="../../images/sciosettingsasio1.jpg" ALT="ASIO 驱动的声卡输入输出设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <H3><A name="flexasio">FlexASIO</A></H3>
+
+        <P>如果使用的是 FlexASIO 这个 ASIO 驱动，点击 <em>ASIO 控制面板</em>按钮会打开一个对话框。在这个对话框里，可以用图形界面生成和更新 FlexASIO 的配置文件 FlexASIO.toml。<br>
+        <P><IMG SRC="../../images/flexasiopanel.jpg" ALT="FlexASIO 控制面板" BORDER=0 width="397" height="187"><BR CLEAR="ALL"><BR>
+
+        <P>REW 处理配置文件时，只支持 <EM>backend</EM> 和 <EM>bufferSizeSamples</EM> 两个选项。<EM>[input]</EM> 和 <EM>[output]</EM> 两节里只写入所选的输入、输出设备名，不包含 FlexASIO 支持的其他选项。
+
+        <P>只有点击<EM>关闭控制面板并更新配置文件</EM>按钮，配置文件才会更新；随后 FlexASIO 驱动会重新载入，以刷新可用的输入和输出。如果不点这个按钮就直接关掉对话框，所有改动都会丢弃。
+
+        <H3>声卡校准文件格式</H3>
+
+        <P>校准文件是纯文本文件，默认扩展名为 .cal，也接受其他扩展名。文件里应写明接口在各个频率上的实际增益（gain）响应，也可以同时写相位响应。之后的测量会减去这些数值。
+
+        <P>文件里的数值可以用空格、制表符（Tab）或逗号分隔。
+        <UL>
+            <LI>每行校准数据都必须有一个频率值和一个增益值，相位值可有可无。
+            <LI>频率单位为 Hz，增益单位为 dB，相位单位为度。
+            <LI>校准点的频率间隔可以任意，但每一行的频率都必须高于上一行，并且至少要有 2 组“频率、增益”数据。
+            <LI>只载入以数字开头的行，其他行一律忽略。
+            <LI>用逗号分隔的文件，逗号后面至少要有一个空格。
+            <LI>数值前面的空格会被忽略。
+            <LI>要注明这份数据是在什么采样率下生成的，可以加一行：以“Sample Rate:”开头（不含引号），后面跟以 Hz 为单位的采样率。REW 载入文件时会检查这一行。如果它与当前接口设置的采样率不一致，REW 会给出警告，因为在其他采样率下生成的校准数据，修正结果不准确。
+        </UL>
+        下面是一段格式有效的文件示例：<BR><BR>
+        <PRE>
+* Soundcard Calibration data saved by Room EQ Wizard V5.00
+* Source: EDIROL UA-1A, Digital Audio Interface, Right channel, volume: no control
+* Format:  256k Log Swept Sine, 1 sweep
+* Dated: 21-Nov-2010 21:47:56
+* Sample Rate: 44100
+*
+2.019 -1.424 53.471
+2.219 -1.238 49.420
+2.419 -1.062 45.118
+2.619 -0.929 41.888
+2.819 -0.823 39.056
+3.019 -0.740 36.590
+3.219 -0.668 34.409
+3.419 -0.607 32.468
+3.619 -0.557 30.736
+3.819 -0.513 29.177
+4.019 -0.475 27.777
+4.219 -0.443 26.495
+        </PRE>
+
+        <P>校准文件载入后，会应用到此后的所有测量。载入校准文件<B>不会</B>影响已经测得的数据，也不会影响导入的测量数据。
+
+        <P>图表会刷新，显示校准曲线，曲线整体平移到当前的目标电平上。
+
+        <P>校准点之间用线性插值（linear interpolation）。
+
+        <P>超出校准数据频率范围的部分，处理方式取决于是否选择了 C 计权补偿（C weighting compensation）。如果选择了，校准数据频率范围以外的频率，用 C 计权曲线的数值。如果没有选择，低于文件中最低频率的部分，一律沿用最低频率的校准值；高于最高频率的部分，一律沿用最高频率的校准值。
+
+        <P>REW 会记住校准文件的名称和路径，下次启动时自动载入，并弹出一条消息确认已载入。
+
+        <P>要停止应用校准数据，点击 <B>Clear Cal...</B>（清除校准）按钮。<BR><BR>
+        <B>实用提示：</B>测量做完之后，如果想加上或去掉声卡校准文件，只要按需载入或清除校准数据，再点 IR 时间窗面板里的 <EM>Apply Windows</EM>（应用时间窗）按钮，重新计算频率响应即可。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

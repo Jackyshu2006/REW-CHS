@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>分析设置</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">分析设置</A></H2>
+
+        <P>“设置 → 分析”页签里的设置，用来调整 REW 部分计算的做法。<BR><BR>
+        <IMG SRC="../../images/analysissettings.jpg" ALT="分析设置" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <H4><A name="windowdefaults">IR 时间窗默认值</A></H4>
+
+        <P><FONT CLASS="heading">左侧</FONT>和<FONT CLASS="heading">右侧</FONT>两个选择框，分别选择脉冲响应（impulse response）峰值之前和之后使用的时间窗类型。这里设的是新测量的默认值。已有测量的窗类型，可以用工具栏上的 IR 时间窗按钮修改。
+
+        <P>默认情况下，REW 自动设置时间窗宽度，让完整的房间响应都能显示出来。右时间窗为 500 ms。左时间窗在扫频结束频率高于 200 Hz 时为 125 ms，结束频率低于 200 Hz 时会更宽。要改用自己的宽度，取消勾选<FONT CLASS="heading">自动设置时间窗宽度</FONT>，再设定新测量要用的默认宽度。
+
+        <P>勾选<A name="fdw"><FONT CLASS="heading">添加频率相关时间窗 (FDW)</FONT></A>后，REW 会在左、右时间窗之后，再对测量施加一个频率相关时间窗（frequency dependent window，FDW）。FDW 的宽度在右边的控件里设定，单位可以选周期数或倍频程。
+
+        <P>单位用周期数时，以 15 个周期的时间窗为例：在 100 Hz 处宽 150 ms（15 × 10 ms），在 1 kHz 处宽 15 ms（15 × 1 ms），在 10 kHz 处宽 1.5 ms（15 × 0.1 ms）。
+
+        <P>勾选<A name="mtw"><FONT CLASS="heading">添加多时间窗 (MTW)</FONT></A>后，REW 会在左、右时间窗之后，再对测量施加一个多时间窗（multi-time window，MTW）。MTW 的宽度按各倍频程中心频率分别指定，在右边的控件里设定，单位为毫秒。它的效果接近同样宽度的 Blackman 右时间窗。
+
+        <P>两个中心频率之间的宽度由插值得出，所以时间窗宽度随频率平滑变化。相邻倍频程频带的宽度如果相差太大，响应里可能出现伪像（artefact）。
+
+        <P>默认值近似一种按回声融合时间（echo fusion time）设定的心理声学加窗。点击重置按钮，可以把各宽度恢复为默认值。
+
+        <P>生成频谱衰减图（Spectral Decay）和瀑布图时，REW 用 <FONT CLASS="heading">IR 衰减/瀑布图左侧</FONT>和 <FONT CLASS="heading">IR 衰减/瀑布图右侧</FONT>两项所选的时间窗，对脉冲响应数据加窗。
+
+        <P>为导入的音频数据生成瀑布图时，REW 用<FONT CLASS="heading">瀑布图 (音频数据)</FONT>一项所选的时间窗。这里设的是默认值，某一条测量具体用哪种窗，可以在图表选项的选择框里修改。
+
+        <P>生成 Fourier（傅里叶）模式的频谱图时，REW 用<FONT CLASS="heading">频谱图</FONT>一项所选的时间窗，对响应数据加窗。这里设的是默认值，某一条测量具体用哪种窗，可以在图表选项的选择框里修改。
+
+        <H4><A name="ircalc">脉冲响应计算</A></H4>
+
+        <P>REW 完成测量后，可以<FONT CLASS="heading"><A name="irtruncation">截断</A>得出的脉冲响应</FONT>，既保留重要信息，又尽量减小测量文件占用的存储空间。峰值之前保留 1 秒，峰值之后默认保留 1.7 秒。峰值之后的时长随采样率略有不同：44.1k 及其整数倍时约 2 秒，48k 时为 1.7 秒。
+
+        <P>有些情况下需要保留更长的脉冲响应，例如在很大的空间里测量，脉冲响应本身就很长。为此，REW 提供了几个选项：在约 4.4 秒或约 9.9 秒处截断，或者保留完整的脉冲响应。这时可能还要用更长的扫频：用 256k 扫频时，峰值之后约有 6 秒的脉冲响应数据可用。
+
+        <P><B>警告：</B>保留完整的脉冲响应（“Keep full IR”，即保留完整 IR）时，得到的脉冲响应长度是所用扫频的两倍，测量文件会大得多，IR 的绘图和处理也会变慢。保留完整响应时，峰值位于响应的正中间。
+
+        <P>导入脉冲响应时，t=0 可以设在三个位置之一：导入数据的第一个采样、脉冲响应的峰值，或者界面上所示的指定采样序号。
+
+        <P>REW 生成脉冲响应时，会对它做过采样（oversampling），供图表绘制使用。过采样数据用什么方法生成，由 <FONT CLASS="heading"><A name="iroversampler">IR 过采样器</A></FONT>这一项决定，有三种选择：
+
+        <P><EM>Windowed sinc</EM>（加窗 sinc 插值）用带限插值器（bandlimited interpolator）插值。<EM>FFT time shift</EM>（FFT 时移）利用 FFT 的时移性质，实现分数延迟（fractional delay）。<EM>None</EM>（无）关闭 IR 过采样，这时绘图在原始采样点之间改用 Hermite 插值（埃尔米特插值）。默认设置是 <EM>Windowed sinc</EM>。
+
+        <P>这项设置不影响导入的 IR，导入的 IR 不做过采样。
+
+        <P>勾选 <FONT CLASS="heading">IR 降采样</FONT>后，REW 会按测量实际覆盖的频率范围，降低脉冲响应的采样率。对低频测量，这能大大减小脉冲响应的数据量，并加快数据处理。
+
+        <P>勾选<FONT CLASS="heading"><A name="adjustclockacoustic">用声学时间基准调整时钟</A></FONT>后，REW 在使用声学时间基准（acoustic timing reference）测量时，会补偿输入和输出之间的时钟频率差异。
+
+        <P>具体做法是：扫频结束时再播放一次时间基准信号，REW 根据前后两次时间基准信号之间的间隔，算出让输入、输出设备时钟频率一致所需的调整量。
+
+        <P>勾选<FONT CLASS="heading"><A name="adjustclockloopback">用回环调整时钟</A></FONT>后，REW 在用回环作时间基准时，会补偿输入和输出之间的时钟频率差异。
+
+        <P>具体做法是：REW 分析回环信号，算出让输入、输出设备时钟频率一致所需的调整量。要应用这项修正，扫频的起始频率必须低于 1 kHz，结束频率必须高于 10 kHz。
+
+        <P>勾选<FONT CLASS="heading"><A name="loopbackdelayref">回环延迟参考为 IR 峰值</A></FONT>后，回环测量显示的系统延迟，等于实测 IR 峰值和回环 IR 峰值之间的时间差。测量几个带宽相同的声源（例如一组音箱）之间的相对延迟时，这样算可能合适；测量低音炮这类带宽受限的声源时，就不合适。
+
+        <P>不勾选<FONT CLASS="heading">回环延迟参考为 IR 峰值</FONT>时，系统延迟按峰值位置分两种情况取值。峰值靠近 IR 起点时，用相对于回环的 IR 延迟估算值。峰值出现得较晚时（带宽受限的设备），用相对于回环的 IR 起始时间估算值。
+
+        <P>使用声学时间基准时，不论是否勾选这一项，系统延迟总是用 IR 延迟估算值或 IR 起始时间估算值。
+
+        <P>勾选<FONT CLASS="heading"><A name="multicore">使用多核 CPU</A></FONT>（默认勾选）后，REW 计算时会用多个处理器核心，加快处理速度。REW 从 V5.30 起默认如此。但在散热有限的系统上（例如笔记本电脑），这可能导致过热降频（thermal throttling），进而让音频信号的生成或采集出现丢帧。
+
+        <P>勾选<FONT CLASS="heading"><A name="alignirpeak">对齐 IR 峰值</A></FONT>后，REW 会在需要时把新测量的脉冲响应平移不足一个采样的时间，让峰值正好落在采样时刻上。峰值通常落在两个采样之间，具体位置取决于系统延迟。
+
+        <P>勾选 <FONT CLASS="heading"><A name="aligntzero">t=0 对齐采样点</A></FONT>后，每次修改脉冲响应的 t=0 位置，REW 都会同时做必要的分数采样平移，保证 t=0 落在采样时刻上。
+
+        <H4><A NAME="frcalculation">频率响应计算</A></H4>
+
+        <P><FONT CLASS="heading">允许 96 PPO 对数间距</FONT>这一项，控制 REW 能否把频率响应从线性间隔的数据，转换为每倍频程 96 点（96 PPO）的对数间隔数据。
+
+        <P>计算频率响应用的是 FFT，它得出的数据在频率上是线性间隔的，也就是相邻两个数据点之间的频率步长固定。这样一来，响应的高频部分数据点极多，占用大量内存，对显示却没有实际用处。
+
+        <P>这一项默认勾选。勾选后，如果转换能减少内存占用，REW 会自动把频率响应转换为更高效的对数间隔，每个倍频程 96 个数据点；扫频结束频率高于 300 Hz 左右时，转换通常都能减少内存占用。转换时，REW 先对数据做 1/48 倍频程平滑，去掉响应高频段的梳状起伏。每次新测量、每次施加 IR 时间窗，都会做这个转换。
+
+        <P>要看一条测量是对数间隔还是线性间隔，点击工具栏上的信息按钮，打开测量信息窗口即可。
+
+        <P><B>请注意</B>，如果脉冲峰值离脉冲的零时刻较远，REW 不会转换为 96 PPO。这里的“远”是指：峰值偏离零时刻的这段时间，在测量结束频率处，会让相邻两个频率数据点的相位相差超过 90 度。这样做是为了避免高频相位数据出现混叠（aliasing），导致群延迟（group delay）数值出错。
+
+        <P>勾选<FONT CLASS="heading">显示时间窗限制以下响应</FONT>后，低于当前时间窗有效范围的频率响应和相位响应也会显示出来。例如时间窗宽度为 10 ms 时，100 Hz 以下的频率无效，平时不显示。有时看看这部分数据会有帮助，打开这一项就能显示，但这部分响应画成虚线，表示它们在时间窗截止频率以下。
+
+        <P>勾选<FONT CLASS="heading">使用右侧 IR 窗宽计算最低有效频率</FONT>后，REW 仅根据右时间窗的宽度计算最低有效频率；不勾选时，则根据左、右时间窗的总宽度计算。时间窗参考点通常位于或接近脉冲响应峰值，此时决定最低有效频率的是右时间窗的宽度。
+
+        <P>新 SPL 测量默认用哪种平滑，可以在对数间距勾选框旁边的下拉框里选择。
+
+        <P>勾选<FONT CLASS="heading">将校准数据增益限制为 20 dB</FONT> 后，REW 为补偿校准数据衰减而施加的总增益，最多为 20 dB。这样，在麦克风／仪表和声卡的合成响应下降超过 20 dB 的频段，本底噪声（noise floor）不会被过度抬高。这项设置影响频率响应、RTA 曲线和声压计读数，做曲线运算时也同样生效。
+
+        <P>勾选<FONT CLASS="heading">校准文件应用于失真分析</FONT>后，REW 会把校准文件应用到失真结果上。在基波或谐波受音频接口滚降（roll-off）影响的频段，应用校准文件能得到更准确的结果，但同时也会抬高这些频段的本底噪声。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

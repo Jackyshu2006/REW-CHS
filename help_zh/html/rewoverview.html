@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>REW 概述</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">REW 概述</A></H2>
+
+        <P>REW 启动后的界面是这样的：<BR>
+        <P><IMG SRC="../../images/rewinitial.jpg" ALT="REW 初始窗口" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>主窗口一开始是空白的。要先做一次测量，或者载入已有的测量，窗口里才会有内容。
+        <P>声压计（SPL Meter）、信号发生器（Signal Generator）、示波器（Scope）和电平表（Level Meters）不需要载入测量就能用：<BR>
+        <IMG SRC="../../images/basictools.jpg" ALT="声压计、信号发生器和电平表" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>RTA 窗口、EQ 窗口和房间仿真（Room Simulator）也一样，不载入测量就能打开：<BR>
+        <IMG SRC="../../images/rtaeqsimbuttons.jpg" ALT="RTA、EQ 和房间仿真按钮" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>做过测量、或者载入测量之后，主窗口是这样的：
+        <P><IMG SRC="../../images/rewmeasurements.jpg" ALT="载入测量后的 REW 窗口" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>每条测量显示在窗口左侧的面板里。当前选中的测量是白色背景，其余的变暗。
+
+        <P>还有一些测量带淡色底色，用来区分不同类型。窗口右侧是当前测量的图表区。
+
+        <P>在某条测量上点右键，会弹出操作菜单，同时显示这条测量的更多信息，包括你写过的备注。
+        <P><IMG SRC="../../images/measpanelrightclick.jpg" ALT="测量面板的右键菜单">
+
+        <P>这时<A name="toolbar">工具栏</A>（toolbar）上的按钮全部可用。按钮分成三组，第一组和测量有关：<BR>
+        <IMG SRC="../../images/measurementbuttons.jpg" ALT="测量按钮" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>这一组按钮的作用依次是：进行一次新测量；打开已有的测量文件；把当前全部测量保存成一个测量文件（.mdat）；清除当前全部测量；打开信息面板（Info），查看当前测量的更多信息。
+
+        <P>第二组是各类工具：<BR> <IMG SRC="../../images/toolbuttons.jpg" ALT="工具按钮" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>“IR 时间窗（IR Windows）”按钮会打开一个窗口，可以修改当前测量的脉冲响应（impulse response）时间窗类型和长度。
+
+        <P>“IR 时间窗”按钮旁边，依次是声压计、信号发生器、示波器和电平表按钮。再往后是打开“叠加图（Overlays）”窗口的按钮。叠加图可以把载入的测量任选几条，或者全部画在同一张图上。
+
+        <P>最后三个按钮分别打开 RTA 窗口、EQ 窗口和房间仿真。EQ 窗口用来研究 EQ 对当前测量的影响。
+
+        <P>工具栏最后一个按钮打开设置（Preferences）面板：<BR>
+        <IMG SRC="../../images/settingsbutton.jpg" ALT="设置按钮" BORDER=0 ALIGN="left" width="67" height="55"><BR CLEAR="All">
+
+        <P>图表区里有一个按钮，可以把当前图表另存为图片：<BR>
+        <IMG SRC="../../images/capturebutton.jpg" ALT="另存图片按钮" BORDER=0 ALIGN="left" width="44" height="47"><BR CLEAR="All">
+        <P>旁边是图表类型选择条，用来切换当前显示的图表：<BR><BR>
+        <IMG SRC="../../images/graphselector.jpg" ALT="图表类型选择条" BORDER=0 ALIGN="left"><BR CLEAR="All"><BR>
+        <P>还有一排按钮，作用分别是：显示或隐藏图表区的滚动条；在对数和线性之间切换频率轴；设置坐标轴范围；打开图表选项菜单。<BR>
+        <IMG SRC="../../images/graphbuttons.jpg" ALT="图表按钮" BORDER=0 ALIGN="left" width="231" height="48"><BR CLEAR="All">
+
+        <P>图表下方是图例区（legend），显示光标所在位置各条曲线的数值：<BR> <IMG SRC="../../images/graphlegend.jpg" ALT="图例区" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>如果对数据做过平滑（smoothing），曲线名称和数值之间还会显示平滑所用的分数倍频程（上图中是 1/48 倍频程）。
+
+        <P>在图例区点右键，会弹出一个菜单，用来管理曲线的选中状态。
+
+        <P>主窗口底部是<A name="statusbar">状态栏</A>（status bar），从左到右依次显示：内存使用量、采样率、输入和输出的数据格式、输入数据位监视器，以及输入数据位宽。当 REW 正在采集输入数据时，位宽和位监视器会随之更新。<BR> <IMG SRC="../../images/statusbarleft.jpg" ALT="状态栏中的内存、采样率和数据格式信息" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>再往右是三项数据：削波（clipping）前的最大 SPL（按当前输入 SPL 校准计算）；输入和输出的满量程（full scale）RMS 电压；以及计算功率时用的电阻值。这几项都可以点击修改。<BR>
+        <IMG SRC="../../images/statusbarmid.jpg" ALT="状态栏中的最大 SPL、输入输出满量程电压和功率参考电阻" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        <P>最后是消息区，以及一个进度条。进度条只在 REW 处理数据时出现。
+
+        <P>让 REW 跑起来的第一步，是<A HREF="calsoundcard.html#top">设置音频输入输出并校准声卡</A>。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- 通过 JavaScript 使 onlineonly 文本可见，该脚本在帮助系统查看器中不运行 -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

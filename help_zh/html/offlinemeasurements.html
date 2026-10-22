@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>离线测量</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">离线测量</A></H2>
+
+        <P>有时候没办法把电脑接到要测的系统上，或者接起来很不现实，而<A href="makingmeasurements.html#fileplayback">用文件播放做测量</A>这条路又不适用。
+
+        <P>遇到这种情况，可以先把 REW 的测量扫频信号通过系统放出来，用别的设备录下响应，再把扫频信号和这段录音一起导入 REW，由它生成一条新的测量。
+
+        <P>具体操作是用文件菜单里的<A HREF="file.html#filesweepimport">导入扫频录音</A>。
+
+        <H3><a name="makesweep">生成扫频信号</a></H3>
+
+        <P>第一步是做出测量用的扫频信号，录响应时要放的就是它。信号在<A HREF="siggen.html#meassweep">信号发生器</A>里生成。<BR><BR>
+        <IMG SRC="../../images/siggenmeassweep.jpg" ALT="信号发生器的测量扫频"><BR CLEAR="ALL"><BR>
+
+        <P>离线测量必须使用时间基准（timing reference）信号。
+
+        <P>先设定扫频的信号电平和参考电平微调（微调量通常是 0），再选扫频信号的采样率。这个采样率要和录响应时的采样率相同，或者是录音采样率的整数倍、整数分之一。
+
+        <P>WAV 采样精度优先选 32 位浮点。被测系统若不支持，就试 24 位。
+
+        <H3><a name="makesweep">导入扫频录音</a></H3>
+
+        <P>用文件菜单里的<A HREF="file.html#filesweepimport">导入扫频录音</A>打开导入对话框，也可以按快捷键 Ctrl+Shift+N。<BR><BR>
+        <IMG SRC="../../images/importsweepblank.jpg" ALT="导入扫频录音"><BR CLEAR="all">
+
+        <P>先载入测量扫频文件。可以浏览到文件位置，也可以直接把文件拖进激励信号窗口。
+
+        <P>REW 会问你导入哪一个声道，1 是左声道，2 是右声道。
+
+        <P>如果希望把 REW 设置 → 校准文件里当前指定的麦克风校准文件和声卡校准文件应用到导入的文件上，就勾选<EM>应用校准文件</EM>。举例来说：录音是用已校准的麦克风做的，而这支麦克风的校准文件已经加载进 REW，这时就该勾。
+
+        <P>载入完成后会显示一张信号波形图。
+
+        <P>接着载入录好的响应文件。同样可以浏览选择，或者把文件拖进响应窗口。
+
+        <P>如果有多段响应录音，可以一次全拖进响应窗口，REW 会为每一段各生成一条测量。
+
+        <P>录音采样率若是扫频采样率的整数倍或整数分之一，REW 会先把录音重采样到与扫频一致，再做处理。<BR><BR>
+        <IMG SRC="../../images/importsweeploaded.jpg" ALT="已载入文件的导入扫频录音对话框"><BR CLEAR="all">
+
+        <P>到这一步就完成了。REW 会用这些录音生成一条新测量，后续在 REW 里的处理和普通测量没有区别。
+
+        <P>测量备注里会记下生成它所用的文件名，测量名称默认取响应录音的文件名。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+        </BODY>
+</HTML>

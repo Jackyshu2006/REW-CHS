@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Equaliser Selection</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Equaliser Selection</A></H2>
+
+        <P><IMG SRC="../../images/equaliserselector.jpg" ALT="Equaliser Selector" BORDER=0><BR CLEAR="ALL"><BR>
+
+        <P>The Equaliser panel is used to select the type of equaliser whose responses
+        REW is to model. The choices are grouped by manufacturer and model. Changing the 
+        equaliser type updates the <A href="eqfilters.html#top">EQ filters panel</A>,
+        applying the settings appropriate to the selected equaliser. Filters already
+        defined are retained where possible, but parameter values will be adjusted if
+        necessary to comply with the ranges and resolutions of the chosen equaliser.
+        The currently selected equaliser is shown in the panel title, with the sample 
+        rate at which it operates shown in brackets, and in the EQ Filters panel.
+        
+        <P>If the equaliser has additional settings a cog icon appears next to the model selector,
+            currently only the Configurable PEQ has additional settings.
+        <P><IMG SRC="../../images/equaliseradditionalsettings.jpg" ALT="Equaliser with additional settings" BORDER=0><BR CLEAR="ALL">
+
+        <H3>Equalisers supported</H3>
+        
+        <DL>
+            <DT><A name="acoustas">AirDSP by Acoustas</A>
+            <DD>The Acoustas AirDSP entry has 15 bands with peak, low shelf and high shelf filters
+            and 2 crossover filters. The crossover filter types supported are Butterworth, Bessel 
+            and Linkwitz-Riley up to 8th order (48 dB/octave).
+            For the peak filters the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.25 dB
+                <TR ALIGN="center"><TD>Peak Q<TD>0.1<TD>10<TD>0.01
+                <TR ALIGN="center"><TD>Shelf Q<TD>0.1<TD>1<TD>0.01
+            </TABLE>
+
+            <DT><A name="ADA">ADA PEQ</A>
+            <DD>The ADA equaliser setting supports parametric filters only, allowing 12
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            <B>N.B. The ADA filter shapes have not been verified against an actual unit.</B><BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-10<TD>+10<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>0.1
+            </TABLE>
+
+            <DT><A name="aunbandeq">Apple AU N-Band EQ</A>
+            <DD>The AU N-Band EQ is a software EQ that runs at the sample rate of the 
+            measurement it is applied to. This equaliser setting supports 16 filters. 
+            The parametric filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+            
+            but bandwidths are entered in octaves.<BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>22000<TD>0.01 Hz below 100 Hz, 0.1 Hz below 1 kHz, 1 Hz above 1 kHz
+                <TR ALIGN="center"><TD>Gain<TD>-96<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>BW<TD>0.02<TD>5<TD>0.01 octaves
+            </TABLE>
+
+            <DT><A name="audiotec">Audiotec Fischer</A>
+            <DD>The Audiotec Fischer entries are Full EQ (30 bands), Half EQ (15 bands), Input EQ (7 bands) and EQ with TC (27 bands). 
+            All offer peak, modal, low shelf and high shelf filters. For the peak filters the bandwidth in Hz 
+            between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-30<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Peak Q<TD>0.5<TD>50<TD>0.01
+                <TR ALIGN="center"><TD>Shelf Q<TD>0.1<TD>2<TD>0.1
+            </TABLE>
+
+
+            <DT><A name="audison">Audison/Hertz</A>
+            <DD>The Audison/Hertz entries are 31 bands (Outputs), 15 bands (Outputs), 
+            12 bands (Inputs) and 5 bands (User tuning). All offer peak filters,
+            all but the 5 bands option also offer low shelf and high shelf filters. For the 
+            peak filters the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Peak Q<TD>0.5<TD>16<TD>0.01
+                <TR ALIGN="center"><TD>Shelf Q<TD>0.5<TD>1.41<TD>0.01
+            </TABLE>
+
+
+            <DT><A name="bfdpro">Behringer BFD Pro DSP1124P/FBQ1000</A>
+            <DD>The DSP1124P equaliser setting supports the DSP1124P's parametric filters, 
+            allowing 12 filters. Note that this equaliser is now sold under as the FBQ1000. 
+            Filters can be transferred over a <A href="bfdcomms.html">Midi connection</A>
+            using the <EM>Send filter settings to equaliser</EM> action. 
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>see below
+                <TR ALIGN="center"><TD>Gain<TD>-48<TD>+16<TD>1 dB
+                <TR ALIGN="center"><TD>BW/60<TD>1<TD>120<TD>1
+            </TABLE><BR>
+
+            The frequency control adjusts in the pseudo-1/60th octave steps DSP1124P 
+            supports (20 evenly spaced subdivisions of the ISO one-third octave intervals), 
+            with the one-third octave and fine adjustment values DSP1124P uses shown 
+            alongside the actual frequency in the <A HREF="eqfilters.html#top">EQ Filters Panel</A>.<BR><BR>
+
+            The "BW/60" control replicates the effect of the DSP1124P's bandwidth
+            setting. This control sets the bandwidth of the filter between the
+            half-gain points with:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth (Hz) = centre frequency*(BW/60)*sqrt(2)</DIV><BR>
+
+            For example, at a bandwidth setting of 60/60 a filter centred on
+            1kHz with a gain of -6dB will have a bandwidth of 1,414Hz between the
+            points where its response crosses -3dB. This bandwidth remains constant as the
+            filter's gain is adjusted (Note that the Behringer DSP1100 software
+            package does <B>NOT</B> correctly reproduce the way the bandwidth
+            control actually operates, its bandwidths are too small by a factor
+            of sqrt(2)).<BR><BR>
+
+            Defining filter bandwidth in this way is not uncommon (the TMREQ filters
+            use a similar definition). The relationship between Q and BW for the DSP1124P
+            is<BR><BR>
+            <DIV ALIGN="center">Q = 60/[(BW/60)*sqrt(2)]</DIV><BR><BR>
+
+            so the bandwidth range of 1/60 to 120/60 gives a Q range from 42.4 to 0.35.
+
+            <DT><A name="fbq2496">Behringer BFD Pro FBQ2496</A>
+            <DD>The FBQ2496 equaliser setting supports the FBQ2496's parametric filters,
+            allowing 20 filters. Filters can be transferred over a 
+            <A href="bfdcomms.html">Midi connection</A> using the <EM>Send filter 
+            settings to equaliser</EM> action but the transfer is not always 
+            reliable. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1/60th octave
+                <TR ALIGN="center"><TD>Gain<TD>-36<TD>+15<TD>0.5 dB (1 dB below -15 dB)
+                <TR ALIGN="center"><TD>Bandwidth<TD>1/60<TD>10<TD>octaves, see below
+            </TABLE><BR>
+
+            The frequency control adjusts in approximately 1/60th octave steps (more
+            precisely, 1/200th of a decade).<BR><BR>
+
+            The bandwidth control adjusts in 1/60 of an octave steps from 1/60 to
+            5/60 of an octave, then goes through 1/10, 1/9, 1/8, 1/7, 1/6,
+            1/5, 1/4, 1/3, 1/2, 3/4, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 10 octaves.<BR><BR>
+
+            The relationship between Q and BW in octaves for the FBQ2496 is<BR><BR>
+            <DIV ALIGN="center">Q = sqrt(2)/BW</DIV><BR><BR>
+
+            so the bandwidth range of 1/60 to 10 octaves gives a Q range from 84.85 to 0.14.
+
+            <DT><A name="dcx2496">Behringer DCX2496</A>
+            <DD>The DCX2496 equaliser setting supports parametric filters (labelled "BP" for
+            Band Pass) and low and high shelving filters (with 6 and 12 dB/octave 
+            slopes). It also allows two crossover filters to be defined, LP or HP 
+            (Butterworth 6, 12, 18, 24, 48 dB/oct, Bessel 12, 24 dB/oct, Linkwitz-Riley 
+            12, 24, 48 dB/oct). It allows up to 9 EQ filters per channel, depending on 
+            the other processing the unit is doing. The parametric filter bandwidth in Hz 
+            between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>106 steps per decade
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>20 steps per decade
+            </TABLE><BR>
+            
+            The frequency control adjusts in steps of 1/106th of a decade. The Q 
+            control adjusts in steps of 1/20th of a decade, i.e. there are 20 Q 
+            values between 0.1 and 1 and another 20 between 1.0 and 10.
+
+            <DT><A name="timezero">Beta Three TimeZero2.6D/4.8D</A>
+            <DD>The Beta Three TimeZero2.6D/4.8D equaliser setting offers peaking, low shelf, 
+            high shelf, notch and all pass filters. For the Peaking filters the bandwidth in Hz 
+            between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The TimeZero2.6D/4.8D setting allows 5 filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-16<TD>+12<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.31<TD>19.4<TD>0.01
+            </TABLE>
+
+            <DT><A name="camilla">CamillaDSP</A>
+            <DD>The CamillaDSP Equaliser is a software EQ that runs at the sample rate 
+            of the measurement it is applied to. It supports a range of single-biquad 
+            filters and filter settings (peaking = parametric, 2nd order low pass &amp; high 
+            pass with adjustable Q, low shelf and high shelf with adjustable Q, notch with 
+            adjustable Q, all-pass and Linkwitz Transform. It also offers multiple biquad
+            crossover filters with Butterworth or Linkwitz-Riley characteristics up to 8th 
+            order.<BR><BR>
+            
+            Filters can be saved to and loaded from YAML files (the configuration file format used 
+            by CamillaDSP). Existing CamillaDSP filter configurations can be imported, any
+            unsupported filter types will be skipped with a warning message. The data to import
+            must include the "filters:" tag at the start of the file.<BR><BR>
+            
+            For the Peaking filters the bandwidth in Hz between the half gain points is 
+            given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The equaliser supports 20 parametric filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>22000<TD>0.01 Hz below 100 Hz, 0.1 Hz below 1 kHz, 1 Hz above 1 kHz
+                <TR ALIGN="center"><TD>Gain<TD>-120<TD>+30<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE>
+
+            <DT><A name="usm810">Crown USM810</A>
+            <DD>The USM810 equaliser setting supports parametric filters only, allowing 10
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            <B>N.B. The USM810 filter shapes have not been verified against an actual unit.</B><BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-24<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>35<TD>0.01
+            </TABLE>
+
+            <DT><A name="dbaudio">d&amp;b audiotechnik tuning filters</A>
+            <DD>The d&amp;b audiotechnik tuning filters equaliser setting offers PEQ, 
+            notch with adjustable Q, low shelf and high shelf with slopes up to 
+            24 dB/octave and the d&amp;b asymmetric filter, which provides shelf adjustment 
+            for a frequency span with selectable slope each end of the span. Filters can 
+            be saved to and loaded from .rcp files which are compatible with the d&amp;b R1 
+            software. For the PEQ filters the bandwidth in Hz between the half gain points 
+            is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1. 
+            The d&amp;b audiotechnik tuning filters setting allows 16 filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-18<TD>+12<TD>0.2 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>25<TD>0.05
+            </TABLE>
+            
+            <DT><A name="dualcore">DSPeaker Anti-Mode Dual Core</A>
+            <DD>The Dual Core equaliser setting supports parametric filters only, allowing 16
+            filters. The filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*(-3dB BW)</DIV><BR>
+            <DIV ALIGN="center">Q = centre frequency/(sqrt(gain)*(-3dB BW))</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>5<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-36<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>-3dB BW<TD>1<TD>10000<TD>1
+            </TABLE>
+
+            <DT><A name="eightc">Dutch &amp; Dutch 8c</A>
+            
+            <DD>The Dutch &amp; Dutch 8c Equaliser supports 24 filters, peaking and shelf 
+            which can be written to or read from the speakers over the local network.
+            It also shows the speakers bass, treble and sub filter settings.
+            On Windows a firewall prompt will appear to allow REW to access the network
+            when the 8c equaliser is first selected. The peaking filter bandwidth in Hz 
+            between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>15<TD>20000<TD>0.01 Hz below 100 Hz, 0.1 Hz below 1 kHz, 1 Hz above 1 kHz
+                <TR ALIGN="center"><TD>Gain<TD>-120<TD>+3<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE><BR><BR>
+            
+            REW scans the local network for speakers when the 8c equaliser setting 
+            is selected and, if the 8c is the default equaliser in the Equaliser 
+            preferences, on startup. There is also a <EM>Scan network for speakers</EM>
+            action in the filter tasks pane that will trigger a rescan and show the
+            results in a dialog. The <EM>Send filter settings to speaker or group</EM> 
+            action writes the filter settings to the selected speaker or group of speakers. 
+            The <EM>Load filters from speaker or group</EM> action retrieves the selected 
+            speaker or group filter settings. When initially retrieved the filters will be 
+            set to <EM>Manual</EM> control, to allow REW to use a filter for automatic target 
+            matching set the control to <EM>Automatic</EM>. Filters that were set to automatic
+            when they were sent to the speaker will be set to automatic when they are 
+            retrieved.<BR><BR>
+
+            If the 8c is the default equaliser in the Equaliser preferences the measurement
+            dialog will offer an option to measure with playback from the speakers, which uses
+            measurement sweep files which the speakers contain. When measuring with playback
+            from the speakers REW will capture the filter settings from the speaker when 
+            it is measured, they can be viewed in the Info dialog. Those settings are retained 
+            in the measurement file and allow iterative adjustment of filter settings, taking 
+            into account the filters that were active when the measurement was made. If the 
+            settings have been captured the <EM>Reset filters for current measurement</EM> 
+            action in the filter tasks pane will offer a choice of resetting the filters to 
+            the settings they had when the measurement was made or to None.<BR><BR>
+
+            When the 8c is selected as the equaliser the target settings will be set to:
+            <UL>
+                <LI>Speaker Type: Full Range
+                <LI>LF Slope: 24dB/octave
+                <LI>LF Cutoff (Hz): 20
+                <LI>LF Rise Start (Hz): 100
+                <LI>LF Rise End (Hz): 20
+                <LI>LF Rise Slope (dB/octave): 1.0
+                <LI>HF Fall Start (Hz): 1000
+                <LI>HF Rise Slope (dB/octave): 0.0
+            </UL>
+            and the target match range will be set to 20 .. 100 Hz, with a maximum match 
+            end frequency of 1000 Hz.
+
+            <DT><A name="ucm200">Emotiva UMC-200</A>
+            <DD>The UMC-200 equaliser setting supports parametric filters only, allowing 11
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            <B>N.B. The UMC-200 filter shapes have not been verified against an actual unit.</B><BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>256 steps
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+3<TD>0.25 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>24<TD>0.125
+            </TABLE>
+
+            <DT><A name="xmc1">Emotiva XMC-1</A>
+            <DD>The XMC-1 equaliser setting supports parametric filters only, allowing 11
+            filters. The <EM>Save filter settings to file</EM> action writes the filter 
+            settings to a file in a format suitable for use with the Emotiva software.
+            The filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-64<TD>+6<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.6<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="rmc1">Emotiva RMC-1</A>
+            <DD>The RMC-1 equaliser setting supports the same filter numbers and 
+            types as XMC-1 but offers further choices of channel when saving or 
+            loading .emo files. This setting may also be used with the RMC-1L and XMC-2.
+            
+            <DT><A name="twk88">JL Audio TwK-88</A>
+            <DD>The TwK-88 equaliser setting supports peaking filters only, allowing 10
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            Where gain is less than one for cuts so cuts have narrower bandwidths for 
+            the same Q value as a boost. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+6<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>10<TD>0.01
+            </TABLE>
+
+            <DT><A name="etonaudio">ETON Audio</A>
+            <DD>The ETON Audio equaliser entries support parametric, HSQ and LSQ. All 
+            entries run at 96 kHz, the number of filters varies for each model. 
+            The parametric filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-24<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>15<TD>0.1
+                <TR ALIGN="center"><TD>Shelf Q<TD>0.1<TD>2.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="esxaudio">ESX Audio</A>
+            <DD>The ESX Audio equaliser entries support parametric, HSQ, LSQ and, 
+            depending on model, AP filters. All entries run at 96 kHz, the number of filters
+            varies for each model. The parametric filter bandwidth in Hz between the half 
+            gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>15<TD>0.1
+                <TR ALIGN="center"><TD>Shelf Q<TD>0.3<TD>2.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="gracedesign">Grace Design m908</A>
+            <DD>The Grace Design m908 equaliser setting offers peak, modal, LP, HP, low 
+            shelf and high shelf filters. Filters can be saved to a .csv file using the 
+            <EM>Save filter settings to file</EM> action or the save button on the filters panel
+            and read from .csv files using <EM>Load filter settings from file</EM> action or the
+            open button on the filters panel. REW's modal filters are saved as peak filters. For 
+            the peak filters the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The Grace Design m908 setting allows 12 filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>Depends on frequency
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.2<TD>50<TD>0.02 below 10, 0.1 above
+            </TABLE>
+
+            <DT><A name="hypex">Hypex</A>
+            <DD>The Hypex Input EQ equaliser setting supports parametric, low shelf 
+            and high shelf filters. It allows up to 9 filters. The parametric filter 
+            bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>40000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-15.9<TD>+15.9<TD>0.01 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>20<TD>0.001
+            </TABLE>
+            
+            <DT><A name="jrultr">JRULTR</A>
+            <DD>The JRULTR subwoofer equaliser setting supports parametric, low shelf 
+            and high shelf filters. It allows up to 12 filters plus 2 crossover filters.
+            The crossover filter types supported are Butterworth, Bessel and Linkwitz-Riley 
+            up to 8th order (48 dB/octave).
+            The parametric filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>200<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>150<TD>0.01
+            </TABLE>
+            
+            <DT><A name="kali">Kali Audio Santa Monica</A>
+            <DD>The Kali Audio Santa Monica equaliser setting offers first order
+            LP and HP, second order LP and HP with adjustable Q, peaking, modal, low 
+            shelf with adjustable Q and high shelf with adjustable Q. Filters can be 
+            saved to a .keq file using the <EM>Save filter settings to file</EM> action
+            and read from .keq files using <EM>Load filter settings from file</EM>
+            action. REW's modal filters are saved as peaking filters. For the peaking filters 
+            the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The Kali Audio SM setting allows 8 filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>40000<TD>0.1 Hz below 100Hz, 1 Hz above
+                <TR ALIGN="center"><TD>Gain<TD>-24<TD>+18<TD>0.05 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="minidsp">MiniDSP 48 kHz plug-ins</A>
+            <DD>The miniDSP equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 6 filters operating at 48 kHz. It is aimed at the miniDSP plug-in Advanced
+            mode, which allows filters to be specified by their biquad coefficients. The
+            <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software (note that the
+            a1 and a2 coefficients are negated per the miniDSP format). An advantage of
+            this is the very high filter frequency and Q resolution it allows, permitting
+            exact targeting of modal resonances. The miniDSP plug-in has an <em>Import REW File</em>
+            button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="minidsp96k">MiniDSP 96 kHz plug-ins</A>
+            <DD>The miniDSP-96k equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 5 filters. It is aimed at miniDSP plug-ins that operate at 96 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="minidsp2x4hd">MiniDSP 2x4 HD</A>
+            <DD>The miniDSP 2x4 HD equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 96 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="nanoavr">MiniDSP nanoAVR</A>
+            <DD>The miniDSP nanoAVR equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 96 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12</A>
+            <DD>The miniDSP C-DSP 8x12 equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 192 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12 DL</A>
+            <DD>The miniDSP C-DSP 8x12 equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 48 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="minidspflex">MiniDSP Flex</A>
+            <DD>The miniDSP Flex equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 96 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="minidspflexdl">MiniDSP Flex with Dirac Live</A>
+            <DD>The miniDSP Flex with Dirac Live equaliser setting supports the same filter types and resolutions as the
+            Generic setting, but for 10 filters at 48 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
+            an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
+            
+            <DT><A name="minidsptide16">MiniDSP Tide-16</A>
+            <DD>The miniDSP Tide-16 equaliser setting supports 20 parametric, shelving or all-pass filters. 
+            It operates at 48 kHz.
+            
+            For the parametric filters the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-16<TD>+16<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>20<TD>0.1
+            </TABLE>
+
+            <DT><A name="mosconi">Mosconi</A>
+            <DD>The Mosconi entries are Channel EQ (9-band) and Main EQ (30-band). The Main EQ is 
+            peak and modal only. Channel EQ offers peak, modal, low shelf, high shelf and all pass 
+            filters. For the peaking filters the bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.51<TD>40<TD>0.01
+            </TABLE>
+
+            <DT><A name="model976">Outlaw Audio Model 976</A>
+            <DD>The Model 976 equaliser setting supports 10 filters. The first filter
+            is a low shelf, the last is a high shelf. The shelf filters have 12 dB/octave 
+            slope. The other 8 filters are peaking filters where the bandwidth in Hz between 
+            the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz up to 200Hz, then 10 Hz up to 2 kHz, then 100 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-20<TD>+3<TD>0.5dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>Values are 0.5, 1.0, 1.4, 2.0, 2.4, 2.9, 3.6, 4.8, 7.2 and 14
+            </TABLE>
+
+            <DT><A name="musway">Musway</A>
+            <DD>The Musway entries are 10 bands (Input) and 31 bands (Output). Both offer 
+            peak, low shelf and high shelf filters, the shelf filters have adjustable Q. 
+            Filters can be saved to a .json file using the <EM>Save filter settings to file</EM>
+            action and read from .json files using <EM>Load filter settings from file</EM>
+            action. For the peaking filters the bandwidth in Hz between the half gain points 
+            is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q (peak)<TD>0.2<TD>16<TD>0.01
+                <TR ALIGN="center"><TD>Q (shelf)<TD>0.2<TD>1.42<TD>0.01
+            </TABLE>
+
+            <DT><A name="model976">Outlaw Audio Model 976</A>
+            <DD>The Model 976 equaliser setting supports 10 filters. The first filter
+            is a low shelf, the last is a high shelf. The shelf filters have 12 dB/octave 
+            slope. The other 8 filters are peaking filters where the bandwidth in Hz between 
+            the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz up to 200Hz, then 10 Hz up to 2 kHz, then 100 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-20<TD>+3<TD>0.5dB
+                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>Values are 0.5, 1.0, 1.4, 2.0, 2.4, 2.9, 3.6, 4.8, 7.2 and 14
+            </TABLE>
+
+            <DT><A name="perlisten">PerListen Audio</A>
+            <DD>The PerListen Audio equaliser setting supports parametric filters only, allowing 10
+            filters. The filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>200<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-20<TD>+3<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>20<TD>0.01
+            </TABLE>
+
+            <DT><A name="dsp30">QSC DSP-30</A>
+            <DD>The DSP-30 equaliser setting supports parametric filters only, allowing 20
+            filters. The filter bandwidth in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            <B>N.B. The DSP-30 filter shapes have not been verified against an actual unit.</B><BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-120<TD>+12<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>50<TD>0.01
+            </TABLE>
+
+            <DT><A name="rephase">rePhase</A>
+            <DD>The rePhase equaliser setting supports parametric filters only. It 
+            allows up to 17 filters per channel. The <EM>Save filter settings to file</EM> 
+            action writes the filter settings to a file in a format suitable for use with 
+            the rePhase software. The parametric filter bandwidth in 
+            Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>24000<TD>0.01 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-96<TD>+96<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>10<TD>0.01
+            </TABLE>
+            
+            <DT><A name="rf3sixty">Rockford Fosgate 3Sixty.3</A>
+            <DD>The 3Sixty.3 equaliser setting supports parametric filters only, allowing 20
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = sqrt(gain)*centre frequency/Q</DIV><BR>
+
+            where gain is from the absolute value of the dB figure so always >= 1.
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>0.1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-24<TD>+24<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>6<TD>0.01
+            </TABLE>
+
+            <DT><A name="sonance">Sonance/Blaze</A>
+            <DD>The Sonance/Blaze entry supports 10 filters of many types.
+            Filters can be saved to a file using the <EM>Save filter settings to file</EM>
+            action. For the peaking filters the bandwidth in Hz between the half gain points 
+            is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The filter adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+15<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q (peak)<TD>0.4<TD>30<TD>0.01
+                <TR ALIGN="center"><TD>Q (shelf)<TD>0.4<TD>10<TD>0.01
+            </TABLE>
+
+            <DT><A name="stormaudio">StormAudio</A>
+            <DD>The StormAudio equaliser setting has an "EQ only" option supporting 20 
+            parametric filters and an "All models" option supporting 12 parametric filters 
+            and 2 crossover filters. The crossover filter types supported are Butterworth 
+            and Linkwitz-Riley up to 8th order (48 dB/octave). The <EM>Save filter settings to file</EM> 
+            action writes the filter settings to a file in a format suitable for use with 
+            the StormAudio software. The parametric filter bandwidth in Hz between the 
+            half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>16<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-96<TD>+48<TD>0.25 dB
+                <TR ALIGN="center"><TD>Q<TD>0.25<TD>32<TD>0.25
+            </TABLE>
+
+            <DT><A name="tmreq">TMA TMREQ</A>
+            <DD>The TMREQ equaliser is a software EQ that runs at the sample rate of the 
+            measurement it is applied to. This setting offers the full range of filters 
+            and filter settings supported by TMREQ (peaking = parametric, low pass, high 
+            pass, low shelf, high shelf and notch). For the Peaking filters the bandwidth 
+            in Hz between the half gain points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The TMREQ setting allows 8 filters. The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>20000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-15<TD>+6<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.1
+            </TABLE>
+
+            <DT><A name="sms">Velodyne SMS-1</A>
+            <DD>The SMS-1 equaliser setting supports parametric filters only, allowing 8
+            filters. The filter bandwidth in Hz between the half gain 
+            points is given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            <B>N.B. The SMS-1 filter shapes have not been verified against an actual unit.</B><BR><BR>
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>15<TD>120<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-13<TD>+6<TD>0.5 dB
+                <TR ALIGN="center"><TD>Q<TD>0.3<TD>20.0<TD>0.1
+            </TABLE>
+
+            <DT><A name="dspa8">waveFLEX DSP A8</A>
+            <DD>The DSP A8 equaliser supports the same filter types and resolutions as the
+            Generic setting, but for 5 filters operating at 96 kHz.
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
+            to a file in a format suitable for use with the waveFLEX software. 
+            
+            <DT><A name="Xilica">Xilica XP2040</A>
+            <DD>The XP2040 equaliser setting supports parametric filters only, allowing 16
+            filters. The filter bandwidth is specified in octaves, but the corresponding 
+            bandwidth in Hz is shown in the filter controls panel.
+
+            The adjustment ranges are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>20<TD>30000<TD>1 Hz
+                <TR ALIGN="center"><TD>Gain<TD>-30<TD>+15<TD>0.25 dB
+                <TR ALIGN="center"><TD>BW<TD>0.02<TD>3.61<TD>0.01 octaves
+            </TABLE>
+
+            <DT><A name="generic">Generic</A>
+            <DD>The Generic Equaliser is a software EQ that runs at the sample rate of the 
+            measurement it is applied to. There are two variants, "Generic" and "Extended".
+            Generic supports a full range of single-biquad filters and filter 
+            settings (peaking = parametric, 1st and 2nd order low pass &amp; high pass
+            including adjustable Q 2nd order variants, low shelf and high shelf 
+            including adjustable Q variants, notch, all-pass and Linkwitz Transform) 
+            based on the Robert Bristow-Johnson 'Cookbook' equations. It also offers 
+            a pair of crossover filters with Bessel, Butterworth or Linkwitz-Riley 
+            characteristics up to 8th order. Extended has the same filter types
+            but supports multiple biquad filters in all positions, including shelf,
+            low pass and high pass filters with slopes up to 48 dB/octave.<BR><BR>
+            
+            The <EM>Save Filter Coefficients to File</EM> action writes the filter 
+            coefficients corresponding to the selected sample rate to a file in the 
+            selected format. Currently supported formats are miniDSP and SigmaStudio,
+            note that the a1 and a2 coefficients are negated in the miniDSP format.<BR><BR>
+            
+            LPQ and HPQ filter types can be used to implement higher order filters as
+            cascades of biquad filters. Here are the Q values for some common crossover
+            types and orders, <B>for odd orders the last section is LP1/HP1</B> (a 
+            first order section), those are highlighted in blue:<BR><BR>
+            
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TD>2<TD>Butterworth<TD>0.707<TD><TD><TD>
+                <TR ALIGN="center"><TD>3<TD>Butterworth<TD>1.000<TD><FONT COLOR=#4076c0>LP1/HP1</FONT><TD><TD>
+                <TR ALIGN="center"><TD>4<TD>Butterworth<TD>1.307<TD>0.541<TD><TD>
+                <TR ALIGN="center"><TD>5<TD>Butterworth<TD>1.618<TD>0.618<TD><FONT COLOR=#4076c0>LP1/HP1</FONT><TD>
+                <TR ALIGN="center"><TD>6<TD>Butterworth<TD>1.932<TD>0.707<TD>0.518<TD>
+                <TR ALIGN="center"><TD>7<TD>Butterworth<TD>2.247<TD>0.802<TD>0.555<TD><FONT COLOR=#4076c0>LP1/HP1</FONT>
+                <TR ALIGN="center"><TD>8<TD>Butterworth<TD>2.563<TD>0.900<TD>0.601<TD>0.510
+                <TR ALIGN="center"><TD>2<TD>Linkwitz-Riley<TD>0.500<TD><TD><TD>
+                <TR ALIGN="center"><TD>4<TD>Linkwitz-Riley<TD>0.707<TD>0.707<TD><TD>
+                <TR ALIGN="center"><TD>8<TD>Linkwitz-Riley<TD>1.307<TD>0.541<TD>1.307<TD>0.541
+            </TABLE><BR>
+            
+            For the Peaking filters the bandwidth in Hz between the half gain points is 
+            given by:<BR><BR>
+
+            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
+
+            The Generic settings allows 20 parametric filters. The adjustment ranges 
+            are:<BR><BR>
+
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
+                <TR ALIGN="center"><TD>Frequency<TD>10<TD>22000<TD>0.01 Hz below 100 Hz, 0.1 Hz below 1 kHz, 1 Hz above 1 kHz
+                <TR ALIGN="center"><TD>Gain<TD>-120<TD>+30<TD>0.1 dB
+                <TR ALIGN="center"><TD>Q<TD>0.1<TD>50<TD>0.001
+            </TABLE>
+
+            <DT><A name="extended">Extended</A>
+            <DD>The Extended equaliser offers the capabilities of the Generic equaliser but adds
+            higher order filter choices, including shelf, low pass and high pass filters with slopes
+            up to 48 dB/octave.
+            
+            <DT><A name="configurable">Configurable PEQ</A>
+            <DD>The Configurable PEQ equaliser offers peaking filters but with the number of filters
+            and the range and resolution of the parameters chosen by the user.<BR><BR>
+            <P><IMG SRC="../../images/configurableeq.jpg" ALT="Configurable equaliser settings" BORDER=0><BR CLEAR="ALL"><BR>
+            
+            <P>The bandwidth of the peaking filters depends on the format selection.<BR><BR>
+            
+            <TABLE BORDER="1" CELLPADDING="2">
+                <TR ALIGN="center"><TH>Q/BW format<TH>Bandwidth at half gain
+                <TR ALIGN="center"><TD>RBJ Q<TD>centre frequency/Q
+                <TR ALIGN="center"><TD>Classic Q<TD>sqrt(gain)*centre frequency/Q
+                <TR ALIGN="center"><TD>Symmetric Q<TD>sqrt(absgain)*centre frequency/Q 
+                <TR ALIGN="center"><TD>BW octaves<TD>Bandwidth is in octaves
+            </TABLE>
+            <P>"absgain" refers to using the absolute value of the dB figure so is always >= 1
+        </DL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

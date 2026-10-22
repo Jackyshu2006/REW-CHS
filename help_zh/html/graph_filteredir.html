@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>滤波 IR 图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">滤波 IR 图</A></H2>
+
+        <P>滤波 IR 图可以对测量施加 1/1 倍频程和 1/3 倍频程滤波器。倍频程频带滤波器是巴特沃斯（Butterworth）带通滤波器，阶数在图表选项里选择。
+
+        <P>这张图主要用来考察不同频带内的衰减特性，并按 ISO 3382 分析结果。除了滤波后的脉冲响应（impulse response）本身，图上还有脉冲响应包络（impulse response envelope，ETC）曲线和施罗德积分（Schroeder integral）曲线；RT60（混响时间）估算值就是由施罗德积分得出的。
+        <P><IMG SRC="../../images/filteredir.jpg" ALT="滤波 IR"><BR CLEAR="all">
+
+        <H3>施罗德积分</H3>
+
+        <P>施罗德积分是对脉冲响应的平方做反向积分（backward integration）得到的一条曲线。积分最好从响应衰减到噪声里的那一点开始，并加上一个修正量（即积分的起始值）。这个修正量的前提是：施罗德曲线在整段响应里都保持同样的下降速率。
+
+        <P>REW 用一种迭代方法估算积分的最佳起点，依据的是“Lundeby 法”（出自 A. Lundeby, T. E. Vigran, H. Bietz, and M. Vorländer, “Uncertainties of Measurements in Room Acoustics,” Acustica, vol. 81, pp. 344–355 (1995)）。
+
+        <P>这条曲线的斜率，用来衡量脉冲响应衰减得有多快，由此得出“RT60”数值，也就是声音衰减 60 dB 所需的时间。图上显示的曲线，对应当前施加的滤波器（如果有的话）。
+
+        <P>计算 1/1 倍频程和 1/3 倍频程 RT60 结果所用的衰减数据时，REW 先把脉冲响应滤波到相应的带宽和中心频率，再求该频带的施罗德积分，然后算出各项 RT60 指标。
+        <P><IMG SRC="../../images/schroeder.jpg" ALT="施罗德积分" width="400" height="253"><BR CLEAR="all">
+
+        <H3><A name="metrics">图表指标</A></H3>
+
+        <P>按住 Shift 键，再按住鼠标左键拖动，选出一段施罗德积分范围后，图上会显示这段范围的回归线（regression line）以及对应的 T60 值。
+
+        <P>选好之后，可以拖动所选区域的起点或终点来调整范围，也可以把整个范围一起移动。Y 轴必须设为 dBFS。
+        <P><IMG SRC="../../images/filteredirmetrics.jpg" ALT="滤波 IR 图表指标"><BR CLEAR="all">
+
+        <H3>滤波 IR 图的图表选项</H3>
+
+        <P>滤波 IR 图的图表选项里有以下控件：
+        <P><IMG SRC="../../images/controlsfilteredir.jpg" ALT="滤波 IR 图的图表选项"><BR CLEAR="all">
+
+        <P>勾选 <EM>1/1</EM> 或 <EM>1/3</EM> 框，可以选用 1/1 倍频程或 1/3 倍频程滤波器，同时启用对应的一组控件。所需的滤波频率可以直接从下拉列表里选，也可以用两侧的按钮逐个切换。
+
+        <P>选中后，滤波器立即施加到脉冲响应上，图表左下角的标签显示当前的滤波设置。<B>在选择“No Filter”（不滤波）或取消勾选这两个框之前，滤波器会一直生效。所有图表上的测量名称都会带上所施加滤波器的标注，例如“Auditorium [250Hz 1/3]”。</B>
+
+        <P>滤波器是巴特沃斯带通滤波器，阶数由<EM>滤波器阶数</EM>控件决定，可选 6 到 48 阶，默认 6 阶。请注意，滤波器阶数越高，群延迟（group delay）也相应越大；如果 RT60 值很小（例如声学处理很重的空间里，衰减很快），可能影响 RT60 估算值。使用<EM>时间反转滤波</EM>可以避免这个潜在问题。
+
+        <P>滤波类型下拉框有三个选项：<EM>正向滤波</EM>、<EM>时间反转滤波</EM>和<EM>零相位滤波</EM>。
+
+        <P><EM>时间反转滤波</EM>把倍频程频带滤波器在时间上倒过来应用，能大大减少滤波器自身对测得衰减的影响。在低频使用 1/3 倍频程滤波器时，滤波器自身的衰减时间可能相当长，例如 100 Hz 的 1/3 倍频程滤波器会超过 200 ms。反向应用滤波器可以把这段衰减缩短到 50 ms 以下，但对响应会有一定影响，因此使用时间反转滤波器时，早期衰减时间（Early Decay Time，EDT）的数值可能不可靠。
+
+        <P><EM>零相位滤波</EM>让滤波器在数据上走两遍，一遍正向、一遍反向，使总的相移为零。它同样能减少滤波器衰减时间带来的影响，效果与时间反转滤波相近（但不如后者明显），而且不会明显影响早期衰减时间。
+
+        <P>零相位滤波正向和反向两遍所用的滤波器阶数，都是“滤波器阶数”设定值的三分之二。再配合带宽上的调整，两遍合起来的响应接近按设定阶数单遍滤波的响应。
+
+        <P>脉冲响应可以按峰值归一化（normalisation）后绘制，也可以不归一化，由<EM>绘制归一化 IR 响应</EM>控件决定。选择归一化绘制时，峰值位于 100% 或 0 dBFS。
+
+        <P>勾选<EM>显示数据面板</EM>后，图上会显示一个面板，列出各项衰减参数的结果。
+
+        <P>每个 RT60 数值都附有计算所用的衰减范围，以及一个“r”值，即相关系数（correlation coefficient），用来衡量数据与直线的吻合程度。-1 表示完全吻合；绝对值小于 0.98（即比 -0.98 更接近 0）时，对应的衰减数值可能不可靠。不可靠的数值以橙色斜体显示。
+        <br><br>
+        <IMG SRC="../../images/filteredirdatapanel.jpg" ALT="滤波 IR 数据面板" width="189" height="246"><BR CLEAR="all">
+        <P>可显示的参数如下：
+        <DL>
+            <DT>EDT
+            <DD>早期衰减时间，由施罗德曲线在 0 dB 到 -10 dB 之间的斜率得出。
+            <DT>T20
+            <DD>由施罗德曲线在 -5 dB 到 -25 dB 之间的斜率得出的衰减时间。
+            <DT>T30
+            <DD>由施罗德曲线在 -5 dB 到 -35 dB 之间的斜率得出的衰减时间。
+            <DT>Topt
+            <DD>“最佳”衰减时间，由施罗德曲线在一个可变区间上的斜率得出，这个区间按线性拟合（linear fit）最好的原则选定。如果早期衰减时间比 T30 短得多，Topt 以 EDT 线与 T30 线的交点作为起点；否则以 -5 dB 为起点。终点则由 REW 以 1 dB 为步长一直试到施罗德曲线末端，从中选出线性拟合最好的一个。
+            <DT>曲率
+            <DD>即 (T30/T20 - 1)，以百分比表示，反映衰减曲线斜率的变化情况。典型值在 0 到 5% 之间；高于 10% 就值得怀疑，可能说明房间的衰减曲线分成两段。曲率为负时，结果可能有误，应谨慎对待。
+            <DT>清晰度 C50
+            <DD>早期声能与后期声能之比（early to late energy ratio），单位为 dB，以最初 50 ms 内的声能作为“早期”部分。C50 最常用来衡量语言听起来是否清晰。
+            <DT>清晰度 C80
+            <DD>早期声能与后期声能之比，单位为 dB，以最初 80 ms 内的声能作为“早期”部分。C80 最常用来衡量音乐听起来是否清晰。
+            <DT>明晰度 D50
+            <DD>早期声能与总声能之比（early to total energy ratio），以百分比表示，以最初 50 ms 内的声能作为“早期”部分。
+            <DT>重心时间 TS
+            <DD>脉冲响应平方的“重心”所在的时刻。
+        </DL>
+
+        <P>勾选<EM>显示 IR 导航器</EM>后，图表下方会显示导航器（navigator）视图。
+
+        <P>勾选<EM>显示反射限制</EM>后，图上会从 IR 起始时刻开始，叠加显示消声环境（anechoic）中单次侧向反射（lateral reflection）的可闻阈值（Olive & Toole, 1989）。上面一条是声像偏移或展宽的阈值，下面一条是可察觉阈值。
+
+        <P>如果对 IR 做了滤波，最好使用零相位滤波器（zero phase filter），以免滤波器的时间延迟让 IR 相对阈值线发生平移。
+
+        <P>图上还可以显示“回归线”：在某个衰减参数适用的范围内，对施罗德曲线做最小二乘线性回归（least squares linear regression）得到的直线。选择显示哪一条回归线的下拉框，就在<em>显示回归线</em>勾选框旁边。
+
+        <P><EM>ETC 平滑处理</EM>用一个移动平均滤波器（moving average filter）对包络（ETC）曲线做平滑处理，滤波器的时长由数值框里的数值指定。
+
+        <P><EM>曲线选项</EM>按钮会打开一个对话框，用来更改图上各条曲线的颜色和线型。改动会应用到这张图上显示的所有测量。
+
+        <P>曲线也可以隐藏。隐藏后，它会从图上和图例中一起消失。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

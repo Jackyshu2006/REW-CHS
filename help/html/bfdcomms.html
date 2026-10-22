@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Communicating with the BFD Pro DSP1124P and FBQ2496</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Communicating with the BFD Pro DSP1124P and FBQ2496</A></H2>
+
+        <P>The BFD Pro DSP1124P and FBQ2496 models support Midi communication for 
+        setting up their filters and operating modes. To communicate with the units
+        over Midi a Midi Interface is required, for example the Edirol UM-1X 
+        USB-Midi interface or the M-Audio UNO.<BR>
+        <IMG ALT="Edirol UM-1X" SRC="../../images/um1x.jpg" width="360" height="227"><BR CLEAR="ALL">
+        
+        <P>Connect the plug labelled "OUT" on the Midi interface to the socket labelled "IN"
+        on the BFD (on the UM-1X the adaptor OUT plug has the text "Connect to Midi IN" moulded
+        into it). It is not necessary to connect to the Midi OUT of the BFD.
+        
+        <P>The Midi Output port is selected via the 
+        <A HREF="comms.html">Comms</A> panel in the Preferences dialog, 
+        REW will not be able to communicate over Midi until the port has 
+        been selected. The selection is remembered for the next power-up.
+
+        <P>Midi communication is supported on Windows platforms. Linux platforms will require 
+        <A HREF="http://www.tritonus.org">Tritonus</A> (www.tritonus.org) to support Midi comms.
+        macOS platforms with JRE V6 or later installed should support Midi.
+        
+        <H3><A name="midiconfig">Configuring DSP1124P for Midi Communications</A></H3><BR>
+        <IMG ALT="BFD Pro DSP1124P" SRC="../../images/bfdpro.jpg" width="400" height="96"><BR CLEAR="ALL">
+        
+        <P>In the DSP1124P default configuration Midi comms are disabled. To enable the
+        Midi features used by REW, the unit's Midi menus need to be set up
+        as follows (all buttons referred to are on the DSP1124P front panel):
+        <OL>
+        <LI>Press the IN/OUT and STORE buttons together to access the Midi menus, the
+        LEDs in both buttons start flashing and the display changes to show:<BR>
+        <IMG ALT="Display after entering Midi menu" SRC="../../images/midichanmenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>This is the Midi channel menu (indicated by the &quot;c&quot; in the right hand 
+        digit), when the channel shows &quot;-&quot; midi is off. Use the jog wheel to 
+        change the channel to 1:<BR>
+        <IMG ALT="Midi channel 1 selected" SRC="../../images/midichan1.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>Press the IN/OUT button twice to change to the Controller menu (&quot;C&quot;
+        in right hand digit) and use the jog wheel to select mode 3:<BR>
+        <IMG ALT="Controller mode 3" SRC="../../images/midicontrollermenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>Press the IN/OUT button again to change to the Program menu (&quot;P&quot;
+        in right hand digit) and use the jog wheel to select mode 3:<BR>
+        <IMG ALT="Program mode 3" SRC="../../images/midiprogrammenu.jpg" width="100" height="55"><BR CLEAR="ALL">
+        <LI>Press the IN/OUT button again to change to the Store Enable menu (&quot;S&quot;
+        in right hand digit) and use the jog wheel to set the value to 1:<BR>
+        <IMG ALT="Store Enable 1" SRC="../../images/midistoreenable.jpg" width="100" height="55"><BR CLEAR="ALL">
+        This enables REW to save settings to the DSP1124P's presets
+        <LI>Press the IN/OUT button 2 more times to exit the Midi menus
+        </OL>
+        <P>The DSP1124P is now configured for Midi communications. This configuration,
+        with the exception of the Store Enable setting, is remembered for the next 
+        power-up and does not need to be entered again.
+ 
+        <H3><A name="midiconfig2">Configuring FBQ2496 for Midi Communications</A></H3>
+        <IMG ALT="BFD Pro FBQ2496" SRC="../../images/fbq2496.jpg" width="400" height="100"><BR CLEAR="ALL">
+        
+        <P>Midi comms are enabled by default in the FBQ2496. If Midi comms has been
+        turned off, or the channel has been set to something other than 1, proceed
+        as follows (all buttons referred to are on the front panel):
+        <OL>
+        <LI>Make sure the unit is NOT in PEQ mode (i.e. the LED in the PEQ button must
+        be off, if it is on press the PEQ button to turn it off). Press the BANDWIDTH 
+        and BYPASS buttons together to access the Midi menus, the
+        LEDs in both buttons start flashing as does the MIDI LED below the numeric display.
+        The display itself shows the Midi on/off status, if it shows <B><FONT COLOR="red">OFF</FONT></B>
+        turn the knob until it changes to <B><FONT COLOR="red">on</FONT></B>. Then press
+        the BANDWIDTH button to change to the Midi channel menu, shown in the display by 
+        <B><FONT COLOR="red">C</FONT></B> followed by the channel number. Turn the knob
+        to select channel 1. 
+        
+        <LI>Press any button except BANDWIDTH or BYPASS to exit the Midi menus.
+        </OL>
+        <P>The FBQ2496 is now configured for Midi communications. This configuration
+        is remembered for the next power-up and does not need to be entered again.
+        
+        <H3>Notes</H3>
+        <OL>
+        <LI>Store Enable is turned off by the DSP1124P when it powers up, REW will 
+        prompt you to turn on Store Enable for each measurement session when using DSP1124P. If you do 
+        not turn on Store Enable REW will not be able to save filter settings 
+        to presets - after downloading filters to the DSP1124P the red LED in the STORE
+        button will be flashing as a warning that changes have been made but not stored.
+        You can manually save to presets by pressing the STORE button, 
+        using the jog wheel to select the preset to store to, then pressing the
+        STORE button again (just press the button twice if you are already on the preset
+        you want to use).
+        
+        <LI>The IN/OUT button LED on DSP1124P flickers during Midi communications, 
+        on FBQ2496 the MIDI LED flickers.
+        
+        <LI>When filters are downloaded to FBQ2496 REW will configure the unit
+        to have 20 parametric filters on the channel being downloaded and, after
+        the download, will turn off the bypass (if it is on).
+        
+        <LI>Downloading a set of filters takes about 1 second per filter.
+        
+        </OL>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

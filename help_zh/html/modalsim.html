@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>房间仿真</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">房间仿真</A></H2>
+
+        <P>房间仿真用来计算矩形房间里多个声源在多个位置的频率响应。
+
+        <P>它采用一种频域（frequency domain）方法：以波动方程（wave equation）的刚性边界解（rigid boundary solution）为基础，再针对有损边界（lossy boundary）做修正。计算结果与在时域（time domain）中用镜像声源法（image source method）得到的结果等效（Allen and Berkley 1978）。
+
+        <P>声源和听音位置可以在房间的平面视图和立面视图上拖动调整。
+
+        <P>每个轴向上的最高模态阶数（mode order）为 20。如果房间某个尺寸非常大，仿真的结束频率会被限制在最高模态阶数对应的频率以内。
+
+        <P>第一次打开时，房间仿真窗口是这样的：
+        <P><IMG SRC="../../images/roomsim.jpg" ALT="房间仿真"><BR CLEAR="all">
+
+        <P>左侧面板显示房间视图，还有设置房间尺寸和各表面吸声系数（acoustic absorption）的控件。
+
+        <P>右侧显示主听音位置及其周围几个附加位置的频率响应。右侧还有几组控件，分别用来设定：显示哪些模态共振（modal resonance），在哪些位置计算响应，仿真哪些声源，以及这些声源怎么管理。
+
+        <P>整个窗口可以调整大小；拖动左右两个面板之间的分隔条，可以调整两侧所占的比例。点击分隔条顶部的小三角形，可以把其中一侧面板完全收起。
+
+        <H3><A name="roompanel">房间面板</A></H3>
+
+        <P>房间的尺寸和属性在房间面板顶部的控件里设置。点击面板右上角的双箭头，可以把这些控件收起。<BR><BR>
+        <IMG SRC="../../images/roompanelcontrols.jpg" ALT="房间面板控件" width="390" height="198"><BR CLEAR="all">
+
+        <P>尺寸按所选的<EM>单位</EM>显示为公制或英制。无论选了哪种单位，尺寸控件都接受公制和英制两种输入，例如 2.5m、250cm、2500mm、8.2ft、8ft 2in、8' 2"、8f2i、8f2 和 98in 都是有效输入。只输入数字、不带单位时，按所选单位处理。
+
+        <P>房间密封良好时，勾选<EM>密闭空间模拟</EM>。勾选后，最低频段的响应提升会更大。
+
+        <P>表面吸声系数决定声音遇到各表面时被吸收多少。这里的吸声系数与入射角和频率无关。数值越大，该表面吸收的声音越多，房间模态共振受到的阻尼也越大。
+
+        <P>房间面板控件下方是房间的平面视图和立面视图。<BR><BR>
+        <IMG SRC="../../images/roomview.jpg" ALT="房间视图" width="310" height="492"><BR CLEAR="all">
+
+        <P>主听音位置用头部图标表示。头部周围的十字是另外选定的附加位置，这些位置的响应也会计算。上图选的是主听音位置左、右、前、后、上、下六个位置。
+
+        <P>取消勾选面板底部的<EM>显示立面视图</EM>，可以隐藏立面视图。点击右下角的相机图标，可以把房间面板保存为图片。
+
+        <P>把鼠标指针移到声源上，就能选中它。选中的声源会高亮显示，可以按住左键拖动，也可以用方向键移动；用方向键能调得更精细。拖动时按住 Shift 键，只能水平或垂直移动。房间尺寸很大时，声源的轮廓可能与房间边界重叠，但声学中心（acoustic centre）的位置不受影响。
+
+        <P>右键单击声源，或按 R 键（顺时针）、L 键（逆时针），可以旋转声源。请注意，旋转声源不会改变它的响应，所有声源都按全指向（omnidirectional）处理。
+
+        <P>主听音位置和各附加听音位置也一样，可以用鼠标移动，也可以先让它高亮，再用方向键移动。声源或听音位置高亮时，会显示它的位置：<BR><BR>
+        <IMG SRC="../../images/posnhighlight.jpg" ALT="位置高亮" width="253" height="439"><BR CLEAR="all">
+
+        <P>声源高亮时，显示的距离是到它声学中心的距离。声学中心位于声源前面板的中心。此时，响应图上还会显示这个声源单独产生的响应，即主听音位置的合成响应中来自这个声源的那一部分。
+
+        <P>仿真里有左、右音箱时，让头部位置高亮，会显示从头部位置看两只音箱之间的夹角。<BR><BR>
+        <IMG SRC="../../images/roomsimangle.jpg" ALT="音箱之间的夹角" width="253" height="269"><BR CLEAR="all">
+
+        <H3><A name="responsepanel">响应面板</A></H3>
+
+        <P>响应面板显示主听音位置及其周围各附加位置的频率响应。还可以设置一条“参考”曲线，把当前主听音位置的响应保存下来，之后做调整时用来对比。
+
+        <P>房间的模态分布（modal distribution）也显示在响应面板上，用一组竖线表示，线的颜色按模态涉及的轴向区分：<BR><BR>
+        <IMG SRC="../../images/responsegraph.jpg" ALT="响应与模态分布"><BR CLEAR="all">
+
+        <P>用图下方的最小 SPL 和最大 SPL 控件，可以修改响应图的显示范围。<BR><BR>
+        <IMG SRC="../../images/roomsimspan.jpg" ALT="房间响应图的 SPL 控件"><BR CLEAR="all">
+
+        <H3><A name="presets">预设</A></H3>
+
+        <P>用图例（legend）下方的按钮，可以保存或载入房间仿真的配置预设，最多 5 组。每组预设包含房间尺寸和吸声系数、声源的选择和位置、麦克风的选择和位置。下次启动时，预设仍会保留。输入的注释也会随预设一起保存。
+
+        <P>预设按钮右侧还有两个按钮：一个把参考曲线设为当前主听音位置的响应，另一个把响应图保存为图片，图片里包含输入的注释。
+
+        <P><IMG SRC="../../images/simpresets.jpg" ALT="仿真预设"><BR CLEAR="all">
+
+        <H3><A name="controls">控件</A></H3>
+
+        <P><A name="modallines"><EM>模态共振线</EM></A>这组控件标出各类模态线对应的颜色，还可以调整线条的透明度。没有勾选的线不会画在图上。<BR><BR>
+        <IMG SRC="../../images/modalres.jpg" ALT="模态共振线"><BR CLEAR="all">
+        <BR>
+
+        <TABLE BORDER="1" CELLPADDING="2">
+            <TR ALIGN="center"><TH>颜色<TH>模态
+            <TR ALIGN="center"><TD>红<TD>轴向（长度）
+            <TR ALIGN="center"><TD>绿<TD>轴向（宽度）
+            <TR ALIGN="center"><TD>蓝<TD>轴向（高度）
+            <TR ALIGN="center"><TD>橙<TD>切向（长度/宽度）
+            <TR ALIGN="center"><TD>品红<TD>切向（长度/高度）
+            <TR ALIGN="center"><TD>青<TD>切向（宽度/高度）
+            <TR ALIGN="center"><TD>灰<TD>斜向
+        </TABLE>
+
+        <P><EM>麦克风位置</EM>这组控件设定各附加听音位置到主听音位置的距离。这些距离也可以在房间视图上拖动十字来调整。<BR><BR>
+        <IMG SRC="../../images/micposns.jpg" ALT="麦克风位置"><BR CLEAR="all">
+
+        <P>在<EM>音箱控制</EM>里可以选择多个声源，其中低音炮最多 8 只。勾选<EM>低音炮相同延迟</EM>后，所有低音炮都使用勾选框旁边的延迟值；不勾选时，每只低音炮使用各自的延迟设置。
+
+        <P>每个声源的低频延伸（low frequency extension）可以单独设置。这是声源开始滚降（roll off）的频率，不是低音管理（bass management）频率；低音管理频率用<EM>包含分频滤波器</EM>控件设置。
+
+        <P>显示的房间响应，是所有选中声源叠加的结果。<BR><BR>
+        <IMG SRC="../../images/speakercontrols.jpg" ALT="音箱控制"><BR CLEAR="all">
+
+        <P>点击相应的按钮，可以把低音炮移到房间角落或墙面中点；也可以把头部移到房间宽度方向的中线上，或移到两只音箱正中间。
+
+        <P>勾选<EM>左音箱移动时同步右音箱</EM>后，移动左音箱时右音箱也会跟着移动，两只音箱之间的距离保持不变。右音箱仍可以单独移动。
+
+        <P>勾选<EM>保持左右音箱对称</EM>后，移动其中任一只音箱，另一只也会跟着移动：两只音箱保持同样的高度和同样的前墙距离，到各自侧墙的距离也相等。
+
+        <P>勾选<EM>显示消声室响应</EM>后，响应图会去掉房间的影响，只留下声源本身的响应。
+
+        <P>各声源可以在主听音位置做时间对齐。如果仿真了多只低音炮，还可以观察逐只单独做时间对齐的效果。请注意，如果多只低音炮是为了尽量减少模态激励（modal excitation）而对称摆放的，就<B>不要</B>对它们逐只单独对齐。
+
+        <P>窗口会显示到各个声源的距离和声音传播时间（time of flight）。修改相应控件，可以观察给各声源加延迟或调增益的效果。
+
+        <P>请注意，仿真会以主听音位置为准，自动对各声源做电平对齐，但所有仿真的低音炮都以相同电平发声。多只低音炮对称摆放、用来减少模态激励和缩小座位之间的差异时，必须让它们电平相同。
+
+        <P><EM>音箱位置</EM>面板列出房间里所有声源的位置。<BR><BR>
+        <IMG SRC="../../images/speakerpositions.jpg" ALT="音箱位置"><BR CLEAR="all">
+
+        <H3><A name="measurements">生成测量</A></H3>
+
+        <P>面板右侧有几个按钮，可以用仿真得到的响应生成测量。<BR><BR>
+        <IMG SRC="../../images/simresponses.jpg" ALT="生成测量的按钮" width="135" height="177"><BR CLEAR="all">
+
+        <P><EM>主麦克风位置合成响应</EM>按钮生成一条测量，内容是所有当前选中的声源同时工作时，主麦克风位置的仿真响应。
+
+        <P><EM>选取麦克风位合成响应</EM>也生成一条测量，内容是所有当前选中的声源同时工作时，各个选中麦克风位置仿真响应的平均值。这条测量还带有一层底色（underlay），标出各个单独响应覆盖的总范围。
+
+        <P><EM>主麦克风位置独立响应</EM>生成一组测量，每个当前选中的声源各一条，内容是这个声源在主麦克风位置单独产生的仿真响应。
+
+        <P><EM>选取麦克风位独立响应</EM>也生成一组测量，每个当前选中的声源各一条，内容是这个声源单独工作时，各个选中麦克风位置仿真响应的平均值。每条测量同样带有底色，标出各个单独响应覆盖的总范围。
+
+        <P>生成的测量里包含房间尺寸以及音箱和麦克风的位置。在 SPL & 相位图的图表选项里勾选<EM>显示房间面板</EM>，图上就会显示房间布局的平面视图，也就是生成这条测量时所用的布局。这个视图的高亮功能与房间仿真里的视图相同，只是不能改动位置。<BR><BR>
+        <P><IMG SRC="../../images/roomsimplan.jpg" ALT="生成的测量"><BR CLEAR="all">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

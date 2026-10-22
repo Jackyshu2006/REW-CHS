@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>View Preferences</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">View Preferences</A></H2>
+
+        The View Preferences control the appearance of REW<BR><BR>
+
+        <IMG SRC="../../images/viewsettings.jpg" ALT="View Preferences" BORDER=0>
+        <BR CLEAR="ALL"><BR>
+
+        <FONT CLASS="heading">Use thick traces</FONT> and 
+        <FONT CLASS="heading">Use anti-aliasing for traces</FONT> improve graph
+        appearance but may result in slow drawing performance on some platforms, 
+        uncheck these options for faster drawing. 
+        <FONT CLASS="heading">Use thicker traces for averages</FONT> uses thicker lines for
+        traces from measurements that are the result of averaging other measurements when 
+        plotting them on overlays or in the measurement thumbnail. 
+        
+        <P><FONT CLASS="heading">Enable mousewheel zoom</FONT>
+        allows the graph to be zoomed in or out using a mousewheel or trackpad.  Hold the shift key to zoom in x axis only.
+        <FONT CLASS="heading">Limit mousewheel zoom rate</FONT> prevents the graph 
+        from zooming in or out too rapidly.
+        <FONT CLASS="heading">Save trace colour with measurement</FONT> includes the trace
+        colour settings in the measurement file. 
+        There are a group of options for highlighted traces. <FONT CLASS="heading">Use thicker traces for highlighting</FONT>
+        helps the highlighted trace stand out, as does <FONT CLASS="heading">Use yellow underlay</FONT>.
+        <FONT CLASS="heading">Show name of highlighted trace</FONT> controls whether the trace name
+        is shown on the graph when a trace is highlighted.
+        If <FONT CLASS="heading">Show watermark text below on graphs</FONT> is selected
+        the text in the watermark text box will appear behind all graphs except for the 
+        waterfall and spectrogram with the opacity set by the <FONT CLASS="heading">Waterfall opacity</FONT> control.
+        <FONT CLASS="heading">Freq axis start (Hz)</FONT> sets the lowest frequency that
+        can be shown on graphs. If <FONT CLASS="heading">Show aspect ratio dB/decade</FONT> 
+        is selected the aspect ratio of frequency response graphs will be shown near the bottom 
+        right corner of the graph when the cursor is over the graph.
+        
+        <P><FONT CLASS="heading">Freq axis preset</FONT> 1 and 2 are buttons that appear on the 
+        graph to allow the frequency axis to be quickly changed between the two preset ranges
+        defined here. The associated IEC 263 aspect ratio will be applied unless the selection is 
+        "As plotted".
+        
+        <P>The <FONT CLASS="heading">Default trace colours</FONT> button brings up a panel
+        to change the default trace colours or reset them to the REW defaults.
+        The r,g,b values for the trace colours are shown when hovering over the colour 
+        buttons. These default colours are remembered for the next time REW starts.
+        Changing the default colours will not alter the trace colours of any measurements
+        already loaded. To change the colours of existing measurements use the trace
+        colour button in the measurement panel right click menu or click the <EM>Set All Trace Colours To Defaults</EM>
+        button on the colour chooser panel.
+
+        <H4>Interface</H4>
+        
+        <P>The <FONT CLASS="heading">Show/hide options</FONT> has a list of settings to show or hide 
+        elements of the interface.
+        
+        <P><FONT CLASS="heading">Don't show the welcome message</FONT> controls whether REW shows a 
+        welcome message when it starts up.
+
+        <P>If <FONT CLASS="heading">Show minor grid lines</FONT> is selected the graphs show minor as well as major grid lines. 
+
+        <P>The grid on the measurement thumbnails can be turned off by unchecking 
+        <FONT CLASS="heading">Show grid on thumbnails</FONT>.
+
+        <P><FONT CLASS="heading">Show toolbar</FONT> controls whether the toolbar appears 
+        below the menu, hiding it makes more room for graphs on low resolution screens.
+        The text under the toolbar buttons can be hidden by unchecking
+        <FONT CLASS="heading">Show toolbar text labels</FONT>. The text under the 
+        graph buttons can be hidden by unchecking <FONT CLASS="heading">Show graph button text labels</FONT>. 
+
+        <P>If <FONT CLASS="heading">Show phase wrap lines</FONT> is selected the wrap points of phase 
+        traces are shown with dashed lines.
+
+        <P>If <FONT CLASS="heading">Show measurement level on thumbnails</FONT> is selected the signal level used for
+        a measurement will be shown on the thumbnail for the measurement.
+
+        <P>If <FONT CLASS="heading">Show measurement index on thumbnails</FONT> is selected (the default) the index of
+        a measurement will be shown on the thumbnail for the measurement. If this option is turned off the index appears 
+        in front of the measurement name instead, which speeds up list changes when working with large numbers of measurements 
+        as the thumbnails do not need to be regenerated.
+        
+        <P>If <FONT CLASS="heading">Confirm unsaved measurement removal</FONT>
+        is checked REW will ask for confirmation if you try to remove a measurement that has 
+        not been saved since it was last modified. This setting can also be changed from the 
+        removal confirmation dialog.
+
+        <P>If <A name="shownotes"><FONT CLASS="heading">Show measurement panel notes</FONT></A> is selected any notes a measurement has will be shown 
+        on the measurement panels, up to the <FONT CLASS="heading">Lines of notes to show</FONT> number of lines.
+        
+        <P>If <FONT CLASS="heading">Show overlay panel notes</FONT> is selected any notes a measurement has will be shown 
+        on the overlay graph measurement panels, up to the <FONT CLASS="heading">Lines of notes to show</FONT> number of lines.
+        
+        <P>If <FONT CLASS="heading">Disable tooltips</FONT> is selected tooltips will not appear when the mouse hovers over a control or component.
+
+        <P>If <FONT CLASS="heading">Opaque control panels</FONT> graph traces will not show through the graph control panels.
+        
+        <P>If <FONT CLASS="heading">Right press to pan</FONT> is selected pressing the right mouse button will activate 
+        graph pan mode. The right click menu will not appear if the graph is panned more than a few pixels.
+        The graph can also be panned by a press and hold of the left button or by Alt + left press.
+        
+        <P><FONT CLASS="heading">Suppress soundcard errors</FONT> stops REW showing error
+        messages or warnings if it cannot access a soundcard on startup, this may be useful 
+        if REW is being used to analyse measurements on a computer without the audio interfaces 
+        needed for making measurements. 
+
+        <P>If <FONT CLASS="heading">Animate measurement list</FONT> is selected changes in the measurements list will be animated.
+
+        <P><FONT CLASS="heading">Full scale sine rms is 0 dBFS</FONT> determines whether the rms
+        level of a full scale sine wave is show as 0 dBFS or -3 dBFS. If this option is selected 
+        the rms level may be greater than 0 dBFS for some signal types, for example,a  full scale 
+        square wave would have an rms level of +3 dBFS.
+
+        <P>If <FONT CLASS="heading">Mousewheel adjusts controls on hover</FONT> is selected spinners and drop-down boxes 
+        can be adjusted by scrolling the mouse when it is over the control. Press the Alt key while scrolling for fine 
+        adjustment. If this option is not selected the mousewheel can still be used to adjust spinners after first selecting them.
+        
+        <P>The <FONT CLASS="heading">Window on top options</FONT> has a list of settings to keep some windows 
+        on top of other windows.
+        
+        <P><FONT CLASS="heading">Colour scheme</FONT> selects the colour scheme to use.
+        Restart REW to update the colours for all components.
+        
+        <P><FONT CLASS="heading">Distance units</FONT> selects whether distances are shown in
+        metres or feet and inches.
+        
+        <P><FONT CLASS="heading">Speed of sound</FONT> selects the value used for the speed of 
+        sound when converting times to distances, calculating modal resonances etc. The default
+        value is 343.0 m/s (approximate speed of sound in dry air at 20 degrees C).
+        
+        <P><FONT CLASS="heading">Tuning frequency</FONT> sets the reference frequency for musical notes,
+        the default is 440 Hz.
+        
+        <P><FONT CLASS="heading">Octave notation</FONT> selects the notation scheme to use when showing
+        musical note names.
+        
+        <P>The <FONT CLASS="heading">Font options</FONT> has a settings affecting the font sizes REW uses.
+        
+        <P><FONT CLASS="heading">General font size</FONT> is the base font size (in points)
+        for REW. <FONT CLASS="heading">Graph font size</FONT> is the font size 
+        used for the graph axes. Those font size changes do not take effect until REW is next 
+        started.
+        
+        <P><FONT CLASS="heading">Maximum measurements</FONT> is the maximum number of measurements
+        that can be loaded in REW. Changes to this value do not take effect until REW is next 
+        started. Note that with a high maximum number of measurements REW could run out of memory,
+        if that occurs it is possible to increase the amount of memory REW requests on startup during 
+        installation.
+
+        <P><FONT CLASS="heading">Max RTA inputs</FONT> and <FONT CLASS="heading">Max level meters input</FONT>
+        set the maximum number of inputs that will be shown when using multi-input capture (Pro 
+        upgrade). Changes to these settings do not take effect until REW is next started.
+                
+        <P>On macOS <FONT CLASS="heading">Use macOS file dialogs</FONT> changes the file 
+        selection dialog to a format more like the native macOS file chooser, but note that the
+        macOS chooser does not have the preview panel which REW uses to show the contents 
+        of mdat, req, calibration data and image files. There have been reports of the native file 
+        chooser sometimes not appearing, if that happens try switching back to the Java file chooser.
+        
+        <P><FONT CLASS="heading">Using AZERTY keyboard</FONT> is an option offered on macOS to work 
+        around a Java bug (JDK-8019498) causing incorrect shortcut key mappings.
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

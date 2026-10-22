@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>All SPL Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">All SPL graph</A></H2>
+        
+        <P><IMG SRC="../../images/allsplplot.jpg" ALT="All SPL Graph"><BR CLEAR="all">
+        <P>The All SPL graph is an overlay graph that shows all measurements (SPL and/or
+        Impedance) that have been made. It allows an average to be generated of all selected
+        traces, arithmetic operations to be carried out on pairs of traces to generate 
+        a new trace, pairs of traces to be aligned and Inter-Aural Cross Correlation 
+        to be calculated for a pair of traces.
+
+        <H3><a name="actions">All SPL actions</a></H3>
+        
+        <P>Right clicking on the graph brings up a menu of actions which are applied to 
+        all measurements selected in the graph legend:
+        <P><IMG SRC="../../images/actionsallspl.jpg" ALT="All SPL Actions"><BR CLEAR="all">
+
+        <UL>
+            <LI>A smoothing action that allows the fractional octave smoothing 
+                setting for all the selected traces to be changed. The 
+                chosen setting is applied using the <EM>Apply</EM> button
+            <LI><EM>Align SPL...</EM>, which adjusts all the selected SPL traces 
+                so that they have the same average SPL over a selected span.
+            <LI><EM>Undo SPL alignment</EM>, which reverts to the original measured levels.
+            <LI><EM>Remove IR delays</EM>, which removes the estimated IR delay for all the currently 
+                selected measurements which have an IR.
+            <LI><EM>Undo t=0 changes</EM>, which resets t=0 to the as measured state.
+            <LI><EM>Time align</EM>, which brings all the currently selected measurements 
+                into time alignment. If the measurements have been made with a timing 
+                reference (a loopback connection or an acoustic timing reference) the
+                impulse response is shifted according to the measurement delay value,
+                taking into account any IR timing offsets which have been applied 
+                since the measurement delay was calculated. Measurements which have been 
+                made without a timing reference are shifted according to the estimated IR 
+                delay. Time alignment can only be applied to measurements that have an impulse 
+                response.
+            <LI><EM>Align IR start</EM>, which aligns all the selected measurements 
+                using their IR start times.
+            <LI><EM>Cross corr align</EM>, which time aligns the selected measurements 
+                by cross correlation of their windowed impulse responses, using the measurement 
+                which appears first in the list of those selected as the reference (the order of 
+                measurements can be changed by dragging them up or down the list). This may be useful 
+                to align measurements from a mic array or measurements of the same source from 
+                different positions prior to vector averaging.
+            <LI><EM>Clear the ref</EM> clears any use of a measurement as a refernece for other measurements 
+            <LI><EM>RMS average</EM>, which calculates an rms average of the SPL values of 
+                those traces which are selected when the button is pressed. This does the same 
+                as the <EM>Average The Responses</EM> button, the dB values are converted to linear 
+                magnitudes, those magnitudes are then squared, summed and divided by the number 
+                of measurements, the square root of the result is taken, then the value is converted 
+                back to dB. Phase is not taken into account, measurements are treated as incoherent. 
+                If only a single trace is selected the result has the magnitude data from the source 
+                measurement and no phase data. If the measurements were made at different positions 
+                (spatial averaging) it is usually best to first use the <EM>Align SPL...</EM> feature 
+                to remove overall level differences due to different source distances. When measurements 
+                with distortion data are averaged their distortion data is also averaged, providing the 
+                data cover the same frequency range at the same resolution.
+            <LI><EM>dB average</EM>, which averages the dB SPL values of the currently selected traces.
+                This produces results that are closer to what one might intuitively expect from 
+                looking at the traces, but gives equal weight to peaks and dips which masks the magnitude
+                difference between them. For example, a +20 dB peak has a magnitude that is 100 times 
+                larger than a -20 dB dip. dB averaging them produces 0 dB, 10 times smaller than the 
+                peak and 10 times larger than the dip. dB averaging may be useful when averaging
+                smoothed traces to derive an EQ target, with unsmoothed data the dips would have
+                a disproportionate effect on the result.  When measurements 
+                with distortion data are averaged their distortion data is also averaged, providing the 
+                data cover the same frequency range at the same resolution.
+            <LI><EM>Vector average</EM>, which averages the currently selected traces taking into
+                account both magnitude and phase. It can only be applied to measurements that 
+                have an impulse response and is most appropriate for multiple measurements taken 
+                from the same position, or measurements which have been time and level aligned
+                before averaging them. When measurements with distortion data are averaged using 
+                Vector average their distortion data is also averaged, providing the measurements 
+                were made at the same sample rate and with the same sweep settings.
+            <LI><EM>RMS + phase avg.</EM> and <EM>dB + phase avg.</EM>, which produce an RMS or dB average 
+                of the magnitudes and use vector average for the phases. They can only be applied to measurements 
+                that have an impulse response. Both are appropriate for multiple measurements of a source. 
+                Measurements should be time and level aligned before averaging them, cross correlation 
+                alignment is recommended for the time alignment. These averaging methods do not exhibit 
+                the magnitude dips due to phase cancellations that can occur with vector averaging. The 
+                resulting impulse response may have significant acausal content as the relationship between 
+                magnitude and phase that would normally hold is broken. As a result the average requires
+                larger left windows than usual. The effects of any calibration files of the individual 
+                measurements are merged into the resulting impulse response.
+            <LI><EM>Vector sum</EM>, which sums the currently selected traces taking into
+                account both magnitude and phase. It can only be applied to measurements that 
+                have an impulse response.
+            <LI><EM>Export IR WAV</EM>, which saves the impulse responses of the selected measurements to WAV files. 
+            <LI><EM>Export IR txt</EM>, which saves the impulse responses of the selected measurements to text files. 
+            <LI><EM>Export as txt</EM>, which exports the selected measurements to text files. 
+        </UL>
+        
+        <P>The remaining action is:
+        <UL>
+            <li><EM>Alignment tool</EM>, which brings up the Alignment tool dialog
+        </UL>
+        
+        <H3><A name="actionsmultiple">Actions for individual selections</A></H3>
+
+        <P>Right clicking on the selector brings up additional actions that depend on the current graph, 
+        for the All SPL graph there are controls to adjust the SPL offset and to set a measurement as a 
+        reference for other measurements.
+        
+        <P><IMG SRC="../../images/overlayrightclick.jpg" ALT="Overlay selector right click panel for single selection">
+        
+        <P><A name="measasref">If a measurement is set as a reference</A> it has an orange band on the
+        selection list, measurements using another as a reference have a purple band. Those measurements
+        using the reference change their SPL plots to show the difference between them and the reference.
+        
+        <P><IMG SRC="../../images/measasref.jpg" ALT="Overlay selector shpwing a measurement being used as a reference">
+        
+        <P><a name="tracearithmetic">Trace Arithmetic</a> help is <A href="arithmetic.html#top">here</A>.
+
+        <H4><a name="alignmenttool">Alignment Tool</a></H4>
+        
+        <P>The <EM>Alignment tool</EM> allows gain, polarity and delay adjustments to be made to a 
+        pair of measurements with a live preview of the summed result updated as the parameters are 
+        changed (the preview uses log spaced data at 96 PPO so may differ slightly from the final 
+        result). There is also a dotted trace which shows the result of a summation of the measurements 
+        ignoring phase. When the alignment tool is opened the All SPL graph selections change to show 
+        only the traces being aligned. Other traces may be selected in the graph legend if desired. The 
+        original trace selections are restored when the alignment tool is closed.
+        There are two sliders for delay adjustment of the B measurement, one for coarse 
+        adjustment and one for fine to provide a wide manual adjustment range. The delay range the 
+        alignment tool will use when trying to align measurements is set by the <EM>Delay range (ms)</EM>
+        controls. The tool can operate in phase or impulse alignment modes. 
+        <P><IMG SRC="../../images/alignmenttool.jpg" ALT="Alignment tool phase mode"><BR CLEAR="all">
+        
+        <P>The <EM>Aligned copy</EM> buttons generate a copy of the selected measurement with the 
+        alignment gain, delay and polarity selections applied. <EM>Aligned sum</EM> generates
+        a new measurement with the summed results of the alignment settings.
+
+        <H4><a name="alignmenttoolphase">Alignment Tool - phase alignment</a></H4>
+        
+        <P>When <EM>Show phase traces</EM> is selected in phase alignment mode the All SPL graph is 
+        split with the SPL traces at the top and phase traces for the two selected measurements  
+        at the bottom. When <EM>Show summed phase</EM> is selected the phase of the aligned sum
+        is also shown. If <EM>Remove time delay</EM> is selected the impulse responses are shifted 
+        so that the first measurement IR starts at t=0, that can reduce wraps in the phase traces.
+        <P><IMG SRC="../../images/aligntoolphase.jpg" ALT="Alignment tool phase"><BR CLEAR="all">
+        
+        <P>The <EM>Level phase at cursor</EM> button calculates the delay required to bring 
+        the first measurement phase trace to be approximately horizontal around the frequency 
+        of the cursor in the phase trace graph. Both measurements have the same delay applied 
+        so the relative delays required to align them are not affected. Shifting the phase traces 
+        in that way makes it easier to align them. The delay is only used to update the phase 
+        traces, it is <B>not</B> applied when using <EM>Aligned copy</EM> or <EM>Aligned sum</EM>.
+        <EM>Undo levelling</EM> removes the levelling delay from both measurements.
+        
+        <P>The <EM>Align phase slopes at cursor</EM> button calculates the measurement 2 
+        delay required to give both phase traces approximately the same slope around the 
+        frequency of the cursor in the phase trace graph, so they have approximately the 
+        same group delay. Note that the phase traces may still be far apart, particularly 
+        if one measurement is out of phase with the other. In that case inverting one of 
+        the measurements would bring the phase traces closer together.
+        
+        <P>The <EM>Align phase at cursor</EM> button calculates the measurement 2 delay 
+        required to bring both phase traces as close as possible to each other around the 
+        frequency of the cursor in the phase trace graph. Note that a better overall 
+        alignment might be achieved by inverting one of the measurements and then aligning 
+        phase, and/or by manually adjusting the delay.
+        
+        <H4><a name="alignmenttoolimpulse">Alignment Tool - impulse alignment</a></H4>
+        
+        <P><IMG SRC="../../images/alignmenttoolimpulse.jpg" ALT="Alignment tool impulse mode"><BR CLEAR="all">
+
+        <P>When <EM>Show impulse responses</EM> is selected in impulse alignment mode the All SPL graph is 
+        split with the SPL traces at the top and impulse responses for the two selected measurements at the
+        bottom. To perform impulse alignment the responses are filtered at the cursor frequency with a 1/3
+        octave zero phase filter, the filtered responses are then aligned. The time span of the filtered 
+        impulse response graph adjusts to suit the alignment frequency.
+        <P><IMG SRC="../../images/aligntoolimpulse.jpg" ALT="Alignment tool impulse"><BR CLEAR="all"><BR>
+        
+        <P>The <EM>Align IRs at cursor</EM> button applies the filters at the cursor frequency and cross-correlates 
+        the responses to determine their best alignment. The alignment result may require inversion of one of the 
+        responses, which is evident in the impulse response display above. Here is the response after inverting the 
+        polarity of the subwoofer trace.
+        <P><IMG SRC="../../images/aligntoolimpulseinverted.jpg" ALT="Alignment tool impulse inverted"><BR CLEAR="all"><BR>
+            
+        <P>That ability to ignore polarity in finding the best alignment of the responses is an advantage
+        of the impulse alignment mode, but it may struggle to align the filtered responses in an environment 
+        with strong modal resonances near the chosen alignment frequency as the resonance may dominate the
+        filtered response.
+        
+        <H3><a name="allsplcontrols">All SPL Controls</a></H3>
+        
+        <P>The control panel for the All SPL graph has these controls:
+        <P><IMG SRC="../../images/controlsallspl.jpg" ALT="All SPL Controls"><BR CLEAR="all">
+
+        <P>If <EM>Show points when zoomed in</EM> is selected the individual points 
+        that make up the SPL and phase responses are shown on the graph when the zoom 
+        level is high enough for them to be distinguished (which may only be over part 
+        of the plot)
+
+        <P>If <EM>Show frequency bands</EM> is selected the audio frequency bands
+        are shown in a stripe above the graph. The bands are:
+        <ul>
+            <li>Infrasound: below 20 Hz
+            <li>Sub bass: 20 to 60 Hz
+            <li>Bass: 60 to 250 Hz
+            <li>Low midrange: 250 to 500 Hz
+            <li>Midrange: 500 Hz to 2 kHz
+            <li>Upper midrange: 2 to 4 kHz
+            <li>Presence: 4 to 6 kHz
+            <li>Brilliance: 6 to 20 kHz
+        </ul>
+            
+        <P>If <EM>Show modal frequencies</EM> is selected the theoretical modal
+        frequencies for the room dimensions entered in the 
+        <A href="eqwindow.html#modalanalysis">Modal Analysis</A> section of the
+        EQ Window for the currently selected measurement are plotted at the bottom of the graph. 
+
+        <P>When impedance is being plotted the axis has a span from 0 to 1 kohm. If
+        a larger impedance range is required the axis can be switched to logarithmic
+        with a range up to 1 Mohm using the <EM>Use a log axis for impedance</EM>
+        check box. If selected a log axis will be used wherever impedance is plotted.
+
+        <P>The <A name="iec263"><EM>IEC 263 ratio</EM> control</A> allows the graph to be 
+        locked to a specified dB/decade aspect ratio. The aspect ratio is maintained by
+        adjusting the margins around the graph as required.
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the line 
+        type of the graph traces to be changed.
+
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

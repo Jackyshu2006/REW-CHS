@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>导入测量数据</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">导入测量数据</A></H2>
+
+        <P>REW 可以导入其他程序生成的频率响应（frequency response）和阻抗（impedance）测量数据，其中包括 ETF5 测量系统（<A HREF="http://www.acoustisoft.com">http://www.acoustisoft.com</A>）的数据。REW 支持 ETF5 的大多数导出格式，也支持通用的逗号、空格或制表符（Tab）分隔文本文件。
+
+        <P>注意：用 ETF5 测量时，最好使用它的 calibrated SPL（校准 SPL）选项，这样不同声道之间才能比较电平。
+
+        <H3><A name="etfimpulse">ETF *.pcm 格式的脉冲响应</A></H3>
+
+        <P>ETF 的全频段测量可以用 <I>File &rarr; Write Impulse As *.pcm</I> 选项，把脉冲响应（impulse response）导出为 .pcm 原始数据格式。
+
+        <P>在 REW 里，用<EM>文件 &rarr; 导入脉冲响应</EM>命令载入这些文件。导入脉冲响应后，REW 就能用这些数据生成频谱衰减图和瀑布图（导入频率响应文本文件则做不到）。REW 读取文件的前 128k 个样本（采样率为 48 kHz 时约 2.73 秒）。
+
+        <H3><A name="wavimpulse">WAV、AIFF、Flac 或 MP3 格式的脉冲响应</A></H3>
+
+        <P><EM>文件 &rarr; 导入脉冲响应</EM>命令也可以载入以 .wav、.aiff、.mp3 或 .flac 格式保存的脉冲响应。REW 最多可从文件里载入约 60 秒的数据。
+
+        <H3><A name="textimport">频率响应和阻抗文本文件</A></H3>
+
+        <P><EM>文件 &rarr; 导入频率响应</EM>和<EM>文件 &rarr; 导入阻抗测量</EM>两个命令接受扩展名为 .txt、.frd、.dat 或 .zma 的文本文件。
+
+        <P>扩展名为 .zma 时，数据一律按阻抗处理。其他扩展名则看用哪个命令载入：用<EM>导入频率响应</EM>载入就按 SPL 处理，用<EM>导入阻抗测量</EM>载入就按阻抗处理。支持以下格式：
+        <UL>
+            <LI>通用的逗号、制表符、空格或分号分隔文件
+            <UL>
+                <LI>数据按“频率、幅度（SPL 或阻抗）、相位（可选，单位为度）”排列，每行一组数值。
+                <LI>数据点的频率间隔可以任意，但每一行的频率都必须高于上一行，并且至少要有 5 组数据。
+                <LI>只导入以数字开头的行，其他行一律忽略。
+                <LI>用逗号分隔的文件，逗号后面至少要有一个空格。
+                <LI>数值前面的空格会被忽略。
+                <LI>要在数据行上加注释，在最后一个数值后面先加一个制表符、逗号或空格，再写注释。
+            </UL>
+            <LI>ETF5 Low Frequency Room Response（低频房间响应）窗口的 Export Data（导出数据）选项
+            <LI>ETF5 的 Export Bode Response（导出伯德响应）选项
+            <LI>ETF5 Logarithmic Frequency Response（对数频率响应）窗口的 Export Data 选项<BR>
+            <UL>
+                <LI>数据点之间采用三次样条插值（cubic spline interpolation）。
+            </UL>
+        </UL>
+
+        <H4><A name="commaformat">逗号分隔文件格式</A></H4>
+
+        <P>下面是一个格式有效的逗号分隔 SPL 数据示例，不含相位：
+        <PRE>
+            SPL measurements acquired by REW V3.08
+            Source: D:\REW\test files\testfile.txt
+            Format: Comma delimited data
+            Dated: 05-Mar-2005 17:53:56
+            Channel: Left, Bass limited 80Hz
+
+            20.0, 65.01
+            21.0, 65.77
+            22.0, 67.50
+            23.0, 67.93
+            24.0, 68.22
+            25.0, 67.88
+            26.0, 67.92
+            27.0, 68.31, this line has a comment
+            28.0, 69.14
+            29.0, 69.16
+            30.0, 69.29
+        </PRE>
+
+        <P>如果你所在地区用逗号作小数点，为了不产生歧义，最好用制表符、空格或分号作分隔符。
+
+        <H4><A name="spaceformat">空格分隔文件格式</A></H4>
+
+        <P>下面是一段空格分隔格式的阻抗数据，含相位：
+        <PRE>
+            * Measurement data saved by REW V5.00
+            * Source: Line (ESI MAYA44 Audio), no input selected, Right channel, volume: no control
+            * Format:   1M Log Swept Sine, 1 sweep at -30,0 dBFS
+            * Dated: 31-Dec-2010 11:26:49
+            * Sense Resistor: 100.0
+            * Lead resistance: 0.000
+            * Calibration factor: 1.0028
+            * Note: horizontal
+            * Measurement: SPH170 horz
+            * Frequency Step: 0.36621094 Hz
+            * Start Frequency: 1.8310547 Hz
+            *
+            * Freq(Hz) Z(Ohms) Phase(degrees)
+            1.831 6.423 5.392
+            2.197 6.444 6.426
+            2.563 6.481 7.302
+            2.930 6.522 8.049
+            3.296 6.558 8.714
+            3.662 6.586 9.368
+            4.028 6.609 10.076
+            4.395 6.632 10.864
+            4.761 6.664 11.706
+            5.127 6.705 12.549
+            5.493 6.753 13.346
+            5.859 6.803 14.082
+            6.226 6.851 14.777
+            6.592 6.896 15.467
+            6.958 6.939 16.180
+            7.324 6.985 16.919
+            7.690 7.034 17.669
+            8.057 7.089 18.409
+            8.423 7.147 19.126
+            8.789 7.207 19.822
+            9.155 7.269 20.505
+            9.521 7.332 21.181
+            9.888 7.398 21.851
+        </PRE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

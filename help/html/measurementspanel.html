@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Measurements Panel</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Measurements Panel</A></H2>
+        
+        <P>The Measurements Panel shows the measurements which have been made or
+        loaded and information about them, including a thumbnail of the frequency 
+        response. The name of the file the measurement was loaded from or has been 
+        saved to (if it has been saved) is also shown. Individual measurements are 
+        selected by clicking on them. Measurement notes can be shown in the list using
+        the View preference <A href="view.html#shownotes">Show measurement panel notes</A>
+        or by hovering the mouse over a measurement, when they will appear in a tooltip.
+        
+        <P>Measurements can be rearranged by dragging them to a new position in the 
+        list, either individually or by selecting multiple measurements by Ctrl+left
+        click or Shift + left click and dragging the group. If the measurement list
+        has focus (blue border around the current selection) keyboard shortcuts to
+        select all (Ctrl+A), cut (Ctrl+X) and paste (Ctrl+V) may also be used. Pasted
+        measurements are placed before the currently selected measurement or, if there 
+        is no current selection, at the end of the list.
+        
+        <P><IMG SRC="../../images/measurementspanel.jpg" ALT="Measurements panel">
+
+        <H3><A name="collapsed">Collapsed view</A></H3>
+
+        <P>The measurement panels can be made narrower to provide more screen area for the 
+        graph, click the <EM>&lt;&lt;</EM> button to narrow the panel.
+        <P><IMG SRC="../../images/measpanelcollapsed.jpg" ALT="Measurement panel collapsed">
+        
+        <H3><A name="groups">Measurement groups</A></H3>
+
+        <P>Measurements can be assigned to groups to help manage long lists of measurements.
+        The groups can be expanded or collapsed by clicking on the arrow next to the group name.
+        Groups appear in alphabetical order, ahead of any measurements that are not in a group.
+        Groups may have a colour assigned to them.
+        <P><IMG SRC="../../images/measpanelgroups.jpg" ALT="Measurement panel groups">
+            
+        <P>Clicking on a group shows buttons to save or remove the measurements in the group.
+        <P><IMG SRC="../../images/groupsaveremove.jpg" ALT="Save or remove measurements in a group">
+        
+        <H3><A name="addtogroup">Adding measurements to groups</A></H3>
+
+        <P>The measurement right click menus have <EM>Add to group</EM> actions to assign
+        a measurement or all the currently selected measurements to a group. 
+        <P><IMG SRC="../../images/addtogroup.jpg" ALT="Add a measurement to a group">
+        
+        <P>The <EM>New group...</EM> brings up a dialog to provide a name for the new group
+        and optionally assign the group a colour and add some notes.
+        <P><IMG SRC="../../images/newgroup.jpg" ALT="Make a new a group">
+        
+        <H3><A name="groupactions">Group actions</A></H3>
+
+        <P>The groups button <IMG SRC="../../images/groupsbutton.jpg" ALT="Groups button" BORDER=0>
+        brings up a menu of group actions. 
+        <P><IMG SRC="../../images/groupactions.jpg" ALT="Group actions">
+
+        <P>The various <EM>Add all...</EM> entries allow measurements of different types to 
+        be assigned to a group. 
+        
+        <P>The <EM>Make groups from filenames</EM> option will generate groups with the names 
+        of the currently loaded files (and any new files as they are loaded) and put the measurements 
+        in the corresponding group <I>unless</I> the measurements are already in a group.
+        
+        <P>The groups menu for overlay graphs (including All SPL) has a different option, 
+        <EM>Select group measurements on expand</EM>. If that option is selected all measurements
+        in a group will be selected when the group is expanded, otherwise the measurements will
+        initially be unselected and afterwards will restore their previous selection state.
+        
+        <H3><A name="managegroups">Manage groups</A></H3>
+
+        <P>The <EM>Manage groups</EM> action brings up a table of all the groups REW has seen,
+        allowing their names to be edited by double-clicking on a table cell. Rows 
+        of the table can be selected and the corresponding groups removed if they are no longer 
+        wanted. The table can be resized.
+        <P><IMG SRC="../../images/managegroups.jpg" ALT="Manage groups" BORDER=0>
+        
+        <H3><A name="editgroup">Editing an individual group</A></H3>
+
+        <P>Right clicking on an individual group entry brings up a panel to edit the group's
+        title and/or notes. Ctrl+TAB and Ctrl+Shift+TAB can be used to tab between the fields 
+        and cycle through the various groups currently loaded. The group notes can be formatted
+        with bold, italic or underline text by selecting the text and using the buttons below 
+        the panel. Links can be included by typing or pasting the link and pressing space. 
+        <P><IMG SRC="../../images/editgroup.jpg" ALT="Manage groups" BORDER=0>
+        
+        <H3><A name="filtered">Filtered view</A></H3>
+
+        <P>The list of measurements can be filtered to only show some types of measurements
+        or measurements whose names contain the entered text. The background of some measurement 
+        types is tinted to help distinguish them, unless they are part of a group which has
+        its own colour.
+
+        <P><IMG SRC="../../images/measpanelfilters.jpg" ALT="Measurement panel filters">
+        
+        <H3><A name="actions">Measurement actions</A></H3>
+
+        <P>Right clicking on a measurement panel brings up a set of controls to save, 
+        remove, change the trace colour, lock the measurement, add it to a group, change the 
+        measurement's name, view and edit its notes and apply other actions. The panel 
+        also shows the mic/meter and soundcard calibration files that were used (hover 
+        the mouse over that text area to bring up a tooltip that shows the full text width).
+        When the panel opens the measurement name will be selected, ready for editing. Use Ctrl+TAB
+        to move from the name to the notes area. Ctrl+TAB again will update the panel for the
+        next measurement in the list, wrapping around at the end. Use Ctrl+Shift+TAB to move 
+        backwards through the panel/list. To quickly edit just the measurement's name right click 
+        over the name area, a text field will be shown to edit the name.
+
+        <P><IMG SRC="../../images/measpanelrightclick.jpg" ALT="Measurement Panel right click panel">
+
+        <P>The text box at the top of the right click panel is used to change the
+        name of the measurement. The length of the name is limited to the width of
+        the box. If a blank name is entered, "No Description" is used. The name is
+        shown in blue for new measurements or measurements with unsaved changes.
+
+<!--        <P><A name="disable">Disabled</A> measurements
+        are skipped when using the next/previous measurement shortcuts (Alt+up/down and 
+        Ctrl+up/down) and are not shown on overlay graphs. All measurements can be 
+        re-enabled via the <EM>Enable all measurements</EM> action or by using the 
+        Ctrl+E shortcut. The Ctrl+D shortcut disables the currently selected measurement. -->
+        
+        <P><A name="locked">Locked</A> measurements cannot be deleted, the remove 
+        action is disabled and a padlock icon is shown on the measurement panel. All 
+        measurements can be unlocked via the <EM>Unlock all measurements</EM> action
+        or by using the Ctrl+U shortcut. The Ctrl+L shortcut locks the currently selected 
+        measurement.
+        
+        <P>The other actions for each selected measurement are:
+        <ul>
+            <li><EM>Invert</EM> to change the polarity of the measurement
+            <li><EM>EQ</EM> to open the EQ window with the measurement selected
+            <li><EM>Add to group</EM> to put the measurement in a group (select "None" to
+                remove it from any group)
+            <li><EM>Change cal</EM> to bring up a dialog to load, update or clear
+                the calibration data files for the mic/meter or soundcard or to select whether
+                a C-weighted SPL meter was used for the measurement. Note that changing the
+                calibration data or C-weighted setting will clear any waterfall, decay or 
+                spectrogram plots that have been generated as they would no longer show 
+                valid data. Other affected plots will be regenerated using the new cal data.
+                <BR><BR><IMG SRC="../../images/changecaldialog.jpg" ALT="Change Cal dialog"><BR clear="all">
+            <li><EM>Response copy</EM> to make a copy that has the same 
+                response as the measurement - the copy has the same impulse 
+                response and calibration data as the original but does not include 
+                distortion data or equaliser settings, for example
+            <li><EM>Mic in box corrn</EM> to make a measurement that has 
+                the SPL data of the source with a correction to compensate for the
+                measurement being made using the microphone in box method, adding an offset
+                of 40*log10(f/f0) where f0 is a nominal reference frequency, which has 
+                been set to 50 Hz. The result would usually be merged with a far field 
+                measurement.
+            <li><EM>Excess phase copy</EM> to copy the excess phase response to use in 
+                calculations - the copy is the original measurement divided by a minimum 
+                phase version of the measurement
+            <li><EM>Min phase copy</EM> to make a copy of the minimum phase response to use in 
+                calculations - the copy has a minimum phase impulse response and the 
+                same magnitude response and calibration data as the original. See
+                <A href="graph_splphase.html#minphase">Generating minimum phase</A>"
+                for details.
+            <li><EM>Magnitude copy</EM> to make a copy that has the same magnitude
+                response as the measurement but no impulse response or phase response
+            <li><EM>Merge cal to IR</EM> makes a copy that has the same 
+                response as the measurement but with an impulse response that includes the 
+                effect of the measurement's cal files. There might be artefacts in the
+                impulse response if the cal data has large roll-offs. Note that the new 
+                measurement will include the distortion data of the original, but the 
+                fundamental for that distortion data will remain unchanged.
+            <li><EM>Trim IR to windows</EM> makes a copy with an impulse response that is shortened to the smallest power of
+                2 that covers the windowed span, starting at the beginning of the left window. 
+                This might be useful for shortening an IR before export or to shorten the IR from 
+                an arithmetic result that produces a long IR.
+        </ul>
+        
+        <H3><A name="actionsmultiple">Measurement actions for multiple selections</A></H3>
+
+        <P>Right clicking on a measurement panel after multiple measurements have been
+        selected (by Ctrl+left click or Shift+left click) brings up a set of actions to 
+        save, remove, lock, unlock, change colour, change cal data or make response copies 
+        for the selected measurements.
+        
+        <P><IMG SRC="../../images/measpanelrightclickmultiple.jpg" ALT="Measurement Panel right click panel for multiple selections">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

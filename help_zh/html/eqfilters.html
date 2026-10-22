@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>EQ 滤波器</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">EQ 滤波器面板</A></H2>
+
+        <P>点击 EQ 窗口顶部的 EQ 滤波器按钮，即可打开 EQ 滤波器面板。<BR><BR>
+        <IMG SRC="../../images/eqfiltersbtn.jpg" ALT="EQ 滤波器按钮" width="79" height="22">
+        <BR CLEAR="all"><BR>
+
+        <P>面板显示当前测量的滤波器设置。面板左侧的按钮用来载入、保存、重置滤波器，或把滤波器设置复制到剪贴板，还可以打开面板本身的设置。
+
+        <P>面板上显示测量名和均衡器名。均衡器可以在 EQ 窗口右侧的<A HREF="equaliser.html#top">均衡器</A>面板里更换。
+
+        <P>面板还显示这组滤波器所需的动态余量（headroom）。只有这组滤波器叠加后的总响应带有增益（某处高于 0 dB）时，这个值才会大于零。另外还显示当前用了多少个 biquad（二阶滤波单元）。
+
+        <P>用<EM>全部显示</EM>和<EM>全部隐藏</EM>按钮，可以一次显示或隐藏所有滤波器的控件。单击某个滤波器，可以单独显示它的控件；双击则再次隐藏。
+
+        <P>滤波器可以按所选的排序方向（升序或降序）和排序依据（频率、增益、Q 值、带宽或面积）排列。鼠标停在某个滤波器的控件上时，滤波器调整图上会高亮显示这个滤波器的响应。<BR><BR>
+        <IMG SRC="../../images/eqfilterspanel.jpg" ALT="EQ 滤波器面板（显示控件）">
+        <BR CLEAR="all"><BR>
+        <IMG SRC="../../images/eqfilterspanelhidden.jpg" ALT="EQ 滤波器面板（隐藏控件）">
+        <BR CLEAR="all"><BR>
+
+        <P>无论滤波器的控件是显示还是隐藏，只要鼠标停在数值框或下拉框上，就可以用滚轮改变其中的数值。不需要这个功能时，在设置 → 视图里取消勾选<EM>鼠标悬停时滚轮调整控件</EM>。需要微调时，按住 Alt 键再滚动滚轮。
+
+        <H3><A name="settings">滤波器面板设置</A></H3>
+        <BR>
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD width='110'><IMG SRC="../../images/eqfilterspanelsettings.jpg" ALT="EQ 滤波器面板设置" ALIGN="left">
+            <TD VALIGN="top">点击齿轮图标，打开滤波器面板的设置。<BR><BR>
+            每个滤波器的启用/禁用按钮上都画着该滤波器的响应图。响应图的 dB 范围可以在面板设置里用响应上限、响应下限调整；取消勾选<EM>显示滤波器响应</EM>，则不再画响应图。<BR><BR>
+            响应图正中是滤波器的中心频率（centre frequency），两侧显示多宽的频率范围，由<EM>响应比例</EM>设置决定。这个设置用的是宽高比（aspect ratio），而不是固定的频率跨度。因此，即使改了响应图的 dB 范围，或者隐藏控件后按钮变窄，响应曲线的形状也保持一致。<BR><BR>
+            <EM>并排微调按钮</EM>选项决定数值控件旁边按钮的样式：勾选时是左右并排的加、减按钮，调起来更方便；不勾选时是上下叠放的箭头按钮，更紧凑。
+            </TABLE>
+
+        <H3><A name="controls">滤波器控件</A></H3>
+        <BR>
+
+        <TABLE BORDER="0" CELLPADDING="2" width='100%'>
+        <TR>
+            <TD width='110'><IMG SRC="../../images/filtercontrols.jpg" ALT="滤波器控件" ALIGN="left">
+            <TD VALIGN="top">每个滤波器都有以下控件：
+           <UL>
+               <LI>一个启用/禁用按钮。按钮上有滤波器编号和一幅响应预览图，预览图的颜色与滤波器调整图上显示各滤波器单独响应时所用的颜色相同。
+               <LI>一个滤波器类型下拉框，可选项取决于所选的均衡器。有些均衡器只提供峰值滤波器（peaking filter），按型号不同，分别标为 PK、PEQ 或 Peaking。<BR><BR>
+               有的均衡器还提供“Modal”（模态）滤波器类型。它是一种峰值滤波器，REW 会自动调整它的带宽或 Q 值，使其符合设定的目标 T60 衰减时间（decay time）。已知某个模态共振（modal resonance）的衰减时间时，可以用它精确抵消这个共振。<BR><BR>
+               通用均衡器提供的滤波器类型很多；扩展均衡器还包括高阶滤波器。
+               <LI>中心频率或转折频率（corner frequency）、增益，以及 Q 值、带宽或其他控件。具体有哪些控件，取决于滤波器类型和所选的<A HREF="equaliser.html#top">均衡器</A>。
+               <LI>一个“自动 EQ”勾选框，决定是否允许 REW 在自动 EQ 目标匹配中使用这个滤波器。不勾选时，匹配目标的过程中不会改动这个滤波器，手动做的调整因此得以保留。
+           </UL>
+        </TABLE>
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

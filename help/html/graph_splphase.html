@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>SPL and Phase Graph</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">SPL and Phase Graph</A></H2>
+        
+        <P><IMG SRC="../../images/splphaseplot.jpg" ALT="SPL and Phase Graph"><BR CLEAR="all">
+        <P>The SPL and Phase plot (or Impedance and Phase for an Impedance measurement) 
+        shows the frequency and phase responses of the measurement. The frequency 
+        response is labelled with the measurement name, the phase response uses a 
+        dotted trace and the right hand plot Y axis. The left hand Y axis can be set 
+        to show dB SPL, dBFS, dBr, dB V/V, dBu, dBV, dBW, volts/&radic;(Hz), watts or, for impedance traces, 
+        ohms. The dBr and dB V/V values are effectively a transfer function view, showing
+        either the relative input to output dBFS levels (dBr) or voltage levels (dB V/V). 
+        Values for dBW and watts are derived from the measured voltages using the reference 
+        impedance value in the RTA Appearance settings. The volts/&radic;(Hz) axis option is 
+        only valid for RTA measurements.
+        
+        <P>For stepped level measurements the graph will show a plot of the input level versus
+        the generator level, and a linearity plot showing the ratio of input level to generator
+        level. There is an option in the graph controls to normalise the linearity trace so that 
+        it is at 0 dB at the end of the trace.
+        
+        <P>For impedance measurements the magnitude, phase and resistance (real part) of 
+        the impedance can be plotted, along with the Equivalent Peak Dissipation Resistance 
+        (EPDR). EPDR is used to evaluate how difficult a load a speaker's impedance presents
+        by showing the resistance that would result in the same output device peak power 
+        dissipation as the speaker load at a given frequency, see E. Benjamin, "Audio Power 
+        Amplifiers for Loudspeaker Loads", JAES, Vol.42 No.9, September 1994. 
+        
+        <P>when the mouse cursor is within the graph panel for an impedance measurement
+        the equivalent series resistance + inductance or resistance + capacitance
+        and parallel resistance||inductance or resistance||capacitance of the impedance 
+        at the cursor position is shown at the bottom left corner 
+        of the graph. This may be useful when making measurements of inductors or 
+        capacitors to check their value, but the 
+        <A HREF="#componentmodel">Component Model</A> provides a much more accurate equivalent circuit.<BR>
+        <IMG SRC="../../images/impedancereadout.jpg" ALT="Impedance Readout" width="500" height="303">
+        <BR CLEAR="all">
+
+        <P>Note that to have valid phase 
+        information it is necessary to remove any time delays from the Impulse Response. 
+        A time delay causes a phase shift that increases with frequency - for example, 
+        a delay of just 1 ms results in a phase shift of 36 degrees at 100Hz but 3,600 
+        degrees at 10kHz, because 1 ms is 1/10th of the 10 ms period of a 100Hz signal 
+        but is 10 times the 0.1 ms period of a 10kHz signal, and each period is 360 
+        degrees. The time delay of a measurement can be adjusted by changing the zero 
+        position of the time axis using the <EM>Offset t=0</EM> controls, or by using 
+        the <EM>Estimate IR delay</EM> control (<FONT CLASS="keys">Ctrl+Alt+E</FONT>),
+        both described <A HREF="#controls">below</A>.
+
+        <P>In addition to the measured phase, the plot can show minimum and excess 
+        phase plots that result from generating a minimum phase version of the response,
+        described further below. The plot also shows any mic/meter or soundcard 
+        calibration data for the measurement. The calibration data can be changed 
+        or removed by selecting <EM>Change cal</EM> in the measurement panel right click menu.
+
+        <H3>Minimum Phase/Excess Phase</H3>
+        
+        <P>If the <EM>Generate minimum phase</EM> action has been used to produce
+        a minimum phase version of the response the minimum and excess phase traces
+        are activated. The minimum phase trace shows the lowest phase shift a system 
+        with the same frequency response as the measurement could have, while the 
+        excess phase trace shows the difference between the measured and minimum phase. 
+        Note that it is best to make full range measurements if the minimum phase response 
+        is to be generated as a good result relies on measuring far beyond the bandwidth 
+        of the system being measured. Even then there are limits to the accuracy of minimum 
+        phase responses generated from sampled data, particularly at frequencies above 
+        about one quarter of the sample rate. There are options to improve the result,
+        for details see <A href=#minphase>Generating minimum phase</A> below. For more 
+        about minimum and excess phase and group delay see <A HREF="minimumphase.html#top">Minimum Phase</A>. 
+        
+        <H3><A name="calresponse">Mic Cal</A></H3>
+
+        <P>The Mic Cal trace shows the frequency response of the Mic calibration
+        data for this measurement (the calibration file to use for new measurements 
+        is specified in the <A HREF="calfiles.html#top">Cal files</A> 
+        Preferences). If <EM>C Weighted SPL Meter</EM> was selected this curve 
+        will show the effect of C weighting (outside the range of the calibration 
+        data file, if there is one). The trace is not shown if there is no mic/meter 
+        calibration data. The trace is drawn relative to the middle of the graph.
+
+        <H3><A name="sccalresponse">Soundcard Cal</A></H3>
+
+        <P>The Soundcard Cal trace shows the measured frequency response of the
+        soundcard relative to its level at 1kHz (if a calibration file has been 
+        loaded via the <A HREF="soundcard.html">Soundcard</A> Preferences). 
+        The trace is not shown if cal data has not been loaded.  The trace is drawn relative to the middle of the graph.
+
+        Fractional octave smoothing can be applied or removed via the
+        <A HREF="graph.html#onesmooth">Graph</A> menu and its 
+        <A HREF="shortcuts.html#top">shortcut keys</A>. The smoothing is applied
+        to the SPL, phase and Group Delay traces. This is mainly used for full range
+        measurements, as reflections can cause severe comb filtering which makes it
+        difficult to see the underlying trend of the response. Smoothing should
+        rarely be used for low frequency measurements as it obscures the true shape
+        of the response. When smoothing has been applied an indicator appears in the
+        trace legend.
+
+        <H3><A name="metrics">Graph metrics</A></H3>
+        
+        <P>If a frequency range is selected by holding the shift key then pressing and 
+        dragging with the left mouse button a best-fit line for the selected range is 
+        displayed, with lines above and below it to show +3 dB and -3 dB. The slope of
+        the line in dB/octave is shown (if the frequency axis is logarithmic) along
+        with the span of the data relative to the best-fit line and the minimum, maximum
+        and average of the range. The range can be adjusted after selection by dragging 
+        the start or end of the area, or the whole range can be moved.
+        <P><IMG SRC="../../images/splphasemetrics.jpg" ALT="SPL and Phase metrics"><BR CLEAR="all">
+
+        <H3><a name="actions">SPL and Phase actions</a></H3>
+        
+        <P>Right clicking on the graph brings up a menu of actions:
+        <P><IMG SRC="../../images/actionssplphase.jpg" ALT="SPL and Phase actions"><BR CLEAR="all">
+            
+        <ul>
+            <li>The smoothing box allows the graph smoothing to be changed
+            <li>The SPL offset control offsets the measurement's SPL data either 
+                temporarily or (by using <EM>Add to data</EM>) permanently. The offset 
+                value moves the graph position (when the Y axis is SPL), but does not alter the 
+                data so the legend values do not change. If the <EM>Add to data</EM> 
+                action is pressed the current offset value is transferred to the measurement 
+                data and the legend readings will update accordingly.
+            <li>The <A name="scaleircontrols"><EM>Scale FR Peak</EM> control</A> adjusts 
+                the SPL offset to achieve a desired maximum SPL figure in the frequency response. 
+                This may be useful to adjust levels for an imported impulse response, for
+                example. The <EM>Apply</EM> button carries out the scaling.
+            <li><EM><A name="tzero">Offset t=0</A></EM> allows the position of time zero in the impulse response 
+                to be altered, with a live preview of the effect the offset will have on phase. 
+                The measurement is not changed unless either the <EM>Apply</EM> or <EM>Apply &amp; close</EM>
+                button is pressed on the adjustment dialog. There are two sliders for offset adjustment, 
+                one for coarse adjustment and one for fine to provide a wide adjustment range. Fine adjustment of 
+                either slider can be made with the left and right arrow keys after clicking on the 
+                slider knob. The sliders can also be adjusted with the mouse scroll wheel, holding 
+                the Alt key provides fine adjustment in that case. If a timing reference was used 
+                the System Delay figure (which can be viewed in the measurement Info panel) is 
+                shifted by the same amount as the zero time. The cumulative shift that has been 
+                applied to the impulse response is shown at the top of the dialog.
+                <BR><BR><IMG SRC="../../images/t0offsetdialog.jpg" ALT="t=0 offset dialog"><BR CLEAR="all">
+            <li><EM>Invert</EM> inverts the polarity of the measurement which shifts the phase values by 180 degrees.
+            <li><EM>Set t=0 at IR peak</EM> sets t=0 to the peak of the IR.
+            <li>The phase trace normally wraps at +180/-180 degrees. This is because 
+                phase is cyclic over a 360 degree range (+90 is the same phase as -270). 
+                The trace can, however, be displayed without wrapping which is what the 
+                <EM>Unwrap Phase</EM> action does. A difficulty with unwrapped phase is knowing
+                where the correct zero phase is, another is being able to view parts of 
+                the trace where the unwrapped value has become very large. The unwrapped
+                phase is offset (by a multiple of 360 degrees) so that it is within the 
+                range -180..180 degrees at the cursor frequency. <EM>Wrap Phase</EM> changes 
+                the phase trace back to a conventional wrapped view with 
+                <A href=view.html#phasewraplines>optional</A> vertical lines where the trace 
+                crosses 180 or -180 degrees.
+            <li>The <EM>+360</EM>and <EM>-360</EM> actions shift the unwrapped phase trace 
+                in 360 degree steps.
+            <li><EM>Align SPL...</EM> adjusts the measurement so that the average SPL 
+                over a selected span is a specified level. <EM>Undo SPL alignment</EM>
+                reverts to the original measured level.
+            <li><EM>Estimate IR delay</EM> (<FONT CLASS="keys">Ctrl+Alt+E</FONT>) calculates 
+                an estimate of the time delay in the measurement by comparing it with 
+                a minimum phase version. The delay it calculates can be removed from the 
+                impulse response by pressing the <EM>Shift IR</EM> button on the panel 
+                shown after the delay is calculated. Note that shifting the impulse 
+                response will clear any spectrogram which had been generated as the 
+                plot would no longer be valid.
+            <li><EM>Set t=0 at IR peak and update timing offset</EM> sets t=0 to the peak of the IR
+                and adjusts the timing offset on the Measure dialog so that subsequent measurements
+                apply the same timing shift.
+            <li>The <EM>Generate minimum phase</EM> action brings up a dialog to configure the
+                settings for producing the minimum phase response. Minimum phase generation is not 
+                possible for some types of measurement (stepped sine, multi-input average, impedance).
+                There is a full explanation <A href="#minphase">below</A>.
+            <li><a name="adjustaverage">Multi-input average</a> measurements have an 
+                <EM>Adjust average</EM> action  
+                which brings up a dialog that allows the SPL alignment and weighting of the 
+                individual inputs to be adjusted before the average is recalculated. The
+                <EM>Revert to measured</EM> button on that dialog removes all SPL alignment offsets and
+                recalculates the average. The check boxes next to the weightings provide a 
+                quick way to exclude an input from the average, deselecting a box sets the 
+                weighting for that input to zero and recalculates the average and the overall 
+                min/max spread for the measurement. Selecting the box again sets the weighting 
+                to 1. When the mouse is over a check box the response for that input is shown 
+                on the graph.
+                <BR><BR><IMG SRC="../../images/adjustaverage.jpg" ALT="Multi-input averaging adjustments" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        </ul>
+        
+
+        <H3><a name="controls">SPL and Phase controls</a></H3>
+        
+        <P>The control panel for the SPL and Phase graph has these controls, there may 
+         be more or fewer controls depending on the measurement type.
+        <P><IMG SRC="../../images/controlssplphase.jpg" ALT="SPL and Phase controls"><BR CLEAR="all">
+
+        <P>If <EM>Show points when zoomed in</EM> is selected the individual points 
+        that make up the SPL and phase responses are shown on the graph when the zoom 
+        level is high enough for them to be distinguished (which may only be over part 
+        of the plot)
+
+        <P>If <EM>Show frequency bands</EM> is selected the audio frequency bands
+        are shown in a stripe above the graph. The bands are:
+        <ul>
+            <li>Infrasound: below 20 Hz
+            <li>Sub bass: 20 to 60 Hz
+            <li>Bass: 60 to 250 Hz
+            <li>Low midrange: 250 to 500 Hz
+            <li>Midrange: 500 Hz to 2 kHz
+            <li>Upper midrange: 2 to 4 kHz
+            <li>Presence: 4 to 6 kHz
+            <li>Brilliance: 6 to 20 kHz
+        </ul>
+        
+        <P>If <EM>Show note name</EM> is selected the musical note corresponding to the cursor 
+        frequency is shown on the graph.
+            
+        <P><EM>Show phase zero line</EM> is selected a line is drawn at the zero phase position, 
+        this may not coincide with a grid line as the grid lines are linked to the left hand 
+        graph axis. 
+        
+        <P>The <EM>Hide phase below</EM> and <EM>Hide phase above</EM> settings allow the phase 
+        trace to be hidden outside the selected range. That reduces visual clutter where the magnitude 
+        falls to the noise floor, for example.
+            
+        <P><EM>Show room panel</EM> is only shown for measurements generated from 
+        the <A href="modalsim.html#measurements">Room simulator</A>. If selected a plan
+        view of the room configuration used to generate the simulated response is shown.
+        
+        <P><IMG SRC="../../images/roomsimplan.jpg" ALT="Room plan view"><BR CLEAR="all">
+        
+        <P><EM>Show distortion panel</EM> is only applicable for measurements saved from 
+        the RTA with valid distortion data. If selected the distortion information is shown.
+        
+        <P>If <EM>Show modal frequencies</EM> is selected the theoretical modal
+        frequencies for the room dimensions entered in the 
+        <A href="eqwindow.html#modalanalysis">Modal Analysis</A> section of the
+        EQ Window (or in the Room simulator for responses generated from there) 
+        are plotted at the bottom of the graph. 
+        
+        <P>When impedance is being plotted the linear axis has a span from 0 to 1 kohm. If
+        a larger impedance range is required the axis can be switched to logarithmic
+        with a range up to 10 Mohm using the <EM>Use a log axis for impedance</EM>
+        check box. If selected a log axis will be used wherever impedance is plotted.
+
+        <P>The <A name="iec263"><EM>IEC 263 ratio</EM> control</A> allows the graph to be 
+        locked to a specified dB/decade aspect ratio. The aspect ratio is maintained by
+        adjusting the margins around the graph as required.
+        
+        <P>The <EM>Trace options</EM> button brings up a dialog that allows the colour and line type 
+        of the graph traces to be changed. If a change is made to a measurement trace it will be 
+        used for all measurements shown on this graph, overriding the measurement colour. Traces 
+        can also be hidden, which will remove them from the graph and from the graph legend.
+        
+        <P>If <EM>Overlay model traces</EM> is selected for an impedance measurement and a
+        component model has been generated the model magnitude and phase will be overlaid on 
+        the measured traces as dashed lines.
+        
+        <H3><a name="componentmodel">Component model</a></H3>
+        
+        <P>The <EM>Component model</EM> button is only shown 
+        for impedance measurements and only enabled for measurements of inductors or capacitors. 
+        REW identifies the measurement as being of a capacitor if the phase at 20 Hz (or the 
+        start of the measurement, if higher) is below -60 degrees, or an inductor if the phase 
+        at the end of the measurement is above 45 degrees. For those measurements pressing 
+        the button will carry out a curve fit over the range from 10 Hz to 20 kHz for inductors 
+        or 100 Hz to 20 kHz for capacitors (or the measurement range if smaller) to derive 
+        equivalent circuit component values. Measurements should span at least those ranges, 
+        preferably beyond them so that the model behaviour can be seen beyond the fit range. 
+        The equivalent circuit is shown below the button. The equivalent circuit impedance 
+        and phase are shown as dashed lines overlaying the measured traces if <EM>Overlay 
+        model traces</EM> is selected in the graph controls. When measuring 
+        components make sure the component lead length is close to the length it will have 
+        in circuit, otherwise the measurement will include lead resistance and inductance 
+        which will not be present when the part is used. 
+        
+        <P>For capacitors the equivalent circuit is a series combination of a resistor 
+        (the ESR), a capacitor and an inductor (likely to be very small at audio frequencies, 
+        not shown if less than 1 nH). The ESR value is likely to be over-estimated for very 
+        small capacitors (below 100 nF or so) as the impedance at the end of the model fit range 
+        (20 kHz) is still quite high, so it is limited to 1 ohm maximum in those cases. 
+        If the option to <EM>Model capacitor dielectric loss</EM> is selected
+        an additional R and C may be included in parallel with the capacitor, to capture the effects of
+        dielectric loss. The dielectric loss components are omitted if the loss capacitance is 
+        less than 0.1% of the main capacitance. The series R is omitted if it is less than 1 milliohm.
+        Whilst accounting for the dielectric loss usually 
+        gives a more accurate fit to the impedance data the equivalent circuit becomes more complex 
+        and does not yield a single capacitor value to use. A combined Csum capacitance value is 
+        shown, but this may only be valid at low frequencies. The best option if a single figure 
+        is required is to use the impedance readout value shown at the bottom left of the graph 
+        when the cursor is at the frequency of interest. The images below show results without 
+        and with dielectric loss components.
+        <P><IMG SRC="../../images/equivcctcap.jpg" ALT="Capacitor equivalent circuit"><BR CLEAR="all">
+        <P><IMG SRC="../../images/equivcctcapda.jpg" ALT="Capacitor equivalent circuit with dielectric loss"><BR CLEAR="all">
+        
+        <P>For inductors the equivalent circuit is an LR2 model consisting of a series 
+        resistor, a series inductor and a resistor and inductor in parallel. 
+        <P><IMG SRC="../../images/equivcctind.jpg" ALT="Inductor equivalent circuit"><BR CLEAR="all">
+
+        <H3><A name = "minphase">Generating minimum phase</A></H3>
+        
+        <P><EM>Generate minimum phase</EM> will produce a minimum phase version
+        of the measurement. Using this control also generates a minimum phase 
+        impulse plot and, for measurements that already had an impulse response
+        or phase data, minimum and excess phase and group delay plots. If the measurement did not 
+        have an impulse response but did have phase data an impulse response is generated
+        using the original phase data. If the measurement only had SPL data the minimum 
+        phase impulse is set as the IR for the measurement, this allows an IR and phase 
+        to be produced for measurements which do not have them, such as imported text files.
+        
+        <P>If the system that was measured was inherently minimum phase (as most 
+        crossovers are, for example) the minimum phase response should be the same as 
+        removing any time delay from the measurement. Individual driver measurements 
+        are usually minimum phase, but multi-driver loudspeaker measurements are 
+        usually not. Room measurements are typically not minimum phase except in 
+        some regions, mainly at low frequencies. For more about minimum and excess 
+        phase and group delay see <A HREF="minimumphase.html#top">Minimum Phase</A>.
+        
+        <P>There are limits to the accuracy of the minimum phase response that can 
+        be generated for sampled data systems which mean they may not reflect the 
+        true minimum phase response of the system being measured, particularly at 
+        frequencies above about one quarter of the sample rate. DAC reconstruction 
+        and ADC antialias filters are commonly not minimum phase and have very 
+        steep roll-offs, so results for systems whose bandwidth exceeds half 
+        the sample rate will be affected by them. REW's responses are generated by
+        using the FFT, which means they will have zero phase at DC and half the 
+        sample rate. REW uses the real cepstrum to produce its minimum phase response.
+        
+        <P><IMG SRC="../../images/minphasedialog.jpg" ALT="Minimum phase dialog"><BR CLEAR="all">
+
+        <P>If <EM>Include cal file effects</EM> is selected the response used to generate the 
+        minimum phase will include any calibration files the measurement has. That means their
+        influence will become part of the minimum phase impulse response. Note that measurement
+        impulse responses themselves do not include cal file effects. 
+        
+        <P>If the measurement does not cover the full frequency span from 0 to half the sample 
+        rate, or the device response drops into the noise floor at its extremes, there are options 
+        to define what data the minimum phase calculation should use outside the measurement range
+        or the valid range of the measurement. The first option is to <EM>Replicate data outside range</EM>,
+        which repeats the measurement start value for frequencies below the start frequency and the
+        end value for frequencies above the end frequency. This may be useful for measurements that
+        cover a limited frequency span, or have been imported from text files with a limited span.
+        
+        <P>An alternative is to add 'tails' to the measurement at low frequencies, high frequencies
+        or both. Some systems will have a known low frequency roll-off. For example, sealed box
+        loudspeakers ultimately roll off at 12 dB/octave, while ported loudspeakers typically roll 
+        off at 24 dB/octave (in both cases below their respective resonant frequencies). The measured
+        low frequency response can be replaced by a tail with a user-defined slope to facilitate the
+        generation of an accurate low frequency minimum phase response. To help with this a slope
+        overlay is shown at the cursor position, indicating the local slope of the response. 
+        <P><IMG SRC="../../images/slopeoverlay.jpg" ALT="Cursor slope overlay"><BR CLEAR="all">
+            
+        <P>A tail may also be added at high frequencies, though the results may be less successful
+        if the bandwidth of the system being measured is not far below the sample rate. If a high 
+        frequency tail is being added REW will oversample the response by a factor of 4
+        to reduce the influence of the sample rate. There is also an option to 
+        <EM>Apply frequency warping to HF tail</EM> which replicates the effect approaching 
+        half the sample rate typically has on the slopes of digitally-generated filters.
+        
+        <P>The images below show the effect of adding tails to a crossover response measurement.
+        The tails are overlaid on the measurement in cyan. The result is very good, but this is an
+        ideal case for the high frequency behaviour since the crossover was measured at 96 kHz and 
+        rolls off from 1 kHz, so the measurement bandwidth far, far exceeds the system bandwidth.
+        <P><IMG SRC="../../images/notails.jpg" ALT="Minimum phase without tails"><BR CLEAR="all">
+        <P><IMG SRC="../../images/tails.jpg" ALT="Minimum phase with tails"><BR CLEAR="all">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

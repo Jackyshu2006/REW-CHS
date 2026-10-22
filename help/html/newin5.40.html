@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>What's new in REW V5.40</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">What's new in REW V5.40</A></H2>
+        
+        <P>V5.40 adds a new measurement method, <A href="fsafmeasurement.html">Fast Subband Adaptive Filtering (FSAF)</A>;
+            <A href="api.html">an API</A>; <A href="measurementspanel.html#groups">measurement groups</A>; 
+            replaces the measurement list with a <A href="measurementspanel.html">new version</A>
+            that better supports drag and drop and offers multiple selection, cut and paste 
+            keyboard shortcuts and filtering; replaces Actions panels by 
+            <A href="measurementspanel.html#actions">measurement</A> and 
+            <A href="graph_splphase.html#actions">graph</A> right click menus; 
+            and adds a 3D view for waterfalls and spectrograms. The Java runtime 
+            has been updated to Java 17.
+
+        <H3><A name="pro">Pro version</A></H3>
+        
+        <ul>
+            <li>Added a tool for calculation of <a href="sti.html">speech transmission index</A> 
+                by the indirect method per IEC 60268-16:2020
+            <li>Multi-input capture has options to align the individual measurements to the 
+                first input's measurement using cross correlation alignment and to vector 
+                average the individual measurements
+        </ul>
+
+        <H3><A name="api">API</A></H3>
+        
+        <ul>
+            <li>Added: <A href="api.html">An API</A> accessible over http at <FONT class="endpoint">localhost (127.0.0.1)</FONT>, 
+                the default port is 4735.
+        </ul>
+
+        <H3><A name="sweep">Measurement</A></H3>
+        
+        <ul>
+            <li>Added: Measurement with arbitrary stimuli (including music and noise) using 
+                the <A href="fsafmeasurement.html">Fast Subband Adaptive Filtering</A> process 
+                developed by Michael Tsiroulnikov aka Michael Zrull.
+            <li>Added: A ramped levels measurement mode to make a series of measurements over a 
+                range of stimulus levels
+        </ul>
+
+        <P>Other measurement-related changes include:
+        <ul>
+            <li>Added: Output level can be appended to the measurement name
+            <li>Added: Low input level warning messages can be disabled by not selecting 
+                "Warn if input levels are low" on the Measure dialog
+            <li>High distortion and low SNR warning messages can be disabled on the Measure dialog
+            <li>Changed: Longer measurement names are allowed, but the name will be truncated if 
+                necessary in graph legends
+            <li>Changed: SPL log includes the rolling Leq figure in the Leq trace name and 
+                file header if rolling is selected
+            <li>Changed: Stepped IMD distortion with the X axis set to "Input" is plotted 
+                against the input rms level rather than the IMD reference tone level as previously
+            <li>Changed: Frequency-dependent windows are used to reduce the noise floor of sweep 
+                distortion measurements, preventing the noise floor rising with frequency
+        </ul>
+
+        <H3><A name="audio">Audio interface</A></H3>
+        
+        <ul>
+            <li>Added: <A href="soundcard.html#virtualbalanced">Virtual balanced input</A>
+                on the Soundcard preferences has a sum/diff mode selection to control 
+                whether the balanced input is added or subtracted
+            <li>Changed: Sample format info in the status bar includes the buffer size 
+                when using ASIO
+            <li>Changed: Java output channel mapping supports up to 24 channels
+        </ul>
+
+        <H3><A name="eq">EQ</A></H3>
+        
+        <ul>
+            <li>Added: AirDSP by Acoustas equaliser entries
+            <li>Added: MiniDSP Tide-16 equaliser entry
+            <li>Added: ETON Audio equaliser entries
+            <li>Added: Sonance/Blaze equaliser entry
+            <li>Added: ESX Audio equaliser entries
+            <li>Added: Musway equaliser entries
+            <li>Added: Support for Q-SYS biquad coefficient format when saving generic 
+                equaliser coefficients to file
+            <li>Added: There is an "EQ only" StormAudio equaliser entry that has 20 filters,
+                but no crossover filters
+            <li>Added: The EQ window filter adjust graph has an action to copy filters 
+                from another measurement
+            <li>Added: The filter adjust graph has an option to choose whether the filter 
+                settings are shown when editing filters graphically
+            <li>Changed: StormAudio equaliser limits and filter types updated
+            <li>Changed: Do not show message for changes in configurable equaliser settings
+            <li>Changed: Use stochastic optimiser for configurable equalisers with frequency 
+                step 1 Hz or greater
+            <li>Changed: Draw filter responses relative to the total target response level 
+                at 1 kHz rather than relative to the target level figure
+            <li>Changed: Equalisers that run at the rate of the measurement (e.g. Generic) 
+                will default to the REW sample rate when no measurements are loaded
+        </ul>
+
+        <H3><A name="ir">Impulse responses</A></H3>
+        
+        <ul>
+            <li>Added: There is a <A href="impulseresponse.html#mtw">multi-time window</A>
+                option for impulse responses, whose width is specified at octave centre frequencies
+            <li>Added: Left and right window positions can be set by clicking in the area above 
+                the impulse graph
+            <li>Added: "Show reflection limits" option for the Impulse and Filtered IR graphs 
+                to overlay the thresholds for the audible effects of a single lateral reflection 
+                in an anechoic space (Olive & Toole, 1989)
+            <li>Changed: Offset t=0 window for overlays has "Apply &amp; prev" and "Apply &amp; next" 
+                buttons to step through the measurements
+            <li>Changed: The IACC calculation window is called up from the Tools menu
+        </ul>
+        
+        <H3><A name="allspl">All SPL graph and its tools</A></H3>
+        
+        <ul>
+            <li>Added: A measurement can be set as a reference for other selected measurements 
+                on the All SPL and Overlay SPL graphs
+            <li>Added: The <A href="graph_allspl.html#alignmenttool">alignment tool</A>
+                has controls to set the allowed delay range
+            <li>Added: Alignment tool in phase alignment mode has a check box for whether the 
+                summed phase trace should be shown
+            <li>Added: The alignment tool has an option to remove any common time delay between 
+                the measurements being aligned so that the first IR starts at t=0, this may 
+                reduce phase wraps
+            <li>Added: Vector sum action in All SPL graph to add multiple measurements
+            <li>Added: Some arithmetic operations have an option to control whether the result 
+                should span the overlapping frequency range of the traces or their combined 
+                range (which is the default)
+            <li>Added: All SPL measurement right click menu has an action to make a measurement 
+                the current selection for individual graphs
+            <li>Added: All SPL measurement list has a button to sort the measurements alphabetically by name
+            <li>Changed: Cross corr align improved for measurements with strong reflections
+            <li>Changed: Alignment tool phase alignment emphasises phase match nearer to the 
+                alignment frequency
+            <li>Changed: Alignment tool phase alignment uses a 1/2 octave span either side 
+                of the alignment frequency
+            <li>Changed: Trace arithmetic division uses a maximum gain figure instead of a 
+                regularisation figure
+            <li>Changed: Gain limiting for trace arithmetic division and inversion can be 
+                disabled by deselecting the Max gain checkbox
+            <li>Changed: For division with frequency limits the target outside the limits 
+                is unity gain and zero phase
+            <li>Changed: Response copies include the distortion data of the source
+        </ul>
+
+        <H3><A name="spectrogram">Spectrogram and Waterfall</A></H3>
+        
+        <ul>
+            <li>Added: 3D view for waterfall and spectrogram
+            <li>Added: The spectrogram contour intervals include 3 and 6 dB options
+            <li>Added: The waterfall can be normalised to the peak at each frequency
+            <li>Added: Waterfall and spectrogram have an "Apply settings to all" button 
+                to replicate settings to other measurements
+            <li>Added: Burst decay waterfall and spectrogram plots have more octave fraction choices
+        </ul>
+        
+
+        <H3><A name="siggen">Overlays window</A></H3>
+        
+        <ul>
+            <li>Added: Level and Linearity overlay plots for stepped level measurements
+            <li>Added: Overlay SPL, Prediced SPL and Distortion have a button to view sets 
+                of measurements as a 3D surface
+            <li>Added: Offset t=0 for a measurement on impulse overlay shifts the 
+                trace live as well as showing the phase impact
+            <li>Added: Overlay graph trace options include measurement name
+            <li>Added: Show a message on the distortion overlay graph if the measurement 
+                selections do not have the chosen distortion measure
+            <li>Added: Overlay window measurement list has a button to sort the measurements alphabetically by name
+            <li>Added: The right click menu for overlay graph measurements has a "Copy selections info to clipboard" action
+            <li>Changed: Overlays have a new way of selecting what measurements appear 
+                on them, a condensed version of the new measurements list
+            <li>Changed: When an mdat file is loaded the overlays selections it had 
+                when saved will be restored
+        </ul>
+        
+        <H3><A name="siggen">Signal generator</A></H3>
+        
+        <ul>
+            <li>Added: Signal generator has a musical note selector
+            <li>Added: The generator can produce uncorrelated noise signals
+            <li>Added: The generator can produce Gaussian noise signals
+            <li>Added: Signal generator Speech noise signal per IEC 60268-16:2020
+            <li>Added: The jitter test signal can be chosen as 16-bit or 24-bit
+            <li>Changed: The repeat interval for the CEA-2010 burst matches the RTA 
+                FFT length (with a minimum of 1 second)
+            <li>Changed: Increased voltage presets on FS sine Vrms field to 8
+        </ul>
+
+        <H3><A name="spl">SPL meter</A></H3>
+        
+        <ul>
+            <li>Added: The SPL meter can show SPL, Leq and SEL at the same time with independent weighting for each
+            <li>Fixed: Clicking Calibrate on the SPL meter with a calibrated UMIK on 
+                macOS would request a cal file when it should say cal is not required
+        </ul>
+
+        <H3><A name="rta">RTA</A></H3>
+        
+        <ul>
+            <li>Added: Stepped sine measurement has a THD vs frequency & level option to 
+                make a series of stepped THD vs frequency measurements over a range of signal levels
+            <li>Added: The RTA distortion settings have a <A href="spectrum.html#crosscorr">Cross correlation averaging</A> 
+                option to reduce input noise when measuring a signal that is connected 
+                to both the measurement and reference inputs
+            <li>Added: Stereo WAV files dropped on the RTA can be processed using 
+                cross correlation averaging
+            <li>Added: The RTA has a <A href="spectrum.html#peakfinder">peak finder</A>
+                to identify peaks in the spectrum
+            <li>Added: RTA has an option in the graph controls to stop the generator 
+                when the RTA stops
+            <li>Added: Amplitude correction for the RTA ENOB figure can be turned off 
+                in the distortion settings
+            <li>Added: The appearance settings have an option to overlay the hearing threshold 
+                if the Y axis is SPL
+            <li>Added: The distortion settings have a "Show note name" option to label the 
+                fundamental with the corresponding musical note
+            <li>Added: RTA multi-input capture shows individual peak traces for the first two inputs
+            <li>Changed: RTA max SPL limits for CEA-2010 burst can be either CEA 2010 (2006), 
+                CTA-2010-B or CTA-2034-B
+            <li>Changed: Custom two-tone signals with a 4:1 amplitude ratio are treated 
+                as modulation distortion measurements for the purpose of deciding the frequencies for d3, d4 and d5
+            <li>Changed: Increased voltage presets on FS sine Vrms field to 8
+            <li>Changed: RTA option to stop at a number of averages can be used with file data
+            <li>Changed: Revised the calculation of harmonic levels for harmonics close to 
+                the noise floor to reduce the noise contribution
+            <li>Changed: The control for the ref resistance for power figures has moved to 
+                the RTA toolbar for faster access
+        </ul>
+        
+        <H3><A name="scope">Scope</A></H3>
+        <ul>
+            <li>Scope has a Save button that saves the visible portion of the current traces as measurements
+        </ul>
+        
+        <H3><A name="rt60">RT60 graphs</A></H3>
+        <ul>
+            <li>Added: Option to overlay the EBU RT60 limits on the individual and overlays RT60 graphs
+            <li>Added: Control for the nominal RT60 value for the EBU limits overlay
+            <li>Added: Overlay RT60 graph has a "Copy the average to the clipboard" action
+            <li>Added: Show a warning if the Analysis preferences IR truncation setting is too 
+                short for accurate RT60 results
+            <li>Changed: The RT60 decay upper graph has the same SPL span and time 
+                span as the waterfall below, with a small additional margin
+            <li>Changed: Allow Topt to show an RT60 result even if the decay within the span 
+                is small. This may salvage some data from measurements made with the Analysis 
+                IR truncation preference set too short for the space being measured.
+        </ul>
+        
+        <H3><A name="export">Data import and export</A></H3>
+        
+        <ul>
+            <li>Added: Support for importing Flac and MP3 files
+            <li>Added: Support for importing lspCAD convolution impulse .txt and 
+                emulator impulse .txt files
+            <li>Added: IR text export header includes the data offset figure, that offset 
+                will be used if the file is later imported
+            <li>Added: Audio Science Review SPL Vertical.txt and SPL Horizontal.txt
+                measurement results can be imported
+            <li>Added: The Captured graph has options in the right click menu to export 
+                the stimulus, captured or reference signals as WAV files
+            <li>Added: Dropped files with a header line containing "freq" and "ohm" are 
+                treated as impedance data
+            <li>Changed: If the Ctrl key is held while dragging WAV, AIFF, Flac or MP3 
+                files onto the main REW window they will be treated as audio imports instead 
+                of IR imports
+            <li>Changed: Imported text files that are impedance data exported from REW or data
+                exported from DATS are treated as impedance data when dragged and dropped onto REW
+            <li>Changed: Sorting the names of imported files uses alphanumeric comparison instead of lexicographic
+        </ul>
+
+        <H3><A name="prefs">Preferences</A></H3>
+        
+        <ul>
+            <li>Added: View preferences has a "Use large icons" option in the Graph 
+                section to facilitate touch screen use
+            <li>Added: View preferences to show notes on the measurement panels and 
+                overlay measurement panels and choose how many lines of notes to show
+            <li>Added: There are View preferences to set the tuning frequency for musical 
+                notes (default is 440 Hz) and choose the octave notation style
+            <li>Added: View preferences has a watermark opacity control
+            <li>Changed: Right press to pan can be turned off in the View preferences
+            <li>Changed: When the "Enable mousewheel zoom" View preference is not 
+                selected the mouse wheel may still be used to zoom by scrolling on the axes
+        </ul>
+        
+            
+        <H3><A name="interface">Interface</A></H3>
+        
+        <P>There are a variety of additions and changes to the user interface:
+            
+        <ul>
+            <li>Added: UI text has been extracted to properties files in a "bundles" 
+                folder allowing other languages to be supported
+            <li>Changed: Replaced the measurement list with a new version that better 
+                supports drag and drop and offers multiple selection, cut and paste 
+                keyboard shortcuts (when the list has focus) and filtering
+            <li>Changed: Actions panels have been replaced by right click menus for 
+                graphs for quicker access to the actions
+            <li>Added: Measurements can be grouped
+            <li>Added: Toolbar icon for trace arithmetic
+            <li>Added: The top of the impulse response graph magnitude plot can be 
+                set manually or automatically
+            <li>Added: There is a checkbox in the SPL &amp; Phase graph controls to select 
+                whether or not to show the component model overlay on impedance traces
+            <li>Added: Ctrl+TAB and Ctrl+Shift+TAB can be used to navigate through the 
+                measurements right click panel fields and then the list of measurements
+            <li>Added: The SPL &amp; Phase graph has an option to show the musical note 
+                corresponding to the cursor frequency
+            <li>Added: Clicking on the Max SPL figure at the bottom of the main REW 
+                window will open the cal settings panel for the input
+            <li>Added: Show full path for entries in recently used files list as tooltips
+            <li>Added: Prevent users from saving files to the REW temp folder
+            <li>Added: A custom clarity trace with a control to set the division 
+                between early and late time in the graph controls
+            <li>Added: The full scale input voltage, full scale output voltage and 
+                ref resistance for a measurement can be edited on the Info dialog
+            <li>Added Graph image captures have an option to add a line border
+            <li>Added: SPL & Phase graph has an option to label the distortion components 
+                for RTA spectrum captures
+            <li>Added: The View preferences have a "Frequency band style" entry to choose 
+                a musical or Bark scale
+            <li>Added: The main window status bar shows the FS sine Vrms in and FS sine 
+                Vrms out values, they can be clicked to change them
+            <li>Changed: Graph image captures do not include check boxes and only 
+                include values if the option to include the cursor is selected
+            <li>Changed: Graph image captures remember the comment entered for the 
+                next use of the dialog
+            <li>Changed: Left press and hold can be used to move the graph when using 
+                large graph icons
+            <li>Changed: Restore windows to the screen they were last on
+            <li>Changed: Voltage axis can go up to 1000 V
+            <li>Changed: Room simulator allows sources to be placed with their acoustic 
+                centres flush with room surfaces
+            <li>Changed: Thiele-Small parameters "Write parameters to file" includes 
+                simplified model parameters
+            <li>Changed: When Thiele-Small parameters free air measurement is selected 
+                clear any secondary measurement selections
+            <li>Changed: Trace separation offsets traces upwards instead of downwards 
+                to allow use with impedance traces
+            <li>Changed: The widths of the legend panel entries adapt to accommodate 
+                the longest measurement name
+            <li>Changed: Graph axis select and frequency span buttons are translucent
+            <li>Added: The main window status bar shows the FS sine Vrms in, FS sine Vrms out and dBW ref resistance values, they can be clicked to change them
+            <li>Added: The View preferences show/hide options has a new entry "Show measurement index on thumbnails", selected by default. If this is turned off the index appears in front of the name instead, which speeds up list changes when working with large numbers of measurements as the thumbnails do not need to be regenerated
+            <li>Added: Phase graph controls have options to set frequency limits for the phase traces
+        </ul>
+        
+        <H3><A name="fixes">Bug fixes</A></H3>
+        
+        <P>Finally, there are a number of bug fixes:
+        
+        <ul>
+            <li>Fixed: Preserve relative timing for multi-input captures made without 
+                a timing ref maintains the chosen t=0 reference
+            <li>Fixed: Stepped sine THD results were limited to the 9th harmonic even 
+                if data was captured up to 50th harmonic
+            <li>Fixed: The Remove all confirmation could get stuck behind other windows
+            <li>Fixed: Index out of bounds for some stepped sine test settings
+            <li>Fixed: Prefix meas name with output did not show secondary ASIO output
+            <li>Fixed: Disabled filters were included in Kali Santa Monica exported files
+            <li>Fixed: CEA thresholds overlay for saved CEA2010 measurements was drawn 
+                based on generator frequency instead of the saved data frequency
+            <li>Fixed: The native file dialog on macOS did not pre-populate save dialogs 
+                with the default filename
+            <li>Fixed: Align SPL dialog did not retain the choice of using fixed dB or 
+                average level when next used
+            <li>Fixed: Trace arithmetic results which do not have an impulse response 
+                could have partially unwrapped phase
+            <li>Fixed: Graph capture legend labels could show incorrect smoothing
+            <li>Fixed: Temporary copies of measurements might have incomplete distortion data
+            <li>Fixed: The bottom axis limit setting for the impedance &amp; phase graph 
+                could not be raised from 0 using the spinner buttons when using log impedance axis
+            <li>Fixed: ARTA .pir import was not working properly
+            <li>Fixed: The LFE end frequency could be applied when measuring from file
+            <li>Fixed: The Impulse graph ETC smoothing spinner did not update when 
+                switching between measurements
+            <li>Fixed: The result of an alignment tool sum could have its peak at 
+                the end of the IR if the alignment delay placed it before the start times of the aligned responses
+            <li>Fixed: Predicted phase for imported measurements did not update when 
+                filters were changed
+            <li>Fixed: EQ target match optimiser did not properly manage Q limits 
+                for equalisers using classic Q
+            <li>Fixed: Unintentional scroll events from finger movement on Apple 
+                magic mouse dismissed popups
+            <li>Fixed: Spectrograms for imported audio data may not have started at t=0
+            <li>Fixed: Impulse response import did not use the Analysis preferences 
+                default width for the left window
+            <li>Fixed: RTA was not correctly processing multi-channel WAV files
+            <li>Fixed: RMS+phase and dB+phase averages of measurements whose IRs start 
+                at 0 seconds had left window set to zero
+            <li>Fixed: Filter panel gain spinner buttons stopped working for negative 
+                gains in Macedonian locale
+            <li>Fixed: Generating EQ for measurements with differing configurable 
+                equaliser settings could cause exceptions
+            <li>Fixed: Selecting an ASIO driver did not update the soundcard cal choice
+            <li>Fixed: Peak of rms + phase average IR could end up in the wrong place
+            <li>Fixed: Alignment tool did not use correct phase data if measurements 
+                being aligned had FDW
+            <li>Fixed: Watermark Y position was wrong on graphs that had two graph views
+            <li>Fixed: Magnitude plot cursor position was incorrect on image captures 
+                of the Impulse graph
+            <li>Fixed: "Measure with these filters" caused an exception if there had
+                not been any previous measurements
+            <li>Fixed: Window resizing limits were based on the display used on startup 
+                rather than the current display for the window
+            <li>Fixed: Sample rate was only shown in the status bar when it changed
+            <li>Fixed: Index out of bounds when saving an RTA peak measurement with 
+                multiple inputs and group averages enabled
+            <li>Fixed: Some WAV files could not be opened correctly if the file length 
+                did not match the WAV specification
+            <li>Fixed: Graph smoothing shortcuts on macOS did not work properly
+            <li>Fixed: Phase wraps may not be shown correctly on the predicted phase trace
+            <li>Fixed: Default smoothing was not applied to the group delay of new measurements
+            <li>Fixed: On Linux interfaces could be opened with too many channels if 
+                they declared a very high maximum channel count
+            <li>Fixed: Input cal data panel could appear behind the Measure dialog
+            <li>Fixed: A stepped sine measurement that was stopped due to excessive 
+                clipping would cause an exception
+            <li>Fixed: Allow graphical filter edit with a house curve that has an offset
+            <li>Fixed: Impedance cal measurements did not properly override measurement 
+                sweep frequency range
+            <li>Fixed: Impedance measurement noise filters were not being applied
+            <li>Fixed: Graph x axis frequency presets did not work properly if the 
+                chosen end frequency was too far beyond the range of the loaded measurements
+            <li>Fixed: Trim IR to windows could prepend zero-valued data to the trimmed IR
+            <li>Fixed: Producing a minimum phase response from an imported data file 
+                could generate an index out of bounds exception
+            <li>Fixed: ENOB calculation gave results 0.5 bits higher than they should be
+            <li>Fixed: Trace arithmetic on responses whose IR start times were greater 
+                than zero and whose windowed IRs had little or no overlap in time would produce an error
+            <li>Fixed: Filter text export for LSQ and HSQ shelf filters had incorrect Q values
+            <li>Fixed: Selecting dBr as the Y axis on the SPL &amp; Phase graph for a saved 
+                RTA measurement was not handled correctly
+            <li>Fixed: On macOS and Linux spinners might not commit their edits on loss of focus
+            <li>Fixed: NPE would occur if the EQ window was opened with no measurement 
+                loaded and the filter adjust graph Y axis was dBr
+            <li>Fixed: The t=0 offset phase preview smoothing behaviour did not match 
+                the measurement phase smoothing
+            <li>Fixed: Calculate target level would not adjust the target by more than 
+                100 dB from the current value
+            <li>Fixed: Stepped sine THD measurements should base the fundamental frequency 
+                on the test frequency
+            <li>Fixed: Stepped level measurement X axis limits were set incorrectly on 
+                the SPL &amp; Phase graph
+            <li>Fixed: Sequential channels selection panel on the Measure dialog was 
+                limited to 4 rows
+            <li>Fixed: The d&amp;b tuning filters equaliser entry used classic Q definition, 
+                should be symmetric Q definition
+            <li>Fixed: Moving selected items in the room simulator using the arrow keys 
+                did not update the time delay values
+            <li>Fixed: Impedance measurement level check did not work properly
+            <li>Fixed: Serial number detection was not working for EARS cal files
+            <li>Fixed: Setting a toneburst with a burst length longer than the burst period caused an error
+            <li>Fixed: Stepped IMD plots used total input RMS as the reference level 
+                for dBr and percent instead of the relevant reference for the IMD measure
+            <li>Fixed: The measurement name preview on the Measure dialog did not enforce 
+                the name length limit, name preview now turns red if name is too long and will be truncated
+            <li>Fixed: Poor EQ target match when overall gain was allowed, caused by a fix for 
+                handling Q limits for classic Q in 5.31.2
+            <li>Fixed: |A|/|B| gave incorrect results when using regularisation
+            <li>Fixed: Group delay plots were incorrect when the IR peak was offset from t = 0 by more than a few ms
+            <li>Fixed: Burst decay spectrogram could have a divide by zero error with short IR windows
+        </ul><br><br>
+
+        
+        <P>Copyright &copy; 2026 John Mulcahy All Rights Reserved
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>

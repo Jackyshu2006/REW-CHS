@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>脉冲响应图</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">脉冲响应图</A></H2>
+
+        <P>脉冲响应图显示当前测量的<A HREF="impulseresponse.html#top">脉冲响应</A>（impulse response）。此外，它还可以显示：左、右时间窗（left and right windows），以及时间窗对计算频率响应（frequency response）所用数据的作用；最小相位（minimum phase）脉冲响应；脉冲响应包络（impulse response envelope，ETC）；阶跃响应（step response）。
+        <P><IMG SRC="../../images/impulseplot.jpg" ALT="脉冲响应图"><BR CLEAR="all">
+
+        <P>脉冲响应的 Y 轴可以选 % FS 或 dBFS 两种单位，其中 FS 指满量程（Full Scale）。鼠标指针移到图表区内时，图表左上角会出现一个选择控件，用它来切换。
+
+        <P>dBFS 刻度相当于把脉冲响应先平方、再取对数来看，即英文所说的“log squared”视图。<BR>
+        <IMG SRC="../../images/yaxisselector.jpg" ALT="脉冲响应 Y 轴选择控件"><BR CLEAR="all">
+        <P><IMG SRC="../../images/impulseplotdbfs.jpg" ALT="脉冲响应图（dBFS）"><BR CLEAR="all">
+
+        <H3><A name="navigator">导航器</A></H3>
+
+        <P>脉冲响应图下方有一个导航器（navigator）视图，显示完整的响应，当前显示的那一段会高亮。拖动高亮区域，可以改变显示的位置；在导航器里任意位置单击，显示区就会以单击处为中心。
+
+        <P>鼠标指针停在导航器上时滚动滚轮，图表会沿时间轴缩放，缩放中心是鼠标指针在主图表上对应的时间位置。
+
+        <P>导航器取代了滚动条。如果在图表选项里关掉导航器，滚动条是否重新显示，取决于图表上方滚动条按钮的状态。
+        <P><IMG SRC="../../images/impulsenavigator.jpg" ALT="脉冲响应导航器"><BR CLEAR="all">
+
+        <H3><A name="windowindicators">时间窗标记</A></H3>
+
+        <P>图表上方的标记显示脉冲响应各个时间窗的范围，以及时间窗参考点的位置。在图表上方单击，或者点住标记拖动，都可以修改时间窗设置；松开鼠标按键时，新的数值才生效。
+
+        <P>修改时间窗设置的过程中，新范围以外的区域会显示为阴影，直到设置生效为止。拖动时间窗标记时，脉冲响应下方会预览新设置对 SPL 响应的影响。
+
+        <P>调整时间窗时，最好把 Y 轴设为 dB 刻度。这样更容易看出响应在哪里已经衰减到噪声里。
+        <P><IMG SRC="../../images/impulsewindowpreview.jpg" ALT="调整脉冲响应时间窗"><BR CLEAR="all">
+
+        <P>每次测量后，REW 会自动设定左时间窗的宽度。全频段（full range）测量，以及结束频率不低于 1 kHz 的测量，宽度为 125 ms；结束频率更低时，宽度会相应加大，以容纳扫频范围受限带来的预振铃（pre-ringing）。
+
+        <P>要修改某条测量的时间窗设置，点 <EM>IR 时间窗</EM>按钮：
+        <P><IMG SRC="../../images/irwindowsbtn.jpg" ALT="IR 时间窗按钮"><BR CLEAR="all">
+        <P><IMG SRC="../../images/irwindowcontrols.jpg" ALT="IR 时间窗设置对话框"><BR CLEAR="all">
+
+        <P>在 IR 时间窗设置对话框里，可以定义一组时间窗预设配置：用<EM>保存为预设配置</EM>按钮创建，在预设配置面板里选中即可应用。
+        <P><IMG SRC="../../images/irwindowpresets.jpg" ALT="IR 时间窗预设配置"><BR CLEAR="all">
+
+        <P>脉冲响应反映的是整个系统，包括麦克风／声压计和声卡在内。<B>麦克风／声压计校准文件和声卡校准文件只在计算频率响应时才应用，它们的影响不包含在脉冲响应里。</B>
+
+        <P>不过，<A href=graph_allspl.html#measurementactions>All SPL 图表</A>的图表选项里有一个<EM>合并校准至 IR</EM> 测量操作，可以把校准文件的响应合并进脉冲响应。
+
+        <H3><A name="minphaseir">最小相位脉冲响应</A></H3>
+
+        <P>如果已经用<EM>生成最小相位</EM>，为当前测量的幅度响应（magnitude response）生成了最小相位版本，最小相位 IR 曲线就会启用，显示这个最小相位系统应有的脉冲响应。
+
+        <P>请注意，如果要生成最小相位响应，必须做全频段测量，因为要得到好的结果，测量范围必须超出被测系统的带宽。
+
+        <H3><A name="irenvelope">脉冲响应包络</A></H3>
+
+        <P>脉冲响应的包络也叫能量时间曲线（energy-time curve，ETC），可以用来识别反射，并观察脉冲响应的整体形状。
+
+        <P>下图显示的就是包络。初始峰值之后的那些尖峰，来自房间各个表面的反射。第一个尖峰出现在初始峰值之后 3.25 ms，说明这一路声音多走了 1.11 米（3.7 英尺）才到达麦克风。
+        <P><IMG SRC="../../images/envelope.jpg" ALT="脉冲响应包络" width="400" height="253"><BR CLEAR="all">
+
+        <H3><A name="stepresponse">阶跃响应</A></H3>
+
+        <P>阶跃响应表示：如果输入信号突然跳到某个固定电平、并一直保持在这个电平，系统会输出什么。它是加窗后脉冲响应的积分（integral）。
+
+        <P>如果测量输入链路中存在直流偏移，阶跃响应会随时间推移整体上升或下降，而不是逐渐回到零。
+        <P><IMG SRC="../../images/step.jpg" ALT="阶跃响应" width="400" height="253"><BR CLEAR="all">
+
+        <H3><A name="irdistortion">失真分量</A></H3>
+
+        <P>对数扫频分析法有一个特性：各次谐波失真（harmonic distortion）分量，会以额外脉冲的形式出现在负时间区域，谐波次数越高，相邻脉冲的间隔越小。
+
+        <P>例如，下图是一台笔记本电脑声卡的回环测量，可以看到直到 8 次谐波的各个失真分量形成的尖峰：
+        <P><IMG SRC="../../images/impulseharmonics.jpg" ALT="带谐波峰的脉冲响应" width="380" height="148"><BR CLEAR="all">
+
+        <P>下面是用一块外置 USB 声卡做的类似测量。这块声卡的采样率是 44.1 kHz，不是 48 kHz，所以在脉冲之前那 1 s 里，最多只能看到 6 次谐波。不过，实际看得出来的只有 2、3、5 次谐波的峰；4 次谐波的峰只是勉强高出本底噪声（noise floor）。这块声卡的本底噪声比笔记本声卡低约 10 dB。
+
+        <P>脉冲之后那段拖得较长的波瓣，是因为这块声卡的低频 -3 dB 频率低得多：1.0 Hz，而笔记本声卡是 22.1 Hz。注意，这张图时间轴的右端是 2.0 s，上一张图是 0.5 s。
+        <P><IMG SRC="../../images/impulseharmonicsusb.jpg" ALT="带谐波峰的脉冲响应" width="380" height="148"><BR CLEAR="all">
+
+        <H3><a name="actions">脉冲响应图的操作</a></H3>
+
+        <P>脉冲响应图的右键菜单有以下操作：
+        <P><IMG SRC="../../images/actionsimpulse.jpg" ALT="脉冲响应图的操作"><BR CLEAR="all">
+
+        <P><EM>偏移 t=0</EM> 用来改变脉冲响应中时间零点的位置，并实时预览偏移对相位的影响。只有点<EM>应用</EM>或<EM>应用并关闭</EM>按钮，测量才会真正改变。
+
+        <P>调整偏移量有两种办法：直接输入数值；或者先单击偏移量数值框，再用 ↑ 键和 ↓ 键调整。
+
+        <P>对话框顶部显示已经对脉冲响应施加的累计偏移量。其中也包括：为了把原始实测 IR 对齐到峰值或时间基准（timing reference，如果用了的话）而做过的平移。点<EM>归零累计偏移</EM>按钮，偏移量会自动设为一个值，这个值正好让累计偏移量归零。
+
+        <P>如果测量时用了时间基准，系统延迟数值也会随之平移，平移量与零点相同。系统延迟数值可在测量的信息面板里查看。
+        <P><IMG SRC="../../images/t0offsetdialogIR.jpg" ALT="t=0 偏移对话框"><BR CLEAR="all">
+        <P><IMG SRC="../../images/impulsetzeropreview.jpg" ALT="t=0 偏移预览"><BR CLEAR="all">
+
+        <P><EM>反相</EM>会反转测量的极性（polarity）。
+
+        <P><EM>应用 2 Hz 高通</EM>会对测量施加一个 2 Hz 的零相位高通滤波器（zero phase high pass filter）。如果测量带有直流偏移（DC offset），影响了阶跃响应，这个操作可能有用。<B>这个操作无法撤销</B>，拿不准时，先做一份响应副本，再对副本施加滤波器。
+
+        <P><EM>在光标处设置 t=0</EM> 把零点对齐到当前光标（cursor）所在的位置。
+
+        <P><EM>在 IR 起始处设置 t=0</EM> 把零点对齐到脉冲开始的时刻，也就是脉冲从本底噪声里冒出来的那一刻。
+
+        <P><EM>在 IR 峰值处设置 t=0</EM> 把 t=0 设在 IR 的峰值处。
+
+        <P><EM>撤销 t=0 变更</EM>把 t=0 恢复到测量时的原始位置。
+
+        <P><A name="scaleirdata"><EM>缩放 IR 数据...</EM></A>会弹出一个对话框，可以按选定的增益缩放脉冲响应的数值，也可以让峰值达到指定值。如果已知峰值，把它填进“新峰值”栏，增益会随之自动调整。
+
+        <P>这个操作不影响 SPL 数值：脉冲响应数据改变时，REW 会对 SPL 偏移做相应的补偿。
+        <P><IMG SRC="../../images/scaleirdata.jpg" ALT="缩放 IR 数据对话框"><BR CLEAR="all">
+
+        <P><A name="clockadjustment"><EM>时钟调整</EM></A>适用于用 REW V5.20 beta 2 及以后版本做的对数扫频测量，用来补偿输出设备与输入设备之间的时钟频率（clock rate）差异。
+
+        <P>输出设备和输入设备不是同一台时，两者的时钟可能相差较多，足以让脉冲响应的形状变形，扫频较长时尤其明显。时钟频率的差异影响的是相位响应（phase response），幅度不受影响。
+
+        <P>调整量的单位是百万分率（parts per million，ppm）。调整时钟频率的过程中，会实时预览调整对脉冲响应和相位的影响。只有点<EM>应用</EM>或<EM>应用并关闭</EM>按钮，测量才会真正改变。
+
+        <P>单击滑块的拖动钮后，可以用 ← 键和 → 键做微调。滑块的范围是 -500 到 +500 ppm；需要更大的调整量时，可以先点<EM>应用</EM>，再按需继续调整。累计时钟调整量显示在对话框顶部，也显示在测量的信息面板里。
+
+        <P>请注意，时钟调整的计算量很大，所以显示不会立即更新。
+        <P><IMG SRC="../../images/clockadjustment.jpg" ALT="时钟调整"><BR CLEAR="all">
+
+        <P><EM>估算 IR 延迟</EM>（<FONT CLASS="keys">Ctrl+Alt+E</FONT>）把测量与它的最小相位版本比较，估算出测量中的时间延迟。算出延迟后会弹出一个面板，点其中的<EM>平移 IR</EM> 按钮，就能把这段延迟从脉冲响应中去掉；还可以把这段延迟设为之后测量的时间偏移（timing offset）。
+        <P><IMG SRC="../../images/shiftir.jpg" ALT="估算 IR 延迟"><BR CLEAR="all">
+
+        <P><EM>在 IR 峰值处设置 t=0 并更新时间偏移</EM>把 t=0 设在 IR 峰值处，同时调整测量对话框里的时间偏移，让之后的测量也施加同样的时间平移。
+
+        <P><EM>生成最小相位</EM>会按当前的 IR 时间窗设置，生成测量的最小相位版本。此后，最小相位脉冲响应显示的是这样一个系统的响应：频率响应与测量相同，但相移（phase shift）尽可能小。
+
+        <P>请注意，如果要生成最小相位响应，最好做全频段测量，因为要得到好的结果，测量范围必须超出被测系统的带宽。
+
+        <P>这项功能还会分别在 SPL &amp; 相位图上启用最小相位和多余相位（excess phase）曲线，在群延迟图上启用最小群延迟和多余群延迟曲线。
+
+        <P><B>注意</B>：IR 时间窗设置很重要。最小相位响应是由测量的频率响应（幅度响应）推导出来的，而频率响应又受 IR 时间窗设置影响。之后如果改了时间窗设置，应重新执行一次<EM>生成最小相位</EM>，让结果反映新的设置。
+
+        <P>另外，左时间窗（即作用在峰值之前的那段时间窗）的形状也会影响最小相位的结果。例如，用矩形窗（rectangular window）得到的响应，相移会比用 Hann（汉宁窗）时更小。
+
+        <P>如果被测系统本身就是最小相位系统（例如大多数分频器都是），那么最小相位响应与去掉测量中全部时间延迟后的响应相同。房间测量一般不是最小相位的，只在部分频段例外，主要是低频。关于最小相位、多余相位和群延迟（group delay）的更多内容，见<A HREF="minimumphase.html#top">最小相位</A>。
+
+        <H3><A name="controls">脉冲响应图的图表选项</A></H3>
+
+        <P>脉冲响应图的图表选项里有以下控件：
+        <P><IMG SRC="../../images/controlsimpulse.jpg" ALT="脉冲响应图的图表选项"><BR CLEAR="all">
+
+        <P>脉冲响应可以按峰值归一化（normalisation）后绘制，也可以不归一化，由<EM>绘制归一化 IR 响应</EM>控件决定。选择归一化绘制时，峰值位于 100% 或 0 dBFS。
+
+        <P>阶跃响应可以按它自己的峰值归一化，也可以按脉冲响应的峰值归一化，由<EM>阶跃响应归一化至 IR 峰值</EM>控件决定。
+
+        <P>勾选<EM>显示幅度图</EM>后，脉冲响应图下方会显示该响应的 SPL 幅度图（magnitude graph）。这个视图，与用图表顶部的标记调整 IR 时间窗时看到的视图相同。
+
+        <P><EM>IEC 263 比例</EM>控件设置幅度图的宽高比（aspect ratio），<EM>幅度跨度 (dB SPL)</EM>设置它的 SPL 跨度。勾选<EM>自动设置幅度上限</EM>时，幅度图的顶端自动设定；否则由<EM>幅度顶部 (dB SPL)</EM>设置决定。
+
+        <P>勾选<EM>显示 IR 导航器</EM>后，图表下方会显示导航器视图。
+
+        <P>勾选<EM>显示反射限制</EM>后，图上会从 IR 起始时刻开始，叠加显示消声环境（anechoic）中单次侧向反射（lateral reflection）的可闻阈值（Olive & Toole, 1989）。上面一条是声像偏移或展宽的阈值，下面一条是可察觉阈值。
+
+        <P>勾选<EM>缩放时显示数据点</EM>后，放大到能分辨单个数据点时，图上会画出构成响应的各个数据点。
+        <P><IMG SRC="../../images/showpoints.jpg" ALT="显示数据点"><BR CLEAR="all">
+
+        <P><A name="iec263"><EM>IEC 263 比例</EM>控件</A>可以把幅度图锁定在指定的“dB/十倍频程”宽高比上。REW 会按需要调整图表四周的边距，来保持这个宽高比。
+
+        <P><EM>幅度跨度 (dB SPL)</EM>控件设置幅度图 Y 轴的跨度。
+
+        <P><EM>ETC 平滑处理</EM>用一个移动平均滤波器（moving average filter）对包络（ETC）曲线做平滑处理，滤波器的时长由数值框里的数值指定。
+
+        <P><EM>曲线选项</EM>按钮会打开一个对话框，用来更改图上各条曲线的颜色和线型。改动会应用到这张图上显示的所有测量。
+
+        <P>曲线也可以隐藏。隐藏后，它会从图上和图例中一起消失。
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

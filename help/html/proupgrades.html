@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Pro upgrades</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Pro upgrades</A></H2>
+
+        <P>The REW Pro Upgrade adds features for professional users, including support for capturing
+        from multiple inputs simultaneously and calculation of Speech Transmission Index (STI) by the 
+        indirect method per IEC 60268-16:2020, further features will follow. The Pro Upgrade license 
+        unlocks multi-input capture and STI and will also unlock all future pro features and is a one-time fee.
+
+        <h3>Multi-input capture</h3>
+
+        <P><A HREF="multichannelcapture.html#top">Multi-input Capture</A> allows REW to capture 
+        multiple inputs simultaneously for measurement or for the RTA. Each input can have 
+        its own calibration file. Individual SPL metering is available for the first four inputs,
+        level metering is available for up to 32 inputs. Measurements made with multi-input capture will 
+        show an rms average of all the captured channel magnitudes with an underlay showing the 
+        span of the individual channels and can optionally include individual measurements for 
+        each channel and separately averaged sub-groups of any of the inputs. 
+
+        <P>Multi-input capture would typically be used with a mic array (such as the
+        miniDSP UMIK-X) or a multi-channel interface with multiple analog microphones connected 
+        to it. REW captures a contiguous range of input channels. Whilst it is possible to use 
+        this feature with multiple USB microphones on Windows when using an ASIO wrapper, this is
+        <B>NOT</B> recommended because:
+        <UL>
+            <LI>REW would only be able to access the input volume setting for the first USB mic and
+                would use that to adjust SPL values for all the mics, so all the USB mics would need to have the same
+                OS volume setting
+            <LI>USB mics typically provide a stereo pair of inputs, each carrying the same data, so there would be
+                two identical input captures for each mic
+        </UL>
+
+        <P><IMG SRC="../../images/measresult.jpg" ALT="Multi-input Capture Measurement result" BORDER=0 ALIGN="left" width="500" height="289"><BR CLEAR="All">
+
+        <P>The first and last channels to be captured are selected on the Soundcard preferences
+        or the Measure dialog. The example below shows selection using ASIO drivers, a similar selection
+        is offered for Java drivers. On Windows when using the Java drivers select the WASAPI exclusive device 
+        entries for multi-channel support (entries starting EXCL: in the device selectors). On macOS or Linux 
+        Java drivers offer as many channels as the interface supports. 
+
+        <P><IMG SRC="../../images/multichanselection.jpg" ALT="Input selection" BORDER=0 ALIGN="left" width="500" height="198"><BR CLEAR="All">
+
+        <P>A license is valid for a single user on any computer they use.
+
+        <P><B>The miniDSP UMIK-X multi-channel microphone system <I>includes</I> an REW Pro Upgrade license.</B>
+
+        <P><B>Before</B> purchasing a license make sure that REW functions as required in its default single channel capture mode.
+
+        <P>To enable your license, go to the REW Pro Upgrades menu and select Multi-input capture.
+        Paste in your license code and click Verify license.
+        <P><IMG SRC="../../images/multchan.jpg" ALT="Multi-input capture license dialog" BORDER=0 ALIGN="left"><BR CLEAR="All">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+        
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

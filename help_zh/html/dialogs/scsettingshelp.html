@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>声卡设置初始页面</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+ <BODY LANG="zh-CN" DIR="LTR">
+    请选择您要用于测量的 <FONT CLASS="heading">输出设备</FONT> 与
+    <FONT CLASS="heading">输入设备</FONT>。选定设备后，即可选择特定的 <FONT CLASS="heading">输出</FONT>
+    与 <FONT CLASS="heading">输入</FONT>。用于输出与输入的通道可从输出与输入选项右侧的下拉菜单中选择，大多数输出与输入为立体声，因此您可以选择使用左声道或右声道，或者（仅限输出）同时使用两个声道。某些接口仅提供单声道输入或输出，此时声道选择器将被禁用。
+
+    <P>请确认输入通道已连接至您的声压计（或麦克风前级输出）。若已在 <FONT CLASS="heading">分析设置</FONT> 中勾选 <FONT CLASS="heading">使用回路作为时间基准</FONT>，则另一个通道将用作参考，以消除电脑与接口内部的时间延迟，这需要在参考通道上有回路连接。
+
+    <P>若勾选 <FONT CLASS="heading">虚拟平衡</FONT>，则会提供 <FONT CLASS="heading">平衡输入</FONT> 的选项。平衡输入会根据模式设置与测量输入相加或相减，并将结果乘以 0.5。差值模式可模拟平衡输入的行为，适用于平衡输入由反相信号驱动的情况（例如在信号发生器中选取 <EM>反相第二输出通道</EM> 选项）。
+
+    <P>如果接口（或输入链中的其他设备）将信号反相，请勾选 <FONT CLASS="heading">反相</FONT> 框，让 REW 自动修正反相。若输入有直流偏移，请勾选 <FONT CLASS="heading">高通</FONT> 框，让 REW 自动应用 2 Hz 的高通滤波器。
+
+    <P>若您选择 <FONT CLASS="settings">默认设备</FONT>，REW 将使用您在操作系统中设为默认的设备——在 Windows 下，这些是通过控制面板中的 <B>声音及音频设备</B> 项目指定；在 macOS 下，则是通过“应用程序”->“实用工具”中的“Audio MIDI Setup”工具指定。此时所使用的 <FONT CLASS="heading">输出</FONT> 与 <FONT CLASS="heading">输入</FONT> 将是您在接口混音器中选取的项目。请确认在接口混音器中，输入并未馈入输出信号，且监听功能（若有）已关闭。
+
+    <P>如果您从 REW 的选择框中选择特定的设备、输出与输入，您可以选择一律通过操作系统的控件自行调整音量，或是让 REW 在启动时将其设为上次使用的数值。这由输出与输入音量控件上方的复选框决定。请注意，在某些操作系统或对某些接口，REW 可能无法控制音量，在这种情况下请取消勾选框，或将 <FONT CLASS="heading">输出设备</FONT> 与 <FONT CLASS="heading">输入设备</FONT> 保持设为 <FONT CLASS="settings">默认设备</FONT>。
+
+    <P>输出设备的 <FONT CLASS="heading">缓冲区</FONT> 与输入设备的 <FONT CLASS="heading">缓冲区</FONT> 控件可设置访问接口时所使用的缓冲区大小。默认为 32k（表示缓冲区大小为 32,768 组音频样本）。如果您在信号发生器输出中偶尔遇到断续或中断的情况，请尝试增加输出设备的缓冲区大小，但请注意这也可能有其他原因，例如无线网卡的干扰。同样地，如果采集的音频信号（如示波器图表所示）偶尔有中断情况，请尝试增加输入设备的缓冲区。使用较大的缓冲区会增加延迟（开始与停止播放及录音时的延迟），但通常不会有其他不良影响。如果您没有遇到任何音频输入或输出的问题，可以考虑减小缓冲区大小以将延迟降至最低。
+
+    <P>在进行测量之前，建议使用 <FONT CLASS="heading">校准</FONT> 区域中的 <EM>校准...</EM> 按钮来测量接口，以便补偿接口本身的响应。在进行测量之前，您可以使用 <EM>检查电平</EM> 来确认播放与输入电平设置正确。
+
+    <P>32 位整数的采样格式通常承载 24 位的数据。若将其视为 32 位数据处理，会产生低阶的谐波噪声（约在 -160 dBFS 左右）。为防止此情况，应勾选 <FONT CLASS="heading">将 32 位数据视为 24 位</FONT> 来将其视为 24 位处理。如果设备确实是真正的 32 位，关闭此选项将可获得设备的完整分辨率，但请注意，REW 内部使用 32 位浮点数来分配音频数据，这表示等效的整数动态范围为 25 位。
+
+</BODY>
+</html>

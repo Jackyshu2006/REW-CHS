@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>多通道测量</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">多通道测量</A></H2>
+
+        <P>多通道测量是专业版升级功能，它让 REW 能同时采集多路输入，用于测量或 RTA。每一路输入都可以有自己的校准文件。
+
+        <P>前四路输入可以各自做声压级计量，电平表最多能显示前 32 路输入的电平。
+
+        <P>用多通道测量做出来的测量，图上画的是所有已采集通道幅度的 RMS 平均值，并用底色标出各通道的分布范围；也可以选择把每个通道的独立测量一并保留。
+
+    	<P><IMG SRC="../../images/measresult.jpg" ALT="多通道测量结果" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="inputs">输入通道选择</A></H3>
+
+        <P>要采集的首、末两个通道，在设置 → 声卡、测量对话框或 RTA 输入对话框里选。
+
+        <P>下面的例子用的是 ASIO 驱动，Java 驱动的选择方式与此类似。
+
+        <P>Windows 上用 Java 驱动时，要拿到多通道支持就得选 WASAPI 独占模式的设备条目，也就是设备选择框里以 EXCL: 开头的那几项。
+
+        <P>在 macOS 或 Linux 上，Java 驱动能给出多少通道，取决于音频接口本身支持多少路。
+
+        <P><IMG SRC="../../images/multichanselection.jpg" ALT="多通道输入选择" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="weighting">权重与 SPL 对齐</A></H3>
+
+        <P>每一路输入在平均中占多大权重，可以自行配置。也可以先把各路输入在指定频段内对齐到同一声压级，再做平均，这一步对空间平均（spatial averaging）很有用。
+
+        <P>权重和 SPL 对齐既能在测量之前配置（用测量对话框上的<EM>配置平均</EM>按钮），也能在测量之后调整（用 SPL &amp; 相位图控制面板里的<EM>调整平均设置</EM>按钮）。
+
+        <P>权重配置可以存成四组预设。
+
+        <P>权重旁边的勾选框，是把某一路输入排除出平均的快捷办法：取消勾选，这一路的权重就变成 0；重新勾选，权重回到 1。
+
+        <P>任意几路输入都可以自由组合，定义成自定义的平均分组。
+
+    	<P><IMG SRC="../../images/configureaverage.jpg" ALT="多通道平均配置" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="rta">多通道 RTA 测量</A></H3>
+
+        <P>多通道采集下的 RTA 测量，图上可能出现这几类曲线：各通道幅度的 RMS 平均值；各通道自己的曲线，条数上限由<A href="view.html">设置 → 视图</A>里的输入数决定（默认 16）；已定义的各个平均分组；以及前两路输入的峰值曲线。
+
+        <P>用了平均分组时（无论是按 UMIK-X 模块平均，还是自定义的平均分组），可以把已经并入平均的单路输入隐藏起来，免得图上曲线太乱。
+
+        <P>能同时显示多少路输入，还受计算机运算能力和绘图能力的限制——画得过多会影响数据采集。
+
+        <P>多通道 RTA 测量的保存格式与多通道扫频测量相同，所以采集完之后，同样可以对它做权重和 SPL 对齐的调整。
+
+        <P>勾选<EM>输入保存为独立测量</EM>后，保存当前输入会生成一条平均值测量，外加每一路输入通道各自的测量。
+
+        <P>如果还勾了<EM>平均各 UMIK-X 阵列</EM>或<EM>使用分组平均值</EM>，保存时也会为相应的平均分组各生成一条测量。
+
+        <P>勾选<EM>不绘制属于分组或模块平均的输入</EM>后，凡是已并入平均分组的单路输入，RTA 图上都不再单独绘制；没有并入任何平均分组的单路输入照常绘制。
+
+        <P>权重和 SPL 对齐可以在采集前或采集中配置，用的是 RTA 输入选择对话框上的<EM>配置平均</EM>按钮。
+    	<P><IMG SRC="../../images/rtamultiinputdialog.jpg" ALT="RTA 多通道输入选择对话框" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <P>多通道 RTA 测量只选两路输入时，失真和电平会分别显示，步进正弦测量也可以两路同时做。
+    	<P><IMG SRC="../../images/rtamultiinputdist.jpg" ALT="双输入 RTA 失真" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="sweep">多通道扫频测量</A></H3>
+
+        <P>多通道采集下的扫频测量，可以生成整体平均、分组平均和各路输入的独立测量，具体生成哪些由输入选择面板上的选项决定。
+
+        <P>扫频测量时如果用了时间基准（timing reference），各路独立测量之间的相对时间关系会被保留下来。
+
+        <P>没有用时间基准时，是否保留相对时间关系由<EM>保持相对时间关系</EM>这个选项决定；勾选后，各通道的时间都以第一路输入为基准。
+
+        <P>另外还有两个选项：用互相关（cross correlation）对齐各路独立测量，以及对它们做向量平均（vector average）。如果打算做向量平均，建议同时开启互相关对齐。
+
+        <P><B>请注意：向量平均对所有测量一视同仁，权重完全相同。</B>
+
+    	<P><IMG SRC="../../images/sweepmultiinputdialog.jpg" ALT="测量的多通道输入选择对话框" BORDER=0 ALIGN="left"><BR CLEAR="All">
+
+        <H3><A name="mics">麦克风</A></H3>
+
+        <P>多通道测量的典型配法有两种：一支麦克风阵列（例如 miniDSP UMIK-X），或者一台接了多支模拟麦克风的多通道音频接口。REW 采集的是连续的一段输入通道。
+
+        <P>在 Windows 上通过 ASIO 封装驱动（ASIO wrapper）接多支 USB 麦克风，技术上也能用这个功能，但<B>不推荐</B>，原因有两条：
+        <UL>
+            <LI>REW 只能读到第一支 USB 麦克风的输入音量设置，并拿这一个数值去换算所有麦克风的声压级。所以这些 USB 麦克风在操作系统里的音量必须设成完全一样。
+            <LI>USB 麦克风通常提供一对立体声输入，两路送出的是同样的数据。于是每支麦克风都会占掉两路完全相同的采集通道。
+        </UL> 
+
+        <P>用 miniDSP UMIK-X 时，测量对话框和 RTA 输入对话框里都有选项，可以为每块 UMA4 麦克风阵列上的四支麦克风生成一条平均，同时再生成所有已选输入的整体平均。
+
+        <P>阵列平均测量的名称带前缀：第一块阵列是“A1-”，第二块是“A2-”，依此类推。
+
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+
+    </BODY>
+</HTML>

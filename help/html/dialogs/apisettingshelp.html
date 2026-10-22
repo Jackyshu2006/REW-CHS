@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>API Preferences help</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../../wizstyle.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+
+        <P>REW has a REST API accessible over http at <FONT class="endpoint">localhost (127.0.0.1)</FONT>, the default 
+        port is 4735. It cannot be accessed outside the machine REW is running on. Port numbers between 1024 and 65535 
+        may be entered in the port field to specify a port for REW to use. To start the API server use the button above 
+        or select the <FONT CLASS="heading"><A name="apionstartup">Start the API when REW starts</A></FONT> option or 
+        run REW with the <FONT class="cmd">-api</FONT> argument. On Windows with the default REW installation that 
+        could be done using
+        
+        <P><FONT class="cmd">C:\Program Files\REW\roomeqwizard.exe -api</FONT>
+    
+        <P>On macOS it could be done from a terminal using
+            
+        <P><FONT class="cmd">open -a REW.app --args -api</FONT>
+
+        <P>To specify a different port, e.g. 4567, add another argument <FONT class="cmd">-port 4567</FONT>. 
+        Port numbers below 1024 will be ignored.
+        
+        <P>All API <FONT class="cmd">GET</FONT> methods are available whenever the API is running, allowing the
+        API to be used to retrieve data from REW. <FONT class="cmd">PUT</FONT> and <FONT class="cmd">POST</FONT>
+        are also supported by default for most endpoints, but to control REW via the API to make automated sweep measurements 
+        requires a <A href="https://www.roomeqwizard.com/upgrades.html" target="_blank">Pro upgrade license</A>.
+        
+        <P>The API documentation is served by swagger-ui and can be accessed by browsing to 
+        <FONT class="endpoint">localhost:4735</FONT>. The OpenAPI specification for the API can be
+        accessed at <FONT class="endpoint">localhost:4735/doc.json</FONT> or <FONT class="endpoint">localhost:4735/doc.yaml</FONT>
+        for JSON or YAML formats. Setting values using the data models can be done with <FONT class="cmd">POST</FONT>
+        or, for models with multiple fields, <FONT class="cmd">PUT</FONT>, however both methods will accept
+        data models with a subset of the defined fields.
+        
+    </BODY>
+</html>

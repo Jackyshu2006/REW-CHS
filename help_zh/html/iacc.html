@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>双耳互相关</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">双耳互相关</A></H2>
+
+        <P><EM>IACC</EM>（双耳互相关，Inter-Aural Cross Correlation）面板用来计算一对双耳测量（binaural measurement）的早期、晚期和全程 IACC 值。
+
+        <P>两条测量的零时刻，取两者脉冲响应（impulse response，IR）起始时刻中较早的一个。早期与晚期的分界点，在零时刻之后 80 ms。“晚期”段的终点，取 500 ms 和施罗德积分（Schroeder integral）终点两者中较晚的一个；施罗德积分的终点，就是积分曲线落入本底噪声（noise floor）的位置。
+
+        <P>REW 不会改动两条测量原有的对齐状态。如果需要对齐，可以考虑用“互相关对齐”操作。
+
+        <P>计算前，REW 会用 1 倍频程的零相位带通滤波器（zero phase bandpass filter）对两条测量滤波，滤波器的阶数按所选设置。
+
+        <P><IMG SRC="../../images/iacc.jpg" ALT="IACC 面板"><BR CLEAR="all">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+
+        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
+        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
+    </BODY>
+</HTML>
