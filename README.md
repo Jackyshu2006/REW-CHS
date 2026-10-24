@@ -2,8 +2,6 @@
 
 [REW（Room EQ Wizard）](https://www.roomeqwizard.com/)的简体中文翻译。REW 由 John Mulcahy 开发。
 
-当前译文版本 **v1.3.135.1**，基于 REW 5.40 beta 135。
-
 [English version](#rew-simplified-chinese)
 
 ![REW 中文界面](images/rew-main-zh.png)
