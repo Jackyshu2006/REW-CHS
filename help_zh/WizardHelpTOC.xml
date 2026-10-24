@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_2_0.dtd">
+<toc version="1.0">
+     
+    <tocitem text="Room EQ Wizard 帮助">
+          
+        <tocitem target="html.welcome_top" text="欢迎使用 REW">
+               
+            <tocitem target="html.welcome_requirements" text="系统需求"/>
+               
+            <tocitem target="html.welcome_linuxinstall" text="Linux 安装"/>
+               
+            <tocitem target="html.welcome_diagnostics" text="诊断日志"/>
+               
+            <tocitem target="html.welcome_vmoptions" text="Java 运行环境（JRE）选项"/>
+               
+            <tocitem target="html.welcome_preferences" text="REW 设置"/>
+               
+            <tocitem target="html.welcome_initialprefs" text="初始设置"/>
+               
+            <tocitem target="html.welcome_warranty" text="免责声明"/>
+               
+            <tocitem target="html.welcome_acknowledgements" text="致谢"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.newin5.40_top" text="REW V5.40 更新说明"/>
+          
+        <tocitem target="html.gettingstarted_top" text="REW 快速入门">
+               
+            <tocitem target="html.gettingstarted_explanation" text="REW 如何进行测量"/>
+               
+            <tocitem target="html.gettingstarted_equipment" text="所需设备"/>
+               
+            <tocitem target="html.gettingstarted_connections" text="连接"/>
+               
+            <tocitem target="html.gettingstarted_eqconnections" text="均衡器连接"/>
+               
+            <tocitem target="html.gettingstarted_meterrange" text="声压计量程"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.primer_top" text="信号与测量"/>
+          
+        <tocitem target="html.rewoverview_top" text="REW 概述"/>
+          
+        <tocitem target="html.calsoundcard_top" text="测量前的准备"/>
+          
+        <tocitem target="html.measurementlevel_top" text="检查电平">
+               
+            <tocitem target="html.measurementlevel_setmeaslevel" text="电平检查步骤"/>
+               
+            <tocitem target="html.measurementlevel_volctrlnotes" text="音量控制说明"/>
+               
+            <tocitem target="html.measurementlevel_inputcaltrouble" text="输入音量设定的排查"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.inputcal_top" text="校准 SPL 读数">
+               
+            <tocitem target="html.inputcal_splcalprocedure" text="SPL 校准步骤"/>
+               
+            <tocitem target="html.inputcal_splcalnotes" text="SPL 校准说明"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.makingmeasurements_top" text="开始测量">
+               
+            <tocitem target="html.makingmeasurements_measure" text="做一次测量"/>
+               
+            <tocitem target="html.makingmeasurements_headroom" text="测量时的动态余量"/>
+               
+            <tocitem target="html.makingmeasurements_timingref" text="使用时间基准测量"/>
+               
+            <tocitem target="html.makingmeasurements_fileplayback" text="用文件播放做测量"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.offlinemeasurements_top" text="离线测量"/>
+          
+        <tocitem target="html.impedancemeasurement_top" text="阻抗测量"/>
+          
+        <tocitem target="html.fsafmeasurement_top" text="FSAF 测量"/>
+          
+        <tocitem target="html.multichannelcapture_top" text="多通道测量"/>
+          
+        <tocitem target="html.thielesmall_top" text="Thiele-Small 参数"/>
+          
+        <tocitem target="html.hintsandtips_top" text="使用技巧"/>
+          
+        <tocitem target="html.measurementspanel_top" text="测量面板">
+               
+            <tocitem target="html.measurementspanel_collapsed" text="折叠视图"/>
+               
+            <tocitem target="html.measurementspanel_filtered" text="筛选视图"/>
+               
+            <tocitem target="html.measurementspanel_actions" text="测量操作"/>
+               
+            <tocitem target="html.measurementspanel_actionsmultiple" text="多选时的测量操作"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.impulseresponse_top" text="脉冲响应"/>
+          
+        <tocitem target="html.minimumphase_top" text="最小相位"/>
+          
+        <tocitem target="html.iseqtheanswer_top" text="为什么不能用 EQ 解决所有声学问题？"/>
+          
+        <tocitem target="html.splmeter_top" text="声压计">
+               
+            <tocitem target="html.splmeter_limits" text="声压计限制"/>
+               
+            <tocitem target="html.splmeter_weighting" text="计权方式"/>
+               
+            <tocitem target="html.splmeter_spldisplay" text="显示区"/>
+               
+            <tocitem target="html.splmeter_meterinput" text="输入通道选择"/>
+               
+            <tocitem target="html.splmeter_splcal" text="校准 SPL 读数"/>
+               
+            <tocitem target="html.splmeter_spllog" text="声压级数据记录"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.siggen_top" text="信号发生器">
+               
+            <tocitem target="html.siggen_rmslevel" text="RMS 信号电平"/>
+               
+            <tocitem target="html.siggen_waveform" text="波形预览"/>
+               
+            <tocitem target="html.siggen_output" text="输出"/>
+               
+            <tocitem target="html.siggen_protections" text="保护"/>
+               
+            <tocitem target="html.siggen_savingsignals" text="保存信号为 WAV 文件"/>
+               
+            <tocitem target="html.siggen_sinewave" text="正弦波"/>
+               
+            <tocitem target="html.siggen_squarewave" text="方波"/>
+               
+            <tocitem target="html.siggen_sawtooth" text="锯齿波"/>
+               
+            <tocitem target="html.siggen_toneburst" text="猝发音"/>
+               
+            <tocitem target="html.siggen_cea2010" text="CEA-2010 猝发音"/>
+               
+            <tocitem target="html.siggen_jtest" text="J-test"/>
+               
+            <tocitem target="html.siggen_dualtone" text="双音"/>
+               
+            <tocitem target="html.siggen_tripletone" text="三音"/>
+               
+            <tocitem target="html.siggen_multitone" text="多音"/>
+               
+            <tocitem target="html.siggen_pinknoise" text="随机粉红噪声与随机白噪声"/>
+               
+            <tocitem target="html.siggen_periodicnoise" text="周期性粉红噪声与周期性白噪声"/>
+               
+            <tocitem target="html.siggen_sinesweep" text="线性扫频、对数扫频"/>
+               
+            <tocitem target="html.siggen_meassweep" text="测量扫频"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.scope_top" text="示波器"/>
+          
+        <tocitem target="html.levelmeters_top" text="电平表"/>
+          
+        <tocitem target="html.interchan_top" text="相对增益与相位"/>
+          
+        <tocitem target="html.graphpanel_top" text="图表面板">
+               
+            <tocitem target="html.graph_splphase_top" text="SPL 与相位图"/>
+               
+            <tocitem target="html.graph_allspl_top" text="All SPL 图"/>
+               
+            <tocitem target="html.graph_distortion_top" text="失真图"/>
+               
+            <tocitem target="html.graph_impulse_top" text="脉冲响应图"/>
+               
+            <tocitem target="html.graph_filteredir_top" text="滤波 IR 图"/>
+               
+            <tocitem target="html.graph_groupdelay_top" text="群延迟图"/>
+               
+            <tocitem target="html.graph_rt60_top" text="RT60 图"/>
+               
+            <tocitem target="html.graph_rt60decay_top" text="RT60 衰减图"/>
+               
+            <tocitem target="html.graph_clarity_top" text="清晰度图"/>
+               
+            <tocitem target="html.graph_csd_top" text="频谱衰减图"/>
+               
+            <tocitem target="html.graph_waterfall_top" text="瀑布图"/>
+               
+            <tocitem target="html.graph_spectrogram_top" text="频谱图"/>
+               
+            <tocitem target="html.graph_3d_top" text="3D 图"/>
+               
+            <tocitem target="html.graph_captured_top" text="采集信号图"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.overlays_top" text="叠加图窗口"/>
+          
+        <tocitem target="html.spectrum_top" text="RTA 窗口">
+               
+            <tocitem target="html.spectrum_fileprocessing" text="处理 WAV 文件"/>
+               
+            <tocitem target="html.spectrum_calibrate" text="校准输入电平"/>
+               
+            <tocitem target="html.spectrum_rtacontrols" text="频谱 / RTA 图表选项"/>
+               
+            <tocitem target="html.spectrum_averaging" text="平均"/>
+               
+            <tocitem target="html.spectrum_rtadistortion" text="失真测量"/>
+               
+            <tocitem target="html.spectrum_rtathd" text="谐波失真"/>
+               
+            <tocitem target="html.spectrum_rtaintermod" text="互调失真"/>
+               
+            <tocitem target="html.spectrum_rtatdplusn" text="多音总失真"/>
+               
+            <tocitem target="html.spectrum_steppedsine" text="步进正弦失真"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.eqwindow_top" text="EQ 窗口">
+               
+            <tocitem target="html.eqwindow_filtadjgroup" text="滤波器调整"/>
+               
+            <tocitem target="html.eqwindow_eqwaterfall" text="瀑布图"/>
+               
+            <tocitem target="html.eqwindow_eqimpulse" text="脉冲响应"/>
+               
+            <tocitem target="html.eqwindow_eqphase" text="相位"/>
+               
+            <tocitem target="html.eqwindow_eqgd" text="群延迟"/>
+               
+            <tocitem target="html.eqwindow_eqsettings" text="EQ 设置区"/>
+               
+            <tocitem target="html.eqwindow_targetsettings" text="目标设置"/>
+               
+            <tocitem target="html.eqwindow_filtertasks" text="滤波器任务"/>
+               
+            <tocitem target="html.eqwindow_modalanalysis" text="模态分析"/>
+               
+            <tocitem target="html.eqwindow_polezero" text="极零点图"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.eqfilters_top" text="EQ 滤波器面板"/>
+          
+        <tocitem target="html.equaliser_top" text="均衡器选择"/>
+          
+        <tocitem target="html.modalsim_top" text="房间仿真"/>
+          
+        <tocitem target="html.arithmetic_top" text="曲线运算"/>
+          
+        <tocitem target="html.iacc_top" text="双耳互相关"/>
+          
+        <tocitem target="html.sti_top" text="语音传输指数"/>
+          
+        <tocitem target="html.distcomp" text="失真补偿"/>
+          
+        <tocitem target="html.dataimport_top" text="导入测量数据">
+               
+            <tocitem target="html.dataimport_etfimpulse" text="ETF *.pcm 格式的脉冲响应"/>
+               
+            <tocitem target="html.dataimport_textimport" text="频率响应和阻抗文本文件"/>
+               
+            <tocitem target="html.dataimport_commaformat" text="逗号分隔文件格式"/>
+               
+            <tocitem target="html.dataimport_spaceformat" text="空格分隔文件格式"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.bfdcomms_top" text="与 BFD Pro DSP1124P 和 FBQ2496 通信"/>
+          
+        <tocitem text="设置">
+               
+            <tocitem target="html.soundcard_top" text="声卡设置"/>
+               
+            <tocitem target="html.calfiles_top" text="校准文件设置"/>
+               
+            <tocitem target="html.comms_top" text="通信设置"/>
+               
+            <tocitem target="html.analysis_top" text="分析设置"/>
+               
+            <tocitem target="html.eqsettings_top" text="均衡器设置"/>
+               
+            <tocitem target="html.view_top" text="视图设置"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.shortcuts_top" text="键盘快捷键"/>
+          
+        <tocitem text="菜单">
+               
+            <tocitem target="html.file_top" text="文件菜单"/>
+               
+            <tocitem target="html.tools_top" text="工具菜单"/>
+               
+            <tocitem target="html.settings_top" text="设置菜单"/>
+               
+            <tocitem target="html.graph_top" text="图表菜单"/>
+               
+            <tocitem target="html.help_top" text="帮助菜单"/>
+               
+            <tocitem target="html.proupgrades_top" text="专业版升级"/>
+              
+        </tocitem>
+          
+        <tocitem target="html.api_top" text="API"/>
+         
+    </tocitem>
+    
+</toc>

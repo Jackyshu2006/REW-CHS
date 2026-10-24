@@ -69,6 +69,9 @@
             <li>Added: <A href="soundcard.html#virtualbalanced">Virtual balanced input</A>
                 on the Soundcard preferences has a sum/diff mode selection to control 
                 whether the balanced input is added or subtracted
+            <li>Added: A polynomial can be applied to the input data with coefficients 
+                that are specified in the mic cal file or the Cal Files preferences settings
+                or via the API
             <li>Changed: Sample format info in the status bar includes the buffer size 
                 when using ASIO
             <li>Changed: Java output channel mapping supports up to 24 channels
@@ -161,11 +164,11 @@
         </ul>
         
 
-        <H3><A name="siggen">Overlays window</A></H3>
+        <H3><A name="overlays">Overlays window</A></H3>
         
         <ul>
             <li>Added: Level and Linearity overlay plots for stepped level measurements
-            <li>Added: Overlay SPL, Prediced SPL and Distortion have a button to view sets 
+            <li>Added: Overlay SPL, Predicted SPL and Distortion have a button to view sets 
                 of measurements as a 3D surface
             <li>Added: Offset t=0 for a measurement on impulse overlay shifts the 
                 trace live as well as showing the phase impact
@@ -188,6 +191,10 @@
             <li>Added: The generator can produce Gaussian noise signals
             <li>Added: Signal generator Speech noise signal per IEC 60268-16:2020
             <li>Added: The jitter test signal can be chosen as 16-bit or 24-bit
+            <li>Added: The dual tone signal generator has an option to send its 
+                signals to separate outputs, f1 to one output and f2 to the other
+            <li>Added: The dual tone signal generator has an option to lock its frequencies to FFT bins
+            <li>Added: The signal generator has DIM30 and DIM100 dynamic intermodulation distortion signals
             <li>Changed: The repeat interval for the CEA-2010 burst matches the RTA 
                 FFT length (with a minimum of 1 second)
             <li>Changed: Increased voltage presets on FS sine Vrms field to 8
@@ -206,6 +213,7 @@
         <ul>
             <li>Added: Stepped sine measurement has a THD vs frequency & level option to 
                 make a series of stepped THD vs frequency measurements over a range of signal levels
+            <li>Added: Stepped sine measurement has IMD vs frequency and DFD vs frequency options
             <li>Added: The RTA distortion settings have a <A href="spectrum.html#crosscorr">Cross correlation averaging</A> 
                 option to reduce input noise when measuring a signal that is connected 
                 to both the measurement and reference inputs
@@ -222,6 +230,12 @@
             <li>Added: The distortion settings have a "Show note name" option to label the 
                 fundamental with the corresponding musical note
             <li>Added: RTA multi-input capture shows individual peak traces for the first two inputs
+            <li>Added: The RTA has a distortion compensation dialog to generate a correction 
+                polynomial by analysing a dual tone input
+            <li>The RTA can analyse dynamic intermodulation distortion using DIM30 and DIM100
+            <li>Coherent averaging can be used with dual tone signals (when using the option 
+                to lock the frequencies to FFT bins) and with multitone signals, provided the 
+                Rectangular window is being used
             <li>Changed: RTA max SPL limits for CEA-2010 burst can be either CEA 2010 (2006), 
                 CTA-2010-B or CTA-2034-B
             <li>Changed: Custom two-tone signals with a 4:1 amplitude ratio are treated 
@@ -326,8 +340,8 @@
                 for RTA spectrum captures
             <li>Added: The View preferences have a "Frequency band style" entry to choose 
                 a musical or Bark scale
-            <li>Added: The main window status bar shows the FS sine Vrms in and FS sine 
-                Vrms out values, they can be clicked to change them
+            <li>Added: The main window status bar shows the FS sine Vrms in, 
+                FS sine Vrms out and dBW ref resistance values, they can be clicked to change them
             <li>Changed: Graph image captures do not include check boxes and only 
                 include values if the option to include the cursor is selected
             <li>Changed: Graph image captures remember the comment entered for the 
@@ -347,7 +361,6 @@
             <li>Changed: The widths of the legend panel entries adapt to accommodate 
                 the longest measurement name
             <li>Changed: Graph axis select and frequency span buttons are translucent
-            <li>Added: The main window status bar shows the FS sine Vrms in, FS sine Vrms out and dBW ref resistance values, they can be clicked to change them
             <li>Added: The View preferences show/hide options has a new entry "Show measurement index on thumbnails", selected by default. If this is turned off the index appears in front of the name instead, which speeds up list changes when working with large numbers of measurements as the thumbnails do not need to be regenerated
             <li>Added: Phase graph controls have options to set frequency limits for the phase traces
         </ul>
@@ -473,8 +486,5 @@
         <P>Copyright &copy; 2026 John Mulcahy All Rights Reserved
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

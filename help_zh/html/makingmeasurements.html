@@ -94,6 +94,8 @@
             如果用回环（loopback）连接作时间基准，就打开设置 → 分析里的
             <A href="analysis.html#adjustclockloopback">用回环调整时钟</A>。<BR><BR>
 
+            如果被测环境在高频段的混响时间（RT60）超过约 2 秒，可以勾选<EM>按较长的高频 RT60 配置扫频</EM>。这个选项会留出更多时间，用来采集高频的衰减过程。混响时间越长，扫频也应该越长。另外，还要在<A href="analysis.html#irtruncation">设置 → 分析</A>里加大 IR 截断时长。<BR><BR>
+
             扫频长度每翻一倍，信噪比提高接近 3 dB。但每次扫频之后的处理时间会增加到两倍以上。<BR><BR>
 
             如果电脑处理器不快、内存也不大，用短一点的扫频会快很多，代价是长度每减半、
@@ -125,7 +127,7 @@
             频率响应与单次扫频明显不同，就坚持使用单次扫频。</B>
 
             <LI>测量可以选用<FONT CLASS="heading">时间基准</FONT>，使用时间基准时的相关设置见
-            <A href=#acousticref>使用时间基准测量</A>。<BR><BR>
+            <A href="#timingref">使用时间基准测量</A>。<BR><BR>
 
             不使用时间基准时，测得脉冲响应的 t=0 位置有三种取法：<BR><BR>
 
@@ -374,8 +376,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
         </BODY>
 </HTML>

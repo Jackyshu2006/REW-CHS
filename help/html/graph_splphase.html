@@ -34,7 +34,7 @@
         dissipation as the speaker load at a given frequency, see E. Benjamin, "Audio Power 
         Amplifiers for Loudspeaker Loads", JAES, Vol.42 No.9, September 1994. 
         
-        <P>when the mouse cursor is within the graph panel for an impedance measurement
+        <P>When the mouse cursor is within the graph panel for an impedance measurement
         the equivalent series resistance + inductance or resistance + capacitance
         and parallel resistance||inductance or resistance||capacitance of the impedance 
         at the cursor position is shown at the bottom left corner 
@@ -53,7 +53,7 @@
         degrees. The time delay of a measurement can be adjusted by changing the zero 
         position of the time axis using the <EM>Offset t=0</EM> controls, or by using 
         the <EM>Estimate IR delay</EM> control (<FONT CLASS="keys">Ctrl+Alt+E</FONT>),
-        both described <A HREF="#controls">below</A>.
+        both described <A HREF="#actions">below</A>.
 
         <P>In addition to the measured phase, the plot can show minimum and excess 
         phase plots that result from generating a minimum phase version of the response,
@@ -73,7 +73,7 @@
         of the system being measured. Even then there are limits to the accuracy of minimum 
         phase responses generated from sampled data, particularly at frequencies above 
         about one quarter of the sample rate. There are options to improve the result,
-        for details see <A href=#minphase>Generating minimum phase</A> below. For more 
+        for details see <A href="#minphase">Generating minimum phase</A> below. For more 
         about minimum and excess phase and group delay see <A HREF="minimumphase.html#top">Minimum Phase</A>. 
         
         <H3><A name="calresponse">Mic Cal</A></H3>
@@ -93,7 +93,7 @@
         loaded via the <A HREF="soundcard.html">Soundcard</A> Preferences). 
         The trace is not shown if cal data has not been loaded.  The trace is drawn relative to the middle of the graph.
 
-        Fractional octave smoothing can be applied or removed via the
+        <P>Fractional octave smoothing can be applied or removed via the
         <A HREF="graph.html#onesmooth">Graph</A> menu and its 
         <A HREF="shortcuts.html#top">shortcut keys</A>. The smoothing is applied
         to the SPL, phase and Group Delay traces. This is mainly used for full range
@@ -154,7 +154,7 @@
                 phase is offset (by a multiple of 360 degrees) so that it is within the 
                 range -180..180 degrees at the cursor frequency. <EM>Wrap Phase</EM> changes 
                 the phase trace back to a conventional wrapped view with 
-                <A href=view.html#phasewraplines>optional</A> vertical lines where the trace 
+                <A href="view.html#phasewraplines">optional</A> vertical lines where the trace 
                 crosses 180 or -180 degrees.
             <li>The <EM>+360</EM>and <EM>-360</EM> actions shift the unwrapped phase trace 
                 in 360 degree steps.
@@ -217,7 +217,7 @@
         <P>If <EM>Show note name</EM> is selected the musical note corresponding to the cursor 
         frequency is shown on the graph.
             
-        <P><EM>Show phase zero line</EM> is selected a line is drawn at the zero phase position, 
+        <P>If <EM>Show phase zero line</EM> is selected a line is drawn at the zero phase position, 
         this may not coincide with a grid line as the grid lines are linked to the left hand 
         graph axis. 
         
@@ -242,7 +242,7 @@
         
         <P>When impedance is being plotted the linear axis has a span from 0 to 1 kohm. If
         a larger impedance range is required the axis can be switched to logarithmic
-        with a range up to 10 Mohm using the <EM>Use a log axis for impedance</EM>
+        with a range up to 1 Gohm using the <EM>Use a log axis for impedance</EM>
         check box. If selected a log axis will be used wherever impedance is plotted.
 
         <P>The <A name="iec263"><EM>IEC 263 ratio</EM> control</A> allows the graph to be 
@@ -367,9 +367,6 @@
         <P><IMG SRC="../../images/tails.jpg" ALT="Minimum phase with tails"><BR CLEAR="all">
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

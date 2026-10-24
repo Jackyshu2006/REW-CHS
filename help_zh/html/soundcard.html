@@ -51,7 +51,7 @@
 
             <DT><A name="inputchannel">输入通道（Java 驱动）</A>
             <DD>REW 只用接口的一个通道来采集声压计或麦克风前置放大器（preamplifier）的输出。用<FONT CLASS="heading">输入通道</FONT>控件指定接的是哪一个通道，默认是右通道。<BR><BR>
-            如果在<FONT CLASS="heading">设置 → 分析</FONT>里勾选了<A HREF="analysis.html#ircalc">使用回环作为时间基准</A>，另一个通道会用作参考，以消除电脑和接口内部的时间延迟。这需要在参考通道上接一条回环线。
+            如果测量时用回环作时间基准，另一个通道会用作参考，以消除电脑和接口内部的时间延迟。这需要在参考通道上接一条回环线。
 
             <DT><A name="inputoptions">输入选项</A>
             <DD>如果接口（或输入链路上的其他设备）会把输入信号反相，勾选<FONT CLASS="heading">输入反相</FONT>，恢复正确的极性（polarity）。如果输入存在直流偏移（DC offset），勾选<FONT CLASS="heading">高通输入</FONT>，REW 会加一个 2 Hz 高通滤波器。
@@ -71,9 +71,9 @@
             <DD><FONT CLASS="heading">扫频电平</FONT>控件设定 REW 生成测量扫频（sweep）时的 RMS 电平，以数字满量程（Full Scale）为基准。最高可设 -3 dBFS；如果在<A href="view.html">设置 → 视图</A>里勾选了<FONT CLASS="heading">满量程正弦波 RMS 为 0 dBFS</FONT>，最高可设 0 dBFS。设为最高值时，信号峰值正好落在数字满量程上。<BR><BR>
             常用设置是 -12 dBFS（即默认值）。这项也可以直接在测量对话框里设。
 
-            <DT><A name="buffers">输出缓冲区、输入缓冲区（Java 驱动）</A>
-            <DD><FONT CLASS="heading">输出缓冲区</FONT>和<FONT CLASS="heading">输入缓冲区</FONT>控件设定访问接口时所用缓冲区（buffer）的大小。默认是 32k，即缓冲区能放 32,768 对音频样本。<BR><BR>
-            如果信号发生器的输出偶尔出现毛刺或中断，可以试着加大输出缓冲区。不过要注意，这种现象也可能另有原因，比如无线网卡的干扰。同样，如果采集到的音频信号（在示波器里可以看到）偶尔出现丢帧（dropout），可以试着加大输入缓冲区。<BR><BR>
+            <DT><A name="buffers">输出设备缓冲区、输入设备缓冲区（Java 驱动）</A>
+            <DD>输出设备下的<FONT CLASS="heading">缓冲区</FONT>和输入设备下的<FONT CLASS="heading">缓冲区</FONT>两个控件，分别设定播放、录音时访问接口所用缓冲区（buffer）的大小。默认是 32k，即缓冲区能放 32,768 对音频样本。<BR><BR>
+            如果信号发生器的输出偶尔出现毛刺或中断，可以试着加大输出设备的缓冲区。不过要注意，这种现象也可能另有原因，比如无线网卡的干扰。同样，如果采集到的音频信号（在示波器里可以看到）偶尔出现丢帧（dropout），可以试着加大输入设备的缓冲区。<BR><BR>
             缓冲区越大，延迟（latency）越大，也就是开始和停止播放、录音时的等待时间更长。除此之外，加大缓冲区没有别的坏处。如果音频输入输出都没有问题，也可以把缓冲区调小，尽量减小延迟。
 
             <DT><A name="treat32as24">32 位视为 24 位</A>
@@ -155,18 +155,16 @@
 
         <P>图表会刷新，显示校准曲线，曲线整体平移到当前的目标电平上。
 
-        <P>校准点之间用线性插值（linear interpolation）。
+        <P>校准点之间用插值（interpolation）计算。
 
-        <P>超出校准数据频率范围的部分，处理方式取决于是否选择了 C 计权补偿（C weighting compensation）。如果选择了，校准数据频率范围以外的频率，用 C 计权曲线的数值。如果没有选择，低于文件中最低频率的部分，一律沿用最低频率的校准值；高于最高频率的部分，一律沿用最高频率的校准值。
+        <P>超出校准数据频率范围时，低于文件中最低频率的部分，一律沿用最低频率的校准值；高于最高频率的部分，一律沿用最高频率的校准值。
 
         <P>REW 会记住校准文件的名称和路径，下次启动时自动载入，并弹出一条消息确认已载入。
 
-        <P>要停止应用校准数据，点击 <B>Clear Cal...</B>（清除校准）按钮。<BR><BR>
-        <B>实用提示：</B>测量做完之后，如果想加上或去掉声卡校准文件，只要按需载入或清除校准数据，再点 IR 时间窗面板里的 <EM>Apply Windows</EM>（应用时间窗）按钮，重新计算频率响应即可。
+        <P>要停止应用校准数据，用<A href = "measurementspanel.html#changecal">更改校准</A>对话框把它移除。<BR><BR>
+        <B>实用提示：</B>测量做完之后，如果想加上或去掉声卡校准文件，只要按需载入或清除校准数据即可。
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

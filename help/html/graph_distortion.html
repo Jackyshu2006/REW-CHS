@@ -19,7 +19,7 @@
         
         <P>The harmonic plots can only be generated for frequencies within the bandwidth of the
         measurement. For example, if a measurement is made to 20 kHz, the second harmonic plot
-        can only be generated to 10 kHz, as the 2nd harmonic of 10k Hz is 20 kHz. Similarly the third 
+        can only be generated to 10 kHz, as the 2nd harmonic of 10 kHz is 20 kHz. Similarly the third 
         harmonic plot can only be generated to 6.67 kHz (20/3). The upper limit for distortion plots
         is 95% of the Nyquist frequency (which is half the sample rate). For example, at 44.1 kHz 
         sampling the upper limit is 0.95*44.1/2 = 20.95 kHz.
@@ -73,7 +73,7 @@
         <P>When measurements with distortion data are averaged their distortion data is also averaged, 
         providing the measurements were made over the same frequency range and at the same resolution.
         
-        <H3><a name="sweep">Stepped sine distortion</a></H3>
+        <H3><a name="steppedsine">Stepped sine distortion</a></H3>
         
         <P>Although much, much slower than a log sweep the stepped sine measurement may measure very low 
         distortion levels more accurately than a sweep. Stepped sine distortion measurements show distortion 
@@ -217,7 +217,7 @@
         harmonic traces are shown, along with the THD (black). Higher harmonics were within the 
         noise floor. The measurement shows a sharp rise in 3rd harmonic distortion at 94 Hz, and 
         a dramatic rise in all distortion components from about 2 kHz upwards. Further measurements
-        at differing signal levels established that this distortion was being introduce by the SPL 
+        at differing signal levels established that this distortion was being introduced by the SPL 
         meter used for the measurement.
         <P><IMG SRC="../../images/roomdistsmall.jpg" ALT="Room Measurement Distortion"><BR CLEAR="all">
 
@@ -228,7 +228,7 @@
         <P>Further insight into the distortion behaviour can be obtained by looking at waterfall
         or spectrogram views of the spectrum data captured at each test frequency. Note that these
         can only be generated for stepped sine measurements that had the option to 
-        <EM>Capture spectrum data at each frequency</EM> selected. Here is a spectrogram of the stepped
+        <EM>Capture spectrum at each step</EM> selected. Here is a spectrogram of the stepped
         sine measurement above.
         <BR><BR>
         <IMG SRC="../../images/stepspectrogram.jpg" ALT="Stepped sine spectrogram"><BR CLEAR="all">
@@ -298,9 +298,6 @@
         <IMG SRC="../../images/speakernormharmref.jpg" ALT="Normalised to harmonic frequency speaker distortion measurement"><BR CLEAR="all">
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

@@ -39,10 +39,10 @@
         <h3><a name="limits">Meter limits</a></h3>
         
         <P>Limits can be set independently for the SPL, L<sub>eq</sub> and SEL values.
-        When using the pro upgrade multi-input capture option limits each SPL meter
+        When using the pro upgrade multi-input capture option each SPL meter
         can have different limits. When limits are being used the background of the 
         meter is green when the level is more than the amber threshold below the limit.<br><br>
-        <IMG SRC="../../images/splmeterlimits.jpg" ALT="SPL limit exceeded" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/splmeterlimits.jpg" ALT="SPL below limit" ALIGN="left"><BR CLEAR="all">
         
         <P>Within the amber threshold of the limit the background of the meter turns amber.<br><br>
         <IMG SRC="../../images/approachingspllimit.jpg" ALT="Approaching SPL limit" ALIGN="left"><BR CLEAR="all">
@@ -55,7 +55,7 @@
         <P>SPL measurements use weighting curves to shape the signal they
         receive and emphasise those regions that are of interest for certain
         requirements. The A and C-weighting curves are shown in the figure below.<BR>
-        <IMG SRC="../../images/weightings.jpg" ALT="A and C weighing filters" BORDER=0><BR>
+        <IMG SRC="../../images/weightings.jpg" ALT="A and C weighting filters" BORDER=0><BR>
         C-weighting gives the broadest response (apart from the "Flat", "Zero"
         or "Z" weighting), with -3dB points at 31.5Hz and 8kHz.
         A-weighting has a much more pronounced low frequency roll-off. It is
@@ -98,7 +98,7 @@
         <P>Below the main row of controls a level meter shows the current soundcard
         input level in dBFS, the peak is shown by the red bar while the numeric
         indicator and the coloured bar show the rms level.<br><br>
-        <IMG SRC="../../images/spllevelmeter.jpg" ALT="SPL display" BORDER=0><BR>
+        <IMG SRC="../../images/spllevelmeter.jpg" ALT="SPL display input level meter" BORDER=0><BR>
         
         <P>Below the soundcard level meter is a <em>MinMax</em> button to display min, max and
         peak values in the SPL display and a <em>Reset All</em> button to reset the
@@ -113,7 +113,7 @@
         <P>The soundcard input channel which is measured is selected in the 
         <A HREF="soundcard.html#inputchannel">Soundcard Preferences</A>. Setting the 
         audio input is described in
-        <A HREF="gettingstarted.html#audioconfig">Getting started</A>.
+        <A HREF="calsoundcard.html#audioconfig">Getting set up for measuring</A>.
 
         <H3><A name="splcal">Calibrating the SPL reading</A></H3>
 
@@ -185,9 +185,6 @@
         </PRE>
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

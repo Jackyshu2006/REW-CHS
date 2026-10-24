@@ -33,7 +33,7 @@
 
         <P>时间延迟会造成随频率升高而增大的相移（phase shift）。例如，仅 1 ms 的延迟，在 100 Hz 处造成 36° 的相移，在 10 kHz 处却是 3,600°。这是因为 100 Hz 信号的周期是 10 ms，1 ms 只占它的 1/10；10 kHz 信号的周期是 0.1 ms，1 ms 是它的 10 倍；而每个周期对应 360°。
 
-        <P>要调整测量的时间延迟，可以用<EM>偏移 t=0</EM> 控件改变时间轴的零点位置，也可以用<EM>估算 IR 延迟</EM>控件（<FONT CLASS="keys">Ctrl+Alt+E</FONT>），两者都在<A HREF="#controls">下文</A>介绍。
+        <P>要调整测量的时间延迟，可以用<EM>偏移 t=0</EM> 控件改变时间轴的零点位置，也可以用<EM>估算 IR 延迟</EM>控件（<FONT CLASS="keys">Ctrl+Alt+E</FONT>），两者都在<A HREF="#actions">下文</A>介绍。
 
         <P>除测得的相位外，这张图还可以显示最小相位（minimum phase）和多余相位（excess phase）曲线，它们来自为响应生成的最小相位版本，详见下文。图上还会显示该测量的麦克风／声压计校准数据或声卡校准数据。在测量面板的右键菜单里选<EM>更改校准</EM>，可以更改或移除这些校准数据。
 
@@ -135,7 +135,7 @@
 
         <P>勾选<EM>显示模态频率</EM>后，图表底部会画出理论模态频率（modal frequency）。这些频率按 EQ 窗口<A href="eqwindow.html#modalanalysis">模态分析</A>部分填写的房间尺寸计算；如果响应是由房间仿真生成的，则按房间仿真里的房间尺寸计算。
 
-        <P>显示阻抗时，线性坐标轴的范围是 0 到 1 千欧。如果需要更大的阻抗范围，可以勾选<EM>阻抗图使用对数坐标</EM>，把坐标轴切换为对数坐标，范围可达 10 兆欧。勾选后，凡是显示阻抗的地方都会使用对数坐标轴。
+        <P>显示阻抗时，线性坐标轴的范围是 0 到 1 千欧。如果需要更大的阻抗范围，可以勾选<EM>阻抗图使用对数坐标</EM>，把坐标轴切换为对数坐标，范围可达 1 吉欧。勾选后，凡是显示阻抗的地方都会使用对数坐标轴。
 
         <P><A name="iec263"><EM>IEC 263 比例</EM>控件</A>可以把图表锁定在指定的“dB/十倍频程”宽高比（aspect ratio）上。REW 会按需要调整图表四周的边距，来保持这个宽高比。
 
@@ -205,8 +205,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

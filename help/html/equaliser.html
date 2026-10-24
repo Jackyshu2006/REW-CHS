@@ -121,7 +121,7 @@
 
             <DT><A name="bfdpro">Behringer BFD Pro DSP1124P/FBQ1000</A>
             <DD>The DSP1124P equaliser setting supports the DSP1124P's parametric filters, 
-            allowing 12 filters. Note that this equaliser is now sold under as the FBQ1000. 
+            allowing 12 filters. Note that this equaliser is now sold as the FBQ1000. 
             Filters can be transferred over a <A href="bfdcomms.html">Midi connection</A>
             using the <EM>Send filter settings to equaliser</EM> action. 
             The adjustment ranges are:<BR><BR>
@@ -232,7 +232,7 @@
             of the measurement it is applied to. It supports a range of single-biquad 
             filters and filter settings (peaking = parametric, 2nd order low pass &amp; high 
             pass with adjustable Q, low shelf and high shelf with adjustable Q, notch with 
-            adjustable Q, all-pass and Linkwitz Transform. It also offers multiple biquad
+            adjustable Q, all-pass and Linkwitz Transform). It also offers multiple biquad
             crossover filters with Butterworth or Linkwitz-Riley characteristics up to 8th 
             order.<BR><BR>
             
@@ -316,7 +316,7 @@
             
             <DD>The Dutch &amp; Dutch 8c Equaliser supports 24 filters, peaking and shelf 
             which can be written to or read from the speakers over the local network.
-            It also shows the speakers bass, treble and sub filter settings.
+            It also shows the bass, treble and sub filter settings.
             On Windows a firewall prompt will appear to allow REW to access the network
             when the 8c equaliser is first selected. The peaking filter bandwidth in Hz 
             between the half gain points is given by:<BR><BR>
@@ -336,12 +336,12 @@
             is selected and, if the 8c is the default equaliser in the Equaliser 
             preferences, on startup. There is also a <EM>Scan network for speakers</EM>
             action in the filter tasks pane that will trigger a rescan and show the
-            results in a dialog. The <EM>Send filter settings to speaker or group</EM> 
+            results in a dialog. The <EM>Send filters to speaker or group</EM> 
             action writes the filter settings to the selected speaker or group of speakers. 
             The <EM>Load filters from speaker or group</EM> action retrieves the selected 
             speaker or group filter settings. When initially retrieved the filters will be 
-            set to <EM>Manual</EM> control, to allow REW to use a filter for automatic target 
-            matching set the control to <EM>Automatic</EM>. Filters that were set to automatic
+            set to manual control, to allow REW to use a filter for automatic target 
+            matching select the  <EM>Auto EQ</EM> box. Filters that were set to automatic
             when they were sent to the speaker will be set to automatic when they are 
             retrieved.<BR><BR>
 
@@ -365,12 +365,12 @@
                 <LI>LF Rise End (Hz): 20
                 <LI>LF Rise Slope (dB/octave): 1.0
                 <LI>HF Fall Start (Hz): 1000
-                <LI>HF Rise Slope (dB/octave): 0.0
+                <LI>HF Fall Slope (dB/octave): 0.0
             </UL>
             and the target match range will be set to 20 .. 100 Hz, with a maximum match 
             end frequency of 1000 Hz.
 
-            <DT><A name="ucm200">Emotiva UMC-200</A>
+            <DT><A name="umc200">Emotiva UMC-200</A>
             <DD>The UMC-200 equaliser setting supports parametric filters only, allowing 11
             filters. The filter bandwidth in Hz between the half gain 
             points is given by:<BR><BR>
@@ -577,8 +577,8 @@
             to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
             an <em>Import REW File</em> button on its Parametric EQ configuration screens to load the files.
             
-            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12 DL</A>
-            <DD>The miniDSP C-DSP 8x12 equaliser setting supports the same filter types and resolutions as the
+            <DT><A name="cdsp8x12DL">MiniDSP C-DSP 8x12 DL</A>
+            <DD>The miniDSP C-DSP 8x12 DL equaliser setting supports the same filter types and resolutions as the
             Generic setting, but for 10 filters at 48 kHz.
             The <EM>Save Filter Coefficients to File</EM> action writes the filter coefficients
             to a file in a format suitable for use with the miniDSP software. The miniDSP plug-in has 
@@ -629,23 +629,6 @@
                 <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz
                 <TR ALIGN="center"><TD>Gain<TD>-12<TD>+12<TD>0.1 dB
                 <TR ALIGN="center"><TD>Q<TD>0.51<TD>40<TD>0.01
-            </TABLE>
-
-            <DT><A name="model976">Outlaw Audio Model 976</A>
-            <DD>The Model 976 equaliser setting supports 10 filters. The first filter
-            is a low shelf, the last is a high shelf. The shelf filters have 12 dB/octave 
-            slope. The other 8 filters are peaking filters where the bandwidth in Hz between 
-            the half gain points is given by:<BR><BR>
-
-            <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
-
-            The filter adjustment ranges are:<BR><BR>
-
-            <TABLE BORDER="1" CELLPADDING="2">
-                <TR ALIGN="center"><TH>Parameter<TH>Minimum<TH>Maximum<TH>Resolution
-                <TR ALIGN="center"><TD>Frequency<TD>10<TD>20000<TD>1 Hz up to 200Hz, then 10 Hz up to 2 kHz, then 100 Hz
-                <TR ALIGN="center"><TD>Gain<TD>-20<TD>+3<TD>0.5dB
-                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>Values are 0.5, 1.0, 1.4, 2.0, 2.4, 2.9, 3.6, 4.8, 7.2 and 14
             </TABLE>
 
             <DT><A name="musway">Musway</A>
@@ -862,7 +845,7 @@
             
             The <EM>Save Filter Coefficients to File</EM> action writes the filter 
             coefficients corresponding to the selected sample rate to a file in the 
-            selected format. Currently supported formats are miniDSP and SigmaStudio,
+            selected format. Currently supported formats are miniDSP, SigmaStudio and Q-SYS,
             note that the a1 and a2 coefficients are negated in the miniDSP format.<BR><BR>
             
             LPQ and HPQ filter types can be used to implement higher order filters as
@@ -888,7 +871,7 @@
 
             <DIV ALIGN="center">Bandwidth = centre frequency/Q</DIV><BR>
 
-            The Generic settings allows 20 parametric filters. The adjustment ranges 
+            The Generic setting allows 20 parametric filters. The adjustment ranges 
             are:<BR><BR>
 
             <TABLE BORDER="1" CELLPADDING="2">
@@ -921,9 +904,6 @@
         </DL>
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

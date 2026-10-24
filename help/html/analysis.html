@@ -100,7 +100,7 @@
         <P>The <FONT CLASS="heading"><A name="adjustclockacoustic">Adjust clock with acoustic ref</A></FONT> selection 
         controls whether REW compensates for clock rate differences between input and 
         output when using the acoustic timing reference. If this option is selected an 
-        additional timing reference signal is played at at the end of the sweep and the 
+        additional timing reference signal is played at the end of the sweep and the 
         time between the timing reference signals is used to calculate any clock adjustment 
         required to match the input and output device clock rates.
 
@@ -173,20 +173,17 @@
         <P>The default smoothing to apply to new SPL measurements can be selected from the
         drop-down box next to the log spacing check box.
 
-        <P>If <FONT CLASS="heading">Limit cal data boost to 20 dB</FONT> is selected REW will  
+        <P>If <FONT CLASS="heading"><A name="limitcalboost">Limit cal data boost to 20 dB</A></FONT> is selected REW will  
         limit the total gain applied to compensate for calibration data attenuation to 20 dB. This 
         prevents excessive boosting of the noise floor in areas where the combined mic/meter and
         soundcard response is more than 20 dB down. This setting affects the frequency response,
         RTA trace and SPL meter readings and is also applied when carrying out trace arithmetic.
 
         <P>If <FONT CLASS="heading">Apply cal files to distortion</FONT> is selected REW will  
-        applying the cal files to distortion results. Applying the files provides more accurate 
+        apply the cal files to distortion results. Applying the files provides more accurate 
         results in regions where the fundamental or harmonics are affected by interface roll-offs 
         but also boosts the noise floor in those regions.
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

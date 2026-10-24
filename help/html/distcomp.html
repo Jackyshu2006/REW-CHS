@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>Distortion compensation</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="en-GB" DIR="LTR">
+        <H2><A name="top">Distortion compensation</A></H2>
+        
+        <P><EM>Distortion compensation</EM> allows REW to compensate for the distortion 
+        of components along the measurement path. It can be used to reduce the effect 
+        of microphone or source distortion on measurements, particularly low cost MEMS 
+        and condenser mics which have a dominant 2nd harmonic distortion component.
+        
+        <DIV class="onlineonly"><P>This feature was inspired by the work of Antonin Novak and Petr Honzík: Linearization 
+            of condenser microphones under non-ideal laboratory conditions using a two-speaker setup. 
+            Journal of the Acoustical Society of America, 2026, 160 (2), pp.962-969. ⟨10.1121/10.0044519⟩. 
+            ⟨hal-05766318⟩ 
+        <A href="https://hal.science/hal-05766318v1/document">https://hal.science/hal-05766318v1/document</A>.</DIV>
+
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p>This feature was inspired by the work of Antonin Novak and Petr Honzík: Linearization 
+            of condenser microphones under non-ideal laboratory conditions using a two-speaker setup. 
+            Journal of the Acoustical Society of America, 2026, 160 (2), pp.962-969. ⟨10.1121/10.0044519⟩. 
+            ⟨hal-05766318⟩  <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="https://hal.science/hal-05766318v1/document">
+            <param name="content" value="https://hal.science/hal-05766318v1/document">
+            </object>.
+        </div><BR><BR>
+        <IMG SRC="../../images/distcomp.jpg" ALT="Distortion compensation"><BR CLEAR="all"> 
+        
+        <H3><A name="howitworks">How it works</A></H3>
+        
+        <P>An ideal component passes its input, x, to its output, y, without modification. 
+        Ignoring linear gain for convenience, it has a transfer function that is simply:<BR>
+        
+        <PRE>y = x</PRE>
+
+        <P>Real components alter the signals that pass through them. One model for those 
+        changes is to use a polynomial, so the output has additional powers of x. A
+        polynomial model has the advantage of simplicity, but it is memoryless, meaning
+        its output only depends on the current input and not the input history. Real
+        distortions do exhibit memory, but the memoryless model can nonetheless be useful
+        in distortion reduction. Note that the model applies at any signal level, but at 
+        very high levels (close to clipping or saturation) the model may no longer be a 
+        reasonable approximation.
+
+        <P>Let's suppose the transfer function has an additional factor:<BR>
+        
+        <PRE>y = x * (1 - ax) = x - ax<sup>2</sup></PRE>
+
+        <P>That x<sup>2</sup> term adds distortion. For a single tone that will be a
+        second harmonic, for two tones f1 and f2 it will be the second harmonic of 
+        each tone and components at the sum and difference frequencies f2 + f1 and f2 - f1.
+        We can tackle that by adding our own additional term to counter the distortion:<BR>
+
+        <PRE>y = (x - ax<sup>2</sup>) * (1 + ax) = x - ax<sup>2</sup> + ax<sup>2</sup> - a<sup>2</sup>x<sup>3</sup> = x - a<sup>2</sup>x<sup>3</sup></PRE>
+
+        <P>The x<sup>2</sup> component has been eliminated, but there is now an x<sup>3</sup>
+        term. However, since a is much less than 1, a<sup>2</sup> is even smaller, so we have 
+        traded a larger distortion for a much smaller one. We can also introduce another term
+        to tackle the x<sup>3</sup> component, which will in turn introduce a smaller x<sup>4</sup>
+        component and so on.
+
+        <H3><A name="model">Using the model</A></H3>
+        
+        <P>The polynomial model suggests a way to tackle distortion. We can measure the
+        distortion components from a test signal, such as a tone or two tones, calculate
+        the polynomial coefficients that would cause those distortions then apply our
+        own compensations by negating those coefficients. However, we quickly encounter 
+        shortcomings. 
+        
+        <P>In the polynomial model we can work out what the phases of the distortion 
+        components would be, relative to the tone or tones in the input. They turn out 
+        to be at &plusmn;90&deg; for even components and &plusmn;180&deg; or zero for odd
+        components. However, the phases of components in measurements are often not
+        where the model predicts they should be. Other effects along the path shift the 
+        phase, so the polynomial can't fully counter them. To deal with that the coefficient
+        must change the phase of the power of x it is countering. That can be done with 
+        complex coefficients, so they have a magnitude and a phase instead of just an
+        amplitude. Complex coefficients are implemented in REW by using a Hilbert transform 
+        filter to generate a 90&deg; phase shifted version of the power of x they act on. 
+        Any required phase shift can be produced by combining the original power of x with 
+        the 90&deg; phase shifted version in the correct proportions, which are the sine 
+        and cosine of the required phase shift. That can then be multiplied by the coefficient
+        magnitude.
+        
+        <P>A polynomial with complex coefficients can effectively tackle the distortion 
+        contributions for a simple input signal, such as a tone or two tones. However, a 
+        further complication then arises. The distortion components can change with frequency,
+        so the correction coefficients are not suitable at different frequencies - in fact 
+        they can add rather than reduce distortion if the distortion has changed significantly.
+        To counter that we need a coefficient that changes its magnitude and phase with frequency.
+        That can be achieved by passing the power of x through a filter which has the desired 
+        magnitude and phase response. This is referred to as a parallel Hammerstein model. To 
+        determine the filter a set of measurements of the distortion components at different 
+        frequencies is required. An effective way to obtain that is through a series of 
+        intermodulation distortion measurements using a fixed, low f1 and an f2 that varies 
+        across the frequency range of interest.
+        
+        <H3><A name="implementation">Implementing the correction</A></H3>
+        
+        <P>There is a further complication to take into account when implementing the correction. 
+        Powers of x in the signal increase the signal bandwidth - it doubles for x<sup>2</sup>,
+        triples for x<sup>3</sup> and so on. If we did our calculations at the original sample 
+        rate of the data there would be severe aliasing. To deal with that REW oversamples the 
+        data, does the calculations at a higher sample rate, then downsamples the data again.
+        The oversampling factor is 4 for 44.1 kHz and 48 kHz data and 2 for 88.2 kHz and 96 kHz 
+        data. Data at higher rates is not oversampled, on the assumption that the signals being 
+        processed are within the audio band up to 20 kHz or so and the higher powers would remain 
+        within the range of those higher sample rates.
+        
+        <P>Rather than trying to directly calculate the coefficients from the distortion components
+        REW uses ordinary least squares to generate the values. Since the correcting polynomial itself
+        generates further, smaller distortions the least squares process is done iteratively, 
+        applying the current correction to the data, calculating coefficients for a polynomial to
+        address the remaining distortions in that corrected data, then composing that polynomial with the 
+        previous and repeating.
+        
+        <H3><A name="measuring">Making the measurements</A></H3>
+
+        <P>Novak and Honzik use a two tone signal with separate loudspeakers for each tone. 
+        That measurement approach has the advantage of allowing us to ignore any contribution 
+        from the harmonic distortion of the loudspeakers and eliminates their own intermodulation, 
+        providing the equipment setup prevents them from intermodulating acoustically - see 
+        the paper linked above for setup details. When the REW signal generator is the source 
+        of the dual tone signal the <A href="siggen.html#separateoutputs">separate outputs</A> 
+        option routes the tones to separate outputs.
+        
+        <P>The tone frequencies should be chosen such that the sum and difference frequencies 
+        do not fall on harmonics of either tone. Novak and Honzik used 1100 Hz and 1500 Hz.
+        For measuring with REW an alternative approach is recommended, using a low f1 and an f2
+        that is within the frequency range of interest. The <EM>Minimise f2 sidebands</EM> option
+        then ensures REW calculates the correction to get the best results around f2. For correcting 
+        at a single frequency one measurement is all that's needed. To collect data for a 
+        correction filter to apply across a wide frequency range use the RTA's 
+        <A href="spectrum.htnl#steppedsine">stepped sine</A> measurement mode to make an
+        IMD vs frequency measurement.
+        
+        <P>If the input device has already had compensations generated and applied it may be 
+        useful to then apply compensations to the source that will be used for measurements. 
+        A tone at the intended stimulus frequency can be analysed, the compensations will 
+        then target the harmonics. Applying that correction to the output should reduce 
+        the harmonics significantly.
+        
+        <P>Note that distortion can vary significantly with temperature, the equipment being 
+        measured should be allowed to stabilise at the operating temperature before making 
+        measurements.
+        
+        <H3><A name="polynomial">Applying single-point polynomial compensations</A></H3>
+        
+        <P>For a polynomial correction around a single frequency set up the signal 
+        generator with the desired signal, start the RTA, and make sure the distortion 
+        components are being displayed. A 64k FFT is sufficient. After choosing a 
+        <EM>Compensation order</EM> (2 or 3 are suggested) the <EM>Calculate coefficients</EM> 
+        button runs the calculations. The <EM>Activity log</EM> tracks the progress 
+        of the calculations. If a correction is already active there will be a 
+        short delay while it is cleared and the input pipeline is allowed to flush through. <BR><BR>
+        <IMG SRC="../../images/singlepointdone.jpg" ALT="Single point distortion correction calculated"><BR CLEAR="all">
+        
+        <P>The <EM>D2 quadratic terms</EM> are the 2nd order coefficients of a polynomial
+        that would produce the measured 2nd order intermodulation components. Novak and Honzik
+        apply a 2nd order correction polynomial using the D2 coefficient negated. The 
+        <EM>Use D2 only</EM> button replicates that. d2L and d2H should typically be very 
+        similar where the input device frequency response is the same at their frequencies. 
+        If they are not the correction will be a compromise.
+        
+        <P>The <EM>Polynomial coefficients</EM> of the correction can be immediately applied 
+        to the input by clicking <EM>Apply correction</EM>. The coefficients will then appear in the 
+        <EM>Applied correction</EM> field. Corrections are retained while REW is running and 
+        cleared when it shuts down. The coefficients may be manually edited and applied to see 
+        the effect of changes in their values. The first coefficient must always be 1. When 
+        the distortion compensation panel is opened the coefficients field is initialised to 
+        any existing polynomial coefficients being applied to the input.
+        
+        <P>The <EM>Clear correction</EM> button removes the correction.
+        
+        <P>The <EM>Oversampling load</EM> graph at the bottom of the panel shows how much 
+        of each audio data block's time is being used for the distortion correction. It is
+        typically less than 10 percent.
+        
+        <H3><A name="multipoint">Generating and applying multi-point compensations</A></H3>
+        
+        <P>A multi-point correction starts by getting a stepped IMD measurement of the 
+        system. Here are some example settings, the measurement level will depend on 
+        the system but measuring at the highest levels that will later be used will give 
+        the best distortion product visibility. The <EM>Capture distortion compensation data</EM>
+        button must be pressed to get data that can be used for filter generation.<BR><BR>
+        <IMG SRC="../../images/steppedimd.jpg" ALT="Stepped IMD exmaple settings"><BR CLEAR="all"> 
+        
+        <P>Once the filters have been calculated their response is shown in tabs. The dots 
+        are the measurements, the red trace shows the filter response. <BR><BR>
+        <IMG SRC="../../images/multipointdone.jpg" ALT="Multi-point ditsortion correction calculated"><BR CLEAR="all"> 
+        
+        <P>If the response doesn't pass through the measurement points there may be
+        an issue with the measurement data, e.g. the distortion components are below 
+        the noise floor.
+        
+        <P>The <EM>Apply to input</EM> button applies the filter to the current input. 
+        Any subsequent data capture will have the correction applied. The correction 
+        can be cleared at any time by returning to the dialog and using the 
+        <EM>Clear correction</EM> button. 
+        
+        <P>When input compensations are active the backgrounds of the RTA levels panel 
+        and the Measure dialog level history are green. When output compensations are 
+        active the background of the signal generator waveform preview is green.
+        
+        <H3><A name="saving">Saving and loading compensations</A></H3>
+
+        <P>The <EM>Saved compensations</EM> tab allows previously generated 
+        compensations to be loaded or newly generated compensations to be saved.
+        Compensations are saved as json files in the distortion subfolder of the 
+        REW log files folder, whose location is shown on the About REW dialog. 
+        There are folders for the input or output device and sample rate with which
+        compensations are saved with names entered when saving them.<BR><BR>
+        <IMG SRC="../../images/savedcomp.jpg" ALT="Saved compensations tab"><BR CLEAR="all">
+        
+        <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
+    </BODY>
+</HTML>

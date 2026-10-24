@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <TITLE>失真补偿</TITLE>
+        <link type="text/css" rel="stylesheet" href="../../style.css">
+    </HEAD>
+
+    <BODY LANG="zh-CN" DIR="LTR">
+        <H2><A name="top">失真补偿</A></H2>
+
+        <P><EM>失真补偿</EM>（distortion compensation）能让 REW 补偿测量链路上各个环节产生的失真。用它可以减小麦克风或信号源的失真对测量的影响。低成本的 MEMS 麦克风和电容麦克风尤其用得上，因为它们的失真主要是 2 次谐波。
+
+        <DIV class="onlineonly"><P>这个功能的思路来自 Antonin Novak 和 Petr Honzík 的论文：Linearization
+            of condenser microphones under non-ideal laboratory conditions using a two-speaker setup.
+            Journal of the Acoustical Society of America, 2026, 160 (2), pp.962-969. ⟨10.1121/10.0044519⟩.
+            ⟨hal-05766318⟩
+        <A href="https://hal.science/hal-05766318v1/document">https://hal.science/hal-05766318v1/document</A>。</DIV>
+
+        <div style='display:none'>
+            <!-- External link launchers for the Java helpset viewer -->
+            <p>这个功能的思路来自 Antonin Novak 和 Petr Honzík 的论文：Linearization
+            of condenser microphones under non-ideal laboratory conditions using a two-speaker setup.
+            Journal of the Acoustical Society of America, 2026, 160 (2), pp.962-969. ⟨10.1121/10.0044519⟩.
+            ⟨hal-05766318⟩  <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
+            <param name="text" value="https://hal.science/hal-05766318v1/document">
+            <param name="content" value="https://hal.science/hal-05766318v1/document">
+            </object>。
+        </div><BR><BR>
+        <IMG SRC="../../images/distcomp.jpg" ALT="失真补偿"><BR CLEAR="all">
+
+        <H3><A name="howitworks">工作原理</A></H3>
+
+        <P>理想的环节会把输入 x 原样送到输出 y，对信号不做任何改动。为了说明方便，这里先不考虑线性增益。这样，它的传递函数（transfer function）就是：<BR>
+
+        <PRE>y = x</PRE>
+
+        <P>实际的环节都会改变通过它的信号。描述这种改变的一种方法是多项式模型（polynomial model）：输出里除了 x 本身，还多出 x<sup>2</sup>、x<sup>3</sup> 这样的高次项。
+
+        <P>多项式模型的好处是简单，但它是无记忆（memoryless）的：输出只取决于此刻的输入，和之前输入过什么无关。真实的失真其实是有记忆的。不过，用无记忆模型来降低失真，仍然有效。
+
+        <P>另外要注意，这个模型本身不限定信号电平。但电平很高、接近削波或饱和时，模型可能就不再贴近实际了。
+
+        <P>假设传递函数多乘了一个因子 (1 - ax)：<BR>
+
+        <PRE>y = x * (1 - ax) = x - ax<sup>2</sup></PRE>
+
+        <P>多出来的 x<sup>2</sup> 项就是失真。输入是单音时，它表现为 2 次谐波。输入是 f1 和 f2 两个音时，它会产生每个音各自的 2 次谐波，还会在和频 f2 + f1 与差频 f2 - f1 上产生分量。
+
+        <P>要对付这种失真，可以自己再乘上一个因子，把它抵消掉：<BR>
+
+        <PRE>y = (x - ax<sup>2</sup>) * (1 + ax) = x - ax<sup>2</sup> + ax<sup>2</sup> - a<sup>2</sup>x<sup>3</sup> = x - a<sup>2</sup>x<sup>3</sup></PRE>
+
+        <P>x<sup>2</sup> 分量消掉了，但又出现了一个 x<sup>3</sup> 项。不过 a 远小于 1，a<sup>2</sup> 就更小。所以这一步相当于用一个小得多的失真，换掉了原来较大的失真。
+
+        <P>照这个办法，还可以再加一项去抵消 x<sup>3</sup> 分量。这一项又会带来一个更小的 x<sup>4</sup> 分量，依此类推。
+
+        <H3><A name="model">运用模型</A></H3>
+
+        <P>按照多项式模型，降低失真的思路是这样的。先用测试信号（例如单音或双音）测出失真分量。再算出哪些多项式系数会产生这些失真。最后把这些系数取反，作为补偿施加到信号上。
+
+        <P>不过，照这个思路做下去，很快就会遇到问题。
+
+        <P>按多项式模型，可以推算出每个失真分量相对于输入单音（或双音）的相位。结果是：偶次分量的相位是 &plusmn;90&deg;，奇次分量是 &plusmn;180&deg; 或 0&deg;。
+
+        <P>但实际测到的失真分量，相位往往和模型预测的不一样。这是因为链路上还有别的因素会让相位偏移，而只有实数系数的多项式没法跟着调整相位，所以抵消不干净。
+
+        <P>要解决这个问题，补偿用的系数必须能改变它所抵消的那个高次项的相位。办法是改用复系数（complex coefficients）：复系数不只有幅度，还有相位。
+
+        <P>REW 用希尔伯特变换滤波器（Hilbert transform filter）来实现复系数。这个滤波器先把要处理的高次项移相 90&deg;，得到一个移相后的版本。把原来的高次项和移相 90&deg; 的版本按一定比例相加，就能得到任意需要的相移。这两个比例，就是所需相移角的正弦值和余弦值。最后，再把结果乘以系数的幅度。
+
+        <P>对单音、双音这样简单的输入信号，带复系数的多项式已经能有效抑制失真。
+
+        <P>但接着又会出现一个新问题：失真分量会随频率变化。在某个频率上算出的校正系数，换到别的频率就不合适了。如果失真随频率变化很大，校正甚至会让失真变大，而不是变小。
+
+        <P>所以，系数的幅度和相位都得能随频率变化。做法是让高次项先经过一个滤波器，由滤波器的幅度响应和相位响应决定每个频率上的校正量。这种结构称为并联 Hammerstein 模型（parallel Hammerstein model）。
+
+        <P>要确定这个滤波器，需要先测出失真分量在不同频率上的值。一种有效的办法是做一系列互调失真（intermodulation distortion，IMD）测量：f1 固定在一个较低的频率，f2 在关注的频率范围内逐点变化。
+
+        <H3><A name="implementation">实现校正</A></H3>
+
+        <P>实际实现校正时，还要处理一个问题：信号里的高次项会让信号带宽变宽。x<sup>2</sup> 项使带宽变为两倍，x<sup>3</sup> 项变为三倍，依此类推。
+
+        <P>如果直接在数据原来的采样率下计算，就会产生严重的混叠（aliasing）。所以 REW 会先对数据做过采样（oversampling），在更高的采样率下完成计算，再降采样回原来的采样率。
+
+        <P>过采样倍数（oversampling factor）是：44.1 kHz 和 48 kHz 的数据为 4 倍，88.2 kHz 和 96 kHz 的数据为 2 倍。
+
+        <P>采样率更高的数据不做过采样。这样做的前提是，被处理的信号都在音频范围内，最高约 20 kHz。高次项展宽后的带宽，仍在这些高采样率能容纳的范围之内。
+
+        <P>REW 不直接用失真分量去推算系数，而是用普通最小二乘法（ordinary least squares）求出系数。
+
+        <P>校正多项式本身也会产生新的失真，只是更小。所以最小二乘法要反复迭代。每一轮先把当前的校正施加到数据上，再针对校正后数据里剩下的失真，算出一个新多项式的系数。然后把新多项式和之前的多项式复合（即把一个代入另一个），合成一个多项式，再进入下一轮。
+
+        <H3><A name="measuring">进行测量</A></H3>
+
+        <P>Novak 和 Honzik 的做法是用双音信号，两个音各用一只扬声器单独播放。
+
+        <P>这种测量方式有两个好处：一是扬声器自身的谐波失真可以不用考虑；二是每只扬声器只放一个音，扬声器自己不会产生互调。前提是设备布置得当，两只扬声器之间不会在声学上产生互调。具体布置见上文链接的论文。
+
+        <P>如果双音信号来自 REW 的信号发生器，可以用<A href="siggen.html#separateoutputs">独立输出</A>选项，把两个音分别送到不同的输出。
+
+        <P>两个音的频率要选好，使和频与差频不落在任何一个音的谐波上。Novak 和 Honzik 用的是 1100 Hz 和 1500 Hz。
+
+        <P>用 REW 测量时，推荐另一种做法：f1 取一个较低的频率，f2 放在关注的频率范围内。再启用<EM>最小化 f2 边带</EM>选项，REW 计算校正时就会优先保证 f2 附近的效果。
+
+        <P>只在一个频率上校正，测一次就够了。如果要让校正滤波器覆盖较宽的频率范围，就要用 RTA 的<A href="spectrum.html#steppedsine">步进正弦</A>测量功能做一次 IMD vs 频率测量，为滤波器采集数据。
+
+        <P>如果已经为输入设备生成并应用了补偿，下一步还可以为测量要用的信号源做补偿。
+
+        <P>做法是取一个与预定激励信号同频率的单音来分析，这时算出的补偿针对的就是它的谐波。把这个校正应用到输出上，谐波应该会明显降低。
+
+        <P>注意，失真会随温度明显变化。测量前，要先让被测设备在工作温度下稳定下来。
+
+        <H3><A name="polynomial">应用单点多项式补偿</A></H3>
+
+        <P>要在单个频率附近做多项式校正，先在信号发生器里设好所需的信号，再启动 RTA，并确认 RTA 正在显示失真分量。FFT 长度用 64k 就够了。
+
+        <P>选好<EM>补偿阶数</EM>（建议 2 或 3）后，点<EM>计算系数</EM>按钮开始计算。<EM>运行日志</EM>会显示计算进度。
+
+        <P>如果此前已有校正在生效，计算前会稍等片刻：REW 要先清除这个校正，并等输入处理链里的旧数据处理完。<BR><BR>
+        <IMG SRC="../../images/singlepointdone.jpg" ALT="已计算单点失真校正"><BR CLEAR="all">
+
+        <P><EM>D2 二次项</EM>是一组二阶多项式系数：用这组系数构成的多项式，正好会产生测到的二阶互调分量。
+
+        <P>Novak 和 Honzik 的做法是把 D2 系数取反，构成一个二阶校正多项式。<EM>仅用 D2</EM> 按钮就是照这种做法生成校正。
+
+        <P>d2L 和 d2H 通常应当非常接近，前提是输入设备在这两个分量所在频率上的频率响应相同。如果两者相差较大，校正就只能折中处理。
+
+        <P>点<EM>应用到输入</EM>，可以把校正的<EM>多项式系数</EM>立即应用到输入上。应用后，这些系数会显示在<EM>已应用的校正</EM>栏里。
+
+        <P>校正在 REW 运行期间一直有效，REW 关闭时清除。
+
+        <P>系数也可以手动修改后再应用，用来观察系数改变带来的效果。第一个系数必须始终为 1。
+
+        <P>打开失真补偿面板时，如果输入上已经应用了多项式系数，系数栏里会预先填好这些系数。
+
+        <P><EM>清除校正</EM>按钮用来移除校正。
+
+        <P>面板底部的<EM>过采样运算负载</EM>图表，显示每个音频数据块的处理时间里，有多少用在了失真校正上。这个比例通常不到 10%。
+
+        <H3><A name="multipoint">生成并应用多点补偿</A></H3>
+
+        <P>多点校正的第一步，是对系统做一次步进 IMD 测量。下图是一组示例设置。
+
+        <P>测量电平取决于具体系统。用之后实际会用到的最高电平来测，失真产物最容易看清。
+
+        <P>必须按下<EM>采集失真补偿数据</EM>按钮，得到的数据才能用来生成滤波器。<BR><BR>
+        <IMG SRC="../../images/steppedimd.jpg" ALT="步进 IMD 示例设置"><BR CLEAR="all">
+
+        <P>滤波器计算完成后，各个滤波器的响应分别显示在不同的页签里。图中的圆点是测量值，红色曲线是滤波器的响应。<BR><BR>
+        <IMG SRC="../../images/multipointdone.jpg" ALT="已计算多点失真校正"><BR CLEAR="all">
+
+        <P>如果响应曲线没有穿过测量点，说明测量数据可能有问题，例如失真分量低于本底噪声。
+
+        <P>点<EM>应用到输入</EM>按钮，会把滤波器应用到当前输入上，之后采集的所有数据都会经过这个校正。
+
+        <P>随时可以回到失真补偿面板，用<EM>清除校正</EM>按钮清除校正。
+
+        <P>输入补偿生效时，RTA 电平面板和测量对话框中电平历史图的背景会变成绿色。输出补偿生效时，信号发生器波形预览的背景会变成绿色。
+
+        <H3><A name="saving">保存和加载补偿</A></H3>
+
+        <P>在<EM>已保存的补偿</EM>页签里，可以加载以前生成的补偿，也可以保存新生成的补偿。
+
+        <P>补偿保存为 json 文件，存放在 REW 日志文件目录下的 distortion 子文件夹里。日志文件目录的位置可以在“关于 REW”对话框中查看。
+
+        <P>distortion 子文件夹下，按保存补偿时所用的输入或输出设备和采样率分设文件夹。每个补偿以保存时输入的名称命名。<BR><BR>
+        <IMG SRC="../../images/savedcomp.jpg" ALT="已保存的补偿页签"><BR CLEAR="all">
+
+        <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
+    </BODY>
+</HTML>

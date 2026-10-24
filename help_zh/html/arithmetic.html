@@ -22,7 +22,7 @@
 
         <P>运算结果的频率范围，通常从参与运算的曲线中最低的起始频率，一直到最高的结束频率。有些运算可以把结果限制在两条测量重叠的频率范围内，这由<EM>结果频段取两条曲线的并集</EM>这一项控制：不勾选这一项，结果就只取重叠范围。
 
-        <P>曲线在自己的频率范围以外，按值为零处理；唯一的例外是除法运算的除数，它在自己的范围以外按 1 处理。如果实际响应在测量范围以外还有明显的电平，按零处理就会在频域和时域产生振荡。要得到最好的结果，请使用覆盖全频段的曲线。
+        <P>要得到最好的结果，请使用覆盖全频段的曲线。带 IR 的曲线参与运算时，用的是 FFT 结果的整个频段，从直流（DC）一直到奈奎斯特频率（Nyquist frequency）。没有 IR 的曲线和带 IR 的曲线一起运算时，REW 会为没有 IR 的那条曲线生成一条 IR。生成时，REW 把这条曲线的数据复制到它的有效范围以外。
 
         <P><B>曲线运算注意事项</B>
         <UL>
@@ -39,7 +39,5 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

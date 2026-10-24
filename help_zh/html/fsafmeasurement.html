@@ -49,7 +49,7 @@
 
         <P>请注意：用文件作测量信号时，文件本身的任何缺陷（例如削波）都会让测得的 TD+N 升高。文件里被削波的数据，通常会在失真残差信号（residual）里表现为一个个脉冲声。
 
-        <H3><a name="calibrate">所需设备</a></H3>
+        <H3><a name="equipment">所需设备</a></H3>
 
         <P>FSAF 处理对回放与录音之间的时钟频率（clock rate）差异非常敏感。输出和输入用同一台音频接口时效果最好，因为这样只有一个时钟源。
 
@@ -84,7 +84,7 @@
             <LI>可以给信号加<A name="filters"><FONT CLASS="heading">滤波器</FONT></A>，用来限制信号的频率范围，或者模拟分频滤波器（crossover filter）的效果。<BR><BR>
             <IMG SRC="../../images/fsaffilters.jpg" ALT="FSAF 滤波器设置" BORDER=0><BR CLEAR="ALL"><BR>
 
-            <LI>测试信号的<A name="level">频谱</A>显示在滤波器设置下方，其中已包含所选滤波器的影响。频谱右边显示测试信号的峰值因数和峰度（kurtosis）。<BR><BR>
+            <LI>测试信号的<A name="spectrum">频谱</A>显示在滤波器设置下方，其中已包含所选滤波器的影响。频谱右边显示测试信号的峰值因数和峰度（kurtosis）。<BR><BR>
             <IMG SRC="../../images/fsafspectrum.jpg" ALT="FSAF 测试信号频谱" BORDER=0><BR CLEAR="ALL"><BR>
 
             <LI><A name="irlength"><FONT CLASS="heading">IR 长度</FONT></A>设定 FSAF 处理要提取的脉冲响应（impulse response，IR）的长度，从 IR 起点算起。IR 越长，计算脉冲响应所需的时间就越长。<BR><BR>如果设定的长度远远超过 IR 衰减到本底噪声（noise floor）所需的时间，可能会因为数值病态（numerical ill-conditioning）而出现处理错误。
@@ -121,8 +121,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
         </BODY>
 </HTML>

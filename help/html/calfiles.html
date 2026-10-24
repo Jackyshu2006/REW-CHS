@@ -23,6 +23,12 @@
         highlighted. The calibration files that will be used for a new measurement 
         can be seen by using the <EM>Cal files</EM> button on the Measure dialog.
 
+        <P>To apply or remove a calibration file for an existing measurement, 
+        use the <EM>Change cal</EM> button in the measurement panel right click menu.
+        
+        <P>To calibrate the REW SPL meter reading against an external meter use the
+        <em>Calibrate</em> button in the SPL Meter controls.
+
         <P><IMG SRC="../../images/calfilessettings.jpg" ALT="Cal Files Preferences" BORDER=0>
         <BR CLEAR="ALL"><BR>
 
@@ -61,13 +67,7 @@
         for electronic measurements. It should be set to the rms voltage of a sine wave 
         whose peaks reach full scale.</P>
 
-        <P>To apply or remove a calibration file for an existing measurement, 
-        use the <EM>Change cal</EM> button in the measurement panel right click menu.
-        
-        <P>To calibrate the REW SPL meter reading against an external meter use the
-        <em>Calibrate</em> button in the SPL Meter controls.
-        
-        <H4>Calibration File Format</H4>
+        <H4><A name="format">Calibration File Format</A></H4>
 
         <P>The calibration file is a plain text file which by default has the extension 
         .cal, though other extensions are also accepted. It should contain the actual 
@@ -130,12 +130,8 @@ SPL Meter Calibration data
         data to calculate the SPL calibration offset. Note, however, that this 
         calibration will <B>only be valid when using the same mic interface gain and input
         volume that were used when it was measured</B>. 
-        
-        
+
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

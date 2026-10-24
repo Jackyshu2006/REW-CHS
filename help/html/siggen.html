@@ -45,7 +45,7 @@
             </UL>
             <LI><A href="#dualtone">Dual Tone</A>
             <UL>
-                <LI>SMPTE, DIN, CCIF and Custom
+                <LI>SMPTE, DIN, CCIF, AES-17 MD, AES-17 DFD, TDFD options and Custom
             </UL>
             <LI><A href="#tripletone">Triple Tone</A>
             <UL>
@@ -139,7 +139,7 @@
         <H3><A name="output">Output</A></H3>
         
         <P>Setting the audio output device is described in
-        <A HREF="gettingstarted.html#audioconfig">Getting Started</A>. The output 
+        <A HREF="calsoundcard.html#audioconfig">Getting set up for measuring</A>. The output 
         on the chosen device can be selected in the signal generator within the 
         <EM>Play</EM> panel. When using Java drivers the signal can also be generated 
         on either or both channels of the output if it is stereo. If both channels are 
@@ -191,7 +191,7 @@
         entered frequency. The <EM>Prev. 1/3 Oct.</EM> and <EM>Next 1/3 Oct.</EM> 
         buttons move the generator to a one-third octave centre frequency.
         The <EM>Previous note</EM> and <EM>Next note</EM> buttons  move to the next note
-        in the musical scale based on A4 = 440 Hz.
+        in the musical scale based on the configured A4 tuning.
 
         <H4><A name="locktofft">Lock frequency to RTA FFT</A></H4>
 
@@ -249,7 +249,8 @@
         triangular dither to the output to remove quantisation noise spikes. The level 
         at which the dither is added is controlled by the sample width selector to the 
         right of the check box. <B>N.B. When using the Java drivers audio data is  
-        limited to 16 bit precision on Windows.</B> Dither is beneficial if making 
+        limited to 16-bit precision on Windows unless device names starting EXCL are used.</B>
+        Dither is beneficial if making 
         very precise distortion measurements of an electronic device such as a receiver, 
         processor or equaliser. It is usually not required when making acoustic measurements 
         as the quantisation artefacts it removes are far below the acoustic noise floor. The
@@ -282,13 +283,13 @@
         <P>The option to <EM>Band limit square wave samples</EM> generates the data by 
         summing the constituent harmonics of the signal up to half the sample rate. This avoids 
         out-of band content in the raw data and produces correct harmonic levels throughout the bandwidth, 
-        though the even-sample restriction REW applies to data that is not band limited mean the audible 
+        though the even-sample restriction REW applies to data that is not band limited means the audible 
         difference is small for the 50% duty cycle case. 
         Note that the band limited signal may clip up to 1.5 dB sooner as the overshoots inherent 
         to the band limiting of sampled data appear in the sample values rather than being inter-sample 
         for the equal-valued case. However, the band-limited data will have less overshoot when converted 
         to analog. The frequency constraint for band limited data is much less strict, but for efficient
-        signal generation the exact frequency used will chosen so that the data values repeat within at
+        signal generation the exact frequency used will be chosen so that the data values repeat within at
         most 8192 samples. The frequency used will usually be within 0.1% of the requested frequency,
         but the minimum frequency is 5.4 Hz at 44.1 kHz sample rate and proportionately higher at higher 
         sample rates. Dither should be applied when using the band limited option to avoid artefacts due 
@@ -312,9 +313,11 @@
         summing the constituent harmonics of the signal up to half the sample rate. This avoids 
         out-of band content in the raw data and produces correct harmonic levels throughout the bandwidth. 
         The frequency constraint for band limited data is much less strict, but for efficient signal 
-        generation the exact frequency used will chosen so that the data values repeat within at most 8192 
+        generation the exact frequency used will be chosen so that the data values repeat within at most 8192 
         samples. The frequency used will usually be within 0.1% of the requested frequency, but the minimum 
         frequency is 5.4 Hz at 44.1 kHz sample rate and proportionately higher at higher sample rates.<BR>
+
+        <P>The option to <EM>Invert sawtooth</EM> switches the waveform from a rising ramp to a falling ramp. 
 
         <H3><A name="toneburst">Tone Burst</A></H3>
 
@@ -325,7 +328,7 @@
         
         <P>If the <EM>Repeat the burst</EM> checkbox is selected the burst will be repeated at 
         the selected period. The period may be specified in cycles, ms or as a number of samples.
-        If the period is in cycles the tone can contain at the "Off level" between bursts.
+        If the period is in cycles the tone can continue at the "Off level" between bursts.
         Using a number of samples equal to the RTA FFT length allows a stable display of the 
         signal spectrum if a Rectangular RTA window is used. The <EM>Previous 1/3rd octave 
         frequency</EM> and <EM>Next 1/3rd octave frequency</EM> move the generator to a 1/3rd octave 
@@ -394,6 +397,16 @@
 
         <P>When the dual tone signal is being used the RTA can show figures for the intermodulation
         distortion and the levels of the various intermodulation components.
+        
+        <P>The <EM><A name="separateoutputs">Separate outputs</A></EM> selection is used when the mixing is to be external.
+        To use it the output selection must be L+R or, if using ASIO, the secondary output must be active.
+        When this option is selected f1 will go to the first output and f2 to the second. 
+
+        <P>If the <EM><A name="fftlockedimd">Lock frequencies to RTA FFT</A></EM> option 
+        is selected the generator frequencies are adjusted to the nearest FFT bin centres
+        for the current RTA FFT length (meaning the signal is periodic within the FFT length). 
+        This allows a rectangular FFT window to be used for maximum spectral resolution of the RTA 
+        plot. The FFT length is shown in brackets. 
 
         <H3><A name="tripletone">Triple Tone</A></H3>
 
@@ -432,6 +445,18 @@
 
         <P>When the quad tone signal is being used the RTA can show figures for the Total Distortion
         + Noise (TD+N) percentage. -->
+
+        <H3><A name="dim">Dynamic Intermodulation (DIM)</A></H3>
+
+        <BR><IMG SRC="../../images/dimgen.jpg" ALT="Dynamic Intermodulation (DIM) Generator" ALIGN="left"><BR CLEAR="all">
+
+        <P>The DIM generator provides a stimulus for dynamic intermodulation distortion measurements. 
+        It has presets for DIM30 and DIM100, which are 3.18 kHz square waves with a 15 kHz sine wave 
+        in a 4:1 ratio, with either a 30 kHz or 100 kHz low pass filter applied. The signal generation 
+        limits the square wave harmonics to those below Nyquist with the amplitude and phase change due 
+        to the low pass filter applied. The rms level of the combined signal is the signal generator rms 
+        level. When the DIM signal is being used the RTA can show figures for the dynamic intermodulation 
+        distortion.
 
         <H3><A name="multitone">Multitone</A></H3>
 
@@ -476,7 +501,7 @@
 
        <P>The Pink Noise generator uses white noise filtered through a -10 dB/decade
         filter generated from a weighted sum of a series of first order filters, as
-        devised by Paul Kellet circa 1999. Stated accuracy is within 0.05 dB above
+        devised by Paul Kellett circa 1999. Stated accuracy is within 0.05 dB above
         9.2 Hz at 44.1 kHz sample rate.
 
         <P>The Full Range option outputs the filtered noise directly, giving the
@@ -486,7 +511,7 @@
         Cal applies filters at 30 Hz and 80 Hz. Both are broadly in line with the 
         THX test signal recommendations. CTA-2034 filtering applies shaping in 
         accordance with ANSI/CEA-2034-A Standard Method of Measurement for In-Home 
-        Loudspeakers. Speech noise is shaped in accordance with IEC 60268-16:2030 
+        Loudspeakers. Speech noise is shaped in accordance with IEC 60268-16:2020 
         "Speech-shaped noise" for STI testing. The octave and 1/3 octave options filter the signal at the 
         selected centre frequency with 1 octave or 1/3 octave total bandwidth. Custom 
         Filtered allows low and/or high cut filter frequencies to be set arbitrarily, 
@@ -505,7 +530,7 @@
         the outputs will have uncorrelated signals.
         
         <P>If <EM>Gaussian</EM> is selected the random noise will have a Gaussian 
-        rather than a uniform distribution. For white noise that means a a crest 
+        rather than a uniform distribution. For white noise that means a crest 
         factor about 3 dB higher, for pink noise the difference is much smaller.
         Kurtosis is about 3.0 for Gaussian pink and white noise, about 2.85 for
         uniform pink noise and about 2.55 for uniform white noise.
@@ -556,11 +581,11 @@
         length for a loopback measurement with 1/48 octave RTA that is using an FFT 
         length of 65536 (64k).<BR><BR>
         Length 32768, shorter than FFT<BR>
-        <IMG SRC="../../images/pn32krta64k.jpg" ALT="Periodic Noise controls" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn32krta64k.jpg" ALT="Periodic Noise length shorter than FFT" ALIGN="left"><BR CLEAR="all">
         <BR>Length 131072, longer than FFT (no averaging)<BR>
-        <IMG SRC="../../images/pn128krta64k.jpg" ALT="Periodic Noise controls" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn128krta64k.jpg" ALT="Periodic Noise length longer than FFT" ALIGN="left"><BR CLEAR="all">
         <BR>Length 65536, matching FFT<BR>
-        <IMG SRC="../../images/pn64krta64k.jpg" ALT="Periodic Noise controls" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn64krta64k.jpg" ALT="Periodic Noise length matching FFT" ALIGN="left"><BR CLEAR="all">
 
         <P>The Full Range option generates noise over a span from the lowest frequency 
         for the selected FFT length to half the sample rate, giving the widest bandwidth 
@@ -572,13 +597,13 @@
         generates noise from 30 Hz to 80 Hz. CTA-2034 filtering applies shaping in 
         accordance with ANSI/CEA-2034-A Standard Method of Measurement for In-Home 
         Loudspeakers and has a 12 dB crest factor. Speech noise is shaped in accordance 
-        with IEC 60268-16:2030 "Speech-shaped noise" for STI testing, with the spectrum 
+        with IEC 60268-16:2020 "Speech-shaped noise" for STI testing, with the spectrum 
         cut below the 125 Hz band edge and above the 8 kHz band edge. The octave and 1/3 
         octave options filter the signal at the selected centre frequency with 1 octave 
         or 1/3 octave total bandwidth.
         Custom Filtered allows low and/or high cut frequencies to be set arbitrarily, 
         subject to a minimum bandwidth of 10%. The Sub cal and Spkr cal signals are 
-        brick wall filtered. Other filtered signals offer  choice of Butterworth high 
+        brick wall filtered. Other filtered signals offer a choice of Butterworth high 
         pass and low pass with filter order from 2nd (12 dB/octave) to 8th (48 dB/octave)
         or brickwall. 
 
@@ -636,9 +661,6 @@
         selected if required to counter device behaviour.
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

@@ -33,12 +33,11 @@
         <P>The frequency span of the result of an arithmetic operation will usually be from the lowest
         start frequency to the highest end frequency of the traces operated on. Some operations have
         the option of limiting the result to the overlapping range of the measurements, that is controlled
-        by the <EM>Result spans combined frequency range</EM> control. Outside their
-        frequency range traces are treated as being zero valued, with the exception of the divisor
-        in a division operation which is treated as being unity outside its range. If the
-        measurements actually have significant levels outside the measurement range the zero
-        setting will generate oscillations in frequency and time domains, for best results use
-        traces that span the full frequency range.
+        by the <EM>Result spans combined frequency range</EM> control. For best results use
+        traces that span the full frequency range. Traces with an IR use the full frequency span
+        results of the FFT (DC to Nyquist) during arithmetic operation. A trace without an IR in an 
+        operation with a trace that has an IR will have an IR generated for it with its data replicated
+        outside its valid range.
 
         <P><B>Trace arithmetic notes</B>
         <UL>
@@ -63,7 +62,7 @@
                 smoothed using the measurement A smoothing, unsmoothed data is used during the calculations. 
                 Other measurements use whatever smoothing they already had applied during the calculations
                 and the result is treated as unsmoothed (or 1/48 octave smoothed if data is 96 PPO).</LI>
-            <LI>The division operations have an optional maximum gain parameter  parameter which limits the boost 
+            <LI>The division operations have an optional maximum gain parameter which limits the boost 
                 which occurs when the divisor becomes very small (or zero), such as where the divisor 
                 has notches in its response, and so produces a more stable and manageable result. Division 
                 may also be constrained to operate within a desired frequency span, with an upper and/or 
@@ -84,8 +83,5 @@
         </UL>
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

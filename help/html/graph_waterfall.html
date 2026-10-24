@@ -16,8 +16,8 @@
         which the spectrum data has been captured at each measurement frequency. Measurement
         and audio file plots can be generated in either Fourier or Burst Decay modes. A Fourier
         plot is classical waterfall, produced by sliding a window along the impulse response or data
-        (a more detailed explanation is provided <A href=wterfallgen>below</A>). A Burst Decay plot
-        shows how tone burst decay along a decay axis of periods of the decay frequency, making it 
+        (a more detailed explanation is provided <A href="#waterfallgen">below</A>). A Burst Decay plot
+        shows how tone bursts decay along a decay axis of periods of the decay frequency, making it 
         easier to compare the Q of resonances. The plot is generated automatically when the graph 
         is selected, or may be manually regenerated using the <EM>Generate</EM> button in the bottom 
         left corner of the graph area.<BR> 
@@ -39,7 +39,7 @@
         part of the measurement's impulse response. 'Windowed' means we take the impulse
         response and multiply each sample in it by the value of a window, which is made up 
         of a left side and a right side whose shapes we can choose (the window types are 
-        selected via the Spectral Decay entries in the <A HREF="analysis.html#windowdefaults">Analysis</A> Preferences). 
+        selected via the IR Decay entries in the <A HREF="analysis.html#windowdefaults">Analysis</A> Preferences). 
         Here is an example of an impulse response showing the original impulse, the window 
         shape (in blue) and the windowed response.<BR>
         <IMG SRC="../../images/irwindowed.jpg" ALT="Windowed Impulse Response">
@@ -152,7 +152,7 @@
         <P>The slices in a Burst Decay waterfall are separated by an interval equal to the selected 
         span of the plot in periods divided by the number of slices minus 1. For example, a plot
         spanning 40 periods with 201 slices has a slice interval of 0.2 periods. At 100 Hz that is 2 ms, 
-        at 10 kHz just 20 us. It is that varying of the time scale over which the decays are shown which
+        at 10 kHz just 20 &mu;s. It is that varying of the time scale over which the decays are shown which
         ensures resonances of the same Q decay at the same rate per slice. Here are examples of a Fourier 
         and Burst Decay waterfall of the same system. The Fourier waterfall spans 500 ms, the Burst Decay 
         spans 30 periods, which is 500 ms at 60 Hz where the system has a resonance. It is clear from the 
@@ -230,7 +230,7 @@
         or with a colour gradient that varies with SPL. The <EM>Scheme</EM> selector is set
         to None to use the measurement colour or to the chosen scheme. Here is an example using the 
         Heat colour scheme:
-        <P><IMG SRC="../../images/waterfallheat.png" ALT="Waterfall Controls Stepped Sine"><BR CLEAR="all">
+        <P><IMG SRC="../../images/waterfallheat.png" ALT="Waterfall Heat colour scheme"><BR CLEAR="all">
         
         <P>The <EM>Top</EM>, <EM>Bottom</EM> and <EM>Range</EM> controls adjust how the plot
         colours correspond to the values in the waterfall data. Any values higher 
@@ -254,7 +254,7 @@
 
         <P><IMG SRC="../../images/controlswaterfall.jpg" ALT="Waterfall controls"><BR CLEAR="all">
 
-        <P><EM>Mode</EM> selects the type of spectrogram plot that will be produced,
+        <P><EM>Mode</EM> selects the type of plot that will be produced,
         which can be either <EM>Fourier</EM> or <EM>Burst Decay</EM>.
         
         <P>The <EM>Total Slices</EM> control determines how many slices are used to produce
@@ -282,7 +282,7 @@
         to the 10% to 90% rise time of a left hand window formed by convolving a window function 
         with a unit step (in essence, the step response of the chosen window function). The actual 
         width of the window was much greater, depending on the window type - about twice the rise 
-        time for a Hann window, for example, or about 3 times the rise time for Blackmann-Harris. 
+        time for a Hann window, for example, or about 3 times the rise time for Blackman-Harris. 
         In REW the term is used to refer to the overall width of the left hand window, somewhat 
         misusing it in the interest of retaining terminology that is in common use for CSD plots 
         whilst adopting a definition that provides a clearer indication of what parts of the response 
@@ -347,14 +347,11 @@
         the noise floor, which is the last (frontmost) slice in the set. 
         
         <P>Note that waterfalls can only be generated for stepped sine measurements that had the option
-        to <EM>Capture spectrum data at each frequency</EM> selected.
+        to <EM>Capture spectrum at each step</EM> selected.
 
         <P><IMG SRC="../../images/stepwaterfall.jpg" ALT="Stepped sine waterfall"><BR CLEAR="all">
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

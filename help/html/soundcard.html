@@ -79,7 +79,7 @@
             button is shown:<BR>
             <IMG SRC="../../images/outputmappingbtn.jpg" ALT="Output mapping button" BORDER=0 width="257" height="154"><BR CLEAR="ALL"><BR>
             The button brings up a dialog to select up to 17 channels for use while measuring:<BR>
-            <IMG SRC="../../images/outputmappingdialog.jpg" ALT="Output mapping button" BORDER=0 width="318" height="442"><BR CLEAR="ALL"><BR>
+            <IMG SRC="../../images/outputmappingdialog.jpg" ALT="Output mapping dialog" BORDER=0 width="318" height="442"><BR CLEAR="ALL"><BR>
             Each of the channels can be assigned to any of the available hardware outputs. They can
             be labelled with surround channel names, or the hardware channel number, or the 
             output number.
@@ -88,9 +88,8 @@
             <DD>REW only uses one interface channel to capture the output of your 
             SPL meter or mic preamp, the <FONT CLASS="heading">Input Channel</FONT>
             control tells REW which channel you have connected to. The default is 
-            the Right channel. If <A HREF="analysis.html#ircalc">Use loopback as timing reference</A> 
-            has been selected in the <FONT CLASS="heading">Analysis Preferences</FONT> the 
-            other channel will be used a reference to eliminate time delays within the 
+            the Right channel. If measuring with a loopback timing reference the 
+            other channel will be used as a reference to eliminate time delays within the 
             computer and interface, this requires a loopback connection on the reference 
             channel. 
 
@@ -135,9 +134,9 @@
             setting is -12 dBFS (the default). This selection can also be made directly 
             on the measure dialog.
 
-            <DT><A name="buffers">Output Buffer, Input Buffer (Java drivers)</A>
-            <DD>The <FONT CLASS="heading">Output Buffer</FONT> and
-            <FONT CLASS="heading">Input Buffer</FONT> controls set the size of the 
+            <DT><A name="buffers">Output device Buffer, Input device Buffer (Java drivers)</A>
+            <DD>The Output device <FONT CLASS="heading">Buffer</FONT> and Input device
+            <FONT CLASS="heading">Buffer</FONT> controls set the size of the 
             buffers used when accessing the interface. The default settings are 32k
             (meaning the buffer sizes are 32,768 pairs of audio samples). If you 
             experience occasional glitches or interruptions in the signal generator 
@@ -217,7 +216,7 @@
         <P>If the FlexASIO ASIO driver is being used the <em>ASIO Control Panel</em> button
         will show a dialog that provides a graphical interface to generate and update the 
         FlexASIO configuration file, FlexASIO.toml.<br>
-        <P><IMG SRC="../../images/flexasiopanel.jpg" ALT="FleaxASIO control panel" BORDER=0 width="397" height="187"><BR CLEAR="ALL"><BR>
+        <P><IMG SRC="../../images/flexasiopanel.jpg" ALT="FlexASIO control panel" BORDER=0 width="397" height="187"><BR CLEAR="ALL"><BR>
         
         <P>REW's handling of the configuration file only supports the <EM>backend</EM> 
         and <EM>bufferSizeSamples</EM> options. The <EM>[input]</EM> and <EM>[output]</EM> 
@@ -286,11 +285,8 @@
         graph display is updated to show the calibration curve, offset to lie at the
         current Target level.
 
-        <P>Linear interpolation is used between calibration points. Outside the range of the 
-        calibration data the behaviour depends on whether C weighting compensation has
-        been selected. If C weighting compensation is selected, C weighting curve figures
-        will be used for frequencies above or below the range of frequencies in the 
-        calibration data. If not, the calibration values for the lowest frequency in the file
+        <P>Interpolation is used between calibration points. Outside the range of the 
+        calibration data the calibration values for the lowest frequency in the file
         will also be applied for all lower frequencies and the calibration values for the 
         highest frequency in the file will be applied for all higher frequencies.
 
@@ -298,17 +294,14 @@
         file will be loaded automatically when REW is started. A message confirming
         loading of the file is given.
 
-        <P>To stop calibration data being applied, use the <B>Clear Cal...</B> button.
+        <P>To stop calibration data being applied, remove it useing the 
+        <A href = "measurementspanel.html#changecal">Change Cal</A> dialog.
 
         <B>Useful tip:</B> To apply or remove a soundcard calibration file
         after a measurement has been taken, simply load or clear the cal data
-        as required and press the <EM>Apply Windows</EM> button in the 
-        IR Windows panel to recalculate the frequency response.
+        as required.
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

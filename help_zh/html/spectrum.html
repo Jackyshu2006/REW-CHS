@@ -41,6 +41,40 @@
 
         <P>Y 轴还有一个 volts/&radic;Hz 选项，用来显示幅度谱密度（amplitude spectral density）。这个选项只在频谱模式下才有意义。
 
+        <H3><A name="index">本页目录</A></H3>
+
+        <OL>
+            <LI><a href="#inputselection">输入选择</a></LI>
+            <LI><a href="#calibrate">校准输入电平</a></LI>
+            <LI><A href="#save">把结果保存为测量</A></LI>
+            <LI><a href="#fileprocessing">处理 WAV 文件</a></LI>
+            <LI><a href="#rtacontrols">频谱 / RTA 图表选项</a></LI>
+            <LI><a href="#distortionsettings">失真设置</a>
+                <UL>
+                    <LI><A href="#coherent">相干平均</A></LI>
+                    <LI><A href="#crosscorr">互相关平均</A></LI>
+                    <LI><A href="#otherdistortion">其他失真设置</A></LI>
+                </UL></LI>
+            <LI><a href="#appearance">外观设置</a>
+                <UL>
+                    <LI><A href="#nc">显示噪声曲线</A></LI>
+                    <LI><A href="#cea2010limit">CEA2010 最大 SPL 限值</A></LI>
+                    <LI><A href="#64bit">使用 64 位 FFT</A></LI>
+                    <LI><A href="#burstpeakspl">显示猝发音峰值 SPL</A></LI>
+                    <LI><A href="#hearingthreshold">显示听力 SPL 阈值</A></LI>
+                </UL></LI>
+            <LI><a href="#peakfinder">寻峰器</a></LI>
+            <LI><a href="#traceoptions">曲线选项</a></LI>
+            <LI><a href="#rtadistortion">失真测量</a>
+                <UL>
+                    <LI><a href="#rtathd">谐波失真</a></LI>
+                    <LI><a href="#rtaintermod">互调失真</a></LI>
+                    <LI><a href="#rtadim">动态互调失真</a></LI>
+                    <LI><a href="#rtatdplusn">多音总失真</a></LI>
+                </UL></LI>
+            <LI><a href="#steppedsine">步进正弦失真</a></LI>
+        </OL>
+
         <H3><a name="inputselection">输入选择</a></H3>
 
         <P>点击输入选择按钮，可以更换 RTA 当前使用的输入：<BR>
@@ -85,7 +119,7 @@
         <P>这个电平作为该输入设备校准数据的一部分保存下来。以后只要在设置 → 声卡里选中这个输入设备，就会使用它。<BR></P>
         <IMG SRC="../../images/caldatasettings.jpg" ALT="校准数据设置"><BR CLEAR="all">
 
-        <H4><A name="save">把结果保存为测量</A></H4>
+        <H3><A name="save">把结果保存为测量</A></H3>
 
         <P>点击保存<EM>当前</EM>结果的按钮（快捷键 Alt+S），会把当前显示的内容转成一条测量，放进测量面板。转换按分析仪当前的模式进行：分析仪处于频谱模式，保存的测量就是频谱；处于 RTA 模式，保存的就是 RTA 结果。
 
@@ -159,7 +193,7 @@
         <IMG SRC="../../images/1khann.jpg" ALT="1 kHz 测试音，汉宁窗"><BR CLEAR="all">
         <BR>加窗后，测试音的各次谐波就能分辨出来了。但代价是，加窗会让被分析信号的频谱有一定程度的展宽，从而降低频率分辨率。
 
-        <P>要在 REW 信号发生器上配合使用矩形窗，请勾选信号发生器的<A href="siggen.html#locktofft">锁定 RTA FFT 频率</A>选项。
+        <P>要在 REW 信号发生器上配合使用矩形窗，请勾选信号发生器的<A href="siggen.html#locktofft">将频率锁定到 RTA FFT</A>选项。
 
         <P>汉宁窗适合大多数测量，在分辨率和旁瓣肩部高度（shoulder height）之间取得了较好的平衡。
 
@@ -201,7 +235,7 @@
 
         <P>用陷波滤波器衰减基波时，可以手动填入一个基波电平，供谐波失真（harmonic distortion）计算使用。电平单位是 Vrms，并且要把陷波滤波器之后引入的增益考虑进去。这样 REW 计算失真时，用的才是正确的基波电平。
 
-        <P>陷波滤波器也会改变各次谐波的电平。要补偿这一点，可以把陷波滤波器的响应作为校准文件载入。例如，先接入陷波滤波器，对回环连接做一次扫频测量；再去掉陷波滤波器，测一次。然后用 All SPL 图表的曲线运算功能，算出（有陷波的响应）/（无陷波的响应），把结果导出为文本文件，作为麦克风校准文件载入。
+        <P>陷波滤波器也会改变各次谐波的电平。要补偿这一点，可以把陷波滤波器的响应作为校准文件载入。例如，先接入陷波滤波器，对回环连接做一次扫频测量；再去掉陷波滤波器，测一次。然后用 All SPL 图的曲线运算功能，算出（有陷波的响应）/（无陷波的响应），把结果导出为文本文件，作为麦克风校准文件载入。
 
         <P>另一种做法是只测陷波滤波器的响应，再给这条测量加一个偏移，让它的 dB 值正确反映陷波滤波器在各次谐波处的损耗。基波处的数值不要紧，手动基波会处理它。然后把加了偏移的陷波响应导出为文本，作为麦克风校准文件载入。
 
@@ -211,7 +245,7 @@
 
         <P>失真比可以按所选项显示为百分比或 dB。
 
-        <H4>谐波数据</H4>
+        <H4><A name="harmonicdata">谐波数据</A></H4>
 
         <P><EM>THD 最高谐波</EM>设置决定哪些谐波计入 THD 数值。失真面板上的 THD 数值会注明计入了哪几次谐波。请注意，这项设置只影响 THD，不影响 THD+N。
 
@@ -220,7 +254,19 @@
 
         <H4><A name="coherent">相干平均</A></H4>
 
-        <P>这个选项只适用于谐波失真测量，而且只在采集单个输入时有效。勾选后，求平均之前，REW 先按基波的相位把 FFT 数据做相位对齐。与幅度平均（magnitude averaging）相比，这样能大幅降低本底噪声（noise floor），而且不需要很长的 FFT。实际上，较短的 FFT（例如 64k）平均得更快，本底噪声也降得更快。平均次数每加倍一次，噪声电平约下降 3 dB。
+        <P>相干平均直接对 FFT 的复数数据求平均，也就是幅度和相位一起参与平均。只采集单个输入、并且按下了<EM>显示失真值</EM>按钮时，以下几种测量可以用相干平均：
+        <ul>
+            <li>谐波失真测量。测试音来自 REW 信号发生器或任何外部信号源都可以。</li>
+            <li>REW 信号发生器播放的猝发音。条件是最大重叠率设为 0%，并且猝发周期与 FFT 长度相等。</li>
+            <li>REW 信号发生器播放的双音信号。条件是勾选了<EM>将频率锁定到 RTA FFT</EM>，最大重叠率设为 0%，并且 RTA 的窗函数是矩形窗。</li>
+            <li>REW 信号发生器播放的多音信号。条件是最大重叠率设为 0%，并且 RTA 的窗函数是矩形窗。</li>
+        </ul>
+
+        <P>RTA 要用矩形窗，输入信号就必须在 FFT 长度内是周期性的。用 REW 信号发生器播放双音或多音信号时，这意味着输出和输入必须在同一台设备上，两者共用同一个时钟。
+
+        <P>对单音输入做谐波失真测量时，相干平均会在求平均之前，先按基波的相位把 FFT 数据做相位对齐。
+
+        <P>与幅度平均（magnitude averaging）相比，相干平均能大幅降低本底噪声（noise floor），而且不需要很长的 FFT。实际上，较短的 FFT（例如 64k）平均得更快，本底噪声也降得更快。平均次数每加倍一次，噪声电平约下降 3 dB。
 
         <P>市电频率（工频）成分会被抑制，与基波没有谐波关系的其他噪声也会一并被抑制。所以这个选项<B>只</B>适合用来查看谐波电平。
 
@@ -356,11 +402,11 @@
 
         <P>按旁瓣电平从高到低，较好的选择依次是：Dolph-Chebyshev 150（道尔夫-切比雪夫窗，旁瓣低 150 dB）、Blackman-Harris 7（旁瓣低 180 dB）、Dolph-Chebyshev 200（旁瓣低 200 dB）和 Cosine sum 9-235（余弦和窗，旁瓣低 235 dB）。不推荐用 Hann、Blackman-Harris 4 和 Flat-Top。
 
-        <P>使用 REW 信号发生器时，勾选它的“锁定 RTA FFT 频率”选项，就可以使用矩形窗。
+        <P>使用 REW 信号发生器时，勾选它的“将频率锁定到 RTA FFT”选项，就可以使用矩形窗。
 
-        <P>信号发生器应启用抖动，抖动的位数要与系统实际使用的位数一致；系统使用的位数显示在 REW 主窗口左下角。在 Windows 上使用 Java 驱动时只支持 16 位，要用 24 位请改用 ASIO 驱动。macOS 支持 24 位，请在“音频 MIDI 设置”里确认设备配置为 24 位或更高。
+        <P>信号发生器应启用抖动，抖动的位数要与系统实际使用的位数一致；系统使用的位数显示在 REW 主窗口左下角。在 Windows 上使用 Java 驱动时只支持 16 位，要用 24 位，请选用名称以 EXCL 开头的 Java 设备（WASAPI 独占模式）或 ASIO 驱动。macOS 支持 24 位，请在“音频 MIDI 设置”里确认设备配置为 24 位或更高。
 
-        <P>THD 数值计入的谐波最多到 50 次，或者只计入面板上显示了电平的那几次。计算方法是把这些谐波的功率相加，再与基波功率相比。另有一个单独的 HHD（高次谐波失真，higher harmonic distortion）数值，由 10 次起、最多到 50 次的谐波功率之和算出。THD 数值里包含 HHD 这部分。各次谐波各自的数值，同样是该次谐波的功率与基波功率之比。
+        <P>THD 数值计入的谐波最多到 50 次（见<A href="#harmonicdata">谐波数据</A>一节的<EM>THD 最高谐波</EM>设置）。计算方法是把这些谐波的功率相加，再与基波功率相比。另有一个单独的 HHD（高次谐波失真，higher harmonic distortion）数值，由 10 次起、最多到 50 次的谐波功率之和算出。THD 数值里包含 HHD 这部分。各次谐波各自的数值，同样是该次谐波的功率与基波功率之比。
 
         <P>THD+N 数值等于“输入总功率减去基波功率”与“输入总功率”之比（注意，按这样的定义，THD+N 有可能比 THD 还低）。THD+N 的倒数就是信纳比（SINAD）。
 
@@ -381,7 +427,7 @@
 
         <P>幅度比 1:1 的信号从 -3.0 dBFS 开始削波。这是勾选了设置 → 视图里<EM>满量程正弦波 RMS 为 0 dBFS</EM> 时的数值；不勾选时，削波电平还要再低 3 dB。幅度比 4:1 的信号在 -1.8 dBFS 削波。幅度比为 4:1 的自定义信号，REW 默认按调制失真（modulation distortion）测量处理。
 
-        <P>信号发生器应启用抖动，抖动的位数要与系统实际使用的位数一致；系统使用的位数显示在 REW 主窗口左下角。在 Windows 上使用 Java 驱动时只支持 16 位，要用 24 位请改用 ASIO 驱动。macOS 支持 24 位，请在“音频 MIDI 设置”里确认设备配置为 24 位。
+        <P>信号发生器应启用抖动，抖动的位数要与系统实际使用的位数一致；系统使用的位数显示在 REW 主窗口左下角。在 Windows 上使用 Java 驱动时只支持 16 位，要用 24 位，请选用名称以 EXCL 开头的 Java 设备（WASAPI 独占模式）或 ASIO 驱动。macOS 支持 24 位，请在“音频 MIDI 设置”里确认设备配置为 24 位。
 
         <P>要得到准确的结果，RTA 窗函数的旁瓣要非常低。按旁瓣电平从高到低，较好的选择依次是：Dolph-Chebyshev 150（旁瓣低 150 dB）、Blackman-Harris 7（旁瓣低 180 dB）、Dolph-Chebyshev 200（旁瓣低 200 dB）和 Cosine sum 9-235（旁瓣低 235 dB）。不要使用 Hann、Blackman-Harris 4 或 Flat-Top 窗。<BR><BR>
         <IMG SRC="../../images/intermodresults.jpg" ALT="互调失真结果" width="201" height="182"><BR CLEAR="all"><BR>
@@ -416,9 +462,17 @@
         </TABLE>
         <BR>
 
+        <H4><a name="rtadim">动态互调失真</a></H4>
+
+        <P><B>只有被测系统由 REW 的 <A HREF="siggen.html#dim">DIM</A> 测试信号驱动时，动态互调失真（dynamic intermodulation distortion，DIM）结果才有效。</B>这个信号可以由信号发生器实时产生，也可以保存为文件，在被测系统上回放。从文件回放时，信号发生器窗口仍要开着并选中同一个信号，REW 才知道该计算什么。信号发生器提供 DIM30 和 DIM100 两种预设信号。
+
+        <P>信号发生器应启用抖动，抖动的位数要与系统实际使用的位数一致；系统使用的位数显示在 REW 主窗口左下角。在 Windows 上使用 Java 驱动时只支持 16 位，要用 24 位，请选用名称以 EXCL 开头的 Java 设备（WASAPI 独占模式）或 ASIO 驱动。macOS 支持 24 位，请在“音频 MIDI 设置”里确认设备配置为 24 位。
+
+        <P>要得到准确的结果，RTA 窗函数的旁瓣要非常低。按旁瓣电平从高到低，较好的选择依次是：Dolph-Chebyshev 150（旁瓣低 150 dB）、Blackman-Harris 7（旁瓣低 180 dB）、Dolph-Chebyshev 200（旁瓣低 200 dB）和 Cosine sum 9-235（旁瓣低 235 dB）。不要使用 Hann、Blackman-Harris 4 或 Flat-Top 窗。
+
         <H4><a name="rtatdplusn">多音总失真</a></H4>
 
-        <P>被测系统由 REW 的<A HREF="siggen.html#multitone">多音</A>测试信号驱动时，RTA 会显示一个总失真加噪声 TD+N 数值。它的算法是：用噪声和失真成分的总功率除以各测试音的总功率，再开平方根。
+        <P>被测系统由 REW 的<A HREF="siggen.html#multitone">多音</A>测试信号或三音测试信号驱动时，RTA 会显示一个总失真加噪声 TD+N 数值。它的算法是：用噪声和失真成分的总功率除以各测试音的总功率，再开平方根。
 
         <P>要得到最准确的结果，信号发生器与信号采集应使用同一个时钟源：两者经过同一台设备，或者经过采样时钟相互同步的几台设备。同时应使用矩形窗。
 
@@ -441,7 +495,7 @@
 
         <P>测量信号由 REW 的信号发生器产生。<B>请注意</B>，测量使用信号发生器当前的设置，所以只有勾选了抖动才会加抖动（默认勾选，也推荐勾选）。
 
-        <P>频率可以在所选范围内按每倍频程 1 至 96 点的间隔步进；电平步长最小可到 0.1 dBFS。做“THD vs 频率”测试时，标称测试频率取所选测量 PPO 下的优选频率值（preferred values），只取落在测量范围内的那些。为了避免扇贝损失（scalloping loss），实际测试频率取最接近的 FFT 区间频率，这样能保证基波和全部谐波的峰值都被准确记录到图上。
+        <P>频率可以在所选范围内按每倍频程 1 至 96 点的间隔步进；电平步长最小可到 0.1 dBFS。做“THD vs 频率”和“IMD vs 频率”测试时，标称测试频率取所选测量 PPO 下的优选频率值（preferred values），只取落在测量范围内的那些。为了避免扇贝损失（scalloping loss），实际测试频率取最接近的 FFT 区间频率，这样能保证基波和全部谐波的峰值都被准确记录到图上。
 
         <P>每一步都会采集全部失真数据；所有点采集完后，生成一条新的测量。THD 测试进行中，RTA 图上会显示基波（棕色）、二次谐波（红色）、三次谐波（橙色）和 THD 的电平，第一个输入用实线，第二个输入用虚线。IMD 测试显示参考电平（视激励信号而定，是 f1 的电平，或 f1 与 f2 电平之和）以及 IMD 和 TD+N 电平。多音测试显示参考电平（多音信号的电平）和 TD+N 电平。
 
@@ -486,7 +540,5 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

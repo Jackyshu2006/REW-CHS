@@ -3,22 +3,22 @@
     <HEAD>
         <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <TITLE>All SPL 图表</TITLE>
+        <TITLE>All SPL 图</TITLE>
         <link type="text/css" rel="stylesheet" href="../../style.css">
     </HEAD>
 
     <BODY LANG="zh-CN" DIR="LTR">
-        <H2><A name="top">All SPL 图表</A></H2>
+        <H2><A name="top">All SPL 图</A></H2>
 
-        <P><IMG SRC="../../images/allsplplot.jpg" ALT="All SPL 图表"><BR CLEAR="all">
-        <P>All SPL 图表是一张叠加图（overlay graph），显示已经完成的全部测量（SPL 曲线、阻抗曲线，或两者都有）。
+        <P><IMG SRC="../../images/allsplplot.jpg" ALT="All SPL 图"><BR CLEAR="all">
+        <P>All SPL 图是一张叠加图（overlay graph），显示已经完成的全部测量（SPL 曲线、阻抗曲线，或两者都有）。
 
         <P>在这张图上可以：对所有选中的曲线（trace）求平均；对两条曲线做运算，生成一条新曲线；把两条曲线对齐；计算两条曲线之间的双耳互相关（Inter-Aural Cross Correlation，IACC）。
 
-        <H3><a name="actions">All SPL 图表的操作</a></H3>
+        <H3><a name="actions">All SPL 图的操作</a></H3>
 
         <P>在图表上单击右键，会弹出一个操作菜单。菜单里的操作，作用于图例（legend）中选中的全部测量：
-        <P><IMG SRC="../../images/actionsallspl.jpg" ALT="All SPL 图表的操作"><BR CLEAR="all">
+        <P><IMG SRC="../../images/actionsallspl.jpg" ALT="All SPL 图的操作"><BR CLEAR="all">
 
         <UL>
             <LI>平滑处理（smoothing）操作：用来修改所有选中曲线的分数倍频程（fractional octave）平滑设置。选好后，点<EM>应用</EM>按钮生效。
@@ -33,7 +33,7 @@
             <LI><EM>互相关对齐</EM>：对各测量加窗后的脉冲响应做互相关（cross correlation），据此把选中的测量在时间上对齐。对齐的参考，是选中测量里在列表中排在最前面的那一条；在列表里上下拖动测量，可以改变它们的顺序。<BR><BR>
                 做向量平均（vector averaging）之前，可以先用它对齐麦克风阵列的各路测量，或者同一声源在不同位置的多次测量。
             <LI><EM>清除参考</EM>：不再把任何测量用作其他测量的参考。
-            <LI><EM>RMS 平均</EM>：对执行这项操作时选中的各条曲线，求 SPL 值的 RMS 平均。它与 <EM>Average The Responses</EM>（平均响应）按钮的作用相同。<BR><BR>
+            <LI><EM>RMS 平均</EM>：对执行这项操作时选中的各条曲线，求 SPL 值的 RMS 平均。<BR><BR>
                 计算过程是：先把 dB 值换算成线性幅度，再把各幅度平方、相加、除以测量条数，对结果开平方根，最后换算回 dB。<BR><BR>
                 这种平均不考虑相位，把各条测量当作非相干（incoherent）信号处理。如果只选中一条曲线，结果只含源测量的幅度数据，没有相位数据。<BR><BR>
                 如果各条测量是在不同位置做的（即空间平均，spatial averaging），通常最好先用<EM>对齐 SPL...</EM>功能，消除声源距离不同造成的整体电平差异。<BR><BR>
@@ -60,9 +60,9 @@
             <li><EM>对齐工具</EM>：打开“对齐工具”对话框。
         </UL>
 
-        <H3><A name="actionsmultiple">单选时的操作</A></H3>
+        <H3><A name="actionsindividual">单选时的操作</A></H3>
 
-        <P>在测量选择列表（selector）上单击右键，会弹出随当前图表变化的附加操作。在 All SPL 图表上，这些附加控件一个用来调整 SPL 偏移，一个用来把这条测量设为其他测量的参考。
+        <P>在测量选择列表（selector）上单击右键，会弹出随当前图表变化的附加操作。在 All SPL 图上，这些附加控件一个用来调整 SPL 偏移，一个用来把这条测量设为其他测量的参考。
 
         <P><IMG SRC="../../images/overlayrightclick.jpg" ALT="叠加图测量选择列表单选时的右键菜单">
 
@@ -76,7 +76,7 @@
 
         <P><EM>对齐工具</EM>用来调整一对测量的增益、极性（polarity）和延迟。调整参数时，两者相加的结果会实时预览。预览用的是每倍频程 96 个点（96 PPO）的对数间隔数据，因此可能与最终结果略有差异。图上还有一条虚线曲线，显示不考虑相位时两条测量相加的结果。
 
-        <P>打开对齐工具后，All SPL 图表的曲线选择会改为只显示参与对齐的两条曲线。需要的话，也可以在图例中另外选中其他曲线。关闭对齐工具后，原来的曲线选择会恢复。
+        <P>打开对齐工具后，All SPL 图的曲线选择会改为只显示参与对齐的两条曲线。需要的话，也可以在图例中另外选中其他曲线。关闭对齐工具后，原来的曲线选择会恢复。
 
         <P>测量 B 的延迟有两个滑块：一个用于粗调，一个用于微调，这样手动调整的范围更宽。对齐工具自动对齐测量时允许使用的延迟范围，由<EM>延迟范围 (ms)</EM>控件设定。
 
@@ -87,7 +87,7 @@
 
         <H4><a name="alignmenttoolphase">对齐工具：相位对齐</a></H4>
 
-        <P>在相位对齐模式下勾选<EM>显示相位曲线</EM>后，All SPL 图表会分成上下两部分：上面是 SPL 曲线，下面是两条选中测量的相位曲线。勾选<EM>显示相加结果的相位</EM>后，还会显示对齐相加结果的相位。
+        <P>在相位对齐模式下勾选<EM>显示相位曲线</EM>后，All SPL 图会分成上下两部分：上面是 SPL 曲线，下面是两条选中测量的相位曲线。勾选<EM>显示相加结果的相位</EM>后，还会显示对齐相加结果的相位。
 
         <P>勾选<EM>移除时间延迟</EM>后，两条脉冲响应会一起平移，使测量 A 的 IR 从 t=0 开始。这样可以减少相位曲线上的相位缠绕（phase wrap）。
         <P><IMG SRC="../../images/aligntoolphase.jpg" ALT="对齐工具：相位对齐"><BR CLEAR="all">
@@ -108,7 +108,7 @@
 
         <P><IMG SRC="../../images/alignmenttoolimpulse.jpg" ALT="对齐工具（脉冲响应对齐模式）"><BR CLEAR="all">
 
-        <P>在脉冲响应对齐模式下勾选<EM>显示脉冲响应</EM>后，All SPL 图表会分成上下两部分：上面是 SPL 曲线，下面是两条选中测量的脉冲响应。
+        <P>在脉冲响应对齐模式下勾选<EM>显示脉冲响应</EM>后，All SPL 图会分成上下两部分：上面是 SPL 曲线，下面是两条选中测量的脉冲响应。
 
         <P>脉冲响应对齐的做法是：先用一个 1/3 倍频程的零相位滤波器（zero phase filter），在光标所在频率处对两条响应滤波，再把滤波后的响应对齐。下方滤波后脉冲响应图的时间跨度，会随对齐频率自动调整。
         <P><IMG SRC="../../images/aligntoolimpulse.jpg" ALT="对齐工具：脉冲响应对齐"><BR CLEAR="all"><BR>
@@ -118,10 +118,10 @@
 
         <P>寻找最佳对齐位置时不受极性影响，这是脉冲响应对齐模式的优点。但如果所选对齐频率附近有很强的模态共振（modal resonance），共振可能在滤波后的响应中占主导，这时该模式可能难以把滤波后的响应对齐。
 
-        <H3><a name="allsplcontrols">All SPL 图表选项</a></H3>
+        <H3><a name="allsplcontrols">All SPL 图的图表选项</a></H3>
 
-        <P>All SPL 图表的图表选项里有以下控件：
-        <P><IMG SRC="../../images/controlsallspl.jpg" ALT="All SPL 图表选项"><BR CLEAR="all">
+        <P>All SPL 图的图表选项里有以下控件：
+        <P><IMG SRC="../../images/controlsallspl.jpg" ALT="All SPL 图的图表选项"><BR CLEAR="all">
 
         <P>勾选<EM>缩放时显示数据点</EM>后，放大到能分辨单个数据点时，图上会画出构成 SPL 响应和相位响应的各个数据点。这可能只出现在曲线的一部分范围内。
 
@@ -139,7 +139,7 @@
 
         <P>勾选<EM>显示模态频率</EM>后，图表底部会画出理论模态频率（modal frequency）。这些频率根据房间尺寸计算，所用尺寸是在 EQ 窗口<A href="eqwindow.html#modalanalysis">模态分析</A>部分为当前选中的测量填写的。
 
-        <P>显示阻抗时，坐标轴范围是 0 到 1 千欧。如果需要更大的阻抗范围，可以勾选<EM>阻抗图使用对数坐标</EM>，把坐标轴切换为对数坐标，范围可达 1 兆欧。勾选后，凡是显示阻抗的地方都会使用对数坐标轴。
+        <P>显示阻抗时，坐标轴范围是 0 到 1 千欧。如果需要更大的阻抗范围，可以勾选<EM>阻抗图使用对数坐标</EM>，把坐标轴切换为对数坐标，范围可达 1 吉欧。勾选后，凡是显示阻抗的地方都会使用对数坐标轴。
 
         <P><A name="iec263"><EM>IEC 263 比例</EM>控件</A>可以把图表锁定在指定的“dB/十倍频程”宽高比（aspect ratio）上。REW 会按需要调整图表四周的边距，来保持这个宽高比。
 
@@ -147,8 +147,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

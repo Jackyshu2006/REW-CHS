@@ -17,7 +17,7 @@
         be used to address a response problem. So what is "minimum phase", and why 
         should we care?
         
-        <P>There are rigourous mathematical and systems theory definitions of what
+        <P>There are rigorous mathematical and systems theory definitions of what
         constitutes a minimum phase system, but I will not repeat them here. In the 
         context of acoustic measurements a system which is minimum phase has two
         important properties: it has the lowest time delay for signals passing through 
@@ -40,10 +40,10 @@
         degrees at 10kHz, because 1ms is 1/10th of the 10ms period of a 100Hz signal 
         but is 10 times the 0.1ms period of a 10kHz signal, and each period is 360 degrees. 
         The phase shift caused by a time delay is linear with frequency, meaning the 1ms 
-        example would give 36 degrees of phase shift at 100Hz, and twice that delay at 
-        twice the frequency or three times the delay at three times the frequency etc. If 
+        example would give 36 degrees of phase shift at 100Hz, and twice that at 
+        twice the frequency or three times at three times the frequency etc. If 
         the frequency axis is set to linear the phase plot of a time delay looks like a 
-        straight line droppping down as frequency increases - how steeply it drops 
+        straight line dropping down as frequency increases - how steeply it drops 
         depends on how large the delay is. 
         
         <P>Whilst constant time delays make it difficult to interpret the phase response, 
@@ -188,7 +188,7 @@
         <P>Now for the combined response, which shows the minimum phase in grey and 
         the excess in black, followed by the excess group delay plot:
         <P><IMG SRC="../../images/allaxes.jpg" ALT="All Axes" BORDER=0><BR CLEAR="All"><BR>
-        <P><IMG SRC="../../images/allaxesgd.jpg" ALT="All Axes" BORDER=0><BR CLEAR="All"><BR>
+        <P><IMG SRC="../../images/allaxesgd.jpg" ALT="All Axes excess group delay" BORDER=0><BR CLEAR="All"><BR>
         
         <P>The response is no longer completely minimum phase anywhere in the span,
         as we can see from the excess phase, but it deviates dramatically in the 70-120Hz 
@@ -199,7 +199,7 @@
         alone from an EQ perspective. Non-minimum phase regions are also likely to 
         show greater variation with position and to be more affected by changes within 
         the room, as a change that affects any of the signals that sum to the response 
-        in the minimum phase region can greatly alter the behaviour there. On the plus side, 
+        in the non-minimum phase region can greatly alter the behaviour there. On the plus side, 
         broadband acoustic treatments in the room are effective regardless of the room's 
         minimum or non-minimum phase behaviour.
         
@@ -209,9 +209,6 @@
         portray the results that would be obtained at the point the measurement was taken. 
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

@@ -53,7 +53,7 @@
         
         <P>The <EM>New group...</EM> brings up a dialog to provide a name for the new group
         and optionally assign the group a colour and add some notes.
-        <P><IMG SRC="../../images/newgroup.jpg" ALT="Make a new a group">
+        <P><IMG SRC="../../images/newgroup.jpg" ALT="Make a new group">
         
         <H3><A name="groupactions">Group actions</A></H3>
 
@@ -88,7 +88,7 @@
         and cycle through the various groups currently loaded. The group notes can be formatted
         with bold, italic or underline text by selecting the text and using the buttons below 
         the panel. Links can be included by typing or pasting the link and pressing space. 
-        <P><IMG SRC="../../images/editgroup.jpg" ALT="Manage groups" BORDER=0>
+        <P><IMG SRC="../../images/editgroup.jpg" ALT="Edit groups" BORDER=0>
         
         <H3><A name="filtered">Filtered view</A></H3>
 
@@ -127,9 +127,9 @@
         
         <P><A name="locked">Locked</A> measurements cannot be deleted, the remove 
         action is disabled and a padlock icon is shown on the measurement panel. All 
-        measurements can be unlocked via the <EM>Unlock all measurements</EM> action
-        or by using the Ctrl+U shortcut. The Ctrl+L shortcut locks the currently selected 
-        measurement.
+        measurements can be unlocked by using the Ctrl+U shortcut. The Ctrl+L shortcut 
+        locks the currently selected measurement. There are actions to lock or unlock 
+        the current measurement selections.
         
         <P>The other actions for each selected measurement are:
         <ul>
@@ -137,7 +137,7 @@
             <li><EM>EQ</EM> to open the EQ window with the measurement selected
             <li><EM>Add to group</EM> to put the measurement in a group (select "None" to
                 remove it from any group)
-            <li><EM>Change cal</EM> to bring up a dialog to load, update or clear
+            <li><A name="changecal"><EM>Change cal</EM></A> to bring up a dialog to load, update or clear
                 the calibration data files for the mic/meter or soundcard or to select whether
                 a C-weighted SPL meter was used for the measurement. Note that changing the
                 calibration data or C-weighted setting will clear any waterfall, decay or 
@@ -148,7 +148,7 @@
                 response as the measurement - the copy has the same impulse 
                 response and calibration data as the original but does not include 
                 distortion data or equaliser settings, for example
-            <li><EM>Mic in box corrn</EM> to make a measurement that has 
+            <li><EM>Mic in box</EM> to make a measurement that has 
                 the SPL data of the source with a correction to compensate for the
                 measurement being made using the microphone in box method, adding an offset
                 of 40*log10(f/f0) where f0 is a nominal reference frequency, which has 
@@ -160,11 +160,11 @@
             <li><EM>Min phase copy</EM> to make a copy of the minimum phase response to use in 
                 calculations - the copy has a minimum phase impulse response and the 
                 same magnitude response and calibration data as the original. See
-                <A href="graph_splphase.html#minphase">Generating minimum phase</A>"
+                <A href="graph_splphase.html#minphase">Generating minimum phase</A>
                 for details.
             <li><EM>Magnitude copy</EM> to make a copy that has the same magnitude
                 response as the measurement but no impulse response or phase response
-            <li><EM>Merge cal to IR</EM> makes a copy that has the same 
+            <li><A name="mergecal"><EM>Merge cal to IR</EM></A> makes a copy that has the same 
                 response as the measurement but with an impulse response that includes the 
                 effect of the measurement's cal files. There might be artefacts in the
                 impulse response if the cal data has large roll-offs. Note that the new 
@@ -186,8 +186,5 @@
         <P><IMG SRC="../../images/measpanelrightclickmultiple.jpg" ALT="Measurement Panel right click panel for multiple selections">
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

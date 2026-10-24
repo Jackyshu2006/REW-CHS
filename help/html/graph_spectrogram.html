@@ -30,7 +30,7 @@
         starts before the peak of the impulse so that the onset of the response can 
         be seen. The areas where the response is decaying more slowly show up as 
         streaks along the time axis. The dashed line is the <EM>Peak energy time</EM>
-        trace which shows the peak level in the plot at each frequency. This can 
+        trace which shows the time of the peak level in the plot at each frequency. This can 
         highlight variations in peak energy arrival versus frequency - an ideal 
         peak energy time trace would be a straight line with the same time value 
         for all frequencies.
@@ -62,12 +62,12 @@
         <EM>Fourier</EM> mode.
         <P><IMG SRC="../../images/spectrogramideal.jpg" ALT="Spectrogram Ideal">
         
-        <H3><a name="actions">Waterfall actions</a></H3>
+        <H3><a name="actions">Spectrogram actions</a></H3>
         
         <P>Right clicking on the graph brings up a menu of actions:
         <P><IMG SRC="../../images/actionsspectrogram.jpg" ALT="Spectrogram actions"><BR CLEAR="all">
             
-        <P>The <EM>Appearance settings</EM> action bring up the dialog detailed below.
+        <P>The <EM>Appearance settings</EM> action brings up the dialog detailed below.
         
         <P><EM>Export data</EM> allows the spectrogram data to be exported as text.
         
@@ -92,7 +92,7 @@
         <P><EM>Start hue</EM> is the hue in degrees at the base of the plot. <EM>Rotation</EM> is 
         how many degrees the helix travels around the cube diagonal, setting rotation to zero 
         produces a scheme with a single hue. Rotation can be positive or negative. <EM>Hue factor</EM>
-        is a scaling applied to the colours, a factor of 1.0 ensure perceptual uniformity but higher
+        is a scaling applied to the colours, a factor of 1.0 ensures perceptual uniformity but higher
         values produce a more colourful scheme. The original scheme covers the whole span from
         black to white, but the <EM>Min grey</EM> and <EM>Max grey</EM> controls allow starting
         at a level above black, making the start hue visible, and ending before white, leaving
@@ -318,14 +318,11 @@
         measurement is selected the axis is automatically scaled to show all of the test frequencies in 
         the measurement, but it can subsequently be zoomed in or out using the axis zoom buttons.
         Note that spectrograms can only be generated for stepped sine measurements that had the option
-        to <EM>Capture spectrum data at each frequency</EM> selected.
+        to <EM>Capture spectrum at each step</EM> selected.
 
         <P><IMG SRC="../../images/stepspectrogram2.jpg" ALT="Stepped sine spectrogram"><BR CLEAR="all">
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

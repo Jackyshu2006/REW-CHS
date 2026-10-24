@@ -15,7 +15,7 @@
 
         <P>图表类型有以下几种：<BR>
         <A HREF="graph_splphase.html#top">SPL 与相位图</A><BR>
-        <A HREF="graph_allspl.html#top">All SPL 图表</A><BR>
+        <A HREF="graph_allspl.html#top">All SPL 图</A><BR>
         <A HREF="graph_distortion.html#top">失真图</A><BR>
         <A HREF="graph_impulse.html#top">脉冲响应图</A><BR>
         <A HREF="graph_filteredir.html#top">滤波 IR 图</A><BR>
@@ -31,18 +31,18 @@
 
         <P>在单个测量的图表上，每条曲线都可以用图例区（legend panel）里曲线名称左侧的勾选框单独显示或隐藏。
 
-        <P>在叠加图（overlay graph，All SPL 图表也属于叠加图）上，关闭一条曲线就等于在叠加图的测量列表里取消选中这条测量，曲线随之从图表上移除。
+        <P>在叠加图（overlay graph，All SPL 图也属于叠加图）上，关闭一条曲线就等于在叠加图的测量列表里取消选中这条测量，曲线随之从图表上移除。
 
         <P>曲线名称的颜色与曲线本身相同。名称和该曲线在当前光标（cursor）位置的数值之间，画着这条曲线的线型。
 
-        <P>如果曲线做过平滑处理（smoothing），这里会标出所用的倍频程分数（下图示例为 1/12 倍频程）。
+        <P>如果曲线做过平滑处理（smoothing），这里会标出所用的倍频程分数（下图示例为 1/48 倍频程）。
 
         <P>把鼠标指针移到图例（legend）中某条曲线的名称上，图表上的这条曲线就会高亮，其他曲线变淡，让它更醒目。高亮时还可以同时显示测量名称，由<A HREF="view.html#top">设置 → 视图</A>里的<EM>显示高亮曲线名称</EM>选项控制。
 
         <P>在叠加图上，可以按 Ctrl+H 高亮当前选中的那条测量，再按一次取消高亮。<BR>
         <IMG SRC="../../images/graphlegend.jpg" ALT="图表图例" BORDER=0 ALIGN="left"><BR CLEAR="All">
 
-        <P>在单个测量图表的图例区单击右键，会弹出一个小菜单，可以选中全部曲线、取消全部选择或反选。在叠加图上，这个菜单只有“取消选择”一项，效果与在叠加图窗口的测量列表里取消选择相同。
+        <P>在图表的图例区单击右键，会弹出一个小菜单，可以选中全部曲线、取消全部选择或反选。
 
         <H4><A name="savejpegbutton">另存图片按钮</A></H4>
 
@@ -55,7 +55,7 @@
 
         <P>这样，频率响应图在视觉上就有统一的比例。曲线不会因为纵轴被拉伸或压缩而显得过分平坦，响应斜率也不会看起来比实际更缓或更陡。
 
-        <P>导出的图片还有一组选项（在对话框的“选项”下拉框里勾选）。勾选<EM>图例</EM>，图片会包含图表的图例。勾选<EM>光标</EM>，图片上会画出光标线及其数值。勾选<EM>时间戳</EM>，图表右下角会显示当前日期和时间。勾选<EM>边框</EM>，图片四周会加一圈 1 像素宽的灰色边框。
+        <P>导出的图片还有一组选项（在对话框的“选项”下拉框里勾选）。勾选<EM>图例</EM>，图片会包含图表的图例。勾选<EM>标题</EM>，图片会包含图表标题。勾选<EM>光标</EM>，图片上会画出光标线及其数值。勾选<EM>时间戳</EM>，图表右下角会显示当前日期和时间。勾选<EM>边框</EM>，图片四周会加一圈 1 像素宽的灰色边框。
 
         <P>勾选<EM>单色</EM>后，曲线不再用不同颜色区分，而是分别用四种线型之一绘制：实线、点线、虚线或点划线。
 
@@ -163,8 +163,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

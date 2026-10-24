@@ -292,7 +292,7 @@
             </UL>
             同时，目标匹配范围设为 20 至 100 Hz，匹配结束频率最高为 1000 Hz。
 
-            <DT><A name="ucm200">Emotiva UMC-200</A>
+            <DT><A name="umc200">Emotiva UMC-200</A>
             <DD>UMC-200 均衡器只支持参数式滤波器，最多 11 个。滤波器在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
 
             <DIV ALIGN="center">带宽 = sqrt(增益)*中心频率/Q</DIV><BR>
@@ -457,7 +457,7 @@
             <DD>miniDSP C-DSP 8x12 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 192 kHz。
             <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
 
-            <DT><A name="cdsp8x12">MiniDSP C-DSP 8x12 DL</A>
+            <DT><A name="cdsp8x12DL">MiniDSP C-DSP 8x12 DL</A>
             <DD>miniDSP C-DSP 8x12 DL 均衡器支持的滤波器类型和步进与通用均衡器相同，但只有 10 个滤波器，工作在 48 kHz。
             <EM>保存滤波器系数至文件</EM>操作把滤波器系数写入文件，格式可直接供 miniDSP 软件使用。miniDSP 插件的 Parametric EQ 配置界面上有 <em>Import REW File</em> 按钮，用来载入这些文件。
 
@@ -496,20 +496,6 @@
                 <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>1 Hz
                 <TR ALIGN="center"><TD>增益<TD>-12<TD>+12<TD>0.1 dB
                 <TR ALIGN="center"><TD>Q<TD>0.51<TD>40<TD>0.01
-            </TABLE>
-
-            <DT><A name="model976">Outlaw Audio Model 976</A>
-            <DD>Model 976 均衡器支持 10 个滤波器。第一个是低频搁架，最后一个是高频搁架，两个搁架滤波器的斜率都是 12 dB/倍频程。其余 8 个是峰值滤波器，它们在两个半增益点之间的带宽（Hz）按下式计算：<BR><BR>
-
-            <DIV ALIGN="center">带宽 = 中心频率/Q</DIV><BR>
-
-            滤波器调节范围如下：<BR><BR>
-
-            <TABLE BORDER="1" CELLPADDING="2">
-                <TR ALIGN="center"><TH>参数<TH>最小值<TH>最大值<TH>步进
-                <TR ALIGN="center"><TD>频率<TD>10<TD>20000<TD>200 Hz 以下 1 Hz，2 kHz 以下 10 Hz，再往上 100 Hz
-                <TR ALIGN="center"><TD>增益<TD>-20<TD>+3<TD>0.5 dB
-                <TR ALIGN="center"><TD>Q<TD>0.5<TD>14<TD>可选值为 0.5、1.0、1.4、2.0、2.4、2.9、3.6、4.8、7.2 和 14
             </TABLE>
 
             <DT><A name="musway">Musway</A>
@@ -683,7 +669,7 @@
             “通用”提供全套只用一个 biquad 实现的滤波器及其设置：峰值（即参数式）、一阶和二阶低通与高通（二阶含 Q 可调的版本）、低频搁架和高频搁架（含 Q 可调的版本）、陷波、全通，以及 Linkwitz 变换。这些滤波器依据 Robert Bristow-Johnson 的“Cookbook”公式（Audio EQ Cookbook）设计。它还提供一对分频滤波器，特性可选贝塞尔、巴特沃斯或 Linkwitz-Riley，最高 8 阶。<BR><BR>
             “扩展”的滤波器类型相同，但每个滤波器位置都可以用多个 biquad 级联，因此搁架、低通和高通滤波器的斜率最高可达 48 dB/倍频程。<BR><BR>
 
-            <EM>保存滤波器系数至文件</EM>操作按所选采样率算出对应的滤波器系数，以所选格式写入文件。目前支持 miniDSP 和 SigmaStudio 两种格式。注意，miniDSP 格式中的 a1 和 a2 系数是取反的。<BR><BR>
+            <EM>保存滤波器系数至文件</EM>操作按所选采样率算出对应的滤波器系数，以所选格式写入文件。目前支持 miniDSP、SigmaStudio 和 Q-SYS 三种格式。注意，miniDSP 格式中的 a1 和 a2 系数是取反的。<BR><BR>
 
             用 LPQ 和 HPQ（Q 可调的二阶低通、高通）这两种滤波器类型，可以把多个 biquad 级联（cascade）起来，实现更高阶的滤波器。下表列出几种常见分频类型和阶数所需的各节 Q 值。<B>奇数阶时，最后一节为 LP1/HP1</B>（一阶节），表中以蓝色标出：<BR><BR>
 
@@ -734,8 +720,6 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

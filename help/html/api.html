@@ -23,11 +23,13 @@
         <P><FONT class="cmd">open -a REW.app --args -api</FONT>
                 
         <P>To specify a different port, e.g. 4567, add <FONT class="cmd">-port 4567</FONT>. 
-        Port numbers below 1024 will be ignored. The default port will be assumed in the 
+        Port numbers below 1024 will be ignored. If the requested port is not available up 
+        to 10 successive ports will be tried, if none are available a random available port 
+        will be assigned. The default port will be assumed in the 
         examples which follow. To specify a different IP address, e.g. 0.0.0.0, add
         <FONT class="cmd">-host "0.0.0.0"</FONT>, "localhost" is the default.
         
-        <P>To run REW without a GUI use the -nogui argument, but if you 
+        <P>To run REW without a GUI use the <FONT class="cmd">-nogui</FONT> argument, but if you 
         do that you must use the <A href="#application">application</A> shutdown command to 
         close REW when done.
         
@@ -45,7 +47,7 @@
         
         <H3><A name="examples">API usage examples</A></H3>
 
-        <div  style='display:none'>
+        <div style='display:none'>
             <!-- External link launchers for the Java helpset viewer -->
             <P>There is an example of using the API to evaluate QC pass/fail measurements at
             <object CLASSID="java:roomeqwizard.HelpsetExternalLinkLauncher">
@@ -74,53 +76,57 @@
         <OL>
             <LI><A href="#usage">Usage</A>
                 <UL>
-                <LI><A href="#blocking">Blocking behaviour for scripting</A></LI>
-                <LI><A href="#inhibitgraphupdates">Inhibit graph updates</A></LI>
-                <LI><A href="#logging">Message logging</A></LI>
-                <LI><A href="#arrays">Array encoding</A></LI>
-                <LI><A href="#subscriptions">Subscriptions</A></LI>
+                    <LI><A href="#blocking">Blocking behaviour for scripting</A></LI>
+                    <LI><A href="#inhibitgraphupdates">Inhibit graph updates</A></LI>
+                    <LI><A href="#logging">Message logging</A></LI>
+                    <LI><A href="#arrays">Array encoding</A></LI>
+                    <LI><A href="#subscriptions">Subscriptions</A></LI>
                 </UL></LI>
             <LI><A href="#application">Application</A></LI>
             <LI><A href="#audio">Audio</A>
                 <UL>
-                <LI><A href="#java">Java settings</A></LI>
-                <LI><A href="#asio">ASIO settings</A></LI>
+                    <LI><A href="#inputcal">Input calibration configuration</A></LI>
+                    <LI><A href="#outputcal">Output (soundcard) calibration configuration</A></LI>
+                    <LI><A href="#distpoly">Distortion compensation polynomials</A></LI>
+                    <LI><A href="#java">Java settings</A></LI>
+                    <LI><A href="#asio">ASIO settings</A></LI>
                 </UL></LI>
             <LI><A href="#input-levels">Input levels</A></LI>
             <LI><A href="#measurements">Measurements</A>
                 <UL>
-                <LI><A href="#measurements-commands">Measurements commands</A></LI>
-                <LI><A href="#change-summary">Change measurement name or notes</A></LI>
-                <LI><A href="#freqresp">Frequency response</A></LI>
-                <LI><A href="#groupdelay">Group delay</A></LI>
-                <LI><A href="#impulseresp">Impulse response</A></LI>
-                <LI><A href="#irwindows">IR window settings</A></LI>
-                <LI><A href="#distortion">Distortion data</A></LI>
-                <LI><A href="#singlecommands">Commands for individual measurements</A>
-                    <UL>
-                        <LI><A href="#waterfall">Generate waterfall</A></LI>
-                        <LI><A href="#spectrogram">Generate spectrogram</A></LI>
-                        <LI><A href="#generateminphase">Generate minimum phase</A></LI>
-                        <LI><A href="#minphase">Minimum or excess phase version</A></LI>
-                        <LI><A href="#scaleir">Scale IR</A></LI>
-                        <LI><A href="#smooth">Smooth</A></LI>
-                        <LI><A href="#offsettzero">Offset t=0</A></LI>
-                        <LI><A href="#addsploffset">Add SPL offset</A></LI>
-                        <LI><A href="#unwrap">Unwrap phase</A></LI>
-                        <LI><A href="#rt60">Generate RT60</A></LI>
-                    </UL></LI>
-                <LI><A href="#process-measurements">Processing measurements</A>
-                    <UL>
-                        <LI><A href="#alignspl">Align SPL</A></LI>
-                        <LI><A href="#arithmetic">Arithmetic</A></LI>
-                    </UL></LI>
-                <LI><A href="#eqandfilters">EQ and filters</A></LI>
+                    <LI><A href="#measurements-commands">Measurements commands</A></LI>
+                    <LI><A href="#change-summary">Change measurement name or notes</A></LI>
+                    <LI><A href="#freqresp">Frequency response</A></LI>
+                    <LI><A href="#groupdelay">Group delay</A></LI>
+                    <LI><A href="#impulseresp">Impulse response</A></LI>
+                    <LI><A href="#irwindows">IR window settings</A></LI>
+                    <LI><A href="#distortion">Distortion data</A></LI>
+                    <LI><A href="#singlecommands">Commands for individual measurements</A>
+                        <UL>
+                            <LI><A href="#waterfall">Generate waterfall</A></LI>
+                            <LI><A href="#spectrogram">Generate spectrogram</A></LI>
+                            <LI><A href="#generateminphase">Generate minimum phase</A></LI>
+                            <LI><A href="#minphase">Minimum or excess phase version</A></LI>
+                            <LI><A href="#scaleir">Scale IR</A></LI>
+                            <LI><A href="#smooth">Smooth</A></LI>
+                            <LI><A href="#offsettzero">Offset t=0</A></LI>
+                            <LI><A href="#addsploffset">Add SPL offset</A></LI>
+                            <LI><A href="#unwrap">Unwrap phase</A></LI>
+                            <LI><A href="#rt60">Generate RT60</A></LI>
+                        </UL></LI>
+                    <LI><A href="#process-measurements">Processing measurements</A>
+                        <UL>
+                            <LI><A href="#alignspl">Align SPL</A></LI>
+                            <LI><A href="#arithmetic">Arithmetic</A></LI>
+                        </UL></LI>
+                    <LI><A href="#eqandfilters">EQ and filters</A></LI>
                 </UL></LI>
             <LI><A href="#groups">Groups</A></LI>
             <LI><A href="#measure">Measure</A></LI>
             <LI><A href="#alignment-tool">Alignment tool</A></LI>
             <LI><A href="#eq">EQ defaults</A>
-                <UL><LI><A href="#eqprogress">EQ matching progress</A></LI>
+                <UL>
+                    <LI><A href="#eqprogress">EQ matching progress</A></LI>
                 </UL></LI>
             <LI><A href="#generator">Generator</A></LI>
             <LI><A href="#spl-meter">SPL meter</A></LI>
@@ -129,12 +135,12 @@
             <LI><A href="#stepped-measurement">Stepped measurement</A></LI>
             <LI><A href="#import">Import</A>
                 <UL>
-                <LI><A href="#importfrequencyresponse">Import frequency response</A></LI>
-                <LI><A href="#importimpulseresponse">Import impulse response</A></LI>
-                <LI><A href="#importfreqresponsedata">Import frequency response data</A></LI>
-                <LI><A href="#importimpulseresponsedata">Import impulse response data</A></LI>
-                <LI><A href="#importrtafile">Import RTA file</A></LI>
-                <LI><A href="#importsweeprecordings">Import sweep recordings</A></LI>
+                    <LI><A href="#importfrequencyresponse">Import frequency response</A></LI>
+                    <LI><A href="#importimpulseresponse">Import impulse response</A></LI>
+                    <LI><A href="#importfreqresponsedata">Import frequency response data</A></LI>
+                    <LI><A href="#importimpulseresponsedata">Import impulse response data</A></LI>
+                    <LI><A href="#importrtafile">Import RTA file</A></LI>
+                    <LI><A href="#importsweeprecordings">Import sweep recordings</A></LI>
                 </UL></LI>
             <LI><A href="#roomsim">Room simulator</A></LI>
         </OL>
@@ -238,6 +244,8 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
             <li>GET the graph choices for the main or overlay graph windows
             <li>GET and POST the frequency axis choice for the main or overlay graph windows
             <li>GET the frequency axis spacing choices for the main or overlay graph windows
+            <li>GET a map of the current measurement selections on the All SPL graph, the keys are
+                the index of each measurement and the values are MeasurementSummary objects
         </ul>
         
         <P>Any errors that have been logged can be read from the <FONT class="endpoint">/application/errors</FONT> 
@@ -293,6 +301,8 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         <P>The global option to <A href="soundcard.html#treat32as24">treat 32-bit data as 24-bit</A>
         can be read and set at the <FONT class="endpoint">/audio/configuration</FONT> endpoint.
 
+        <H4><A name="inputcal">Input calibration configuration</A></H4>
+        
         <P>The current input calibration configuration, including any mic cal file(s) being used, can be read 
         at the <FONT class="endpoint">/audio/input-cal</FONT> endpoint. This endpoint only supports 
         <FONT class="cmd">PUT</FONT> to make changes since the current input selection the cal data relates to 
@@ -301,7 +311,50 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         changing settings, REW will check that it still corresponds to the input in use and reject the request
         if the input has changed. To clear a cal file set its file path to an empty string. Note that backslashes 
         in file paths must be escaped (meaning a double backslash is required), or forward slashes may 
-        be used.
+        be used. The InputCalConfiguration contains InputCalData, either one for the whole device or, if
+        the device has separate cal for each input, one for each input. Here is an example of one configuration
+        for the whole device:<BR><BR>
+<PRE>
+{
+  "currentInputSelection": "EXCL: Line (2- miniDSP 2x4n) LINE_IN (Master Volume)",
+  "separateCalFileForEachInput": false,
+  "inputDeviceIsCWeighted": false,
+  "calDataAllInputs": {
+    "calFilePath": "",
+    "dBFSAt94dBSPL": -20.0469509765625,
+    "fullScaleSineVrms": 1
+  }
+}
+</PRE>
+        <P>Here is an example of a per-input cal configuration with a cal file loaded for input 2:<BR><BR>
+<PRE>
+{
+  "currentInputSelection": "EXCL: Line (2- miniDSP 2x4n) LINE_IN (Master Volume)",
+  "separateCalFileForEachInput": true,
+  "inputDeviceIsCWeighted": false,
+  "perInputCalData": {
+    "1": {
+      "dBFSAt94dBSPL": -20.0469509765625,
+      "fullScaleSineVrms": 1
+    },
+    "2": {
+      "calFilePath": "C:\\Users\\myusername\\Documents\\test.txt",
+      "dBFSAt94dBSPL": -20.0469509765625,
+      "fullScaleSineVrms": 1
+    },
+    "3": {
+      "dBFSAt94dBSPL": -20.0469509765625,
+      "fullScaleSineVrms": 1
+    },
+    "4": {
+      "dBFSAt94dBSPL": -20.0469509765625,
+      "fullScaleSineVrms": 1
+    }
+  }
+}
+</PRE>
+        
+        <H4><A name="outputcal">Output ("soundcard") calibration configuration</A></H4>
         
         <P>The current output ("soundcard") calibration configuration, including any cal file being used, can be read 
         at the <FONT class="endpoint">/audio/output-cal</FONT> endpoint. This endpoint only supports 
@@ -311,7 +364,29 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         changing settings, REW will check that it still corresponds to the output in use and reject the request
         if the output has changed. To clear a cal file set its file path to an empty string. Note that backslashes 
         in file paths must be escaped (meaning a double backslash is required), or forward slashes may 
-        be used.
+        be used. Here is an example:<BR><BR>
+<PRE>
+{
+  "currentOutputSelection": "EXCL: Speakers (2- miniDSP 2x4n) SPEAKER",
+  "calData": {
+    "calFilePath": "",
+    "sampleRate": {
+      "value": 48000,
+      "unit": "Hz"
+    }
+  }
+}
+</PRE>
+        
+        <H4><A name="distpoly">Distortion compensation polynomials</A></H4>
+        
+        <P>The distortion compensation polynomials for the current input and output 
+        can be accessed at the <FONT class="endpoint">/audio/input-distortion-compensation-polynomial/</FONT>
+        and <FONT class="endpoint">/audio/output-distortion-compensation-polynomial/</FONT> endpoints.
+        A <FONT class="cmd">GET</FONT> returns the current polynomial, if any. Input polynomials are 
+        returned mapped against the input index, output polynomials are mapped against the sample rate.
+        A <FONT class="cmd">POST</FONT> applies the specified polynomial. Polynomial phases are optional
+        in <FONT class="cmd">POST</FONT>.
         
         <H4><A name="java">Java settings</A></H4>
         
@@ -388,7 +463,7 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         <P>The <FONT class="endpoint">/input-levels</FONT> endpoint provides access to the current input level
         via <A href="#subscriptions">subscription</A> whenever the inputs are being monitored. Monitoring is started 
         or stopped by posting a command to the  <FONT class="endpoint">/input-levels/command</FONT> endpoint. The 
-        list of commands is retrieved from the The <FONT class="endpoint">/input-levels/commands </FONT> endpoint. 
+        list of commands is retrieved from the <FONT class="endpoint">/input-levels/commands </FONT> endpoint. 
         Sending a command to start monitoring input levels will start audio capture if it is not already running. 
         Audio capture will continue until a command is sent to stop monitoring input levels.
         
@@ -429,7 +504,8 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         endpoint deletes that measurement, <FONT class="cmd">DELETE</FONT> at the <FONT class="endpoint">/measurements</FONT>
         endpoint deletes all the measurements. <B>N.B. There are no delete confirmations, use with care!</B>
         
-        <P>Here is an example of a measurement summary:
+        <P>Below is an example of a measurement summary. Colours are encoded as an integer RGB value with the red component 
+        in bits 16-23, the green component in bits 8-15, and the blue component in bits 0-7.
 <pre>
 {
   "title": "Artist 3+Q2070Si",
@@ -439,6 +515,9 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
   "groupName": "Listening position",
   "groupNotes": "Listening position measurements",
   "groupID": "0059f8f0-7eca-1000-8423-819b68ed3558",
+  "containingFileName": "grouptest.mdat",
+  "containingFilePath": "C:/Users/myusername/files/grouptest.mdat",
+  "containingFileNotes": "A set of example measurements with groups",
   "startFreq": 2.1972656,
   "endFreq": 24027.117,
   "inverted": false,
@@ -450,6 +529,10 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
   "clockAdjustmentPPM": 0,
   "timeOfIRStartSeconds": -0.0000625,
   "timeOfIRPeakSeconds": -0.0000012207031250266454
+  "micCalPath": "C:/Users/myusername/files/7000139.txt",
+  "soundcardCalPath": "No cal file",
+  "colour": 1804331,
+  "onOverlay": true
 }
 </pre>
         
@@ -513,11 +596,24 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
 }
     </PRE>
     
-        <H4><A name="change-summary">Change name or notes</A></H4>
+        <H4><A name="change-summary">Change name, notes, cal data, colour or overlay selection</A></H4>
         
         <P>A measurement's name and/or notes can be changed by a <FONT class="cmd">PUT</FONT> at the 
         <FONT class="endpoint">/measurements/:id</FONT> endpoint, putting a MeasurementSummary object which has the
         title and/or notes field set to the new value.
+        
+        <P>A measurements mic and/or soundcard cal data can be changed by a <FONT class="cmd">PUT</FONT> at the 
+        <FONT class="endpoint">/measurements/:id</FONT> endpoint, putting a MeasurementSummary object which has the
+        mic and/or soundcard path field set to the new value.
+        
+        <P>A measurement's trace colour can be changed by a <FONT class="cmd">PUT</FONT> at the 
+        <FONT class="endpoint">/measurements/:id</FONT> endpoint, putting a MeasurementSummary object which has the
+        colour to the new value. Colours are encoded as an integer RGB value with the red component 
+        in bits 16-23, the green component in bits 8-15, and the blue component in bits 0-7.
+        
+        <P>A measurement can be selected or deselected on the All SPL and Overlay graphs by a <FONT class="cmd">PUT</FONT> at the 
+        <FONT class="endpoint">/measurements/:id</FONT> endpoint, putting a MeasurementSummary object which has the
+        onOverlay field set either true or false.
         
         <H4><A name="freqresp">Frequency response</A></H4>
         
@@ -922,6 +1018,9 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
             <LI>targetLevel: target level in dB for an inversion function
             <LI>autoTarget: true if target level is to be set automatically for an inversion function
             <LI>excludeNotches: true if notches are to be excluded for an inversion function
+            <LI>spansCombinedRange: true if the result should span the combined frequency range of the measurements. 
+                It can be used with "A + B", "A - B", "A * B", "A / B", "|A| / |B|" and "(A + B) / 2". It is always 
+                true for other functions.
         </UL>
         
         <P>Here is an example of a ProcessMeasurements object to perform A * B trace arithmetic:
@@ -1409,6 +1508,33 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
 }            
 </PRE>
         
+        <H4><A name="rta-dist-comp">RTA distortion compensation</A></H4>
+        
+        <P>A distortion compensation polynomial calculation can be triggered by a <FONT class="cmd">GET</FONT>
+        at the <FONT class="endpoint">/rta/distortion-compensation</FONT> endpoint. The RTA
+        must be running and analysing a two-tone IMD signal. The order of the compensation is 
+        specified as a query parameter, e.g. ?order="3". To run the calculation minmising the f2 
+        sidebands include a query parameter ?minimise-f2-sidebands="true". The result is returned 
+        mapped against the current input index with the polynomial coefficients and phases, e.g.
+<PRE>
+{
+  "compensations": {
+    "1": {
+      "polyCoefficients": [
+        1,
+        0.00014369376837256194,
+        0.00012889912559042635
+      ],
+      "polyPhases": [
+        0,
+        171.54689616099765,
+        49.45904888662459
+      ]
+    }
+  }
+}
+</PRE>
+        
         <H3><A name="stepped-measurement">Stepped measurement</A></H3>
         
         <P>The <FONT class="endpoint">/stepped-measurement</FONT> endpoint provides control of REW's 
@@ -1649,8 +1775,5 @@ Float array:   {0.125f,  0.25f,  0.375f,  0.5f}
         ?micposition="Main". 
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

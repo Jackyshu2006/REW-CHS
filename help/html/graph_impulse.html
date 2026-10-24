@@ -65,8 +65,8 @@
         <P>The impulse response is that of the whole system, including the mic/meter 
         and the soundcard. <B>The mic/meter and soundcard calibration files are only applied 
         when calculating the frequency response, their effect is not included in the 
-        impulse response.</B> However, there is a <EM>Merge cal data to IR</EM> Measurement 
-        action in the <A href=graph_allspl.html#measurementactions>All SPL graph</A> controls 
+        impulse response.</B> However, there is a <EM>Merge cal data to IR</EM>  
+        action in the <A href="measurementspanel.html#mergecal">measurements panel</A> actions 
         that allows the cal file responses to be merged into the impulse response.
 
         <H3><A name="minphaseir">Minimum Phase Impulse</A></H3>
@@ -106,7 +106,7 @@
         harmonic on a laptop soundcard loopback measurement:
         <P><IMG SRC="../../images/impulseharmonics.jpg" ALT="Impulse Response with Harmonic Peaks" width="380" height="148"><BR CLEAR="all">
 
-        <P>Here is a similar measurement for an external USB soundcard, it is a 44.1k card rather than 48k, which
+        <P>Here is a similar measurement for an external USB soundcard, it is running at 44.1kHz rather than 48kHz, which
         limits us to the 6th harmonic in the 1s pre-impulse period - however, only the 2nd, 3rd and 5th harmonic peaks
         are evident, the 4th harmonic peak is barely visible above the noise floor (which is about 10dB lower than the
         laptop card). The extended lobes after the impulse are due to the card's much lower -3dB frequency, 1.0Hz versus 22.1Hz
@@ -257,9 +257,6 @@
         will remove them from the graph and from the graph legend.
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

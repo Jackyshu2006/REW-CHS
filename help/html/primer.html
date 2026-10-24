@@ -40,8 +40,8 @@
         to consider the frequency content of the signals we are trying to capture.
         
         <P>The <EM>resolution</EM> of the interface measurements is typically either 16 bits 
-        or 24 bits. 16 bit resolution is the same as used on CDs, and is the resolution 
-        REW supports. Having 16 bit resolution means the individual measurement values can 
+        or 24 bits. 16 bit resolution is the same as used on CDs. 
+        Having 16 bit resolution means the individual measurement values can 
         range from -32768 to +32767 (numbers that can be represented with 15 binary digits, plus
         a 16th binary digit to store the sign of the number). Rather than use the measurement 
         numbers directly, it is convenient to refer to them in terms of how close they are to 
@@ -101,8 +101,8 @@
         represented). The spacing depends on the length of signal we analyse in the FFT. FFT calculations 
         are most efficient when the signal lengths are powers of two, such as 16k (16,384), 32k (32768) or 
         64k (65536). To calculate a 64k FFT from a signal that is sampled at 48kHz we need 65536/48000 
-        seconds of the signal, or 1.365s. The frequencies would be spaced at 24000/65536 = 0.366Hz. 
-        If the FFT were generated from 16k samples the frequencies would be 1.465Hz apart. The fewer
+        seconds of the signal, or 1.365s. The frequencies would be spaced at 48000/65536 = 0.732Hz. 
+        If the FFT were generated from 16k samples the frequencies would be 2.93Hz apart. The fewer
         samples used to generate the FFT, the further apart the frequencies are so the lower the frequency
         resolution. For high frequency resolution we need to analyse long time periods of signals.
         
@@ -283,8 +283,5 @@
         better understand how REW <A HREF="gettingstarted.html#explanation">makes measurements</A>.
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

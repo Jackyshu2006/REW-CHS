@@ -54,14 +54,14 @@
 
         <P>REW's FSAF implementation can use noise (white, pink, brown) or a segment of
         a user-supplied file as the measurement signal, allowing distortion results (TD+N) 
-        to be obtained when playing back music. a 10 Hz first order high pass filter is applied 
+        to be obtained when playing back music. A 10 Hz first order high pass filter is applied 
         to the input signal before FSAF processing to avoid processing artefacts.
         
         <P>Note that when using a file as the measurement signal any defects in the file, such as
         clipping, will increase measured TD+N. Clipped data in files typically causes clicks
         in the distortion residual.
         
-        <H3><a name="calibrate">Equipment required</a></H3>
+        <H3><a name="equipment">Equipment required</a></H3>
 
         <P>FSAF processing is very sensitive to clock rate differences between replay and 
         record. The best results are obtained when using the same audio interface for both
@@ -123,7 +123,7 @@
             to the signal to limit its range or simulate the effect of crossover filters. <BR><BR>
             <IMG SRC="../../images/fsaffilters.jpg" ALT="FSAF filter settings" BORDER=0><BR CLEAR="ALL"><BR>
             
-            <LI><A name="level">The spectrum</A> of the test signal is shown below the 
+            <LI><A name="spectrum">The spectrum</A> of the test signal is shown below the 
             filters setting, it includes the effect of any filters chosen. To the right 
             of the spectrum are figures for the crest factor and kurtosis of the test signal.<BR><BR>
             <IMG SRC="../../images/fsafspectrum.jpg" ALT="FSAF test signal spectrum" BORDER=0><BR CLEAR="ALL"><BR>
@@ -143,7 +143,7 @@
             
             <LI>In the options panel <A name="timingmarkers"><FONT CLASS="heading">Use timing markers</FONT></A>
             should be selected if the input and output are not on the same device. For
-            file measurements the residue is saved as a WAV file, there are options to also
+            file measurements the residual is saved as a WAV file, there are options to also
             save the excitation, mic input and LTI response as WAV files. The default location 
             for those files is the temp sub-folder of the REW log files folder, whose
             location is shown in the About REW box. WAV files in the temp folder are deleted after 7 
@@ -173,7 +173,7 @@
 
         <P>When using a file as the test signal REW may optionally save a copy of the measurement 
         residual (the difference between the measured and linear response) in the mdat file. There 
-        are also options to also save the excitation, mic input and LTI response as WAV files. The 
+        are also options to save the excitation, mic input and LTI response as WAV files. The 
         excitation is saved in its original form in a file whose name starts "exc-".
         The default location for those WAV files is the temp sub-folder of the REW log files folder, whose
         location is shown in the About REW box. WAV files in the temp folder are deleted after 7 
@@ -191,9 +191,6 @@
         button.
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
         </BODY>
 </HTML>

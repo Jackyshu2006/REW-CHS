@@ -43,7 +43,7 @@
             </UL>
             <LI><A href="#dualtone">双音</A>
             <UL>
-                <LI>SMPTE、DIN、CCIF 和自定义
+                <LI>SMPTE、DIN、CCIF、AES-17 MD、AES-17 DFD、TDFD 几种预设和自定义
             </UL>
             <LI><A href="#tripletone">三音</A>
             <UL>
@@ -114,7 +114,7 @@
 
         <H3><A name="output">输出</A></H3>
 
-        <P>音频输出设备的设置方法见<A HREF="gettingstarted.html#audioconfig">快速入门</A>。所选设备上具体用哪个输出，在信号发生器的<EM>播放</EM>面板里选。使用 Java 驱动时，如果输出是立体声，信号可以只从其中一个声道输出，也可以两个声道同时输出。
+        <P>音频输出设备的设置方法见<A HREF="calsoundcard.html#audioconfig">测量前的准备</A>。所选设备上具体用哪个输出，在信号发生器的<EM>播放</EM>面板里选。使用 Java 驱动时，如果输出是立体声，信号可以只从其中一个声道输出，也可以两个声道同时输出。
 
         <P>使用 Java 驱动且两个声道都有输出，或者使用 ASIO 驱动并选了第二路输出时，可以用<EM>反相第二输出</EM>复选框设定第二路的信号：勾选时，第二路输出第一路的反相信号；不勾选时，两路信号相同。
 
@@ -141,13 +141,13 @@
 
         <P>正弦波的频率范围是 1.0 Hz 到声卡<A HREF="soundcard.html#samplerate">采样率</A>的一半，例如声卡工作在 48 kHz 时，上限是 24 kHz。
 
-        <P>频率可以直接在“频率”框里输入，也可以用箭头按钮增减：200 Hz 以下每步 0.5 Hz，200 Hz 以上每步 1 Hz。如果勾选了“锁定 RTA FFT 频率”，实际生成的频率通常与设定频率略有差别；发生器运行时，频率显示区右上角会显示这个实际频率。
+        <P>频率可以直接在“频率”框里输入，也可以用箭头按钮增减：200 Hz 以下每步 0.5 Hz，200 Hz 以上每步 1 Hz。如果勾选了“将频率锁定到 RTA FFT”，实际生成的频率通常与设定频率略有差别；发生器运行时，频率显示区右上角会显示这个实际频率。
 
-        <P><EM>上一个 1/3 倍频程</EM>和<EM>下一个 1/3 倍频程</EM>按钮把发生器频率移到相邻的 1/3 倍频程中心频率（centre frequency）。<EM>上一个音名</EM>和<EM>下一个音名</EM>按钮以 A4 = 440 Hz 为基准，把频率移到音阶上相邻的音名。
+        <P><EM>上一个 1/3 倍频程</EM>和<EM>下一个 1/3 倍频程</EM>按钮把发生器频率移到相邻的 1/3 倍频程中心频率（centre frequency）。<EM>上一个音名</EM>和<EM>下一个音名</EM>按钮把频率移到音阶上相邻的音名，音阶以设置 → 视图里设定的 A4 调音基准频率为准。
 
-        <H4><A name="locktofft">锁定 RTA FFT 频率</A></H4>
+        <H4><A name="locktofft">将频率锁定到 RTA FFT</A></H4>
 
-        <P>勾选<EM>锁定 RTA FFT 频率</EM>后，发生器频率会调整到最近的 FFT 频率区间（bin）的中心，频率区间按当前的 RTA FFT 长度划分。这样，信号在一个 FFT 长度内恰好完成整数个周期，RTA 就可以用矩形窗（rectangular window），使 RTA 图的频谱分辨率达到最高。复选框后面的括号里显示 FFT 长度。发生器运行时，实际生成的精确频率显示在频率显示区的右上角。<BR><BR>
+        <P>勾选<EM>将频率锁定到 RTA FFT</EM>后，发生器频率会调整到最近的 FFT 频率区间（bin）的中心，频率区间按当前的 RTA FFT 长度划分。这样，信号在一个 FFT 长度内恰好完成整数个周期，RTA 就可以用矩形窗（rectangular window），使 RTA 图的频谱分辨率达到最高。复选框后面的括号里显示 FFT 长度。发生器运行时，实际生成的精确频率显示在频率显示区的右上角。<BR><BR>
         <IMG SRC="../../images/exactfreq.jpg" ALT="实际频率显示在设定频率上方" ALIGN="left"><BR CLEAR="all">
 
         <H4><A name="freqtrackscursor">频率跟随光标</A></H4>
@@ -172,7 +172,7 @@
 
         <H4><A name="adddither">添加抖动</A></H4>
 
-        <P>勾选<EM>添加抖动</EM>后，发生器会在输出中加入峰峰值 2 LSB 的三角形抖动（triangular dither），用来消除量化噪声（quantisation noise）尖峰。抖动按多少位的精度加入，在复选框右侧的位数下拉框里选择。<B>注意：在 Windows 上使用 Java 驱动时，音频数据的精度限于 16 位。</B>
+        <P>勾选<EM>添加抖动</EM>后，发生器会在输出中加入峰峰值 2 LSB 的三角形抖动（triangular dither），用来消除量化噪声（quantisation noise）尖峰。抖动按多少位的精度加入，在复选框右侧的位数下拉框里选择。<B>注意：在 Windows 上使用 Java 驱动时，音频数据的精度限于 16 位；选用名称以 EXCL 开头的设备（WASAPI 独占模式）时不受此限。</B>
 
         <P>对 AV 功放、AV 处理器或均衡器这类电子设备做非常精确的失真测量时，加抖动很有好处。做声学测量时通常不需要，因为抖动消除的量化伪像（artefact）远低于声学本底噪声。
 
@@ -207,6 +207,8 @@
         <P>勾选<EM>带限锯齿波采样</EM>后，REW 把信号的各次谐波逐一叠加，一直加到采样率的一半，用这种方式生成数据。这样原始数据里不会有带外成分，整个带宽内的谐波电平也都正确。
 
         <P>带限数据的频率限制宽松得多。但为了高效生成信号，REW 会选取合适的精确频率，使数据值在不超过 8192 个采样点的长度内循环重复。实际频率通常与设定频率相差不到 0.1%，但最低频率在 44.1 kHz 采样率下是 5.4 Hz，采样率更高时按比例提高。<BR>
+
+        <P>勾选<EM>反转锯齿波</EM>后，锯齿波由逐渐上升的斜坡变为逐渐下降的斜坡。
 
         <H3><A name="toneburst">猝发音</A></H3>
         <BR><IMG SRC="../../images/toneburst.jpg" ALT="猝发音发生器" ALIGN="left"><BR CLEAR="all">
@@ -256,6 +258,10 @@
 
         <P>使用双音信号时，RTA 可以显示互调失真的数值，以及各互调成分的电平。
 
+        <P>需要在 REW 之外混合两个音时，使用<EM><A name="separateoutputs">独立输出</A></EM>选项。使用这个选项时，输出必须选为 L+R；如果用 ASIO 驱动，则必须启用第二路输出。勾选后，f1 从第一路输出，f2 从第二路输出。
+
+        <P>勾选<EM><A name="fftlockedimd">将频率锁定到 RTA FFT</A></EM>后，发生器的两个频率都会调整到最近的 FFT 频率区间中心，频率区间按当前的 RTA FFT 长度划分。这样，信号在一个 FFT 长度内恰好完成整数个周期，RTA 就可以用矩形窗，使 RTA 图的频谱分辨率达到最高。复选框后面的括号里显示 FFT 长度。
+
         <H3><A name="tripletone">三音</A></H3>
         <BR><IMG SRC="../../images/tripletonegen.jpg" ALT="三音发生器" ALIGN="left"><BR CLEAR="all">
 
@@ -287,6 +293,15 @@
         <P>When the quad tone signal is being used the RTA can show figures for the Total Distortion
         + Noise (TD+N) percentage. -->
 
+        <H3><A name="dim">动态互调失真（DIM）</A></H3>
+        <BR><IMG SRC="../../images/dimgen.jpg" ALT="动态互调失真（DIM）发生器" ALIGN="left"><BR CLEAR="all">
+
+        <P>DIM 发生器为动态互调失真（dynamic intermodulation distortion，DIM）测量提供激励信号。它预置了 DIM30 和 DIM100 两种信号：都是 3.18 kHz 方波叠加 15 kHz 正弦波，两者幅度比为 4:1，再分别经过 30 kHz 或 100 kHz 的低通滤波器。
+
+        <P>生成信号时，REW 只保留方波在奈奎斯特频率（Nyquist frequency）以下的谐波，并按低通滤波器在各频率上造成的幅度和相位变化，对这些谐波做相应调整。
+
+        <P>合成信号的 RMS 电平就是信号发生器设定的 RMS 电平。使用 DIM 信号时，RTA 可以显示动态互调失真的数值。
+
         <H3><A name="multitone">多音</A></H3>
         <BR><IMG SRC="../../images/multitonegen.jpg" ALT="多音发生器" ALIGN="left"><BR CLEAR="all">
 
@@ -307,11 +322,11 @@
         <H3><A name="pinknoise">随机粉红噪声与随机白噪声</A></H3>
         <BR><IMG SRC="../../images/pinkgen.jpg" ALT="粉红噪声发生器" ALIGN="left"><BR CLEAR="all">
 
-        <P>粉红噪声（pink noise）发生器把白噪声（white noise）送进一个 -10 dB/十倍频程的滤波器得到粉红噪声。这个滤波器由一组一阶滤波器加权求和构成，是 Paul Kellet 在 1999 年前后设计的。据设计者说明，在 44.1 kHz 采样率下，9.2 Hz 以上的误差在 0.05 dB 以内。
+        <P>粉红噪声（pink noise）发生器把白噪声（white noise）送进一个 -10 dB/十倍频程的滤波器得到粉红噪声。这个滤波器由一组一阶滤波器加权求和构成，是 Paul Kellett 在 1999 年前后设计的。据设计者说明，在 44.1 kHz 采样率下，9.2 Hz 以上的误差在 0.05 dB 以内。
 
         <P>“全频段”选项直接输出滤波后的噪声，带宽最宽，低频成分也最多。“扬声器校准用”选项在 500 Hz 和 2 kHz 处各加一个 2 阶滤波器（40 dB/十倍频程，即 12 dB/倍频程），得到能量集中在 1 kHz 附近的信号。“低音炮校准用”在 30 Hz 和 80 Hz 处加滤波器。这两种都大体符合 THX 对测试信号的建议。
 
-        <P>“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》（Standard Method of Measurement for In-Home Loudspeakers）对频谱整形。“语音范围”噪声按 IEC 60268-16:2030 的语音整形噪声（speech-shaped noise）整形，用于语音传输指数（STI）测试。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
+        <P>“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》（Standard Method of Measurement for In-Home Loudspeakers）对频谱整形。“语音范围”噪声按 IEC 60268-16:2020 的语音整形噪声（speech-shaped noise）整形，用于语音传输指数（STI）测试。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
 
         <P>“自定义”可以任意设定低频截止和/或高频截止频率，但带宽至少为 1/3 倍频程。滤波器是巴特沃斯（Butterworth）高通和低通，阶数可在 2 阶（12 dB/倍频程）到 8 阶（48 dB/倍频程）之间选择。
 
@@ -346,15 +361,15 @@
 
         <P>下面几张图对比序列长度设置正确与错误时的效果。图中是一次回环测量，RTA 设为 1/48 倍频程，FFT 长度为 65536（64k）。<BR><BR>
         长度 32768，短于 FFT<BR>
-        <IMG SRC="../../images/pn32krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn32krta64k.jpg" ALT="周期性噪声长度短于 FFT" ALIGN="left"><BR CLEAR="all">
         <BR>长度 131072，长于 FFT（未平均）<BR>
-        <IMG SRC="../../images/pn128krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn128krta64k.jpg" ALT="周期性噪声长度长于 FFT" ALIGN="left"><BR CLEAR="all">
         <BR>长度 65536，与 FFT 一致<BR>
-        <IMG SRC="../../images/pn64krta64k.jpg" ALT="周期性噪声控件" ALIGN="left"><BR CLEAR="all">
+        <IMG SRC="../../images/pn64krta64k.jpg" ALT="周期性噪声长度与 FFT 一致" ALIGN="left"><BR CLEAR="all">
 
         <P>“全频段”选项生成的噪声从所选 FFT 长度对应的最低频率一直延伸到采样率的一半，带宽最宽，低频成分也最多。粉红噪声选“全频段”时，10 Hz 以下的频谱是平直的（与随机粉红噪声相同），以免最低频段能量过大。
 
-        <P>“扬声器校准用”选项生成 500 Hz～2 kHz 的噪声，能量集中在 1 kHz 附近。“低音炮校准用”生成 30～80 Hz 的噪声。“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》对频谱整形，峰值因数为 12 dB。“语音范围”噪声按 IEC 60268-16:2030 的语音整形噪声整形，用于 STI 测试，频谱在 125 Hz 频带下沿以下、8 kHz 频带上沿以上的部分被截掉。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
+        <P>“扬声器校准用”选项生成 500 Hz～2 kHz 的噪声，能量集中在 1 kHz 附近。“低音炮校准用”生成 30～80 Hz 的噪声。“CTA-2034”选项按 ANSI/CEA-2034-A《家用音箱标准测量方法》对频谱整形，峰值因数为 12 dB。“语音范围”噪声按 IEC 60268-16:2020 的语音整形噪声整形，用于 STI 测试，频谱在 125 Hz 频带下沿以下、8 kHz 频带上沿以上的部分被截掉。“倍频程”和“1/3 倍频程”选项以所选频率为中心频率滤波，总带宽为 1 个倍频程或 1/3 个倍频程。
 
         <P>“自定义”可以任意设定低频截止和/或高频截止频率，但带宽至少为 10%。“低音炮校准用”和“扬声器校准用”两种信号用砖墙滤波器（brick wall filter）滤波。其他滤波信号可选巴特沃斯高通和低通滤波器，阶数从 2 阶（12 dB/倍频程）到 8 阶（48 dB/倍频程），也可选砖墙滤波器。
 
@@ -384,7 +399,5 @@
 
         <DIV class="onlineonly"><a HREF="index.html#top">帮助索引</A></DIV>
 
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
     </BODY>
 </HTML>

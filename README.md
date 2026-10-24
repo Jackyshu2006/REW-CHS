@@ -14,7 +14,7 @@ REW 是一款免费的声学测量软件。在国内，汽车音响和家庭影�
 
 我是厦门南方公园的 Jacky，平时做汽车音响的改装升级和调音培训。这次翻译的做法是：
 
-- 从英文原文开始，逐行重新翻译了界面和全部 66 页帮助。
+- 从英文原文开始，逐行重新翻译了界面和全部 67 页帮助。
 - 术语不只看单一来源。参考的来源有[术语在线](https://www.termonline.cn)（全国科学技术名词审定委员会）、国内声学教材和国家标准、中文维基百科，以及测量设备厂商（如 NTi Audio）的中文资料，同时考虑国内学术上的通常叫法和行业里的习惯叫法。一个概念只用一个名字，例如 Clarity 和 Definition 分别叫“清晰度”和“明晰度”，不混用。
 - 帮助文件和汉化界面里的用词保持一致。
 - 专业术语第一次出现时附上英文，例如“群延迟（group delay）”，方便理解和核对。
@@ -32,12 +32,13 @@ REW 是一款免费的声学测量软件。在国内，汽车音响和家庭影�
 
 | 目录 | 内容 |
 | --- | --- |
-| `bundles/` | 33 个界面文件 `*_zh.properties`，旁边是对应的英文原文 `*_en_GB.properties` |
-| `help_zh/html/` | 66 页帮助 |
+| `bundles/` | 34 个界面文件 `*_zh.properties`，旁边是对应的英文原文 `*_en_GB.properties` |
+| `help_zh/` | 帮助窗口左侧的目录树 `WizardHelpTOC.xml` 和帮助跳转表 `Map.jhm` |
+| `help_zh/html/` | 67 页帮助 |
 | `help_zh/html/dialogs/` | 15 页弹窗帮助 |
 | `help/html/` | 英文帮助原文，供对照 |
 
-`api.html` 不翻译，所以 `help_zh` 里没有它。帮助窗口左侧的目录树、搜索索引，以及帮助页用到的图片，不在本仓库里。
+`api.html` 不翻译，所以 `help_zh` 里没有它。搜索索引和帮助页用到的图片不在本仓库里。
 
 ## 参与改进
 
@@ -71,7 +72,7 @@ REW is free-to-use acoustic measurement software. In China, many people who do a
 
 I'm Jacky Shu from SouthPark in Xiamen, China. I do car audio upgrades and teach car audio tuning. This is how I did the translation:
 
-- I translated the interface and all 66 help pages again, line by line from the English.
+- I translated the interface and all 67 help pages again, line by line from the English.
 - For terms, I don't rely on one source. My sources include [Termonline](https://www.termonline.cn) (run by the China National Committee for Terms in Sciences and Technologies), Chinese acoustics textbooks and national standards, Chinese Wikipedia, and Chinese documents from measurement equipment makers such as NTi Audio. I also consider the usual names in Chinese academic work and the common names in the industry. One idea has only one name. For example, Clarity is always 清晰度 and Definition is always 明晰度. The two are never mixed.
 - The help and the Chinese interface use consistent wording.
 - When a technical term appears the first time, the English is added after it, for example 群延迟 (group delay). This makes it easier to understand and check.
@@ -87,12 +88,13 @@ This repository was set up with the agreement of John Mulcahy, the author of REW
 
 | Folder | Content |
 | --- | --- |
-| `bundles/` | 33 interface files `*_zh.properties`. The English files `*_en_GB.properties` are beside them. |
-| `help_zh/html/` | 66 help pages |
+| `bundles/` | 34 interface files `*_zh.properties`. The English files `*_en_GB.properties` are beside them. |
+| `help_zh/` | The contents tree on the left of the help window, `WizardHelpTOC.xml`, and the help map, `Map.jhm` |
+| `help_zh/html/` | 67 help pages |
 | `help_zh/html/dialogs/` | 15 dialog help pages |
 | `help/html/` | The English help pages, for comparing |
 
-`api.html` is not translated, so it is not in `help_zh`. The contents tree on the left of the help window, the search index, and the images used by the help pages are not in this repository.
+`api.html` is not translated, so it is not in `help_zh`. The search index and the images used by the help pages are not in this repository.
 
 ## How to help
 

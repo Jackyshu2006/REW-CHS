@@ -112,6 +112,13 @@
             Analysis option to 
             <A href="analysis.html#adjustclockloopback">Adjust clock with loopback</A>.<BR><BR>
             
+            If the environment being measured has an RT60 time above about 2 seconds
+            at high frequencies the option to <EM>Configure the sweep for long HF RT60</EM> 
+            will provide more time to capture those HF decays. The higher the RT60, 
+            the longer the sweep that should be used. The IR truncation in the 
+            <A href="analysis.html#irtruncation">Analysis preferences</A> should 
+            also be increased.<BR><BR>
+            
             Each doubling of the sweep length improves S/N by almost 3 dB. However, 
             the time required to perform the processing after each sweep will more 
             than double. If REW is running on a computer which does not have a fast 
@@ -154,7 +161,7 @@
             the response with a single sweep, stick with single sweeps</B>
             
             <LI>A <FONT CLASS="heading">Timing</FONT> reference can be selected for
-            the measurement, see <A href=#acousticref>Measuring with a timing 
+            the measurement, see <A href="#timingref">Measuring with a timing 
             reference</A> for more on the settings when using a timing reference. 
             When not using a timing reference there are 3 choices for the t=0 position 
             of the measured impulse response: (1) <EM>Set t=0 at IR peak</EM> will
@@ -169,7 +176,7 @@
             <A href="siggen.html#meassweep">Measurement Sweep</A> file that 
             has been generated and <A href="siggen.html#savingsignals">saved</A> 
             previously from the signal generator. Usually REW plays the sweeps,
-            see <A href=#fileplayback>Measuring with file playback</A> for more on 
+            see <A href="#fileplayback">Measuring with file playback</A> for more on 
             using a file.
             
             <LI>The <FONT CLASS="heading">Sample rate</FONT> is selected below the 
@@ -249,7 +256,7 @@
             <IMG SRC="../../images/inputselectbutton.jpg" ALT="Input selection button" BORDER=0><BR CLEAR="ALL"><BR>
             <IMG SRC="../../images/inputselectdialog.jpg" ALT="Input selection dialog" BORDER=0><BR CLEAR="ALL"><BR>
             
-            <LI>If a <A href=multichannelcapture.html>Multiple input measurement</A> is being made
+            <LI>If a <A href="multichannelcapture.html">Multiple input measurement</A> is being made
             there is a <EM>Configure average...</EM> button on the input selection dialog to select 
             whether the individual inputs are weighted and/or have their SPL aligned before the average 
             is calculated. There is also an option to create a <EM>Virtual balanced</EM> input by 
@@ -407,7 +414,7 @@
         the same relative timing, allowing trace arithmetic to be carried out on 
         the traces in the <A href="graph_allspl.html">All SPL</A> graph. <B>Note</B> 
         that multiple sweeps cannot be used when using an acoustic timing reference.
-
+        
         <H4><A name="systemdelay">System delay</A></H4>
         
         <P>If using a timing reference REW can calculate the delay through the system 
@@ -459,7 +466,7 @@
         
         <H3>Number of measurements</H3>
 
-        <P>REW can have up to 1000 measurements loaded at once according the setting for Maximum 
+        <P>REW can have up to 1000 measurements loaded at once according to the setting for Maximum 
         measurements in the <A href="view.html">View preferences</A>, the default is 100. 
         If the maximum number has been reached when a new measurement is requested a 
         warning is given as the first measurement would need to be removed to make room 
@@ -468,9 +475,6 @@
         <BR CLEAR="all"><BR>
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
         </BODY>
 </HTML>

@@ -59,6 +59,40 @@
         There is also a volts per &radic;Hz Y axis option to display the amplitude spectral 
         density, this is only meaningful when using the spectrum view.
         
+        <H3><A name="index">Index</A></H3>
+
+        <OL>
+            <LI><a href="#inputselection">Input selection</a></LI>
+            <LI><a href="#calibrate">Calibrating the input level</a></LI>
+            <LI><A href="#save">Saving results as measurements</A></LI>
+            <LI><a href="#fileprocessing">Processing WAV files</a></LI>
+            <LI><a href="#rtacontrols">Spectrum/RTA controls</a></LI>
+            <LI><a href="#distortionsettings">Distortion settings</a>
+                <UL>
+                    <LI><A href="#coherent">Coherent averaging</A></LI>
+                    <LI><A href="#crosscorr">Cross correlation averaging</A></LI>
+                    <LI><A href="#otherdistortion">Other distortion settings</A></LI>
+                </UL></LI>
+            <LI><a href="#appearance">Appearance controls</a>
+                <UL>
+                    <LI><A href="#nc">Show noise curves</A></LI>
+                    <LI><A href="#cea2010limit">CEA2010 max SPL limit</A></LI>
+                    <LI><A href="#64bit">Use 64-bit FFT</A></LI>
+                    <LI><A href="#burstpeakspl">Show tone burst peak SPL</A></LI>
+                    <LI><A href="#hearingthreshold">Show hearing SPL threshold</A></LI>
+                </UL></LI>
+            <LI><a href="#peakfinder">Peak finder</a></LI>
+            <LI><a href="#traceoptions">Trace options</a></LI>
+            <LI><a href="#rtadistortion">Distortion measurements</a>
+                <UL>
+                    <LI><a href="#rtathd">Harmonic distortion</a></LI>
+                    <LI><a href="#rtaintermod">Intermodulation distortion</a></LI>
+                    <LI><a href="#rtadim">Dynamic intermodulation distortion</a></LI>
+                    <LI><a href="#rtatdplusn">Multitone Total Distortion</a></LI>
+                </UL></LI>
+            <LI><a href="#steppedsine">Stepped sine distortion</a></LI>
+        </OL>
+        
         <H3><a name="inputselection">Input selection</a></H3>
         
         <P>The current RTA input can be changed by clicking the Input selection button:<BR>
@@ -68,7 +102,7 @@
         active mic cal data.<BR>
         <P><IMG SRC="../../images/rtainputdialog.jpg" ALT="RTA input selection dialog" BORDER=0 ALIGN="left" ><BR CLEAR="All">
         
-        <P>When using <A href=multichannelcapture.html>multi-input capture</A> (Pro upgrade)
+        <P>When using <A href="multichannelcapture.html">multi-input capture</A> (Pro upgrade)
         there is an option to select multiple inputs and choose the range of inputs that will 
         be averaged by the RTA to produce the graph traces. Up to 16 individual input traces
         can be displayed along with the average and peak, according to the setting in the 
@@ -89,7 +123,7 @@
         offered. The balanced input will be added to or subtracted from the measurement input according 
         to the mode setting and the result scaled by 0.5. Difference mode simulates the behaviour of a 
         balanced input, and is appropriate if the balanced input is driven by an inverted signal (such 
-        as by selecting the <EM>Invert second output</EM> option on the signal generator.
+        as by selecting the <EM>Invert second output</EM> option on the signal generator).
         <P><IMG SRC="../../images/rtavirtualinputdialog.jpg" ALT="RTA virtual balanced input selection dialog" BORDER=0 ALIGN="left" ><BR CLEAR="All">
             
         <H3><a name="calibrate">Calibrating the input level</a></H3>
@@ -104,7 +138,7 @@
         <P>After the value is entered a confirmation message will be shown, stating the maximum
         peak and rms input voltages the input can accept before clipping at digital full scale.
         If any volume control setting along the input path is altered the calibration will need 
-        be done again. If the input sensitivity is known (including the effect of any volume 
+        to be done again. If the input sensitivity is known (including the effect of any volume 
         control settings) it can be typed directly into the text field below the 
         <EM>FS sine Vrms</EM> label. Clicking in the triangle in the upper left corner
         brings up a list of preset values that may be entered, the labels and values can be 
@@ -117,7 +151,7 @@
         input device is selected on the Soundcard preferences.<BR></P>
         <IMG SRC="../../images/caldatasettings.jpg" ALT="Cal data settings"><BR CLEAR="all">
         
-        <H4><A name="save">Saving results as measurements</A></H4>
+        <H3><A name="save">Saving results as measurements</A></H3>
 
         <P>The <EM>Save current</EM> button converts the current display into a 
         measurement in the measurements pane (keyboard shortcut Alt+S). It is 
@@ -242,7 +276,7 @@
         However, the tradeoff is that windows cause some spreading of the signal they
         are analysing, which reduces the frequency resolution. To use a rectangular window 
         with the REW signal generator use the generator's 
-        <A href="siggen.html#locktofft">Lock frequency to FFT</A> option.
+        <A href="siggen.html#locktofft">Lock frequency to RTA FFT</A> option.
         
         <P>The Hann window is well suited to most measurements, offering a good tradeoff 
         between resolution and shoulder height. If very high dynamic range needs to be 
@@ -298,8 +332,8 @@
 
         <p>The Distortion High Pass and Low Pass are used to set the lowest and highest
         frequencies that will contribute to the calculation of THD, THD+N and, for dual, triple
-        and multitone signals, TD+N. They are only applied when the <EM>Use distortion high pass</EM> 
-        and <EM>Use distortion low pass</EM> boxes are selected. Either can be enabled 
+        and multitone signals, TD+N. They are only applied when the <EM>Enable distortion HP</EM> 
+        and <EM>Enable distortion LP</EM> boxes are selected. Either can be enabled 
         individually. When they are active the region of the plot which is excluded from 
         the calculations will be greyed out and the THD, THD+N and TD+N figures will show 
         the range over which they have been calculated.
@@ -327,7 +361,7 @@
         <P>Distortion ratios may be shown as either percentages or in dB according to the
         selection made.
 
-        <H4>Harmonic data</H4>
+        <H4><A name="harmonicdata">Harmonic data</A></H4>
         
         <P>The <EM>Highest harmonic in THD</EM> setting controls which harmonics are
         used for the calculated THD figure. The THD figure in the distortion panel will show which 
@@ -344,9 +378,31 @@
         
         <H4><A name="coherent">Coherent averaging</A></H4>
 
-        <P>This option is only applicable to harmonic distortion measurements and only when capturing
-        a single input. If it is selected the FFT data is phase aligned according to the phase of the 
-        fundamental before averaging, this can lower the noise floor substantially compared to magnitude 
+        <P>Coherent averaging averages the complex FFT data. It can be used when capturing
+        a single input with the <EM>Calculate distortion</EM> button pressed for:
+        <ul>
+            <li>Harmonic distortion measurements with a tone from the REW signal 
+                generator or any external source</li>
+            <li>Measurements of tone bursts from the REW signal generator if the 
+                FFT overlap is set to 0% and the tone burst interval matches the 
+                FFT length</li>
+            <li>Measurements of dual tone signals from the REW signal generator
+                if the option to <EM>Lock frequencies to RTA FFT</EM> is selected,
+                the FFT overlap is set to 0% and the RTA window is Rectangular</li>
+            <li>Measurements of multitone signals from the REW signal generator
+                if the FFT overlap is set to 0% and the RTA window is Rectangular</li>
+        </ul>
+        
+        <P>To use a rectangular window for the RTA the input signal must be periodic
+        within the FFT length. When using the REW signal generator for dual tone or 
+        multitone signals that requires the output and input signals to be on the same 
+        device so they share the same clock. 
+        
+        <P>When using coherent averaging with harmonic distortion measurement of a tone 
+        input the FFT data is phase aligned according to the phase of the 
+        fundamental before averaging. 
+        
+        <P>Coherent averaging can lower the noise floor substantially compared to magnitude 
         averaging without needing very long FFTs - in fact shorter FFTs (e.g. 64k) will allow faster 
         averaging and more quickly lower the noise floor. The noise level drops by about 3 dB for each 
         doubling of the number of averages. Mains frequency components will be suppressed along with any 
@@ -488,7 +544,7 @@
         <IMG SRC="../../images/32-bit-dithered.jpg" ALT="32-bit FFT dithered data"><BR CLEAR="all">
         <IMG SRC="../../images/64-bit-dithered.jpg" ALT="64-bit FFT dithered data"><BR CLEAR="all">
         
-        <H4><A name="burstpeakspl">Show tone burst peak SPL</A></H4>
+        <H4><A name="burstpeakspl">Show peak SPL for tone bursts</A></H4>
 
         <P>If this option is selected, the generator is playing a tone burst and the graph is in 
         spectrum mode the peak SPL in the input data will be shown on the plot. This is similar
@@ -526,7 +582,7 @@
         
         <H3><a name="rtadistortion">Distortion measurements</a></H3>
         
-        <P>When the <EM>Distortion Panel</EM> button (keyboard shortcut Alt+D) is 
+        <P>When the <EM>Show distortion</EM> button (keyboard shortcut Alt+D) is 
         selected the analyser calculates and displays harmonic or intermodulation 
         distortion figures for the input, including THD, N+D (A-weighted noise plus 
         distortion), N (noise and non-harmonic distortion), THD+N, SNR (where N excludes 
@@ -570,12 +626,13 @@
         
         <P>Dither should be enabled on the generator at the bit width the system is using, 
         check the bottom left corner of the REW main window for the bit width in use. On Windows 
-        using Java drivers only 16 bit is supported, for 24-bit use ASIO drivers. On macOS 24-bit 
+        using Java drivers only 16-bit is supported, for 24-bit use Java EXCL or ASIO drivers. On macOS 24-bit 
         is supported, make sure the devices are configured to operate at 24-bit or higher in Audio Midi 
         setup. 
         
-        <P>The THD figure is based on harmonics up to at most the 50th or the number of harmonics 
-        whose levels are displayed and is calculated from the sum of those harmonic powers 
+        <P>The THD figure is based on harmonics up to at most the 50th (see the 
+        <EM>Highest harmonic in THD</EM> control in the <A href="#harmonicdata">Harmonic data</A> section.
+        and is calculated from the sum of those harmonic powers 
         relative to the power of the fundamental. A separate HHD (higher harmonic distortion)
         figure is calculated from the sum of harmonic powers for the 10th up to at most the 
         50th harmonic. The THD figure includes the HHD contribution. Individual harmonic 
@@ -624,9 +681,9 @@
         
         <P>Dither should be enabled on the generator at the bit width the system is using, 
         check the bottom left corner of the REW main window for the bit width in use. On Windows 
-        using Java drivers only 16 bit is supported, for 24-bit use ASIO drivers. On macOS 24-bit 
-        is supported, make sure the devices are configured to operate at 24-bit in Audio Midi 
-        setup. 
+        using Java drivers only 16-bit is supported, for 24-bit use Java EXCL or ASIO drivers. 
+        On macOS 24-bit is supported, make sure the devices are configured to operate at 24-bit 
+        in Audio Midi setup. 
         
         <P>To obtain accurate results the RTA window should have very low side lobes. 
         Good choices in order of reducing side lobe level are Dolph-Chebyshev 150 (side lobes 
@@ -688,15 +745,36 @@
         </TABLE>
         <BR>
 
+        <H4><a name="rtadim">Dynamic intermodulation distortion</a></H4>
+        
+        <P><B>Dynamic intermodulation distortion results are only valid when the system being 
+        monitored is driven using REW's <A HREF="siggen.html#dim">DIM</A> 
+        test signal.</B> The signal can be generated live from the generator, or saved to 
+        a file and played back on the system being measured. If playing from file the 
+        generator must still be showing with the same signal selected so that REW knows 
+        what it should calculate. The generator provides preset signals for DIM30 and DIM100.
+        
+        <P>Dither should be enabled on the generator at the bit width the system is using, 
+        check the bottom left corner of the REW main window for the bit width in use. On Windows 
+        using Java drivers only 16-bit is supported, for 24-bit use Java EXCL or ASIO drivers. 
+        On macOS 24-bit is supported, make sure the devices are configured to operate at 24-bit 
+        in Audio Midi setup. 
+        
+        <P>To obtain accurate results the RTA window should have very low side lobes. 
+        Good choices in order of reducing side lobe level are Dolph-Chebyshev 150 (side lobes 
+        150 dB down), Blackman-Harris 7 (side lobes 180 dB down), Dolph-Chebyshev 200 (side lobes 
+        200 dB down) and Cosine sum 9-235 (side lobes 235 dB down). Do not use the Hann, 
+        Blackman-Harris 4 or Flat-Top windows.
+        
         <H4><a name="rtatdplusn">Multitone Total Distortion</a></H4>
         
         <P>When the system being monitored is driven using REW's <A HREF="siggen.html#multitone">Multitone</A> 
-        test signal the RTA shows a figure for total distortion + noise, TD+N.  This
+        test signal or a three tone test signal the RTA shows a figure for total distortion + noise, TD+N.  This
         figure is the square root of the ratio of the power of the noise and distortion 
         components to the power of the tones. The signal generator and signal capture
         should have the same clock source for the most accurate results, both going
         through the same device or devices with synchronised sample clocks, and a rectangular 
-        window should be used. When the Distortion settings option <EM>Monitor clock with multitone</EM>
+        window should be used. When the Distortion settings option <EM>Monitor clock match</EM>
         is selected REW will measure the replay-to-record clock difference while capturing the signal.
         If a rectangular window is being used the clock difference is shown as a ppm figure
         below the distortion results, if the result does not settle at 0.0 ppm the clocks are not 
@@ -734,7 +812,7 @@
         applied if selected (it is selected by default and is recommended). The frequency 
         can be stepped in intervals of between 1 and 96 points per octave over the selected 
         span, level can use steps down to 0.1 dBFS. The nominal test frequencies for THD vs frequency
-        will be the preferred values at the chosen measurement PPO that are within the span. To 
+        and IMD vs frequency will be the preferred values at the chosen measurement PPO that are within the span. To 
         avoid scalloping loss effects the test frequencies use the closest FFT bin frequency, 
         that ensures the peaks of the fundamental and all harmonics are captured in the plots.
         
@@ -765,14 +843,14 @@
         test type has its own settling time setting. A <EM>Silence interval</EM> in seconds can be specified 
         to allow time for the device being tested to cool between test points.
         
-        <P>The <EM>Distortion settings</EM> for distortion LP, distortion HP, AES17-20155 standard notch
+        <P>The <EM>Distortion settings</EM> for distortion LP, distortion HP, AES17-2015 standard notch
         and coherent averaging are repeated on this dialog for convenience.
         
-        <P>If <EM>Stop measurement if heavy input clipping occurs</EM> is selected the measurement
+        <P>If <EM>Stop if heavy input clipping occurs</EM> is selected the measurement
         will be stopped if more than 30% of the samples in an input block are clipped. That 
         corresponds to an input level about 2 dB above the clipping threshold.
         
-        <P>If <EM>Stop if distortion percentage exceeded</EM> is selected the measurement
+        <P>If <EM>Stop at distortion limit</EM> is selected the measurement
         will be stopped if the distortion goes beyond the limit entered. To arm this distortion must first 
         drop below the limit, that allows stepped level measurements to start at low levels, 
         where the distortion figure may be high purely due to noise when the signal level is very low.
@@ -826,9 +904,6 @@
         <IMG SRC="../../images/stepwaterfall.jpg" ALT="Stepped sine waterfall"><BR CLEAR="all">
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

@@ -33,9 +33,9 @@
         helps the highlighted trace stand out, as does <FONT CLASS="heading">Use yellow underlay</FONT>.
         <FONT CLASS="heading">Show name of highlighted trace</FONT> controls whether the trace name
         is shown on the graph when a trace is highlighted.
-        If <FONT CLASS="heading">Show watermark text below on graphs</FONT> is selected
+        If <FONT CLASS="heading">Show watermark text on graphs</FONT> is selected
         the text in the watermark text box will appear behind all graphs except for the 
-        waterfall and spectrogram with the opacity set by the <FONT CLASS="heading">Waterfall opacity</FONT> control.
+        waterfall and spectrogram with the opacity set by the <FONT CLASS="heading">Watermark opacity</FONT> control.
         <FONT CLASS="heading">Freq axis start (Hz)</FONT> sets the lowest frequency that
         can be shown on graphs. If <FONT CLASS="heading">Show aspect ratio dB/decade</FONT> 
         is selected the aspect ratio of frequency response graphs will be shown near the bottom 
@@ -74,7 +74,7 @@
         <FONT CLASS="heading">Show toolbar text labels</FONT>. The text under the 
         graph buttons can be hidden by unchecking <FONT CLASS="heading">Show graph button text labels</FONT>. 
 
-        <P>If <FONT CLASS="heading">Show phase wrap lines</FONT> is selected the wrap points of phase 
+        <P>If <FONT CLASS="heading"><A name="phasewraplines">Show phase wrap lines</A></FONT> is selected the wrap points of phase 
         traces are shown with dashed lines.
 
         <P>If <FONT CLASS="heading">Show measurement level on thumbnails</FONT> is selected the signal level used for
@@ -98,7 +98,7 @@
         
         <P>If <FONT CLASS="heading">Disable tooltips</FONT> is selected tooltips will not appear when the mouse hovers over a control or component.
 
-        <P>If <FONT CLASS="heading">Opaque control panels</FONT> graph traces will not show through the graph control panels.
+        <P>If <FONT CLASS="heading">Opaque control panels</FONT> is selected graph traces will not show through the graph control panels.
         
         <P>If <FONT CLASS="heading">Right press to pan</FONT> is selected pressing the right mouse button will activate 
         graph pan mode. The right click menu will not appear if the graph is panned more than a few pixels.
@@ -111,9 +111,9 @@
 
         <P>If <FONT CLASS="heading">Animate measurement list</FONT> is selected changes in the measurements list will be animated.
 
-        <P><FONT CLASS="heading">Full scale sine rms is 0 dBFS</FONT> determines whether the rms
-        level of a full scale sine wave is show as 0 dBFS or -3 dBFS. If this option is selected 
-        the rms level may be greater than 0 dBFS for some signal types, for example,a  full scale 
+        <P><FONT CLASS="heading"><A name="fullscalesine">Full scale sine rms is 0 dBFS</A></FONT> determines whether the rms
+        level of a full scale sine wave is shown as 0 dBFS or -3 dBFS. If this option is selected 
+        the rms level may be greater than 0 dBFS for some signal types, for example, a  full scale 
         square wave would have an rms level of +3 dBFS.
 
         <P>If <FONT CLASS="heading">Mousewheel adjusts controls on hover</FONT> is selected spinners and drop-down boxes 
@@ -139,7 +139,7 @@
         <P><FONT CLASS="heading">Octave notation</FONT> selects the notation scheme to use when showing
         musical note names.
         
-        <P>The <FONT CLASS="heading">Font options</FONT> has a settings affecting the font sizes REW uses.
+        <P>The <FONT CLASS="heading">Font options</FONT> has settings affecting the font sizes REW uses.
         
         <P><FONT CLASS="heading">General font size</FONT> is the base font size (in points)
         for REW. <FONT CLASS="heading">Graph font size</FONT> is the font size 
@@ -167,8 +167,5 @@
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
         
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
-
     </BODY>
 </HTML>

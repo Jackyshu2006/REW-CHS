@@ -76,7 +76,7 @@
         <P>The frequency span selected for target match is highlighted if 
         <EM>Highlight match range</EM> is selected.
         
-        <P>If <EM>Graphical filter edit</EM> is selected the gain or frequency of filters can be 
+        <P>If <EM>Graphical filter editing</EM> is selected the gain or frequency of filters can be 
         adjusted by clicking and dragging on the circular handles at each filter's centre 
         frequency. The colour of the handles matches the colour of the filter in the EQ filters
         panel. Q can be adjusted by placing the mouse over the circular handle and using 
@@ -156,7 +156,7 @@
         can be switched between main/overlay/both to ease comparison between the plots.
  
         <P>The control settings are remembered for the next time REW runs. The
-        <EM>Apply Default Settings</EM> button restores the controls to their default values.
+        <EM>Apply Defaults</EM> button restores the controls to their default values.
         
         <H3><A name="eqimpulse">Impulse</A></H3>
 
@@ -263,12 +263,12 @@
         symbol is displayed next to the Target trace value in the Filter Adjust graph.
             
         <P>An <FONT CLASS="heading">Add room curve</FONT> option is an alternative to specifying 
-        a house curve file that allows the target to to include typical room effects at the listening 
+        a house curve file that allows the target to include typical room effects at the listening 
         position and, if desired, a boost at low frequencies. 
         <FONT CLASS="heading">HF Fall</FONT> is used to reflect the downward tilt at 
         high frequencies which is normal for most listening position speaker measurements, the result 
         of the room's absorption and the speaker's power response. <FONT CLASS="heading">LF Rise</FONT> 
-        allows that tile to be extended to low frequencies, to target a higher bass level which may
+        allows that tilt to be extended to low frequencies, to target a higher bass level which may
         be subjectively preferred. The target curve will rise below the LF Rise start frequency at 
         the slope selected until reaching the LF Rise end frequency. Similarly, the target curve will 
         fall above the HF Fall start frequency at the slope selected. The room curve effect can be 
@@ -288,7 +288,7 @@
         kHz. For Speaker driver targets the alignment range depends on the driver crossover frequencies.
 
         <P><EM>Generate measurement from target shape</EM> creates a new measurement whose response
-        matches the currently configured target. That measurement may be used on the RTA or the ALL 
+        matches the currently configured target. That measurement may be used on the RTA or the All 
         SPL graphs to act as a reference.
 	
         <P>The default target type, bass management slope, cutoff, LF rise and HF fall to use 
@@ -380,12 +380,12 @@
         <P>The Filter Tasks panel also includes a set of controls to optimise the
         settings of the current filters. Note that only filters that lie within the 
         <em>Match Range</em> will be adjusted. <EM>Optimise gains</EM> will adjust
-        the gains of all 'Automatic' PK and modal filters to best match the target response.
-        <EM>Optimise gains and Qs</EM> will adjust the gains and Qs of all 'Automatic' PK
-        filters and the gains of all 'Automatic' modal filters. 
+        the gains of all PK and modal filters with Auto EQ selected to best match the target response.
+        <EM>Optimise gains and Qs</EM> will adjust the gains and Qs of all PK
+        filters with Auto EQ selected and the gains of all modal filters with Auto EQ selected. 
         <EM>Optimise gains, Qs and frequencies</EM> will adjust the gains, Qs and centre
-        frequencies of all 'Automatic' PK filters and the gains of all 'Automatic' modal 
-        filters - it is equivalent to <em>Match response to target</em> without the automatic assignment 
+        frequencies of all PK filters with Auto EQ selected and the gains of all modal 
+        filters with Auto EQ selected - it is equivalent to <em>Match response to target</em> without the automatic assignment 
         of filters. Centre frequencies will be adjusted to within 10% of their initial setting
         and will remain within the match range. 
         
@@ -546,9 +546,6 @@
         shows all poles found during the analysis.
         
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

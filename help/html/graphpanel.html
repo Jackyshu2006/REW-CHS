@@ -39,7 +39,7 @@
         <P>Trace names are in the same colour 
         as the trace itself, whilst the line style for the trace is shown between 
         the label and the trace's value at the current cursor position. If a trace
-        has smoothing applied the octave fraction is shown (1/12th octave in the 
+        has smoothing applied the octave fraction is shown (1/48th octave in the 
         example below). Moving the mouse cursor over a trace name in the legend will
         highlight that trace on the graph, fading other traces to help it stand out.
         The measurement name can also be shown, this is controlled by the 
@@ -48,11 +48,9 @@
         graphs using the Ctrl+H shortcut, toggling highlight on and off.<BR>
         <IMG SRC="../../images/graphlegend.jpg" ALT="Graph Legend" BORDER=0 ALIGN="left"><BR CLEAR="All">
 
-        <P>Right clicking in the legend area of the graphs for individual measurements
+        <P>Right clicking in the legend area of the graphs 
         brings up a small menu that allows all traces to be selected, all selections to 
-        be cleared or the selections to be toggled. On overlay graphs the only option is 
-        to clear the selections, which has the same effect as clearing selection in the 
-        overlays measurements list.
+        be cleared or the selections to be toggled.
         
         <H4><A name="savejpegbutton">Capture Graph Image Button</A></H4>
 
@@ -73,10 +71,11 @@
         that may seem unduly flat or have response slopes that appear shallower or steeper than they are. 
         
         <P>There are a set of options for the captured image. If the <EM>Include legend</EM> 
-        box is checked the image includes the graph legend. <EM>Include cursor</EM> shows the cursor 
+        box is checked the image includes the graph legend. <EM>Include title</EM> includes the graph title. 
+        <EM>Include cursor</EM> shows the cursor 
         lines and values on the captured image. If <EM>Include timestamp</EM> is selected the current 
         date and time will be shown at the bottom right corner of the graph. If <EM>Add border</EM> is 
-        selected a single pixel grey border will be added around the capture.If <EM>Monochrome image</EM> 
+        selected a single pixel grey border will be added around the capture. If <EM>Monochrome image</EM> 
         is selected the traces will be drawn with one of four different line styles instead of in 
         different colours: solid, dotted, dashed or dash-dotted. If <EM>Scale overlays</EM> is selected
         and the graph font size chosen for the image is not the same as the current graph font size
@@ -129,7 +128,7 @@
         as they are entered or by clicking the <EM>Apply Settings</EM> button. There are also 
         buttons to adjust the limits to cover the whole range of the data (<EM>Fit to data</EM>,
         shortcut Ctrl+Alt+F) and to only adjust the Y axis limits to cover the range of the data 
-        leaving the X axis limits unchanged (<EM>Fit Y to data</EM>, shortcut Ctrl+Alt Y). The 
+        leaving the X axis limits unchanged (<EM>Fit Y to data</EM>, shortcut Ctrl+Alt+Y). The 
         graph limits dialog can also be shown by double-clicking on the graph. The graph limits
         can alternatively be adjusted by moving the mouse over the end of a graph axis and using
         the mouse wheel or trackpad scroll gesture.  Hold the Alt key for fine adjustment when 
@@ -176,10 +175,10 @@
         and dragging the pointer.
 
         <P>When variable zoom is active a cross is displayed, split into quadrants
-        allowing horizontal and/or vertical zooming in our out depending on the mouse
+        allowing horizontal and/or vertical zooming in or out depending on the mouse
         position. The amount of zoom is governed by how far the mouse pointer is
         dragged from the start position.
-        <P><IMG SRC="../../images/zoomgraph.jpg" ALT="Zoom control grid" width="247" height="134"><BR CLEAR="all"><BR>
+        <P><IMG SRC="../../images/zoomgraph.jpg" ALT="Zoom control cross" width="247" height="134"><BR CLEAR="all"><BR>
 
         <H4><A name="zoomtoarea">Zoom to Area</A></H4>
 
@@ -196,7 +195,7 @@
         
         <P>The mousewheel can be used to zoom in and out on the graph. Hold the Alt 
         key for fine adjustment. To zoom in the x axis only hold the shift key or move 
-        the moue over the X axis. To disable mousewheel zoom see the <A href="view.html">View</A> preferences.
+        the mouse over the X axis. To disable mousewheel zoom see the <A href="view.html">View</A> preferences.
         
         <H4><A name="keyboardzoom">Zoom with Keyboard</A></H4>
         
@@ -223,13 +222,10 @@
 
         <H4><A name="pan">Moving the graph</A></H4>
 
-        <P>The graph can be moved by holding the <FONT CLASS="keys">Alt</FONT> key the
+        <P>The graph can be moved by holding the <FONT CLASS="keys">Alt</FONT> key then
         pressing the left mouse button.
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>

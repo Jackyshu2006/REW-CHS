@@ -39,7 +39,7 @@
         calculating the best fit line to the Schroeder integral over different ranges. 
         There are some limitations to this approach.  The measurement's noise floor 
         affects the shape of the Schroeder integral, causing it to curve. Various measures 
-        are applied to reduce that affect by estimating the level of the noise floor and 
+        are applied to reduce that effect by estimating the level of the noise floor and 
         altering where the integration starts and the initial values it uses. In addition, 
         the octave band filters have group delays, which may affect the calculated reverberation 
         times, particularly at low frequencies. The filters also usually have poor frequency 
@@ -84,7 +84,7 @@
         <EM>Automatic</EM> is selected REW will determine the rise time, window 
         width and time span to use for the STFT plot. <EM>Manual</EM> allows those
         settings to be altered, using the button to the right of the Manual selection.
-        <EM>Octave band</EM> is the width of the octave band filter applied to the STFT 
+        <EM>Octave fraction</EM> is the width of the octave band filter applied to the STFT 
         data, while <EM>Results PPO</EM> determines the frequency resolution at which 
         REW will calculate the model (up to 96 PPO). <EM>Show Schroeder integral</EM>
         allows the Schroeder integral for the nearest classical RT60 calculation result 
@@ -215,7 +215,7 @@
 
         <P><IMG SRC="../../images/accuracy80decay.jpg" ALT="Accuracy RT60 Decay, noise -80 dB"><BR CLEAR="all">
         
-        <P><IMG SRC="../../images/accuracy40decay.jpg" ALT="Accuracy RT60 Deacy, noise -40 dB"><BR CLEAR="all">
+        <P><IMG SRC="../../images/accuracy40decay.jpg" ALT="Accuracy RT60 Decay, noise -40 dB"><BR CLEAR="all">
         
         <H3><A name="implementation">Implementation</A></H3>
         
@@ -291,9 +291,6 @@
 
 
         <DIV class="onlineonly"><a HREF="index.html#top">Help Index</A></DIV>
-        
-        <!-- Make the onlineonly text visible via javascript, which does not run in the helpset viewer -->
-        <script type="text/javascript" src="../js/OnlineOnly.js"></script>
 
     </BODY>
 </HTML>
